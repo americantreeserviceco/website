@@ -76,6 +76,17 @@
 			color: var(--primary);
 		}
 
+		.nav-toggle {
+			display: none;
+			padding: 10px 14px;
+			border: 1px solid var(--primary);
+			border-radius: 5px;
+			background: transparent;
+			color: var(--primary);
+			font-weight: 700;
+			cursor: pointer;
+		}
+
 		.header-phone {
 			color: var(--primary);
 			font-weight: 700;
@@ -244,13 +255,35 @@
 
 		@media (max-width: 768px) {
 			.nav-container {
-				flex-direction: column;
+				flex-wrap: wrap;
 				gap: 12px;
 			}
 
-			.nav-links {
+			.nav-toggle {
+				display: inline-flex;
+				align-items: center;
 				justify-content: center;
-				gap: 12px 18px;
+			}
+
+			nav {
+				width: 100%;
+			}
+
+			.nav-links {
+				display: none;
+				flex-direction: column;
+				align-items: flex-start;
+				gap: 12px;
+				width: 100%;
+				padding-top: 8px;
+			}
+
+			.nav-links.is-open {
+				display: flex;
+			}
+
+			.nav-links li {
+				width: 100%;
 			}
 
 			.hero {
@@ -273,6 +306,7 @@
 			<a class="logo" href="/" aria-label="American Tree Colorado home">
 				<h1>American Tree Colorado</h1>
 			</a>
+			<button class="nav-toggle" type="button" aria-label="Toggle menu" aria-expanded="false">Menu</button>
 			<nav aria-label="Main navigation">
 				<ul class="nav-links">
 					<li><a href="/">Home</a></li>
@@ -430,5 +464,26 @@
 		</nav>
 		<p>American Tree Colorado | Tree care for the Denver metro area</p>
 	</footer>
+	<script>
+		document.addEventListener('DOMContentLoaded', () => {
+			const menuToggle = document.querySelector('.nav-toggle');
+			const navigation = document.querySelector('.nav-links');
+			if (!menuToggle || !navigation) return;
+
+			menuToggle.addEventListener('click', () => {
+				const isOpen = navigation.classList.toggle('is-open');
+				menuToggle.setAttribute('aria-expanded', String(isOpen));
+				menuToggle.setAttribute('aria-label', isOpen ? 'Close menu' : 'Open menu');
+			});
+
+			navigation.querySelectorAll('a').forEach((link) => {
+				link.addEventListener('click', () => {
+					navigation.classList.remove('is-open');
+					menuToggle.setAttribute('aria-expanded', 'false');
+					menuToggle.setAttribute('aria-label', 'Open menu');
+				});
+			});
+		});
+	</script>
 </body>
 </html>
