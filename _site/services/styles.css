@@ -90,6 +90,17 @@ img {
   color: var(--forest-900);
 }
 
+.nav-toggle {
+  display: none;
+  padding: 0.7rem 1rem;
+  border: 1px solid var(--forest-800);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--forest-800);
+  font-weight: 700;
+  cursor: pointer;
+}
+
 .nav a {
   transition: color 0.2s ease;
 }
@@ -328,8 +339,36 @@ img {
     text-align: center;
   }
 
-  .nav {
+  .site-header .container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .nav-toggle {
+    display: inline-flex;
+    align-items: center;
     justify-content: center;
+  }
+
+  .nav {
+    display: none;
+    width: 100%;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+    padding-top: 0.5rem;
+  }
+
+  .nav.is-open {
+    display: flex;
+  }
+
+  .header-cta {
+    width: 100%;
+    text-align: center;
   }
 
   .service-details {

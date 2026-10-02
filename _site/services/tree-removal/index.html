@@ -11,6 +11,7 @@
   <header class="site-header">
     <div class="container">
       <a href="../../index.html" class="brand"><img src="../../assets/images/logo/AmericanTree_Logo_RGB.png" alt="American Tree Colorado"></a>
+      <button class="nav-toggle" type="button" aria-label="Toggle menu" aria-expanded="false">Menu</button>
       <nav class="nav" aria-label="Main navigation">
         <a href="../../index.html">Home</a>
         <a href="../../about/index.html">About</a>
@@ -78,6 +79,27 @@
       </div>
     </div>
   </footer>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const menuToggle = document.querySelector('.nav-toggle');
+      const navigation = document.querySelector('.nav');
+      if (!menuToggle || !navigation) return;
+
+      menuToggle.addEventListener('click', () => {
+        const isOpen = navigation.classList.toggle('is-open');
+        menuToggle.setAttribute('aria-expanded', String(isOpen));
+        menuToggle.setAttribute('aria-label', isOpen ? 'Close menu' : 'Open menu');
+      });
+
+      navigation.querySelectorAll('a').forEach((link) => {
+        link.addEventListener('click', () => {
+          navigation.classList.remove('is-open');
+          menuToggle.setAttribute('aria-expanded', 'false');
+          menuToggle.setAttribute('aria-label', 'Open menu');
+        });
+      });
+    });
+  </script>
   <script> window.$zoho = window.$zoho || {}; $zoho.salesiq = $zoho.salesiq || { ready: function(){} } </script>
   <script id = "zsiqscript" src = "https://salesiq.zoho.com/widget?wc=siq25524f251a528774cdc8a86e67797f365ecbe601c430d1dcdbc98fd02ca5df9a" defer > </script>
 </body>

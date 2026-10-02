@@ -22,7 +22,6 @@
   "dependencies": {
     "@supabase/supabase-js": "^2.117.2",
     "react": "^19.3.0",
-    "tailwind": "^2.3.1",
     "typescript": "^7.0.2"
   },
   "devDependencies": {
