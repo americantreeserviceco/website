@@ -3,6 +3,9 @@ description: Tree care and landscaping for Colorado homes and businesses.
 markdown: kramdown
 permalink: /blog/:title.html
 timezone: America/Denver
+include:
+  - _redirects
+  - .htaccess
 defaults:
   - scope:
       path: "_posts"

@@ -15,6 +15,7 @@
   "scripts": {
     "build": "python3 scripts/generate_blog_pages.py && jekyll build",
     "build:blog": "python3 scripts/generate_blog_pages.py",
+    "generate:redirects": "node scripts/generate_redirects.js",
     "dev": "jekyll serve",
     "test": "echo \"No tests configured\" && exit 0"
   },
@@ -24,12 +25,12 @@
     "tailwind": "^2.3.1",
     "typescript": "^7.0.2"
   },
-  "allowScripts": {
-    "core-js@2.6.12": true
-  },
   "devDependencies": {
     "autoprefixer": "^10.6.1",
     "postcss": "^8.5.28",
     "tailwindcss": "^4.3.3"
+  },
+  "allowScripts": {
+    "core-js@2.6.12": true
   }
 }

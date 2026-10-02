@@ -43,6 +43,16 @@ bundle exec jekyll serve
 
 The generated site is written to `_site/`. New blog posts belong in `_posts/` and should include Jekyll YAML front matter. Pushing to the `dev` branch triggers the GitHub Pages Jekyll deployment workflow.
 
+## Legacy URL Redirects
+
+Add old-to-new path pairs to `redirects.json`, then run:
+
+```bash
+npm run generate:redirects
+```
+
+The generator writes `_redirects` for hosts that support redirect rules (such as Cloudflare Pages or Netlify), plus Jekyll pages under `redirect-pages/`. Those pages provide browser-level redirects on GitHub Pages, which does not support HTTP 301 rules through `_redirects`. The generator rejects source paths that already match a site page, so an existing page is not silently replaced. Review and deploy the generated files with the site.
+
 ## Installation
 
 To get a local copy up and running, follow these steps:
