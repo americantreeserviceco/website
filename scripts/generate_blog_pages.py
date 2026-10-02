@@ -216,6 +216,10 @@ def build_blog_pages() -> None:
         current_page="blog",
     )
     (BLOG_DIR / "index.html").write_text(index_html, encoding="utf-8")
+    (ROOT / "journal-index.html").write_text(
+        f"---\npermalink: /blog/\n---\n{index_html}",
+        encoding="utf-8",
+    )
 
 
 if __name__ == "__main__":
