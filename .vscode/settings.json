@@ -1,0 +1,20 @@
+{
+    "chat.tools.terminal.autoApprove": {
+        "/^perl -0pi -e 's/\\\\n\\+\\\\z/\\\\n/' index\\.html && git diff --check && tail -n 4 index\\.html \\| cat -A$/": {
+            "approve": true,
+            "matchCommandLine": true
+        },
+        "/^node -e 'const fs=require\\(\"node:fs\"\\),path=require\\(\"node:path\"\\);const root=\"/tmp/american-tree-push-check\";const html=fs\\.readFileSync\\(path\\.join\\(root,\"index\\.html\"\\),\"utf8\"\\);if\\(!/\\^<!doctype html>/i\\.test\\(html\\)\\|\\|!/<main\\\\b/\\.test\\(html\\)\\|\\|!/<h1\\\\b/\\.test\\(html\\)\\)\\{throw Error\\(\"Built homepage is missing its document structure or main heading\"\\)\\};const refs=\\[\\.\\.\\.html\\.matchAll\\(/\\\\b\\(\\?:href\\|src\\)=\"\\(\\[\\^\"\\]\\+\\)\"/g\\),\\.\\.\\.html\\.matchAll\\(/url\\\\\\(\\[\"\\\\x27\\]\\?\\(\\[\\^\"\\\\x27\\)\\]\\+\\)\\[\"\\\\x27\\]\\?\\\\\\)/g\\)\\]\\.map\\(m=>m\\[1\\]\\);const missing=\\[\\];for\\(const ref of refs\\)\\{if\\(/\\^\\(\\?:https\\?:\\|mailto:\\|tel:\\|#\\|data:\\|javascript:\\)/i\\.test\\(ref\\)\\)continue;const pathname=decodeURIComponent\\(new URL\\(ref,\"https://local\\.test/\"\\)\\.pathname\\);const target=path\\.join\\(root,pathname\\);if\\(!\\[target,path\\.join\\(target,\"index\\.html\"\\),`\\$\\{target\\}\\.html`\\]\\.some\\(fs\\.existsSync\\)\\)missing\\.push\\(ref\\)\\}if\\(missing\\.length\\)\\{console\\.error\\(\"Missing local references:\",missing\\.join\\(\", \"\\)\\);process\\.exit\\(1\\)\\}console\\.log\\(`Homepage structure valid; all \\$\\{refs\\.length\\} local references resolve\\.`\\)'$/": {
+            "approve": true,
+            "matchCommandLine": true
+        },
+        "/^ruby -r rexml/document -e 'doc=REXML::Document\\.new\\(File\\.read\\(\"sitemap\\.xml\"\\)\\); urls=REXML::XPath\\.match\\(doc,\"//url/loc\"\\)\\.map\\(&:text\\); puts \"Parsed #\\{urls\\.length\\} URLs\"; puts urls\\.map \\{ \\|url\\| URI\\(url\\)\\.host \\}\\.uniq'$/": {
+            "approve": true,
+            "matchCommandLine": true
+        },
+        "/^npm run build -- --destination /tmp/american-tree-sitemap-check && ruby -r rexml/document -r uri -e 'root=\"/tmp/american-tree-sitemap-check\"; doc=REXML::Document\\.new\\(File\\.read\\(\"sitemap\\.xml\"\\)\\); urls=REXML::XPath\\.match\\(doc,\"//url/loc\"\\)\\.map\\(&:text\\); missing=urls\\.reject \\{ \\|url\\| path=URI\\.parse\\(url\\)\\.path; relative=path\\.sub\\(%r\\{\\^/\\}, \"\"\\); candidates=\\[File\\.join\\(root, relative\\), File\\.join\\(root, relative, \"index\\.html\"\\), File\\.join\\(root, relative\\.sub\\(%r\\{/\\$\\}, \"\"\\), \"index\\.html\"\\)\\]; candidates\\.any\\? \\{ \\|file\\| File\\.file\\?\\(file\\) \\} \\}; normalized=urls\\.map \\{ \\|url\\| path=URI\\.parse\\(url\\)\\.path; path==\"/\" \\|\\| path==\"/index\\.html\" \\? \"/\" : path\\.sub\\(/index\\\\\\.html\\$/, \"\"\\) \\}; duplicates=normalized\\.tally\\.select \\{ \\|_, count\\| count > 1 \\}; hosts=urls\\.map \\{ \\|url\\| URI\\.parse\\(url\\)\\.host \\}\\.uniq; puts \"URLs: #\\{urls\\.length\\}; unique path forms: #\\{normalized\\.uniq\\.length\\}; hosts: #\\{hosts\\.join\\(\", \"\\)\\}\"; puts \"Missing build paths: #\\{missing\\.empty\\? \\? \"none\" : missing\\.join\\(\", \"\\)\\}\"; puts \"Duplicate path groups: #\\{duplicates\\.empty\\? \\? \"none\" : duplicates\\.inspect\\}\"; abort \"Sitemap validation failed\" unless missing\\.empty\\? && File\\.file\\?\\(File\\.join\\(root,\"sitemap\\.xml\"\\)\\)'$/": {
+            "approve": true,
+            "matchCommandLine": true
+        }
+    }
+}
