@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>{{ page.title | escape }} | {{ site.title | escape }}</title>
+	<meta name="description" content="{{ page.description | default: page.excerpt | strip_html | normalize_whitespace | truncate: 160 | escape }}">
+	<style>
+		:root {
+			--forest: #1d4d2a;
+			--forest-dark: #14351f;
+			--green: #2d7d46;
+			--green-soft: #edf8ee;
+			--sand: #f8f7f1;
+			--text: #243126;
+			--muted: #5d685f;
+			--white: #fff;
+		}
+		* { box-sizing: border-box; }
+		body { margin: 0; background: var(--sand); color: var(--text); font: 16px/1.65 Arial, Helvetica, sans-serif; }
+		a { color: var(--forest); text-decoration: none; }
+		a:hover { text-decoration: underline; }
+		.container { width: min(100% - 2rem, 1100px); margin: 0 auto; }
+		.topbar { background: var(--white); border-bottom: 1px solid #dce6dc; }
+		.nav { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 1rem 0; flex-wrap: wrap; }
+		.brand { display: flex; align-items: center; }
+		.brand img { display: block; height: 56px; width: auto; }
+		.nav-links, .footer-links { display: flex; gap: 1rem; flex-wrap: wrap; }
+		.nav-links a { color: var(--forest-dark); font-weight: 700; }
+		.header-cta { padding: .7rem 1rem; background: var(--green); color: var(--white); font-weight: 700; }
+		main { padding: 3rem 0 5rem; }
+		.article { max-width: 850px; margin: 0 auto; padding: clamp(1.25rem, 4vw, 2.5rem); background: var(--white); border: 1px solid #e1e8df; }
+		.article h1 { margin-top: 0; color: var(--forest-dark); line-height: 1.2; }
+		.article h2, .article h3 { color: var(--forest-dark); }
+		.article-meta, .article-excerpt { color: var(--muted); }
+		.article li { margin: .4rem 0; }
+		.back-link { display: inline-block; margin-bottom: 1.5rem; }
+		footer { padding: 2rem 0; background: var(--forest-dark); color: var(--white); }
+		.footer-inner { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+		footer a { color: var(--white); }
+		@media (max-width: 640px) { .nav { justify-content: center; } .nav-links { justify-content: center; } .header-cta { width: 100%; text-align: center; } }
+	</style>
+</head>
+<body>
+	<header class="topbar">
+		<div class="container nav">
+			<a class="brand" href="../index.html"><img src="../assets/images/logo/AmericanTree_Logo_RGB.png" alt="American Tree Colorado"></a>
+			<nav class="nav-links" aria-label="Main navigation">
+				<a href="../index.html">Home</a>
+				<a href="../about/index.html">About</a>
+				<a href="../services/index.html">Services</a>
+				<a href="../locations/index.html">Locations</a>
+				<a href="index.html">Blog</a>
+				<a href="../contact/index.html">Contact</a>
+			</nav>
+			<a class="header-cta" href="../contact/index.html">Request a Quote</a>
+		</div>
+	</header>
+	<main>
+		<div class="container">
+			<article class="article">
+				<a class="back-link" href="index.html">&larr; Back to blog</a>
+				<h1>{{ page.title | escape }}</h1>
+				<p class="article-meta"><time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%B %-d, %Y" }}</time></p>
+				<div class="article-body">{{ content }}</div>
+			</article>
+		</div>
+	</main>
+	<footer>
+		<div class="container footer-inner">
+			<div><strong>{{ site.title | escape }}</strong><br>Tree care for Colorado homes and businesses.</div>
+			<div class="footer-links">
+				<a href="../index.html">Home</a>
+				<a href="../services/index.html">Services</a>
+				<a href="../contact/index.html">Contact</a>
+			</div>
+		</div>
+	</footer>
+	<script> window.$zoho = window.$zoho || {}; $zoho.salesiq = $zoho.salesiq || { ready: function(){} } </script>
+	<script id = "zsiqscript" src = "https://salesiq.zoho.com/widget?wc=siq25524f251a528774cdc8a86e67797f365ecbe601c430d1dcdbc98fd02ca5df9a" defer > </script>
+</body>
+</html>

@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Certified Arborist Tree Care in Golden, CO | American Tree Colorado</title>
+    <meta name="description" content="Golden-based ISA Certified Arborist tree care for Denver West and the foothills. Serving the Denver Metro area since 1993. Save 10% on your first service.">
+    <script type="text/javascript" src="https://www.bugherd.com/sidebarv2.js?apikey=lbhvulmlnhdal1rjzopqrq" async="true"></script>
+    <style>
+        :root {
+            --forest: #1d4d2a;
+            --forest-dark: #14351f;
+            --green: #2d7d46;
+            --green-soft: #eaf5ea;
+            --gold: #d4a017;
+            --sand: #f9f7f1;
+            --text: #243126;
+            --muted: #5d685f;
+            --white: #ffffff;
+            --shadow: 0 18px 40px rgba(19, 53, 31, 0.14);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background: var(--sand);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        a {
+            color: var(--forest);
+            text-decoration: none;
+        }
+
+        header {
+            background: rgba(255, 255, 255, 0.96);
+            border-bottom: 1px solid rgba(29, 77, 42, 0.08);
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 2rem;
+            padding: 1rem 6vw;
+            box-shadow: 0 8px 18px rgba(20, 53, 31, 0.05);
+        }
+
+        .logo {
+            width: 180px;
+            height: auto;
+        }
+
+        .logo img {
+            width: 100%;
+            border-radius: 12px;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 1.5rem;
+            margin: 0;
+            padding: 0;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            font-weight: 700;
+            color: var(--forest-dark);
+            transition: color 0.2s ease;
+        }
+
+        nav a:hover {
+            color: var(--green);
+        }
+
+        .contact-info {
+            text-align: right;
+            font-size: 0.92rem;
+            color: var(--muted);
+        }
+
+        .contact-info p {
+            margin: 0.1rem 0;
+        }
+
+        .hero {
+            background: linear-gradient(rgba(20, 53, 31, 0.72), rgba(20, 53, 31, 0.72)),
+                url('assets/images/jpg/dji_fly_20220331_103702_83_1683391413955_photo_optimized.jpg') center/cover no-repeat;
+            min-height: 540px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: var(--white);
+            padding: 3rem 1.5rem;
+        }
+
+        .hero h1 {
+            max-width: 820px;
+            font-size: clamp(2.3rem, 5vw, 4.4rem);
+            line-height: 1.1;
+            margin: 0 0 1rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 0 1.75rem;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .cta {
+            display: inline-block;
+            background: var(--gold);
+            color: var(--forest-dark);
+            font-weight: 800;
+            letter-spacing: 0.02em;
+            padding: 0.9rem 1.6rem;
+            border-radius: 999px;
+            box-shadow: 0 10px 24px rgba(212, 160, 23, 0.35);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 14px 30px rgba(212, 160, 23, 0.42);
+        }
+
+        section {
+            padding: 4.5rem 6vw;
+        }
+
+        section h2 {
+            font-size: clamp(2rem, 3vw, 2.8rem);
+            color: var(--forest-dark);
+            margin: 0 0 2rem;
+            text-align: center;
+        }
+
+        .services,
+        .testimonials,
+        .blog {
+            background: var(--white);
+        }
+
+        .services {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-item,
+        .testimonial-item,
+        .blog-post {
+            background: var(--green-soft);
+            border-radius: 18px;
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(29, 77, 42, 0.08);
+        }
+
+        .service-item img,
+        .testimonial-item img {
+            width: 100%;
+            height: 210px;
+            object-fit: cover;
+            border-radius: 12px;
+            margin-bottom: 1rem;
+        }
+
+        .service-item h3,
+        .blog-post h3 {
+            margin: 0.5rem 0;
+            color: var(--forest-dark);
+        }
+
+        .service-item p,
+        .blog-post p,
+        .about p,
+        .contact p,
+        .testimonial-item p {
+            color: var(--muted);
+        }
+
+        .service-item a {
+            display: inline-block;
+            margin-top: 0.75rem;
+            font-weight: 700;
+            color: var(--green);
+        }
+
+        .about {
+            background: linear-gradient(180deg, rgba(234, 245, 234, 0.75), rgba(255, 255, 255, 0));
+        }
+
+        .about p {
+            max-width: 900px;
+            margin: 0 auto;
+            font-size: 1.08rem;
+            text-align: center;
+        }
+
+        .testimonials {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 2rem;
+        }
+
+        .testimonial-item {
+            text-align: center;
+        }
+
+        .blog {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 2rem;
+        }
+
+        .contact {
+            background: var(--forest-dark);
+            color: var(--white);
+            text-align: center;
+        }
+
+        .contact h2 {
+            color: var(--white);
+        }
+
+        .contact p {
+            color: rgba(255, 255, 255, 0.85);
+            margin: 0.35rem 0;
+        }
+
+        .map {
+            max-width: 700px;
+            height: 220px;
+            margin: 2rem auto 0;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 18px;
+            overflow: hidden;
+        }
+
+        .map iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        footer {
+            background: #10281a;
+            color: rgba(255, 255, 255, 0.8);
+            padding: 2rem 6vw 3rem;
+            text-align: center;
+        }
+
+        .footer-links ul {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 1rem;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .footer-links a,
+        footer p {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .social-media {
+            margin: 1rem 0 1.5rem;
+            min-height: 24px;
+        }
+
+        @media (max-width: 760px) {
+            header {
+                flex-direction: column;
+                text-align: center;
+                padding-top: 1.2rem;
+                padding-bottom: 1.2rem;
+            }
+
+            nav ul {
+                justify-content: center;
+            }
+
+            .contact-info {
+                text-align: center;
+            }
+
+            section {
+                padding: 3.5rem 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="assets/images/logo/AmericanTree_Logo_RGB.png" alt="American Tree Colorado logo">
+        </div>
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="services/index.html">Services</a></li>
+                <li><a href="about/index.html">About</a></li>
+                <li><a href="locations/index.html">Locations</a></li>
+                <li><a href="blog/index.html">Blog</a></li>
+                <li><a href="contact/index.html">Contact</a></li>
+            </ul>
+        </nav>
+        <div class="contact-info">
+            <p>Phone: (303) 456-6898</p>
+            <p>Email: mandi@americantreecolorado.com</p>
+        </div>
+    </header>
+
+    <section class="hero">
+        <h1>Certified Arborist Tree Care for Golden, Denver West, and the Foothills</h1>
+        <p>Based in Golden and serving the Denver Metro area since 1993, American Tree is led by an ISA Certified Arborist with 46 years of experience. Preserve your trees with expert care and save 10% on your first service.</p>
+        <a href="contact/index.html" class="cta">Get a Free Quote</a>
+    </section>
+
+    <section class="services">
+        <h2>Our Service Areas</h2>
+        <div class="service-item">
+            <h3><a href="locations/arvada/index.html">Arvada</a></h3>
+            <p>Tree removal, trimming, stump grinding, and local tree care support in Arvada.</p>
+        </div>
+        <div class="service-item">
+            <h3><a href="locations/boulder/index.html">Boulder</a></h3>
+            <p>Professional tree service for homes and businesses across Boulder.</p>
+        </div>
+        <div class="service-item">
+            <h3><a href="locations/denver/index.html">Denver</a></h3>
+            <p>Reliable tree care and arborist services across the Denver metro area.</p>
+        </div>
+        <div class="service-item">
+            <h3><a href="locations/golden/index.html">Golden</a></h3>
+            <p>Expert tree services designed for Golden and nearby communities.</p>
+        </div>
+        <div class="service-item">
+            <h3><a href="locations/lakewood/index.html">Lakewood</a></h3>
+            <p>Trusted local tree care for pruning, removals, and landscaping support.</p>
+        </div>
+        <div class="service-item">
+            <h3><a href="locations/index.html">All Locations</a></h3>
+            <p>View the full list of communities we serve in the Front Range.</p>
+        </div>
+    </section>
+
+    <section class="services">
+        <h2>Our Services</h2>
+        <div class="service-item">
+            <img src="assets/images/jpg/Chainsaw.jpg" alt="Chainsaw used for professional tree removal">
+            <h3>Tree Removal</h3>
+            <p>Safe and Efficient Tree Removal Services</p>
+            <a href="services/tree-removal/index.html">Learn More</a>
+        </div>
+        <div class="service-item">
+            <img src="assets/images/jpg/AdobeStock_123834379.jpeg" alt="Professional tree pruning and care">
+            <h3>Tree Pruning</h3>
+            <p>Neat and Healthy Trees</p>
+            <a href="services/tree-trimming-and-pruning/index.html">Learn More</a>
+        </div>
+        <div class="service-item">
+            <img src="assets/images/jpg/IMG_0781.jpg" alt="Tree care work by American Tree Colorado">
+            <h3>Stump Grinding</h3>
+            <p>Remove unwanted stumps and reclaim usable space in your yard.</p>
+            <a href="services/stump-grinding/index.html">Learn More</a>
+        </div>
+        <!-- Add more services as needed -->
+    </section>
+
+    <section class="about">
+        <h2>About Us</h2>
+        <p>Founded in 1993, American Tree Colorado provides residential and commercial arborist services across the Denver Metro area. Led by Troy King, an ISA Certified Arborist with 46 years of hands-on experience, we specialize in complex, high-risk, and environmentally sensitive tree care. We focus on diagnosing, preserving, and protecting trees whenever possible, without compromising safety.</p>
+    </section>
+
+    <section class="testimonials">
+        <h2>What Our Customers Say</h2>
+        <div class="testimonial-item">
+            <p>“AmericanTreeColorado did an excellent job trimming our trees. They 
+were punctual, courteous, and did a great job on the landscaping. Highly 
+recommend!”</p>
+            <p>— John D., Denver, CO</p>
+        </div>
+        <!-- Add more testimonials as needed -->
+    </section>
+
+    <section class="blog">
+        <h2>Latest News and Insights</h2>
+        <div class="blog-post">
+            <h3><a href="blog/winter-root-fertilization.html">Winter Root Fertilization</a></h3>
+            <p>Learn how winter fertilization helps roots stay strong and resilient through the season.</p>
+        </div>
+        <div class="blog-post">
+            <h3><a href="blog/why-healthy-tree-care-matters-for-colorado-propert.html">Why Healthy Tree Care Matters for Colorado Properties</a></h3>
+            <p>See how seasonal maintenance protects your trees from Colorado’s climate and long-term stress.</p>
+        </div>
+        <p><a href="blog/index.html">View all blog posts</a></p>
+    </section>
+
+    <section class="contact">
+        <h2>Get in Touch</h2>
+        <p>Phone: (303) 456-6898</p>
+        <p>Email: mandi@americantreecolorado.com</p>
+        <p>Address: Golden, Colorado 80401 USA</p>
+        <div class="map">
+            <iframe title="Golden, Colorado service area map" src="https://maps.google.com/maps?q=Golden%2C+CO&z=12&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-links">
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="services/index.html">Services</a></li>
+                <li><a href="about/index.html">About</a></li>
+                <li><a href="locations/index.html">Locations</a></li>
+                <li><a href="blog/index.html">Blog</a></li>
+                <li><a href="contact/index.html">Contact</a></li>
+            </ul>
+        </div>
+        <div class="social-media">
+            <!-- Social Media Icons -->
+        </div>
+        <p>Privacy Policy | Terms of Service</p>
+        <p>© [Year] AmericanTreeColorado. All rights reserved.</p>
+    </footer>
+
+    <script> window.$zoho = window.$zoho || {}; $zoho.salesiq = $zoho.salesiq || { ready: function(){} } </script>
+    <script id = "zsiqscript" src = "https://salesiq.zoho.com/widget?wc=siq25524f251a528774cdc8a86e67797f365ecbe601c430d1dcdbc98fd02ca5df9a" defer > </script>
+</body>
+</html>

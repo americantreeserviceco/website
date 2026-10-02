@@ -1,0 +1,35 @@
+{
+  "name": "american-tree-service-site",
+  "version": "1.0.0",
+  "description": "American Tree Colorado staging website",
+  "homepage": "https://github.com/americantreeserviceco/american-tree-service-site#readme",
+  "bugs": {
+    "url": "https://github.com/americantreeserviceco/american-tree-service-site/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/americantreeserviceco/american-tree-service-site.git"
+  },
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "build": "python3 scripts/generate_blog_pages.py && jekyll build",
+    "build:blog": "python3 scripts/generate_blog_pages.py",
+    "dev": "jekyll serve",
+    "test": "echo \"No tests configured\" && exit 0"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.117.2",
+    "react": "^19.3.0",
+    "tailwind": "^2.3.1",
+    "typescript": "^7.0.2"
+  },
+  "allowScripts": {
+    "core-js@2.6.12": true
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.6.1",
+    "postcss": "^8.5.28",
+    "tailwindcss": "^4.3.3"
+  }
+}

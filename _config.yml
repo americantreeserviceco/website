@@ -1,0 +1,36 @@
+title: American Tree Colorado
+description: Tree care and landscaping for Colorado homes and businesses.
+markdown: kramdown
+permalink: /blog/:title.html
+timezone: America/Denver
+defaults:
+  - scope:
+      path: "_posts"
+      type: posts
+    values:
+      layout: default
+exclude:
+  - "blog"
+  - "about/index.md"
+  - "contact/index.md"
+  - "locations/arvada/index.md"
+  - "locations/boulder/index.md"
+  - "locations/denver/index.md"
+  - "locations/golden/index.md"
+  - "locations/lakewood/index.md"
+  - "services/el-nino-emergency-storm-service/index.md"
+  - "services/rapid-hazard-response/index.md"
+  - "services/stump-grinding/index.md"
+  - "services/tree-removal/index.md"
+  - "services/tree-trimming-and-pruning/index.md"
+  - "services/winter-root-fertilization/index.md"
+  - "archive"
+  - "standalone-blog-creator"
+  - "api"
+  - "supabase"
+  - "scripts"
+  - "generate_site"
+  - "node_modules"
+  - "package.json"
+  - "package-lock.json"
+  - ".env"
