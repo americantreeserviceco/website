@@ -5,6 +5,8 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Certified Arborist Tree Care | American Tree Colorado</title>
 	<meta name="description" content="ISA Certified Arborist tree care in Golden and the Denver metro area. Call American Tree Colorado for pruning, removal, and tree health services.">
+	<link rel="preconnect" href="https://salesiq.zoho.com" crossorigin>
+	<link rel="dns-prefetch" href="https://salesiq.zoho.com">
 	<style>
 		:root {
 			--primary: #2d5a27;
@@ -27,6 +29,10 @@
 			background-color: #ffffff;
 		}
 
+		body.halloween-theme {
+			--accent: #e87524;
+		}
+
 		header {
 			background: #ffffff;
 			box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -46,15 +52,17 @@
 		}
 
 		.logo {
-			color: var(--primary);
+			display: inline-flex;
+			align-items: center;
 			text-decoration: none;
 			white-space: nowrap;
 		}
 
-		.logo h1 {
-			color: var(--primary);
-			font-size: 24px;
-			font-weight: 700;
+		.logo img {
+			display: block;
+			height: 52px;
+			width: auto;
+			max-width: 220px;
 		}
 
 		.nav-links {
@@ -94,10 +102,16 @@
 		}
 
 		.hero {
-			background: linear-gradient(rgba(0, 0, 0, 0.58), rgba(0, 0, 0, 0.58)), url('assets/images/jpg/dji_fly_20220331_103702_83_1683391413955_photo_optimized.jpg') no-repeat center center / cover;
+			background: linear-gradient(rgba(0, 0, 0, 0.58), rgba(0, 0, 0, 0.58)), url('assets/images/jpg/dji_fly_20220331_103702_83_1683391413955_photo_optimized_mobile.jpg') no-repeat center center / cover;
+			background-image: linear-gradient(rgba(0, 0, 0, 0.58), rgba(0, 0, 0, 0.58)), url('assets/images/jpg/dji_fly_20220331_103702_83_1683391413955_photo_optimized_mobile.jpg');
+			position: relative;
+			overflow: hidden;
+			min-height: 600px;
+			display: flex;
+			align-items: center;
 			color: #ffffff;
 			text-align: center;
-			padding: 100px 20px;
+			padding: 64px 20px 100px;
 		}
 
 		.hero-content {
@@ -105,7 +119,79 @@
 			margin: 0 auto;
 		}
 
-		.hero h2 {
+		.hero-lantern {
+			display: none;
+		}
+
+		.hero-brand {
+			display: inline-block;
+			margin-bottom: 16px;
+			padding: 8px 16px;
+			border: 1px solid rgba(255,255,255,0.4);
+			border-radius: 999px;
+			background: rgba(255,255,255,0.08);
+			color: #ff5555;
+			font-size: 16px;
+			font-weight: 700;
+			letter-spacing: 0.12em;
+			text-transform: uppercase;
+			text-shadow: 0 1px 3px rgba(0, 0, 0, 0.65);
+			animation: masthead-rgb 6s linear infinite;
+		}
+
+		.halloween-theme .hero {
+			background-image: linear-gradient(rgba(22, 13, 9, 0.72), rgba(22, 13, 9, 0.72)), url('assets/images/jpg/dji_fly_20220331_103702_83_1683391413955_photo_optimized_mobile.jpg');
+		}
+
+		.halloween-theme .hero-brand {
+			color: #ffad62;
+			border-color: rgba(255, 173, 98, 0.65);
+			background: rgba(28, 17, 12, 0.55);
+			animation: none;
+		}
+
+		.halloween-theme .hero-lantern {
+			display: block;
+			position: absolute;
+			right: clamp(16px, 5vw, 64px);
+			bottom: 18px;
+			width: 88px;
+			filter: drop-shadow(0 5px 8px rgba(0, 0, 0, 0.35));
+			animation: lantern-bob 3s ease-in-out infinite;
+		}
+
+		@keyframes lantern-bob {
+			50% { transform: translateY(-5px) rotate(3deg); }
+		}
+
+		.halloween-theme .btn:hover,
+		.halloween-theme .btn:focus-visible {
+			background-color: #c75a13;
+		}
+
+		.halloween-theme .feature-band {
+			background: linear-gradient(135deg, #fff5e9 0%, #f7e4d1 100%);
+			border-color: rgba(232, 117, 36, 0.25);
+		}
+
+		@keyframes masthead-rgb {
+			0%, 100% { color: #ff5555; }
+			33% { color: #55dd55; }
+			66% { color: #5599ff; }
+		}
+
+		@media (prefers-reduced-motion: reduce) {
+			.hero-brand {
+				animation: none;
+				color: #ffffff;
+			}
+
+			.hero-lantern {
+				animation: none;
+			}
+		}
+
+		.hero h1 {
 			font-size: 42px;
 			line-height: 1.15;
 			margin-bottom: 20px;
@@ -133,6 +219,140 @@
 		.btn:hover,
 		.btn:focus-visible {
 			background-color: #bfa030;
+		}
+
+		.feature-band {
+			background: linear-gradient(135deg, #f2f7ee 0%, #dfeee0 100%);
+			border-top: 1px solid rgba(45, 90, 39, 0.12);
+			border-bottom: 1px solid rgba(45, 90, 39, 0.12);
+			padding: 40px 20px;
+		}
+
+		.feature-band .inner {
+			max-width: 1200px;
+			margin: 0 auto;
+		}
+
+		.feature-grid {
+			display: grid;
+			grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+			gap: 20px;
+		}
+
+		.feature-item {
+			background: rgba(255, 255, 255, 0.74);
+			border: 1px solid rgba(45, 90, 39, 0.12);
+			border-radius: 12px;
+			padding: 24px 20px;
+			box-shadow: 0 10px 25px rgba(23, 59, 42, 0.06);
+		}
+
+		.feature-item strong {
+			display: inline-flex;
+			align-items: center;
+			justify-content: center;
+			width: 38px;
+			height: 38px;
+			margin-bottom: 14px;
+			border-radius: 50%;
+			background: var(--primary);
+			color: #fff;
+			font-size: 18px;
+		}
+
+		.feature-item h3 {
+			margin-bottom: 8px;
+			color: var(--secondary);
+			font-size: 20px;
+		}
+
+		.stats-band {
+			background: var(--secondary);
+			color: #fff;
+			padding: 30px 20px;
+		}
+
+		.stats-band .inner {
+			max-width: 1200px;
+			margin: 0 auto;
+		}
+
+		.stats-grid {
+			display: grid;
+			grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+			gap: 20px;
+		}
+
+		.stat {
+			text-align: center;
+			padding: 16px 10px;
+			border: 1px solid rgba(255, 255, 255, 0.15);
+			border-radius: 12px;
+			background: rgba(255, 255, 255, 0.04);
+		}
+
+		.stat strong {
+			display: block;
+			font-size: clamp(2rem, 4vw, 3rem);
+			line-height: 1.1;
+			color: var(--accent);
+		}
+
+		.stat span {
+			display: block;
+			margin-top: 6px;
+			font-size: 0.94rem;
+			letter-spacing: 0.04em;
+			text-transform: uppercase;
+			opacity: 0.9;
+		}
+
+		.cta-strip {
+			position: relative;
+			background: linear-gradient(rgba(18, 41, 27, 0.68), rgba(18, 41, 27, 0.68)), url('assets/images/jpg/IMG_8362.jpg') center/cover no-repeat;
+			border-top: 1px solid rgba(23, 59, 42, 0.12);
+			border-bottom: 1px solid rgba(23, 59, 42, 0.12);
+			padding: 88px 20px;
+			margin: 0 auto;
+		}
+
+		.cta-strip .inner {
+			max-width: 1200px;
+			margin: 0 auto;
+			text-align: center;
+			color: #fff;
+		}
+
+		.cta-strip h2 {
+			font-size: clamp(2rem, 4vw, 3.2rem);
+			line-height: 1.12;
+			margin-bottom: 18px;
+			color: #fff;
+		}
+
+		.cta-strip p {
+			max-width: 680px;
+			margin: 0 auto 28px;
+			font-size: 1.08rem;
+			color: rgba(255, 255, 255, 0.9);
+		}
+
+		.cta-actions {
+			display: flex;
+			justify-content: center;
+			gap: 16px;
+			flex-wrap: wrap;
+		}
+
+		.cta-actions .btn {
+			background: var(--accent);
+			color: var(--secondary);
+		}
+
+		.cta-actions .btn.secondary {
+			background: transparent;
+			color: #fff;
+			border: 1px solid rgba(255, 255, 255, 0.7);
 		}
 
 		section {
@@ -198,10 +418,65 @@
 			margin: 0 auto;
 		}
 
+		.testimonial-wrap {
+			background: #f7f4ee;
+			border-top: 1px solid rgba(45, 90, 39, 0.1);
+			border-bottom: 1px solid rgba(45, 90, 39, 0.1);
+			padding: 30px 20px 0;
+		}
+
+		.testimonial-wrap .inner {
+			max-width: 1200px;
+			margin: 0 auto;
+		}
+
+		.testimonial-grid {
+			display: grid;
+			grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+			gap: 22px;
+		}
+
+		.testimonial {
+			background: #fff;
+			border: 1px solid rgba(45, 90, 39, 0.08);
+			border-radius: 14px;
+			padding: 28px 24px;
+			box-shadow: 0 10px 24px rgba(23, 59, 42, 0.05);
+		}
+
+		.testimonial p {
+			font-size: 1.02rem;
+			margin-bottom: 18px;
+			color: var(--dark);
+		}
+
+		.testimonial footer {
+			background: transparent;
+			padding: 0;
+			margin: 0;
+			text-align: left;
+			color: var(--secondary);
+			font-size: 0.95rem;
+			font-weight: 700;
+		}
+
+		.contact-wrap {
+			background: linear-gradient(180deg, #f8f8f2 0%, #eff4ee 100%);
+		}
+
 		.contact-container {
 			display: grid;
-			grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr));
-			gap: 40px;
+			grid-template-columns: 0.9fr 1.1fr;
+			gap: 32px;
+			align-items: stretch;
+		}
+
+		.contact-info {
+			background: #fff;
+			border: 1px solid rgba(45, 90, 39, 0.08);
+			border-radius: 18px;
+			padding: 28px 24px;
+			box-shadow: 0 12px 28px rgba(23, 59, 42, 0.05);
 		}
 
 		.contact-info h3 {
@@ -212,6 +487,14 @@
 		.contact-info p {
 			margin-bottom: 15px;
 			font-size: 16px;
+		}
+
+		.contact-card {
+			background: #fff;
+			border: 1px solid rgba(45, 90, 39, 0.08);
+			border-radius: 18px;
+			padding: 28px 24px;
+			box-shadow: 0 12px 28px rgba(23, 59, 42, 0.05);
 		}
 
 		form {
@@ -227,10 +510,20 @@
 		form input,
 		form textarea {
 			width: 100%;
-			padding: 12px;
-			border: 1px solid #cccccc;
-			border-radius: 5px;
+			padding: 12px 14px;
+			border: 1px solid #d7d7d7;
+			border-radius: 10px;
 			font-size: 16px;
+			background: #fff;
+		}
+
+		form textarea {
+			resize: vertical;
+			min-height: 120px;
+		}
+
+		form .btn {
+			align-self: flex-start;
 		}
 
 		footer {
@@ -251,6 +544,36 @@
 
 		.footer-links a {
 			color: #ffffff;
+		}
+
+		@media (min-width: 769px) {
+			.nav-container {
+				flex-wrap: nowrap;
+			}
+
+			nav {
+				width: auto;
+			}
+
+			.nav-links {
+				display: flex !important;
+				flex-direction: row;
+				align-items: center;
+				gap: 20px;
+				width: auto;
+				padding-top: 0;
+			}
+
+			.nav-links li {
+				width: auto;
+			}
+
+			.feature-band .feature-grid,
+			.stats-grid,
+			.testimonial-grid,
+			.contact-container {
+				grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+			}
 		}
 
 		@media (max-width: 768px) {
@@ -287,11 +610,40 @@
 			}
 
 			.hero {
-				padding: 76px 20px;
+				min-height: 560px;
+				padding: 40px 20px 76px;
 			}
 
-			.hero h2 {
+			.hero-brand {
+				padding: 8px 10px;
+				font-size: 14px;
+				letter-spacing: 0.06em;
+			}
+
+			.hero h1 {
 				font-size: 32px;
+			}
+
+			.halloween-theme .hero-lantern {
+				right: 12px;
+				bottom: 12px;
+				width: 64px;
+			}
+
+			.cta-strip {
+				padding: 72px 20px;
+			}
+
+			.feature-band .feature-grid,
+			.stats-grid,
+			.testimonial-grid,
+			.contact-container {
+				grid-template-columns: 1fr;
+			}
+
+			.contact-card,
+			.contact-info {
+				padding: 22px 18px;
 			}
 
 			section {
@@ -304,7 +656,7 @@
 	<header>
 		<div class="nav-container">
 			<a class="logo" href="/" aria-label="American Tree Colorado home">
-				<h1>American Tree Colorado</h1>
+				<img src="assets/images/logo/AmericanTree_Logo_RGB.png" alt="American Tree Colorado logo">
 			</a>
 			<button class="nav-toggle" type="button" aria-label="Toggle menu" aria-expanded="false">Menu</button>
 			<nav aria-label="Main navigation">
@@ -322,11 +674,70 @@
 	</header>
 
 	<main>
-		<section class="hero">
+		<section class="hero" fetchpriority="high">
 			<div class="hero-content">
-				<h2>Certified Arborist Tree Care for Golden and the Denver Metro Area</h2>
+				<div class="hero-brand">American Tree Colorado</div>
+				<h1>Certified Arborist Tree Care for Golden and the Denver Metro Area</h1>
 				<p>Locally based and serving Colorado since 1993. Get knowledgeable care for tree health, pruning, removals, and storm hazards.</p>
 				<a class="btn" href="/contact/">Request a Free Estimate</a>
+			</div>
+			<img class="hero-lantern" src="assets/images/halloween-jack-o-lantern.svg" alt="" aria-hidden="true">
+		</section>
+
+		<section class="feature-band" aria-labelledby="why-us-title">
+			<div class="inner">
+				<h2 class="section-title" id="why-us-title">Why homeowners choose us</h2>
+				<div class="feature-grid">
+					<div class="feature-item">
+						<strong>✓</strong>
+						<h3>Certified expertise</h3>
+						<p>ISA-based guidance for healthy, safe tree decisions.</p>
+					</div>
+					<div class="feature-item">
+						<strong>⚡</strong>
+						<h3>Fast response</h3>
+						<p>Prompt support for urgent hazards and storm damage.</p>
+					</div>
+					<div class="feature-item">
+						<strong>🌿</strong>
+						<h3>Long-term care</h3>
+						<p>Pruning, removal, and root health strategies that last.</p>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<section class="stats-band" aria-label="Company highlights">
+			<div class="inner">
+				<div class="stats-grid">
+					<div class="stat">
+						<strong>31+</strong>
+						<span>Years serving Colorado</span>
+					</div>
+					<div class="stat">
+						<strong>6</strong>
+						<span>Core services</span>
+					</div>
+					<div class="stat">
+						<strong>24/7</strong>
+						<span>Storm response</span>
+					</div>
+					<div class="stat">
+						<strong>100%</strong>
+						<span>Property-focused care</span>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<section class="cta-strip" aria-labelledby="cta-title">
+			<div class="inner">
+				<h2 id="cta-title">Ready for safer, healthier trees?</h2>
+				<p>From routine pruning to storm emergency response, our team helps homeowners protect their property and keep trees thriving year-round.</p>
+				<div class="cta-actions">
+					<a class="btn" href="/contact/">Request a free estimate</a>
+					<a class="btn secondary" href="/services/">Explore services</a>
+				</div>
 			</div>
 		</section>
 
@@ -432,7 +843,27 @@
 			</div>
 		</section>
 
-		<section aria-labelledby="contact-title">
+		<section class="testimonial-wrap" aria-labelledby="reviews-title">
+			<div class="inner">
+				<h2 class="section-title" id="reviews-title">What our clients say</h2>
+				<div class="testimonial-grid">
+					<article class="testimonial">
+						<p>“The team showed up quickly, explained everything clearly, and took care of a large tree safely without any stress on our property.”</p>
+						<footer>— Homeowner in Lakewood</footer>
+					</article>
+					<article class="testimonial">
+						<p>“Professional, responsive, and honest. They helped us decide the right tree work and made the whole process easy from start to finish.”</p>
+						<footer>— Property Manager in Denver</footer>
+					</article>
+					<article class="testimonial">
+						<p>“Their pruning and hazard assessment made a huge difference. We felt confident the work was done correctly and safely.”</p>
+						<footer>— Golden homeowner</footer>
+					</article>
+				</div>
+			</div>
+		</section>
+
+		<section class="contact-wrap" aria-labelledby="contact-title">
 			<h2 class="section-title" id="contact-title">Request a Tree Care Estimate</h2>
 			<div class="contact-container">
 				<div class="contact-info">
@@ -440,16 +871,19 @@
 					<p>Call <a href="tel:+13034566898">(303) 456-6898</a> or send a message to discuss your property and tree care needs.</p>
 					<p>Email: <a href="mailto:mandi@americantreecolorado.com">mandi@americantreecolorado.com</a></p>
 					<p>Based in Golden, Colorado, serving the Denver metro area and nearby Front Range communities.</p>
+					<p><strong>Typical response time:</strong> same-day or next-business-day for urgent tree concerns.</p>
 				</div>
-				<form action="https://formspree.io/f/maenvddy" method="POST">
-					<label for="name">Name</label>
-					<input id="name" name="name" type="text" autocomplete="name" required>
-					<label for="email">Email</label>
-					<input id="email" name="email" type="email" autocomplete="email" required>
-					<label for="message">How can we help?</label>
-					<textarea id="message" name="message" rows="5" required></textarea>
-					<button class="btn" type="submit">Send Request</button>
-				</form>
+				<div class="contact-card">
+					<form action="https://formspree.io/f/maenvddy" method="POST">
+						<label for="name">Name</label>
+						<input id="name" name="name" type="text" autocomplete="name" required>
+						<label for="email">Email</label>
+						<input id="email" name="email" type="email" autocomplete="email" required>
+						<label for="message">How can we help?</label>
+						<textarea id="message" name="message" rows="5" required></textarea>
+						<button class="btn" type="submit">Send Request</button>
+					</form>
+				</div>
 			</div>
 		</section>
 	</main>
@@ -466,6 +900,10 @@
 	</footer>
 	<script>
 		document.addEventListener('DOMContentLoaded', () => {
+			if (new Date().getMonth() === 9) {
+				document.body.classList.add('halloween-theme');
+			}
+
 			const menuToggle = document.querySelector('.nav-toggle');
 			const navigation = document.querySelector('.nav-links');
 			if (!menuToggle || !navigation) return;

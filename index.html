@@ -29,6 +29,10 @@
 			background-color: #ffffff;
 		}
 
+		body.halloween-theme {
+			--accent: #e87524;
+		}
+
 		header {
 			background: #ffffff;
 			box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -100,6 +104,11 @@
 		.hero {
 			background: linear-gradient(rgba(0, 0, 0, 0.58), rgba(0, 0, 0, 0.58)), url('assets/images/jpg/dji_fly_20220331_103702_83_1683391413955_photo_optimized_mobile.jpg') no-repeat center center / cover;
 			background-image: linear-gradient(rgba(0, 0, 0, 0.58), rgba(0, 0, 0, 0.58)), url('assets/images/jpg/dji_fly_20220331_103702_83_1683391413955_photo_optimized_mobile.jpg');
+			position: relative;
+			overflow: hidden;
+			min-height: 600px;
+			display: flex;
+			align-items: center;
 			color: #ffffff;
 			text-align: center;
 			padding: 64px 20px 100px;
@@ -108,6 +117,10 @@
 		.hero-content {
 			max-width: 800px;
 			margin: 0 auto;
+		}
+
+		.hero-lantern {
+			display: none;
 		}
 
 		.hero-brand {
@@ -126,6 +139,41 @@
 			animation: masthead-rgb 6s linear infinite;
 		}
 
+		.halloween-theme .hero {
+			background-image: linear-gradient(rgba(22, 13, 9, 0.72), rgba(22, 13, 9, 0.72)), url('assets/images/jpg/dji_fly_20220331_103702_83_1683391413955_photo_optimized_mobile.jpg');
+		}
+
+		.halloween-theme .hero-brand {
+			color: #ffad62;
+			border-color: rgba(255, 173, 98, 0.65);
+			background: rgba(28, 17, 12, 0.55);
+			animation: none;
+		}
+
+		.halloween-theme .hero-lantern {
+			display: block;
+			position: absolute;
+			right: clamp(16px, 5vw, 64px);
+			bottom: 18px;
+			width: 88px;
+			filter: drop-shadow(0 5px 8px rgba(0, 0, 0, 0.35));
+			animation: lantern-bob 3s ease-in-out infinite;
+		}
+
+		@keyframes lantern-bob {
+			50% { transform: translateY(-5px) rotate(3deg); }
+		}
+
+		.halloween-theme .btn:hover,
+		.halloween-theme .btn:focus-visible {
+			background-color: #c75a13;
+		}
+
+		.halloween-theme .feature-band {
+			background: linear-gradient(135deg, #fff5e9 0%, #f7e4d1 100%);
+			border-color: rgba(232, 117, 36, 0.25);
+		}
+
 		@keyframes masthead-rgb {
 			0%, 100% { color: #ff5555; }
 			33% { color: #55dd55; }
@@ -136,6 +184,10 @@
 			.hero-brand {
 				animation: none;
 				color: #ffffff;
+			}
+
+			.hero-lantern {
+				animation: none;
 			}
 		}
 
@@ -558,6 +610,7 @@
 			}
 
 			.hero {
+				min-height: 560px;
 				padding: 40px 20px 76px;
 			}
 
@@ -569,6 +622,12 @@
 
 			.hero h1 {
 				font-size: 32px;
+			}
+
+			.halloween-theme .hero-lantern {
+				right: 10px;
+				bottom: 12px;
+				width: 76px;
 			}
 
 			.cta-strip {
@@ -622,6 +681,7 @@
 				<p>Locally based and serving Colorado since 1993. Get knowledgeable care for tree health, pruning, removals, and storm hazards.</p>
 				<a class="btn" href="/contact/">Request a Free Estimate</a>
 			</div>
+			<img class="hero-lantern" src="assets/images/halloween-jack-o-lantern.svg" alt="" aria-hidden="true">
 		</section>
 
 		<section class="feature-band" aria-labelledby="why-us-title">
@@ -840,6 +900,10 @@
 	</footer>
 	<script>
 		document.addEventListener('DOMContentLoaded', () => {
+			if (new Date().getMonth() === 9) {
+				document.body.classList.add('halloween-theme');
+			}
+
 			const menuToggle = document.querySelector('.nav-toggle');
 			const navigation = document.querySelector('.nav-links');
 			if (!menuToggle || !navigation) return;

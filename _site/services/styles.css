@@ -122,7 +122,7 @@ img {
 
 .hero {
   background: linear-gradient(rgba(20, 53, 31, 0.72), rgba(20, 53, 31, 0.72)),
-    url('../assets/images/jpg/dji_fly_20220331_103702_83_1683391413955_photo_optimized.jpg') center/cover no-repeat;
+    url('../assets/images/jpg/dji_fly_20220331_103702_83_1683391413955_photo_optimized_mobile.jpg') center/cover no-repeat;
   color: var(--white);
   padding: 6rem 0 4.5rem;
   text-align: center;
@@ -201,14 +201,91 @@ img {
   font-weight: 700;
 }
 
+.feature-band {
+  background: linear-gradient(135deg, #f2f7ee 0%, #dfeee0 100%);
+  border-top: 1px solid rgba(20, 53, 31, 0.08);
+  border-bottom: 1px solid rgba(20, 53, 31, 0.08);
+  padding: 2.5rem 0;
+}
+
 .feature-row {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  grid-template-columns: 1fr;
   gap: 1.25rem;
 }
 
 .feature-card {
-  background: var(--green-100);
+  background: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(20, 53, 31, 0.08);
+  box-shadow: var(--shadow);
+}
+
+.stats-band {
+  background: var(--forest-900);
+  color: var(--white);
+  padding: 2rem 0;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1rem;
+}
+
+.stat {
+  text-align: center;
+  padding: 1.2rem 0.75rem;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 0.9rem;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.stat strong {
+  display: block;
+  color: var(--gold-500);
+  font-size: clamp(2rem, 4vw, 2.8rem);
+  line-height: 1.1;
+}
+
+.stat span {
+  display: block;
+  margin-top: 0.35rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-size: 0.78rem;
+  opacity: 0.9;
+}
+
+.testimonial-wrap {
+  background: #f7f4ee;
+  border-top: 1px solid rgba(20, 53, 31, 0.08);
+  border-bottom: 1px solid rgba(20, 53, 31, 0.08);
+  padding: 3.5rem 0;
+}
+
+.testimonial-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.5rem;
+}
+
+.testimonial {
+  background: var(--white);
+  border: 1px solid rgba(20, 53, 31, 0.08);
+  border-radius: 1rem;
+  padding: 1.5rem;
+  box-shadow: var(--shadow);
+}
+
+.testimonial p {
+  margin: 0 0 1rem;
+  color: var(--slate-700);
+  font-size: 1.02rem;
+}
+
+.testimonial footer {
+  color: var(--forest-800);
+  font-weight: 700;
 }
 
 .service-details {
@@ -268,15 +345,20 @@ img {
 }
 
 .cta-banner {
-  background: linear-gradient(135deg, var(--forest-800), var(--forest-700));
+  background: linear-gradient(rgba(18, 41, 27, 0.72), rgba(18, 41, 27, 0.72)), url('../assets/images/jpg/IMG_8362.jpg') center/cover no-repeat;
   color: var(--white);
   text-align: center;
-  padding: 3.5rem 1.5rem;
+  padding: 4rem 1.5rem;
+}
+
+.service-cta {
+  margin-top: 1.5rem;
 }
 
 .cta-banner h2 {
   margin: 0 0 0.75rem;
   font-size: clamp(2rem, 4vw, 2.75rem);
+  color: var(--white);
 }
 
 .cta-banner p {
@@ -332,6 +414,25 @@ img {
   flex-wrap: wrap;
 }
 
+@media (min-width: 761px) {
+  .feature-row {
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  }
+
+  .stats-grid {
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  }
+
+  .card-grid,
+  .testimonial-grid {
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  }
+
+  .service-details {
+    grid-template-columns: 1.5fr 0.85fr;
+  }
+}
+
 @media (max-width: 760px) {
   .site-header .container,
   .site-footer .container {
@@ -371,7 +472,15 @@ img {
     text-align: center;
   }
 
+  .feature-row,
+  .stats-grid,
+  .card-grid,
+  .testimonial-grid,
   .service-details {
     grid-template-columns: 1fr;
+  }
+
+  .cta-banner {
+    padding: 3rem 1rem;
   }
 }
