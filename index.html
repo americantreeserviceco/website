@@ -119,7 +119,13 @@
 			margin: 0 auto;
 		}
 
-		.hero-lantern {
+		.hero-cta-orbit {
+			display: inline-block;
+			position: relative;
+			isolation: isolate;
+		}
+
+		.hero-leaves {
 			display: none;
 		}
 
@@ -150,18 +156,17 @@
 			animation: none;
 		}
 
-		.halloween-theme .hero-lantern {
+		.halloween-theme .hero-leaves {
 			display: block;
 			position: absolute;
-			right: clamp(16px, 5vw, 64px);
-			bottom: 18px;
-			width: 88px;
+			z-index: -1;
+			top: 50%;
+			left: 50%;
+			width: min(360px, calc(100vw - 16px));
+			max-width: none;
+			transform: translate(-50%, -50%);
 			filter: drop-shadow(0 5px 8px rgba(0, 0, 0, 0.35));
-			animation: lantern-bob 3s ease-in-out infinite;
-		}
-
-		@keyframes lantern-bob {
-			50% { transform: translateY(-5px) rotate(3deg); }
+			pointer-events: none;
 		}
 
 		.halloween-theme .btn:hover,
@@ -186,9 +191,6 @@
 				color: #ffffff;
 			}
 
-			.hero-lantern {
-				animation: none;
-			}
 		}
 
 		.hero h1 {
@@ -624,12 +626,6 @@
 				font-size: 32px;
 			}
 
-			.halloween-theme .hero-lantern {
-				right: 10px;
-				bottom: 12px;
-				width: 76px;
-			}
-
 			.cta-strip {
 				padding: 72px 20px;
 			}
@@ -679,9 +675,11 @@
 				<div class="hero-brand">American Tree Colorado</div>
 				<h1>Certified Arborist Tree Care for Golden and the Denver Metro Area</h1>
 				<p>Locally based and serving Colorado since 1993. Get knowledgeable care for tree health, pruning, removals, and storm hazards.</p>
-				<a class="btn" href="/contact/">Request a Free Estimate</a>
+				<div class="hero-cta-orbit">
+					<a class="btn" href="/contact/">Request a Free Estimate</a>
+					<img class="hero-leaves" src="assets/images/autumn-leaves.svg" alt="" aria-hidden="true">
+				</div>
 			</div>
-			<img class="hero-lantern" src="assets/images/halloween-jack-o-lantern.svg" alt="" aria-hidden="true">
 		</section>
 
 		<section class="feature-band" aria-labelledby="why-us-title">
