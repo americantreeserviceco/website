@@ -1,177 +1,195 @@
-import os
-import logging
+import re
+import requests
+from bs4 import BeautifulSoup
+import mysql.connector
+from mysql.connector import Error
 
-try:
-    import mysql.connector  # type: ignore[import-not-found]
-except ImportError:  # pragma: no cover
-    mysql = None  # type: ignore[assignment]
-
-# 1. CONFIGURE LOGGING SYSTEM
-log_filename = "scraper.log"
-
-# Define logging format
-log_format = logging.Formatter(
-    fmt="%(asctime)s [%(levelname)s] %(message)s", 
-    datefmt="%Y-%m-%d %H:%M:%S"
-)
-
-# Root logger setup
-logger = logging.getLogger("ArboristScraper")
-logger.setLevel(logging.INFO)
-
-# File Handler (Appends records continuously to scraper.log)
-file_handler = logging.FileHandler(log_filename, mode='a', encoding='utf-8')
-file_handler.setFormatter(log_format)
-logger.addHandler(file_handler)
-
-# Console/Terminal Handler (Displays logs on screen)
-console_handler = logging.StreamHandler()
-console_handler.setFormatter(log_format)
-logger.addHandler(console_handler)
-
-
-# 2. DATABASE CONFIGURATION
+# ------------------------------------------------------------------
+# MariaDB Database Configuration
+# Update these credentials to match your database environment
+# ------------------------------------------------------------------
 DB_CONFIG = {
-    'host': '192.168.0.18',     # Replace with your standalone Linux server's Network IP
-    'port': 3306,               # Default MariaDB port
-    'user': 'uselesse',   # Your DB User
-    'password': 'ericvbrooks',
-    'database': 'arborist'
+    "host": "localhost",
+    "user": "uselesse",
+    "password": "ericvbrooks",  # Replace with actual user password
+    "database": "arborist",
+    "port": 3306
 }
 
-def init_database():
-    """Establishes network connection and initializes table with constraint protection."""
-    logger.info(f"Connecting to database host machine at {DB_CONFIG['host']}:{DB_CONFIG['port']}...")
-    try:
-        # Step 1: Connect to server root/admin to verify database entity exists
-        conn = mysql.connector.connect(
-            host=DB_CONFIG['host'],
-            port=DB_CONFIG['port'],
-            user=DB_CONFIG['user'],
-            password=DB_CONFIG['password']
-        )
-        cursor = conn.cursor()
-        cursor.execute("CREATE DATABASE IF NOT EXISTS arborist;")
-        cursor.close()
-        conn.close()
+# Target URLs to scrape (Replace or expand with actual target pages)
+TARGET_URLS = [
+    "https://www.5280tree.com",
+    "https://www.savatree.com",
+    "https://www.k2treeservice.com",
+    "https://www.arborscapeservices.com"
+]
 
-        # Step 2: Connect directly to target catalog to establish structural rules
-        conn = mysql.connector.connect(**DB_CONFIG)
-        cursor = conn.cursor()
-        cursor.execute('''
-            CREATE TABLE IF NOT EXISTS contractors (
-                id INT AUTO_INCREMENT PRIMARY KEY,
-                name VARCHAR(255) NOT NULL,
-                location VARCHAR(100) NOT NULL,
-                address VARCHAR(255),
-                phone VARCHAR(50),
-                url VARCHAR(255),
-                offers_tree_removal TINYINT(1) DEFAULT 0,
-                offers_stump_grinding TINYINT(1) DEFAULT 0,
-                offers_emergency_response TINYINT(1) DEFAULT 0,
-                offers_winter_fertilization TINYINT(1) DEFAULT 0,
-                offers_tree_health TINYINT(1) DEFAULT 0,
-                offers_trimming_pruning TINYINT(1) DEFAULT 0,
-                raw_description TEXT,
-                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-                CONSTRAINT unique_contractor UNIQUE (name, phone)
-            ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-        ''')
-        conn.commit()
-        logger.info("Database and table schema validated successfully.")
-        return conn
-    except mysql.connector.Error as db_err:
-        logger.critical(f"Database infrastructure initialization failed: {db_err}")
-        raise
+HTTP_HEADERS = {
+    "User-Agent": (
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+        "AppleWebKit/537.36 (KHTML, like Gecko) "
+        "Chrome/120.0.0.0 Safari/537.36"
+    )
+}
 
-def run_arborist_crawler():
-    try:
-        conn = init_database()
-        cursor = conn.cursor()
-    except Exception:
-        logger.critical("Aborting scraping loop due to baseline database failure.")
-        return
-    
-    locations = ['golden', 'boulder', 'lakewood', 'denver', 'arvada', 'westminster', 'wheat ridge']
-    
-    service_keywords = {
-        'offers_tree_removal': ['removal', 'remove', 'taking down', 'crane tree'],
-        'offers_stump_grinding': ['stump', 'grinding', 'stump routing'],
-        'offers_emergency_response': ['emergency', 'storm damage', '24/7', 'storm response', 'wind damage'],
-        'offers_winter_fertilization': ['fertilization', 'root deep', 'winter care', 'fertilize', 'feeding'],
-        'offers_tree_health': ['health', 'arborist', 'disease', 'diagnosis', 'infestation', 'insect'],
-        'offers_trimming_pruning': ['trimming', 'pruning', 'cutting', 'shaping', 'lacing']
+# ------------------------------------------------------------------
+# 1. Keyword Parser Function
+# ------------------------------------------------------------------
+def parse_arborist_flags(raw_text):
+    """
+    Parses raw text descriptions and evaluates regex patterns to set
+    boolean service flags (1 or 0) for database insertion.
+    """
+    if not raw_text:
+        return {
+            "offer_tree_removal": 0,
+            "offer_stump_grinding": 0,
+            "offer_emergency_response": 0,
+            "offer_winter_fertilization": 0,
+            "offer_tree_health": 0,
+            "offer_trimming_prunning": 0,
+        }
+
+    text = raw_text.lower()
+
+    patterns = {
+        "offer_tree_removal": r"\b(tree removal|hazardous removal|tree felling|take down|removing trees)\b",
+        "offer_stump_grinding": r"\b(stump grinding|stump removal|stump root|stump digging)\b",
+        "offer_emergency_response": r"\b(24/7|24-hour|emergency|storm damage|storm response|disaster cleanup)\b",
+        "offer_winter_fertilization": r"\b(winter fertilization|deep root feeding|dormant feeding|soil injection|winter feeding)\b",
+        "offer_tree_health": r"\b(plant health|tree health|isa certified|arborist evaluation|disease management|insect control|pest treatment|diagnosis)\b",
+        "offer_trimming_prunning": r"\b(trimming|pruning|tree pruning|crown reduction|deadwooding|branch trimming|shrub care)\b",
     }
 
-    logger.info(f"Beginning crawl sequence across {len(locations)} Colorado markets.")
+    flags = {}
+    for flag_name, pattern in patterns.items():
+        flags[flag_name] = 1 if re.search(pattern, text) else 0
 
-    for loc in locations:
-        logger.info(f"Processing target market region: {loc.upper()}, CO...")
-        
-        formatted_loc = loc.replace(" ", "+")
-        target_url = f"https://example-local-directory.com{formatted_loc}+CO"
-        
-        try:
-            # --- STRUCTURAL SIMULATION ---
-            contractors = [{
-                'name': 'Apex Arbor Care',
-                'address': f'800 Foothills Pkwy, {loc.capitalize()}, CO',
-                'phone': '(303) 555-4422',
-                'url': 'https://apexarborcare-demo.com',
-                'description': 'Premium tree removal, emergency storm response, and complete structural pruning.'
-            }]
-            # ----------------------------------------------------------------------------------
+    return flags
 
-            inserted_count = 0
-            skipped_count = 0
 
-            for contractor in contractors:
-                name = contractor['name']
-                address = contractor['address']
-                phone = contractor['phone']
-                url = contractor['url']
-                desc_text = contractor['description'].lower()
-                
-                flags = {}
-                for database_field, keywords in service_keywords.items():
-                    flags[database_field] = 1 if any(kw in desc_text for kw in keywords) else 0
-                
-                sql_insert = '''
-                    INSERT IGNORE INTO contractors (
-                        name, location, address, phone, url,
-                        offers_tree_removal, offers_stump_grinding, offers_emergency_response,
-                        offers_winter_fertilization, offers_tree_health, offers_trimming_pruning,
-                        raw_description
-                    ) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
-                '''
-                
-                cursor.execute(sql_insert, (
-                    name, loc, address, phone, url,
-                    flags['offers_tree_removal'],
-                    flags['offers_stump_grinding'],
-                    flags['offers_emergency_response'],
-                    flags['offers_winter_fertilization'],
-                    flags['offers_tree_health'],
-                    flags['offers_trimming_pruning'],
-                    desc_text
-                ))
-                
-                if cursor.rowcount == 0:
-                    logger.debug(f"Deduplication triggered: '{name}' ({phone}) matches a record.")
-                    skipped_count += 1
-                else:
-                    logger.debug(f"Successfully staged database record for '{name}'.")
-                    inserted_count += 1
-                
-            conn.commit()
-            logger.info(f"Completed {loc.capitalize()}: {inserted_count} inserted, {skipped_count} skipped duplicates.")
-            
-        except Exception as err:
-            logger.error(f"Network processing/parsing metrics failure on location '{loc}': {err}", exc_info=True)
+# ------------------------------------------------------------------
+# 2. Extract Phone Number and Company Name
+# ------------------------------------------------------------------
+def extract_contact_info(soup, url):
+    """Extracts company name and phone number using defensive checks."""
+    # Attempt to extract title/company name
+    title_el = soup.find("title")
+    company_name = title_el.get_text(strip=True) if title_el else url.split("//")[-1].split("/")[0]
+    
+    # Clean company name
+    company_name = company_name.split("|")[0].split("-")[0].strip()
 
-    cursor.close()
-    conn.close()
-    logger.info("Ingestion execution completed. Logging outputs finalized.")
+    # Extract phone number using regex
+    text_content = soup.get_text()
+    phone_match = re.search(r"\(?\b[0-9]{3}\)?[-. ]?[0-9]{3}[-. ]?[0-9]{4}\b", text_content)
+    phone = phone_match.group(0) if phone_match else None
 
-if __name__ == '__main__':
-    run_arborist_crawler()
+    return company_name, phone
+
+
+# ------------------------------------------------------------------
+# 3. Web Scraper Task
+# ------------------------------------------------------------------
+def scrape_arborist_site(url):
+    """Fetches web page, parses content, and extracts service data."""
+    print(f"Scraping: {url}...")
+    try:
+        response = requests.get(url, headers=HTTP_HEADERS, timeout=10)
+        response.raise_for_status()
+    except requests.RequestException as e:
+        print(f"[-] Error fetching {url}: {e}")
+        return None
+
+    soup = BeautifulSoup(response.content, "html.parser")
+
+    # Remove script and style elements for clean text extraction
+    for element in soup(["script", "style", "noscript", "header", "footer", "nav"]):
+        element.decompose()
+
+    raw_description = soup.get_text(separator=" ", strip=True)
+    company_name, phone = extract_contact_info(soup, url)
+    flags = parse_arborist_flags(raw_description)
+
+    return {
+        "company_name": company_name,
+        "phone": phone,
+        "url": url,
+        "raw_description": raw_description[:2000],  # Truncate to reasonable length
+        **flags
+    }
+
+
+# ------------------------------------------------------------------
+# 4. Direct MariaDB Ingestion
+# ------------------------------------------------------------------
+def save_to_mariadb(records):
+    """Inserts or updates scraped records in MariaDB using ON DUPLICATE KEY UPDATE."""
+    if not records:
+        print("No valid records to save.")
+        return
+
+    try:
+        conn = mysql.connector.connect(**DB_CONFIG)
+        cursor = conn.cursor()
+
+        query = """
+            INSERT INTO `arborist` (
+                `company_name`, `phone`, `url`,
+                `offer_tree_removal`, `offer_stump_grinding`, `offer_emergency_response`,
+                `offer_winter_fertilization`, `offer_tree_health`, `offer_trimming_prunning`,
+                `raw_description`
+            ) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+            ON DUPLICATE KEY UPDATE
+                `phone` = VALUES(`phone`),
+                `url` = VALUES(`url`),
+                `offer_tree_removal` = VALUES(`offer_tree_removal`),
+                `offer_stump_grinding` = VALUES(`offer_stump_grinding`),
+                `offer_emergency_response` = VALUES(`offer_emergency_response`),
+                `offer_winter_fertilization` = VALUES(`offer_winter_fertilization`),
+                `offer_tree_health` = VALUES(`offer_tree_health`),
+                `offer_trimming_prunning` = VALUES(`offer_trimming_prunning`),
+                `raw_description` = VALUES(`raw_description`);
+        """
+
+        data_tuples = [
+            (
+                r["company_name"],
+                r["phone"],
+                r["url"],
+                r["offer_tree_removal"],
+                r["offer_stump_grinding"],
+                r["offer_emergency_response"],
+                r["offer_winter_fertilization"],
+                r["offer_tree_health"],
+                r["offer_trimming_prunning"],
+                r["raw_description"],
+            )
+            for r in records
+        ]
+
+        cursor.executemany(query, data_tuples)
+        conn.commit()
+        print(f"[+] Successfully upserted {cursor.rowcount} record(s) into MariaDB.")
+
+    except Error as e:
+        print(f"[-] Database Error: {e}")
+    finally:
+        if 'conn' in locals() and conn.is_connected():
+            cursor.close()
+            conn.close()
+
+
+# ------------------------------------------------------------------
+# Execution Entry Point
+# ------------------------------------------------------------------
+if __name__ == "__main__":
+    scraped_data = []
+
+    for site in TARGET_URLS:
+        result = scrape_arborist_site(site)
+        if result:
+            scraped_data.append(result)
+
+    # Ingest scraped payloads into MariaDB
+    save_to_mariadb(scraped_data)
