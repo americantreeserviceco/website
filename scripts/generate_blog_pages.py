@@ -162,10 +162,12 @@ def markdown_to_html(markdown: str) -> str:
             flush_list()
             continue
 
-        if stripped.startswith("# "):
+        heading = re.match(r"^(#{1,6})\s+(.+)$", stripped)
+        if heading:
             flush_paragraph()
             flush_list()
-            html_lines.append(f"<h2>{render_inline(stripped[2:])}</h2>")
+            heading_level = min(max(len(heading.group(1)), 2), 6)
+            html_lines.append(f"<h{heading_level}>{render_inline(heading.group(2))}</h{heading_level}>")
         elif stripped.startswith("**") and stripped.endswith("**"):
             flush_paragraph()
             flush_list()
