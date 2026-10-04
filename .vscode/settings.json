@@ -44,6 +44,10 @@
         "/^convert /home/uselesse/Downloads/vecteezy_cartoon-halloween-doodle-pack-full-color_72278360\\.png -crop 852x834\\+403\\+316 \\+repage -fuzz 28% -fill none -opaque '#6d4dae' -trim -bordercolor none -border 24 assets/images/halloween-doodles/pumpkin\\.png$/": {
             "approve": true,
             "matchCommandLine": true
+        },
+        "/^convert /tmp/october-2026-calendar-review\\.png -resize '900x' -strip -quality 88 assets/images/october-2026-calendar\\.webp$/": {
+            "approve": true,
+            "matchCommandLine": true
         }
     }
 }
