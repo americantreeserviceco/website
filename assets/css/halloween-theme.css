@@ -1,0 +1,153 @@
+body.halloween-theme {
+  color-scheme: light;
+  --primary: #a54f25;
+  --secondary: #352c40;
+  --accent: #f5a623;
+  --light: #fff5e9;
+  --dark: #28232c;
+  --forest: #a54f25;
+  --forest-dark: #352c40;
+  --forest-900: #352c40;
+  --forest-800: #a54f25;
+  --forest-700: #b75c2d;
+  --green: #b75c2d;
+  --green-600: #a54f25;
+  --green-700: #a54f25;
+  --green-800: #873f28;
+  --green-900: #352c40;
+  --green-50: #fff5e9;
+  --green-100: #f7e4d1;
+  --green-soft: #fff1e2;
+  --gold-500: #f5a623;
+  --sand: #fffaf4;
+  --sand-100: #fffaf4;
+  --text: #28232c;
+  --muted: #655a62;
+  --slate-900: #28232c;
+  --slate-800: #352c40;
+  --slate-700: #5c5058;
+  --slate-600: #655a62;
+  --slate-500: #746871;
+  --primary-color: #a54f25;
+  --secondary-color: #352c40;
+  --bg-color: #fffaf4;
+  --card-bg: #ffffff;
+  --border-color: #ead8c7;
+  --shadow: 0 18px 40px rgba(53, 44, 64, 0.12);
+  background-color: #fffaf4;
+  color: #28232c;
+}
+
+body.halloween-theme .topbar,
+body.halloween-theme .site-header {
+  background-color: #fffaf4;
+  border-color: rgba(165, 79, 37, 0.22);
+}
+
+body.halloween-theme .nav-toggle {
+  border-color: #a54f25;
+  color: #873f28;
+}
+
+body.halloween-theme .feature-band,
+body.halloween-theme .testimonial-wrap {
+  background: linear-gradient(135deg, #fff5e9 0%, #f7e4d1 100%);
+  border-color: rgba(165, 79, 37, 0.2);
+}
+
+body.halloween-theme .service-card,
+body.halloween-theme .info-card,
+body.halloween-theme .feature-card,
+body.halloween-theme .testimonial,
+body.halloween-theme .service-page,
+body.halloween-theme .post-card,
+body.halloween-theme .article {
+  border-color: rgba(165, 79, 37, 0.16);
+}
+
+body.halloween-theme .site-footer,
+body.halloween-theme > footer,
+body.halloween-theme .bg-slate-950 {
+  background-color: #352c40 !important;
+}
+
+body.halloween-theme .hero {
+  background-image: linear-gradient(rgba(36, 27, 43, 0.76), rgba(36, 27, 43, 0.76)), url("../images/jpg/dji_fly_20220331_103702_83_1683391413955_photo_optimized_mobile.jpg");
+}
+
+body.halloween-theme .cta-strip,
+body.halloween-theme .cta-banner {
+  background-image: linear-gradient(rgba(36, 27, 43, 0.76), rgba(36, 27, 43, 0.76)), url("../images/jpg/IMG_8362.jpg");
+}
+
+body.halloween-theme .header-cta,
+body.halloween-theme .primary-btn,
+body.halloween-theme .bg-green-600,
+body.halloween-theme .bg-green-700 {
+  background-color: #a54f25 !important;
+  color: #ffffff !important;
+}
+
+body.halloween-theme .bg-green-50 {
+  background-color: #fff5e9 !important;
+}
+
+body.halloween-theme .bg-green-100 {
+  background-color: #f7e4d1 !important;
+}
+
+body.halloween-theme .bg-green-800 {
+  background-color: #873f28 !important;
+}
+
+body.halloween-theme .bg-green-900,
+body.halloween-theme .bg-slate-900 {
+  background-color: #352c40 !important;
+}
+
+body.halloween-theme .bg-gradient-to-r.from-green-900.to-green-700 {
+  background-image: linear-gradient(to right, #352c40, #a54f25) !important;
+}
+
+body.halloween-theme .text-green-400 {
+  color: #ffad62 !important;
+}
+
+body.halloween-theme .text-green-50,
+body.halloween-theme .text-green-100 {
+  color: #fff0df !important;
+}
+
+body.halloween-theme .text-green-500,
+body.halloween-theme .text-green-600,
+body.halloween-theme .text-green-700,
+body.halloween-theme .text-green-800 {
+  color: #a54f25 !important;
+}
+
+body.halloween-theme .text-green-900 {
+  color: #352c40 !important;
+}
+
+body.halloween-theme .border-green-100,
+body.halloween-theme .border-green-500,
+body.halloween-theme .border-green-600,
+body.halloween-theme .border-green-700 {
+  border-color: rgba(165, 79, 37, 0.28) !important;
+}
+
+body.halloween-theme .hover\:text-green-700:hover {
+  color: #a54f25 !important;
+}
+
+body.halloween-theme .hover\:bg-green-500:hover,
+body.halloween-theme .hover\:bg-green-800:hover {
+  background-color: #c75a13 !important;
+}
+
+body.halloween-theme input:focus,
+body.halloween-theme select:focus,
+body.halloween-theme textarea:focus {
+  border-color: #f5a623;
+  box-shadow: 0 0 0 3px rgba(245, 166, 35, 0.22);
+}

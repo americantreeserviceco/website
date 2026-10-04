@@ -1,0 +1,17 @@
+============================================================
+SYNTAX & LINTING AUDIT REPORT
+Generated on: 2026-10-03 12:47:22
+Target Directory: /home/uselesse/Documents/americantree/website
+============================================================
+
+[!] Python Issue Found in: standalone-blog-creator/generate_and_deploy_post.py
+    --> SyntaxError: expected an indented block after function definition on line 23 (Line 24, Col 1)
+----------------------------------------
+
+============================================================
+SCAN SUMMARY
+============================================================
+Total Files Inspected: 2614
+Files with Issues:     1
+Healthy Files:         2613
+============================================================

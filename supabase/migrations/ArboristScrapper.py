@@ -1,8 +1,10 @@
 import os
 import logging
-import mysql.connector
-import requests
-from bs4 import BeautifulSoup
+
+try:
+    import mysql.connector  # type: ignore[import-not-found]
+except ImportError:  # pragma: no cover
+    mysql = None  # type: ignore[assignment]
 
 # 1. CONFIGURE LOGGING SYSTEM
 log_filename = "scraper.log"
@@ -32,7 +34,7 @@ logger.addHandler(console_handler)
 DB_CONFIG = {
     'host': '192.168.0.18',     # Replace with your standalone Linux server's Network IP
     'port': 3306,               # Default MariaDB port
-    'user': 'root',   # Your DB User
+    'user': 'uselesse',   # Your DB User
     'password': 'ericvbrooks',
     'database': 'arborist'
 }
@@ -111,31 +113,24 @@ def run_arborist_crawler():
         
         try:
             # --- STRUCTURAL SIMULATION ---
-            mock_html = f'''
-            <div class="contractor-card">
-                <h2 class="company-title">Apex Arbor Care</h2>
-                <div class="contact-info">
-                    <span class="phone-num">(303) 555-4422</span>
-                    <p class="street-address">800 Foothills Pkwy, {loc.capitalize()}, CO</p>
-                    <a class="domain-url" href="https://apexarborcare-demo.com">Visit Website</a>
-                </div>
-                <p class="service-snippet">Premium tree removal, emergency storm response, and complete structural pruning.</p>
-            </div>
-            '''
-            soup = BeautifulSoup(mock_html, 'html.parser')
+            contractors = [{
+                'name': 'Apex Arbor Care',
+                'address': f'800 Foothills Pkwy, {loc.capitalize()}, CO',
+                'phone': '(303) 555-4422',
+                'url': 'https://apexarborcare-demo.com',
+                'description': 'Premium tree removal, emergency storm response, and complete structural pruning.'
+            }]
             # ----------------------------------------------------------------------------------
 
             inserted_count = 0
             skipped_count = 0
 
-            for card in soup.find_all(class_='contractor-card'):
-                name = card.find(class_='company-title').get_text(strip=True)
-                address = card.find(class_='street-address').get_text(strip=True) if card.find(class_='street-address') else "N/A"
-                phone = card.find(class_='phone-num').get_text(strip=True) if card.find(class_='phone-num') else "N/A"
-                url = card.find(class_='domain-url')['href'] if card.find(class_='domain-url') else "N/A"
-                
-                desc_element = card.find(class_='service-snippet')
-                desc_text = desc_element.get_text(strip=True).lower() if desc_element else ""
+            for contractor in contractors:
+                name = contractor['name']
+                address = contractor['address']
+                phone = contractor['phone']
+                url = contractor['url']
+                desc_text = contractor['description'].lower()
                 
                 flags = {}
                 for database_field, keywords in service_keywords.items():

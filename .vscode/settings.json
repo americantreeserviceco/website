@@ -20,6 +20,30 @@
             "approve": true,
             "matchCommandLine": true
         },
-        "jekyll": true
+        "jekyll": true,
+        "/^convert /home/uselesse/Downloads/vecteezy_cartoon-halloween-doodle-pack-full-color_72278360\\.png -crop 852x834\\+403\\+316 \\+repage -trim -bordercolor none -border 24 assets/images/halloween-doodles/pumpkin\\.png$/": {
+            "approve": true,
+            "matchCommandLine": true
+        },
+        "/^identify -format '%f: %wx%h %\\[channels\\]\\\\n' assets/images/halloween-doodles/pumpkin\\.png$/": {
+            "approve": true,
+            "matchCommandLine": true
+        },
+        "/^convert /home/uselesse/Downloads/vecteezy_cartoon-halloween-doodle-pack-full-color_72278360\\.png -format 'sparkle=%\\[pixel:p\\{1220,350\\}\\]\\\\n' info:$/": {
+            "approve": true,
+            "matchCommandLine": true
+        },
+        "/^convert /home/uselesse/Downloads/vecteezy_cartoon-halloween-doodle-pack-full-color_72278360\\.png -format '1200,350=%\\[pixel:p\\{1200,350\\}\\]\\\\n1230,350=%\\[pixel:p\\{1230,350\\}\\]\\\\n1250,370=%\\[pixel:p\\{1250,370\\}\\]\\\\n' info:$/": {
+            "approve": true,
+            "matchCommandLine": true
+        },
+        "/^convert /home/uselesse/Documents/americantree/website/assets/images/halloween-doodles/pumpkin\\.png -fuzz 8% -fill none -opaque '#6d4dae' -trim -bordercolor none -border 24 /tmp/pumpkin-clean\\.png && mv /tmp/pumpkin-clean\\.png assets/images/halloween-doodles/pumpkin\\.png$/": {
+            "approve": true,
+            "matchCommandLine": true
+        },
+        "/^convert /home/uselesse/Downloads/vecteezy_cartoon-halloween-doodle-pack-full-color_72278360\\.png -crop 852x834\\+403\\+316 \\+repage -fuzz 28% -fill none -opaque '#6d4dae' -trim -bordercolor none -border 24 assets/images/halloween-doodles/pumpkin\\.png$/": {
+            "approve": true,
+            "matchCommandLine": true
+        }
     }
 }

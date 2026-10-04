@@ -83,6 +83,8 @@ def page_template(title: str, body: str, current_page: str = "") -> str:
     .footer-links {{ display: flex; gap: 1rem; flex-wrap: wrap; }}
     @media (max-width: 640px) {{ .nav {{ justify-content: center; }} .nav-links {{ justify-content: center; }} .header-cta {{ width: 100%; text-align: center; }} }}
   </style>
+  <link rel="stylesheet" href="/assets/css/halloween-theme.css">
+  <script src="/assets/js/halloween-theme.js" defer></script>
 </head>
 <body>
   <header class=\"topbar\">

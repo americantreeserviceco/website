@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 200" aria-hidden="true">
+  <style>
+    .orbit { transform-box: view-box; transform-origin: 180px 100px; animation: carousel 16s linear infinite; }
+    @keyframes carousel { to { transform: rotate(360deg); } }
+    @media (prefers-reduced-motion: reduce) { .orbit { animation: none; } }
+  </style>
+  <g class="orbit" stroke="#59402c" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+    <g fill="#e8a52f">
+      <path d="M180 39c-9-14-22-13-27-2 9 8 18 8 27 2zm-24-3 22 2"/>
+    </g>
+    <g fill="#d96b2b">
+      <path d="M352 100c14-9 13-22 2-27-8 9-8 18-2 27zm3-24-2 22"/>
+    </g>
+    <g fill="#b7a640">
+      <path d="M180 161c9 14 22 13 27 2-9-8-18-8-27-2zm24 3-22-2"/>
+    </g>
+    <g fill="#e8a52f">
+      <path d="M8 100c-14 9-13 22-2 27 8-9 8-18 2-27zm-3 24 2-22"/>
+    </g>
+  </g>
+</svg>

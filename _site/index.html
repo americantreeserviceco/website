@@ -30,7 +30,11 @@
 		}
 
 		body.halloween-theme {
-			--accent: #e87524;
+			--primary: #a54f25;
+			--secondary: #352c40;
+			--accent: #f5a623;
+			--light: #fff5e9;
+			--dark: #28232c;
 		}
 
 		header {
@@ -119,7 +123,17 @@
 			margin: 0 auto;
 		}
 
-		.hero-lantern {
+		.hero-cta-orbit {
+			display: inline-block;
+			position: relative;
+			isolation: isolate;
+		}
+
+		.hero-leaves {
+			display: none;
+		}
+
+		.hero-halloween-art {
 			display: none;
 		}
 
@@ -150,18 +164,64 @@
 			animation: none;
 		}
 
-		.halloween-theme .hero-lantern {
-			display: block;
-			position: absolute;
-			right: clamp(16px, 5vw, 64px);
-			bottom: 18px;
-			width: 88px;
-			filter: drop-shadow(0 5px 8px rgba(0, 0, 0, 0.35));
-			animation: lantern-bob 3s ease-in-out infinite;
+		.halloween-theme .hero-content {
+			display: grid;
+			grid-template-columns: minmax(0, 1fr) minmax(250px, 380px);
+			grid-template-areas:
+				"brand art"
+				"title art"
+				"copy art"
+				"cta art";
+			align-items: center;
+			column-gap: clamp(28px, 5vw, 72px);
+			max-width: 1080px;
+			text-align: left;
 		}
 
-		@keyframes lantern-bob {
-			50% { transform: translateY(-5px) rotate(3deg); }
+		.halloween-theme .hero-brand {
+			grid-area: brand;
+			justify-self: start;
+		}
+
+		.halloween-theme .hero h1 {
+			grid-area: title;
+		}
+
+		.halloween-theme .hero p {
+			grid-area: copy;
+		}
+
+		.halloween-theme .hero-cta-orbit {
+			grid-area: cta;
+			justify-self: start;
+		}
+
+		.halloween-theme .hero-halloween-art {
+			display: block;
+			grid-area: art;
+			width: 100%;
+			max-width: 380px;
+			height: auto;
+			justify-self: center;
+			filter: drop-shadow(0 14px 22px rgba(0, 0, 0, 0.28));
+			animation: halloween-float 5s ease-in-out infinite;
+		}
+
+		@keyframes halloween-float {
+			50% { transform: translateY(-8px); }
+		}
+
+		.halloween-theme .hero-leaves {
+			display: block;
+			position: absolute;
+			z-index: -1;
+			top: 50%;
+			left: 50%;
+			width: min(360px, calc(100vw - 16px));
+			max-width: none;
+			transform: translate(-50%, -50%);
+			filter: drop-shadow(0 5px 8px rgba(0, 0, 0, 0.35));
+			pointer-events: none;
 		}
 
 		.halloween-theme .btn:hover,
@@ -172,6 +232,15 @@
 		.halloween-theme .feature-band {
 			background: linear-gradient(135deg, #fff5e9 0%, #f7e4d1 100%);
 			border-color: rgba(232, 117, 36, 0.25);
+		}
+
+		.halloween-theme .feature-item {
+			border-color: rgba(165, 79, 37, 0.16);
+			box-shadow: 0 8px 22px rgba(53, 44, 64, 0.08);
+		}
+
+		.halloween-theme .cta-strip {
+			background-image: linear-gradient(rgba(36, 27, 43, 0.76), rgba(36, 27, 43, 0.76)), url('assets/images/jpg/IMG_8362.jpg');
 		}
 
 		@keyframes masthead-rgb {
@@ -186,9 +255,10 @@
 				color: #ffffff;
 			}
 
-			.hero-lantern {
+			.halloween-theme .hero-halloween-art {
 				animation: none;
 			}
+
 		}
 
 		.hero h1 {
@@ -614,6 +684,65 @@
 				padding: 40px 20px 76px;
 			}
 
+			.halloween-theme .hero-content {
+				grid-template-columns: minmax(0, 1fr) minmax(100px, 34%);
+				grid-template-areas:
+					"brand art"
+					"title title"
+					"copy copy"
+					"cta cta";
+				column-gap: 8px;
+				row-gap: 0;
+				text-align: center;
+			}
+
+			.halloween-theme .hero-halloween-art {
+				width: min(32vw, 130px);
+				max-width: none;
+				margin: 0 0 4px;
+				justify-self: end;
+			}
+
+			.halloween-theme .hero-brand {
+				justify-self: start;
+				margin-bottom: 8px;
+				padding: 6px 7px;
+				font-size: 10px;
+				letter-spacing: 0;
+				white-space: nowrap;
+			}
+
+			.halloween-theme .hero-cta-orbit {
+				justify-self: center;
+			}
+
+			.halloween-theme .hero {
+				min-height: 0;
+				padding: 16px 20px 12px;
+			}
+
+			.halloween-theme .hero h1 {
+				font-size: 26px;
+				margin-bottom: 10px;
+			}
+
+			.halloween-theme .hero p {
+				font-size: 15px;
+				line-height: 1.4;
+				margin-bottom: 14px;
+			}
+
+			.halloween-theme .feature-band {
+				padding-top: 20px;
+				padding-bottom: 20px;
+			}
+
+			.halloween-theme .feature-band .section-title {
+				font-size: 24px;
+				line-height: 1.2;
+				margin-bottom: 16px;
+			}
+
 			.hero-brand {
 				padding: 8px 10px;
 				font-size: 14px;
@@ -622,12 +751,6 @@
 
 			.hero h1 {
 				font-size: 32px;
-			}
-
-			.halloween-theme .hero-lantern {
-				right: 12px;
-				bottom: 12px;
-				width: 64px;
 			}
 
 			.cta-strip {
@@ -651,6 +774,8 @@
 			}
 		}
 	</style>
+	<link rel="stylesheet" href="/assets/css/halloween-theme.css">
+	<script src="/assets/js/halloween-theme.js" defer></script>
 </head>
 <body>
 	<header>
@@ -677,11 +802,14 @@
 		<section class="hero" fetchpriority="high">
 			<div class="hero-content">
 				<div class="hero-brand">American Tree Colorado</div>
+				<img class="hero-halloween-art" src="assets/images/halloween-boo.webp" alt="" aria-hidden="true">
 				<h1>Certified Arborist Tree Care for Golden and the Denver Metro Area</h1>
 				<p>Locally based and serving Colorado since 1993. Get knowledgeable care for tree health, pruning, removals, and storm hazards.</p>
-				<a class="btn" href="/contact/">Request a Free Estimate</a>
+				<div class="hero-cta-orbit">
+					<a class="btn" href="/contact/">Request a Free Estimate</a>
+					<img class="hero-leaves" src="assets/images/autumn-leaves.svg" alt="" aria-hidden="true">
+				</div>
 			</div>
-			<img class="hero-lantern" src="assets/images/halloween-jack-o-lantern.svg" alt="" aria-hidden="true">
 		</section>
 
 		<section class="feature-band" aria-labelledby="why-us-title">
