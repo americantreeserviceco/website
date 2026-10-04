@@ -1,0 +1,63 @@
+# ----------------------------------------------------------------------
+# .htaccess for americantreeserviceco.com (Jekyll / Static Site Build)
+# ----------------------------------------------------------------------
+
+# 1. SECURITY: Disable directory browsing
+Options -Indexes
+
+# 2. SECURITY: Block access to hidden files and configuration files
+<FilesMatch "^\.">
+    Require all denied
+</FilesMatch>
+<Files wp-config.php>
+    Require all denied
+</Files>
+<Files htaccess.txt>
+    Require all denied
+</Files>
+
+# 3. REWRITE ENGINE: Enable redirects and routing
+RewriteEngine On
+RewriteBase /
+
+# 4. CANONICAL REDIRECT: Force HTTPS and ://americantreeserviceco.com
+RewriteCond %{HTTPS} off [OR]
+RewriteCond %{HTTP_HOST} !^www\. [NC]
+RewriteRule ^(.*)$ https://://americantreeserviceco.com/$1 [L,R=301]
+
+# 5. CLEAN URLS: Serve .html files without the extension in the URL
+# If the request is not for a directory
+RewriteCond %{REQUEST_FILENAME} !-d
+# And the requested filename with .html exists
+RewriteCond %{REQUEST_FILENAME}\.html -f
+# Internally rewrite the path to include .html
+RewriteRule ^([^/]+)$ $1.html [L]
+
+# 6. CUSTOM ERRROR PAGES: Handle missing pages with Jekyll's 404
+ErrorDocument 404 /404.html
+
+# 7. PERFORMANCE: Leverage Browser Caching (mod_expires)
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresDefault "access plus 1 month"
+
+    # CSS and JavaScript
+    ExpiresByType text/css "access plus 1 year"
+    ExpiresByType text/javascript "access plus 1 year"
+    ExpiresByType application/javascript "access plus 1 year"
+    ExpiresByType application/x-javascript "access plus 1 year"
+
+    # Images and Media
+    ExpiresByType image/jpeg "access plus 1 year"
+    ExpiresByType image/png "access plus 1 year"
+    ExpiresByType image/gif "access plus 1 year"
+    ExpiresByType image/webp "access plus 1 year"
+    ExpiresByType image/svg+xml "access plus 1 year"
+    ExpiresByType image/x-icon "access plus 1 year"
+
+    # Web Fonts
+    ExpiresByType font/ttf "access plus 1 year"
+    ExpiresByType font/woff "access plus 1 year"
+    ExpiresByType font/woff2 "access plus 1 year"
+    ExpiresByType application/font-woff "access plus 1 year"
+</IfModule>
