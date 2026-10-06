@@ -1,1 +1,13 @@
+# Node dependencies
 node_modules
+.eslintcache
+
+# Jekyll temporary build files
+_site
+.jekyll-cache/
+.jekyll-metadata
+
+# Ruby environment
+vendor/bundle/
+.bundle/
+Gemfile.lock
