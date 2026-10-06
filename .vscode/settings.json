@@ -49,5 +49,6 @@
             "approve": true,
             "matchCommandLine": true
         }
-    }
+    },
+    "chat.byokUtilityModelDefault": "mainAgent"
 }
