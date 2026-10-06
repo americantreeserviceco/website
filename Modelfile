@@ -1,43 +1,13 @@
-# 1. Use a heavily quantized, lightweight variant of the base model to save RAM/VRAM
-FROM qwen2.5:7b-instruct-q4_K_M
+# 1. Specify your base model (e.g., llama3, mistral, qwen2.5)
+FROM llama3
 
-# Set the functional verification prompt
-SYSTEM """You are an automated, ultra-lightweight Git Pre-Commit Verification Agent for SEO, HTML5, Tailwind, and Node.js. 
-Analyze the provided code diff directly. Do not output filler text. 
-Format: [STATUS]: PASSED/FAILED followed by bulleted [CRITICAL ISSUES & SOLUTIONS] if failed. Be brutally concise.
+# 2. Set your system instructions for the SEO expert
+SYSTEM """You are an expert SEO strategist. Help optimize website content, meta tags, and ranking structures."""
 
-# 2. Performance Parameters to minimize CPU/GPU compute overhead
-PARAMETER temperature 0.1
-PARAMETER top_p 0.9
-
-# 3. Minimize the Context Window (Cuts memory allocation drastically)
-# Dropping from 16k or 8k down to 4k dramatically speeds up processing and lowers VRAM usage.
-PARAMETER num_ctx 4096
-
-# 4. Limit Token Generation (Prevents the model from rambling and wasting compute cycles)
-PARAMETER num_predict 512
-
-# 5. Thread Optimization (Optional: Adjust based on your available CPU cores to prevent system choking)
-# PARAMETER num_thread 4
-
-# Define Chat Template & Stops
-TEMPLATE {{- if .Messages -}}
-  {{- range .Messages -}}
-    {{- if eq .Role "system" -}}<|im_start|>system
-{{ .Content }}<|im_end|>
-    {{- else if eq .Role "user" -}}<|im_start|>user
-{{ .Content }}<|im_end|>
-    {{- else if eq .Role "assistant" -}}<|im_start|>assistant
-{{ .Content }}<|im_end|>
-    {{- end -}}
-  {{- end -}}
-{{- if .Prompt -}}<|im_start|>user
+# 3. FIX HERE: The corrected template structure
+TEMPLATE """{{ if .System }}<|im_start|>system
+{{ .System }}<|im_end|>
+{{ end }}{{ if .Prompt }}<|im_start|>user
 {{ .Prompt }}<|im_end|>
-<|im_start|>assistant
-{{- else -}}<|im_start|>assistant
-{{- end -}}
-
-PARAMETER stop "<|im_start|>"
-PARAMETER stop "<|im_end|>"
-PARAMETER stop "<|endoftext|>"
+{{ end }}<|im_start|>assistant
 """
