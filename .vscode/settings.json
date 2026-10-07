@@ -50,5 +50,6 @@
             "matchCommandLine": true
         }
     },
-    "chat.byokUtilityModelDefault": "mainAgent"
+    "chat.byokUtilityModelDefault": "mainAgent",
+    "bashIde.explainshellEndpoint": "Endpoint:http://localhost:4000/v1Model:qwen-local"
 }
