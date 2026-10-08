@@ -72,12 +72,12 @@ body.halloween-theme .bg-slate-950 {
 }
 
 body.halloween-theme .hero {
-  background-image: linear-gradient(rgba(36, 27, 43, 0.76), rgba(36, 27, 43, 0.76)), url("../images/jpg/dji_fly_20220331_103702_83_1683391413955_photo_optimized_mobile.jpg");
+  background-image: linear-gradient(rgba(36, 27, 43, 0.76), rgba(36, 27, 43, 0.76)), url("../images/optimized/dji-hero.webp");
 }
 
 body.halloween-theme .cta-strip,
 body.halloween-theme .cta-banner {
-  background-image: linear-gradient(rgba(36, 27, 43, 0.76), rgba(36, 27, 43, 0.76)), url("../images/jpg/IMG_8362.jpg");
+  background-image: linear-gradient(rgba(36, 27, 43, 0.76), rgba(36, 27, 43, 0.76)), url("../images/optimized/cta-strip.webp");
 }
 
 body.halloween-theme .header-cta,

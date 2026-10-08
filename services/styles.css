@@ -122,7 +122,7 @@ img {
 
 .hero {
   background: linear-gradient(rgba(20, 53, 31, 0.72), rgba(20, 53, 31, 0.72)),
-    url('../assets/images/jpg/dji_fly_20220331_103702_83_1683391413955_photo_optimized_mobile.jpg') center/cover no-repeat;
+    url('../assets/images/optimized/dji-hero.webp') center/cover no-repeat;
   color: var(--white);
   padding: 6rem 0 4.5rem;
   text-align: center;
@@ -345,7 +345,7 @@ img {
 }
 
 .cta-banner {
-  background: linear-gradient(rgba(18, 41, 27, 0.72), rgba(18, 41, 27, 0.72)), url('../assets/images/jpg/IMG_8362.jpg') center/cover no-repeat;
+  background: linear-gradient(rgba(18, 41, 27, 0.72), rgba(18, 41, 27, 0.72)), url('../assets/images/optimized/cta-strip.webp') center/cover no-repeat;
   color: var(--white);
   text-align: center;
   padding: 4rem 1.5rem;

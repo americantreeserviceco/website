@@ -89,7 +89,7 @@ def page_template(title: str, body: str, current_page: str = "") -> str:
 <body>
   <header class=\"topbar\">
     <div class=\"container nav\">
-      <a class=\"brand\" href=\"../index.html\"><img src=\"../assets/images/logo/AmericanTree_Logo_RGB.png\" alt=\"American Tree Colorado\"></a>
+      <a class=\"brand\" href=\"../index.html\"><img src=\"../assets/images/optimized/AmericanTree_Logo_RGB.webp\" alt=\"American Tree Colorado\"></a>
       <nav class=\"nav-links\" aria-label=\"Main navigation\">
         <a href=\"../index.html\">Home</a>
         <a href=\"../about/index.html\">About</a>
