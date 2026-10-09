@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>American Tree | ISA Certified Arborist - Denver Metro Service Areas</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Segoe UI', 'Tahoma', 'Geneva', 'Verdana', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#f4f6f4',
+                            100: '#e5ebe4',
+                            500: '#d4af37',
+                            600: '#2d5a27',
+                            700: '#1e3d1a',
+                            800: '#1e3d1a',
+                            900: '#1e3d1a',
+                            accent: '#d4af37',
+                        },
+                        slate: {
+                            50: '#f4f6f4',
+                            100: '#edf0ed',
+                            200: '#dfe4df',
+                            300: '#c9d1c9',
+                            400: '#aab5aa',
+                            500: '#657168',
+                            600: '#555f57',
+                            700: '#3d493f',
+                            800: '#222222',
+                            900: '#1e3d1a',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .active-tab {
+            border-bottom: 3px solid #2d5a27;
+            color: #2d5a27;
+            font-weight: 700;
+        }
+        .active-mobile-tab {
+            background-color: #2d5a27;
+            color: #ffffff;
+        }
+        .site-header {
+            background: #ffffff;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .site-nav-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 24px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 16px 20px;
+        }
+        .site-logo img {
+            display: block;
+            width: auto;
+            height: 52px;
+            max-width: 220px;
+        }
+        .site-nav-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        .site-nav-links a {
+            color: #222222;
+            font-weight: 600;
+            text-decoration: none;
+        }
+        .site-nav-links a:hover,
+        .site-nav-links a:focus-visible {
+            color: #2d5a27;
+        }
+        .site-nav-toggle {
+            display: none;
+            padding: 10px 14px;
+            border: 1px solid #2d5a27;
+            border-radius: 5px;
+            background: transparent;
+            color: #2d5a27;
+            font-weight: 700;
+        }
+        .site-header .header-phone {
+            color: #2d5a27;
+            font-weight: 700;
+            white-space: nowrap;
+            text-decoration: none;
+        }
+        .site-footer {
+            margin-top: 60px;
+            padding: 40px 20px;
+            background: #1e3d1a;
+            color: #ffffff;
+            text-align: center;
+        }
+        .site-footer nav {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 16px;
+        }
+        .site-footer a {
+            color: #ffffff;
+            text-decoration: none;
+        }
+        .site-footer a:hover,
+        .site-footer a:focus-visible {
+            color: #d4af37;
+        }
+        @media (max-width: 768px) {
+            .site-nav-container {
+                flex-wrap: wrap;
+                gap: 12px;
+            }
+            .site-nav-toggle {
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+            }
+            .site-nav-container > nav {
+                display: none;
+                order: 4;
+                width: 100%;
+            }
+            .site-nav-container > nav.is-open {
+                display: block;
+            }
+            .site-nav-links {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 12px;
+                padding-top: 8px;
+            }
+            .site-nav-container .header-phone {
+                margin-left: auto;
+            }
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans antialiased min-h-screen flex flex-col justify-between">
+
+    <header class="site-header sticky top-0 z-40">
+        <div class="site-nav-container">
+            <a class="site-logo" href="../index.html" aria-label="American Tree Colorado home">
+                <img src="../assets/images/optimized/AmericanTree_Logo_RGB.webp" alt="American Tree Colorado logo">
+            </a>
+            <button class="site-nav-toggle" type="button" aria-label="Open menu" aria-expanded="false">Menu</button>
+            <nav aria-label="Main navigation">
+                <ul class="site-nav-links">
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="../services/">Services</a></li>
+                    <li><a href="../locations/">Service Areas</a></li>
+                    <li><a href="../about/">About</a></li>
+                    <li><a href="../blog/">Blog</a></li>
+                    <li><a href="../contact/">Contact</a></li>
+                </ul>
+            </nav>
+            <a class="header-phone" href="tel:+13034566898">(303) 456-6898</a>
+        </div>
+
+        <!-- Sub-market Navigation Tabs -->
+        <div class="bg-brand-50 border-t border-slate-200">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <!-- Desktop Tabs -->
+                <nav class="hidden sm:flex space-x-8" aria-label="Tabs">
+                    <button onclick="switchTab('lakewood')" id="tab-lakewood" class="active-tab py-4 px-2 text-sm font-medium transition-colors flex items-center space-x-2">
+                        <i class="fa-solid fa-location-dot"></i>
+                        <span>Lakewood, CO</span>
+                    </button>
+                    <button onclick="switchTab('arvada')" id="tab-arvada" class="text-slate-600 hover:text-slate-900 py-4 px-2 text-sm font-medium transition-colors flex items-center space-x-2">
+                        <i class="fa-solid fa-location-dot"></i>
+                        <span>Arvada, CO</span>
+                    </button>
+                    <button onclick="switchTab('wheatridge')" id="tab-wheatridge" class="text-slate-600 hover:text-slate-900 py-4 px-2 text-sm font-medium transition-colors flex items-center space-x-2">
+                        <i class="fa-solid fa-location-dot"></i>
+                        <span>Wheat Ridge, CO</span>
+                    </button>
+                </nav>
+
+                <!-- Mobile Pill Navigation -->
+                <div class="sm:hidden py-3 flex space-x-2 overflow-x-auto">
+                    <button onclick="switchTab('lakewood')" id="mob-tab-lakewood" class="active-mobile-tab text-xs font-semibold px-4 py-2 rounded-full whitespace-nowrap border border-slate-300">
+                        Lakewood, CO
+                    </button>
+                    <button onclick="switchTab('arvada')" id="mob-tab-arvada" class="bg-white text-slate-700 text-xs font-semibold px-4 py-2 rounded-full whitespace-nowrap border border-slate-300">
+                        Arvada, CO
+                    </button>
+                    <button onclick="switchTab('wheatridge')" id="mob-tab-wheatridge" class="bg-white text-slate-700 text-xs font-semibold px-4 py-2 rounded-full whitespace-nowrap border border-slate-300">
+                        Wheat Ridge, CO
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT CONTAINER (Tab Switcher dynamic insertion) -->
+    <main id="content-container" class="flex-grow">
+        <!-- Content will be hydrated by JS based on selected location -->
+    </main>
+
+    <footer class="site-footer">
+        <nav aria-label="Footer navigation">
+            <a href="../services/">Services</a>
+            <a href="../locations/">Service Areas</a>
+            <a href="/service-areas/wheat-ridge-co/">Wheat Ridge Tree Service</a>
+            <a href="../about/">About</a>
+            <a href="../blog/">Blog</a>
+            <a href="../contact/">Contact</a>
+        </nav>
+        <p>American Tree Colorado | Tree care for the Denver metro area</p>
+    </footer>
+
+    <div id="estimateModal" class="fixed inset-0 bg-slate-900/70 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl shadow-2xl max-w-lg w-full overflow-hidden transform transition-all">
+            <!-- Modal Header -->
+            <div class="bg-slate-900 text-white p-6 flex items-center justify-between">
+                <div>
+                    <h3 class="text-xl font-bold flex items-center space-x-2">
+                        <i class="fa-solid fa-file-signature text-brand-600"></i>
+                        <span>Request Free Estimate</span>
+                    </h3>
+                    <p class="text-slate-400 text-xs mt-1">ISA Certified Arborist Evaluation</p>
+                </div>
+                <button onclick="closeModal()" class="text-slate-400 hover:text-white text-2xl font-bold transition">&times;</button>
+            </div>
+
+            <!-- Modal Body Form -->
+            <form id="estimateForm" action="https://formspree.io/f/maenvddy" method="POST" class="p-6 space-y-4">
+                <input type="hidden" name="_subject" value="New service-area estimate request - American Tree Colorado">
+                <div>
+                    <label for="estimate-name" class="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-1">Full Name</label>
+                    <input id="estimate-name" name="name" type="text" autocomplete="name" required placeholder="John Doe" class="w-full px-4 py-2.5 rounded-lg border border-slate-300 focus:ring-2 focus:ring-brand-600 focus:outline-none text-sm">
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label for="estimate-phone" class="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-1">Phone Number</label>
+                        <input id="estimate-phone" name="phone" type="tel" autocomplete="tel" required placeholder="303-000-0000" class="w-full px-4 py-2.5 rounded-lg border border-slate-300 focus:ring-2 focus:ring-brand-600 focus:outline-none text-sm">
+                    </div>
+                    <div>
+                        <label for="modal-city-select" class="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-1">Service Area</label>
+                        <select id="modal-city-select" name="service_area" class="w-full px-4 py-2.5 rounded-lg border border-slate-300 focus:ring-2 focus:ring-brand-600 focus:outline-none text-sm bg-white">
+                            <option value="Lakewood">Lakewood, CO</option>
+                            <option value="Arvada">Arvada, CO</option>
+                            <option value="Wheat Ridge">Wheat Ridge, CO</option>
+                            <option value="Golden">Golden, CO</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-1">Services Needed</label>
+                    <div class="grid grid-cols-2 gap-2 text-xs text-slate-700">
+                        <label class="flex items-center space-x-2 p-2 rounded border border-slate-200 hover:bg-slate-50 cursor-pointer">
+                            <input type="checkbox" name="services[]" value="Tree Trimming" class="text-brand-600 rounded">
+                            <span>Tree Trimming</span>
+                        </label>
+                        <label class="flex items-center space-x-2 p-2 rounded border border-slate-200 hover:bg-slate-50 cursor-pointer">
+                            <input type="checkbox" name="services[]" value="Tree Removal" class="text-brand-600 rounded">
+                            <span>Tree Removal</span>
+                        </label>
+                        <label class="flex items-center space-x-2 p-2 rounded border border-slate-200 hover:bg-slate-50 cursor-pointer">
+                            <input type="checkbox" name="services[]" value="EAB Treatment" class="text-brand-600 rounded">
+                            <span>EAB Treatment</span>
+                        </label>
+                        <label class="flex items-center space-x-2 p-2 rounded border border-slate-200 hover:bg-slate-50 cursor-pointer">
+                            <input type="checkbox" name="services[]" value="Stump Grinding" class="text-brand-600 rounded">
+                            <span>Stump Grinding</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div>
+                    <label for="estimate-details" class="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-1">Project Details</label>
+                    <textarea id="estimate-details" name="project_details" rows="3" placeholder="Describe the trees, location on property, or specific issues..." class="w-full px-4 py-2.5 rounded-lg border border-slate-300 focus:ring-2 focus:ring-brand-600 focus:outline-none text-sm"></textarea>
+                </div>
+
+                <div class="pt-2">
+                    <button type="submit" class="w-full bg-brand-600 hover:bg-brand-700 text-white font-bold py-3 rounded-xl shadow-lg transition duration-200 flex items-center justify-center space-x-2">
+                        <i class="fa-regular fa-paper-plane"></i>
+                        <span>Submit Free Request</span>
+                    </button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+
+    <script>
+        // Data structure containing content for each sub-market landing page
+        const locationData = {
+            lakewood: {
+                city: "Lakewood, CO",
+                heroTagline: "Protecting & Preserving Lakewood’s Canopy Since 1993",
+                heroIntro: "Whether you need precision canopy pruning for mature cottonwoods in Applewood, safe removal of a hazardous pine on Green Mountain, or expert diagnosis for sick Ash trees near Belmar, American Tree brings over 46 years of hands-on arborist expertise to your Lakewood property.",
+                badge: "Jefferson County Tree Specialists",
+                neighborhoods: ["Applewood", "Morse Park", "Belmar", "Green Mountain", "Solterra", "Bear Creek", "Kendrick Lake", "Eiber"],
+                specificsTitle: "Local Expertise: Managing Trees in Lakewood, CO",
+                specifics: [
+                    {
+                        title: "Heavy Spring Snow & Rapid Swings",
+                        desc: "Early autumn and late spring snowstorms catch leafed-out trees off guard, causing catastrophic limb split. Regular structural pruning dramatically reduces storm damage risks."
+                    },
+                    {
+                        title: "Alkaline Clay Soil Management",
+                        desc: "Lakewood’s high-pH soil makes it difficult for trees like Silver Maples and Oaks to absorb essential iron, resulting in yellowing leaves (iron chlorosis). We restore vitality with targeted micro-nutrient injections."
+                    },
+                    {
+                        title: "Emerald Ash Borer (EAB) Threats",
+                        desc: "As EAB spreads across Jefferson County, unmanaged Ash trees face a 100% mortality rate. We provide proven multi-year preventative trunk treatments to save mature Ash trees."
+                    }
+                ],
+                faqs: [
+                    {
+                        q: "Do I need a permit to remove a tree on my private property in Lakewood?",
+                        a: "For most single-family residential properties in Lakewood, private tree removal does not require a municipal permit unless the tree is located within a public right-of-way, stream corridor, or regulated historic district."
+                    },
+                    {
+                        q: "When is the best time of year to prune trees in Lakewood?",
+                        a: "Dormant winter pruning (November through March) is ideal for most shade and fruit trees because tree structure is fully visible and pest risk is minimal. However, hazardous limbs should be pruned immediately."
+                    },
+                    {
+                        q: "How can I tell if my Ash tree has Emerald Ash Borer?",
+                        a: "Key signs include canopy thinning from the top down, D-shaped exit holes in the bark, bark splitting, and aggressive epicormic sprouting along the trunk. Contact our arborists immediately for an evaluation."
+                    }
+                ]
+            },
+            arvada: {
+                city: "Arvada, CO",
+                heroTagline: "Protecting & Preserving Arvada’s Urban Forest Since 1993",
+                heroIntro: "From historic shade trees near Olde Town Arvada to young canopies in Leyden Rock and Candelas, American Tree delivers science-backed tree management across Arvada and Jefferson County. Backed by over 46 years of arborist experience, our local team keeps your trees healthy, safe, and resilient.",
+                badge: "Front Range Wind & Pest Experts",
+                neighborhoods: ["Olde Town Arvada", "Leyden Rock", "Candelas", "Ralston Valley", "Fairmount", "Arvada West", "Lake Arbor", "Whisper Creek"],
+                specificsTitle: "Local Expertise: Managing Trees in Arvada, CO",
+                specifics: [
+                    {
+                        title: "Emerald Ash Borer (EAB) Quarantine Zone",
+                        desc: "Jefferson County remains an active EAB quarantine zone. Arvada contains thousands of mature Green and White Ash trees that will perish without preventative trunk injections."
+                    },
+                    {
+                        title: "High Foothill Winds in West Arvada",
+                        desc: "Neighborhoods like Leyden Rock, Candelas, and Whispering Creek experience intense downslope wind gusts from Ralston Butte. Regular canopy thinning reduces wind resistance and prevents blow-overs."
+                    },
+                    {
+                        title: "Clay Soils & Iron Chlorosis in Olde Town",
+                        desc: "Historic homes near Olde Town feature large Silver Maples growing in tight, heavy clay soil. We apply deep-root iron and nutrient injections to reverse yellowing leaves and revive root systems."
+                    }
+                ],
+                faqs: [
+                    {
+                        q: "Do I need a permit to remove a tree on my property in Arvada?",
+                        a: "In general, tree removal on private residential property in Arvada does not require a city permit unless the tree is located within a public right-of-way, city easement, or historic preservation district."
+                    },
+                    {
+                        q: "How often should my trees in Arvada be pruned?",
+                        a: "Most mature shade trees benefit from structural pruning every 3 to 5 years to maintain balance and eliminate deadwood. Fast-growing species or trees near roofs may require service every 2 to 3 years."
+                    },
+                    {
+                        q: "Can my Ash tree in Arvada be saved from Emerald Ash Borer?",
+                        a: "Yes—if treated before losing more than 30% of its leaf canopy. We utilize systemically injected insecticides that protect Ash trees from EAB for up to two full years per application."
+                    }
+                ]
+            },
+            wheatridge: {
+                city: "Wheat Ridge, CO",
+                heroTagline: "Preserving Wheat Ridge’s Agriculture & Mature Canopy Since 1993",
+                heroIntro: "Known for its deep agricultural roots, spacious lots, and rich suburban forest, Wheat Ridge features some of the largest mature trees and fruit orchards in Jefferson County. American Tree brings specialized arborist experience to keep your trees healthy, safe, and productive.",
+                badge: "Fruit Tree & Mature Canopy Care",
+                neighborhoods: ["Ridge at 38th", "Historic Wheat Ridge", "Applewood WR", "Clear Creek", "Anderson Park Zone", "Crown Hill Lake", "Panorama Park", "Fruitdale"],
+                specificsTitle: "Local Expertise: Managing Trees in Wheat Ridge, CO",
+                specifics: [
+                    {
+                        title: "Clear Creek Alluvial Soils & Moisture",
+                        desc: "Properties near Clear Creek enjoy nutrient-dense soil, resulting in massive Cottonwoods, Maples, and Willows. Rapid growth creates heavy, brittle limbs vulnerable to sudden snowstorms."
+                    },
+                    {
+                        title: "Preserving Historic Orchards & Fruit Trees",
+                        desc: "Wheat Ridge's agricultural history means many properties boast vintage Apple, Cherry, and Pear trees. We provide specialized seasonal pruning to promote airflow and suppress bacterial fire blight."
+                    },
+                    {
+                        title: "Emerald Ash Borer Vigilance",
+                        desc: "As EAB spreads across Jefferson County, unmanaged Ash trees face guaranteed decay. We offer multi-year preventative trunk injections to protect mature Green and White Ash trees."
+                    }
+                ],
+                faqs: [
+                    {
+                        q: "Do I need a permit to remove a tree on private property in Wheat Ridge?",
+                        a: "In most cases, removing a tree on private residential property in Wheat Ridge does not require a municipal permit, provided the tree is not within a public right-of-way or city easement."
+                    },
+                    {
+                        q: "When is the best time to prune fruit trees in Wheat Ridge?",
+                        a: "Dormant winter pruning (late January through March) is optimal for fruit trees in Wheat Ridge. Pruning while dormant prevents disease transmission (such as fire blight) and structures growth."
+                    },
+                    {
+                        q: "How do I protect my mature Ash trees from Emerald Ash Borer?",
+                        a: "EAB is best managed preventatively. Our team uses systemic trunk injections that circulate through the tree's vascular system, providing two full years of protection per application."
+                    }
+                ]
+            }
+        };
+
+        // Current active sub-market key
+        let currentKey = 'lakewood';
+
+        // Function to render content dynamically
+        function renderPage(key) {
+            currentKey = key;
+            const data = locationData[key];
+            const container = document.getElementById('content-container');
+
+            // Select active tab in dropdown
+            document.getElementById('modal-city-select').value = data.city.split(',')[0];
+
+            container.innerHTML = `
+                <section class="relative bg-slate-900 text-white py-16 sm:py-24 overflow-hidden">
+                    <div class="absolute inset-0 opacity-20 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?auto=format&fit=crop&q=80');"></div>
+                    <div class="absolute inset-0 bg-gradient-to-r from-slate-900 via-slate-900/95 to-slate-900/80"></div>
+
+                    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                        <div class="max-w-3xl">
+                            <div class="inline-flex items-center space-x-2 bg-brand-600/20 border border-brand-500/40 text-brand-100 text-xs font-bold px-3 py-1.5 rounded-full mb-6">
+                                <i class="fa-solid fa-tree text-brand-accent"></i>
+                                <span>${data.badge}</span>
+                            </div>
+
+                            <h1 class="text-3xl sm:text-5xl font-extrabold tracking-tight text-white mb-4 leading-tight">
+                                ISA Certified Arborist & Tree Care in <span class="text-brand-accent">${data.city}</span>
+                            </h1>
+
+                            <p class="text-lg sm:text-xl font-medium text-brand-100 mb-6">${data.heroTagline}</p>
+
+                            <p class="text-slate-300 text-sm sm:text-base leading-relaxed mb-8">
+                                ${data.heroIntro}
+                            </p>
+
+                            <!-- Feature Badges -->
+                            <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-8">
+                                <div class="bg-white/5 border border-white/10 rounded-xl p-3 text-center">
+                                    <i class="fa-solid fa-certificate text-brand-accent text-xl mb-1"></i>
+                                    <div class="text-xs font-bold text-white">ISA Certified</div>
+                                    <div class="text-[10px] text-slate-400">Arborist On Staff</div>
+                                </div>
+                                <div class="bg-white/5 border border-white/10 rounded-xl p-3 text-center">
+                                    <i class="fa-solid fa-shield-halved text-brand-accent text-xl mb-1"></i>
+                                    <div class="text-xs font-bold text-white">100% Insured</div>
+                                    <div class="text-[10px] text-slate-400">Full Coverage</div>
+                                </div>
+                                <div class="bg-white/5 border border-white/10 rounded-xl p-3 text-center">
+                                    <i class="fa-solid fa-clock-rotate-left text-brand-accent text-xl mb-1"></i>
+                                    <div class="text-xs font-bold text-white">46+ Years Exp</div>
+                                    <div class="text-[10px] text-slate-400">Local Authority</div>
+                                </div>
+                                <div class="bg-white/5 border border-white/10 rounded-xl p-3 text-center">
+                                    <i class="fa-solid fa-calculator text-brand-accent text-xl mb-1"></i>
+                                    <div class="text-xs font-bold text-white">Free Estimates</div>
+                                    <div class="text-[10px] text-slate-400">Upfront Quotes</div>
+                                </div>
+                            </div>
+
+                            <!-- CTA Button Row -->
+                            <div class="flex flex-col sm:flex-row gap-4">
+                                <a href="tel:3034566898" class="bg-brand-600 hover:bg-brand-700 text-white font-bold px-6 py-3.5 rounded-xl shadow-lg transition flex items-center justify-center space-x-2">
+                                    <i class="fa-solid fa-phone"></i>
+                                    <span>Call 303-456-6898</span>
+                                </a>
+                                <button onclick="openModal()" class="bg-white hover:bg-slate-100 text-slate-900 font-bold px-6 py-3.5 rounded-xl shadow-lg transition flex items-center justify-center space-x-2">
+                                    <i class="fa-regular fa-calendar-check text-brand-700"></i>
+                                    <span>Request Free Estimate</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="py-16 bg-white">
+                    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                        <div class="text-center max-w-2xl mx-auto mb-12">
+                            <h2 class="text-xs font-bold uppercase tracking-wider text-brand-700 mb-2">Our Services</h2>
+                            <h3 class="text-2xl sm:text-3xl font-extrabold text-slate-900">Comprehensive Tree Care in ${data.city}</h3>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                            <!-- Service 1 -->
+                            <div class="bg-slate-50 p-6 rounded-2xl border border-slate-200 hover:border-brand-600/50 hover:shadow-xl transition-all duration-300 flex flex-col justify-between">
+                                <div>
+                                    <div class="w-12 h-12 bg-brand-100 text-brand-700 rounded-xl flex items-center justify-center text-xl font-bold mb-4">
+                                        <i class="fa-solid fa-scissors"></i>
+                                    </div>
+                                    <h4 class="text-lg font-bold text-slate-900 mb-2">Precision Tree Trimming</h4>
+                                    <p class="text-slate-600 text-sm leading-relaxed mb-4">
+                                        Structural canopy pruning to eliminate deadwood, thin crowding, and withstand Front Range windstorms and heavy spring snows.
+                                    </p>
+                                </div>
+                                <button onclick="openModal()" class="text-brand-700 font-bold text-xs uppercase tracking-wider flex items-center space-x-1 hover:underline">
+                                    <span>Request Service</span>
+                                    <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                                </button>
+                            </div>
+
+                            <!-- Service 2 -->
+                            <div class="bg-slate-50 p-6 rounded-2xl border border-slate-200 hover:border-brand-600/50 hover:shadow-xl transition-all duration-300 flex flex-col justify-between">
+                                <div>
+                                    <div class="w-12 h-12 bg-brand-100 text-brand-700 rounded-xl flex items-center justify-center text-xl font-bold mb-4">
+                                        <i class="fa-solid fa-triangle-exclamation"></i>
+                                    </div>
+                                    <h4 class="text-lg font-bold text-slate-900 mb-2">Safe Tree Removal</h4>
+                                    <p class="text-slate-600 text-sm leading-relaxed mb-4">
+                                        Controlled, zero-impact removals for hazardous, dying, or structurally compromised trees near homes and utility lines.
+                                    </p>
+                                </div>
+                                <button onclick="openModal()" class="text-brand-700 font-bold text-xs uppercase tracking-wider flex items-center space-x-1 hover:underline">
+                                    <span>Request Service</span>
+                                    <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                                </button>
+                            </div>
+
+                            <!-- Service 3 -->
+                            <div class="bg-slate-50 p-6 rounded-2xl border border-slate-200 hover:border-brand-600/50 hover:shadow-xl transition-all duration-300 flex flex-col justify-between">
+                                <div>
+                                    <div class="w-12 h-12 bg-brand-100 text-brand-700 rounded-xl flex items-center justify-center text-xl font-bold mb-4">
+                                        <i class="fa-solid fa-vial-virus"></i>
+                                    </div>
+                                    <h4 class="text-lg font-bold text-slate-900 mb-2">EAB & Pest Control</h4>
+                                    <p class="text-slate-600 text-sm leading-relaxed mb-4">
+                                        Systemic trunk injection treatments for Emerald Ash Borer (EAB), Ips bark beetles, and iron chlorosis soil deficiencies.
+                                    </p>
+                                </div>
+                                <button onclick="openModal()" class="text-brand-700 font-bold text-xs uppercase tracking-wider flex items-center space-x-1 hover:underline">
+                                    <span>Request Service</span>
+                                    <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                                </button>
+                            </div>
+
+                            <!-- Service 4 -->
+                            <div class="bg-slate-50 p-6 rounded-2xl border border-slate-200 hover:border-brand-600/50 hover:shadow-xl transition-all duration-300 flex flex-col justify-between">
+                                <div>
+                                    <div class="w-12 h-12 bg-brand-100 text-brand-700 rounded-xl flex items-center justify-center text-xl font-bold mb-4">
+                                        <i class="fa-solid fa-circle-nodes"></i>
+                                    </div>
+                                    <h4 class="text-lg font-bold text-slate-900 mb-2">Stump Grinding</h4>
+                                    <p class="text-slate-600 text-sm leading-relaxed mb-4">
+                                        Deep stump grinding 6–12 inches below grade to eliminate pests, root flare hazards, and clear ground for new plantings.
+                                    </p>
+                                </div>
+                                <button onclick="openModal()" class="text-brand-700 font-bold text-xs uppercase tracking-wider flex items-center space-x-1 hover:underline">
+                                    <span>Request Service</span>
+                                    <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="py-16 bg-slate-100 border-y border-slate-200">
+                    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                        <div class="text-center max-w-2xl mx-auto mb-12">
+                            <h2 class="text-xs font-bold uppercase tracking-wider text-brand-700 mb-2">Hyper-Local Arboriculture</h2>
+                            <h3 class="text-2xl sm:text-3xl font-extrabold text-slate-900">${data.specificsTitle}</h3>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                            ${data.specifics.map((item, idx) => `
+                                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
+                                    <div class="text-brand-600 font-extrabold text-xl mb-3">0${idx+1}.</div>
+                                    <h4 class="text-lg font-bold text-slate-900 mb-2">${item.title}</h4>
+                                    <p class="text-slate-600 text-sm leading-relaxed">${item.desc}</p>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                </section>
+
+                <section class="py-16 bg-white">
+                    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                        <div class="bg-brand-900 text-white rounded-3xl p-8 sm:p-12 shadow-2xl relative overflow-hidden">
+                            <div class="relative z-10 max-w-3xl">
+                                <h3 class="text-2xl sm:text-3xl font-extrabold mb-4">Serving All ${data.city} Neighborhoods</h3>
+                                <p class="text-brand-100 text-sm sm:text-base leading-relaxed mb-6">
+                                    Our ISA Certified Arborists are dispatching daily across ${data.city}. We know the local soil, pest profiles, and municipal canopy guidelines.
+                                </p>
+
+                                <div class="flex flex-wrap gap-2 mb-8">
+                                    ${data.neighborhoods.map(n => `
+                                        <span class="bg-brand-800/80 text-brand-100 text-xs font-medium px-3.5 py-1.5 rounded-full border border-brand-700">
+                                            <i class="fa-solid fa-location-dot mr-1 text-brand-accent"></i>${n}
+                                        </span>
+                                    `).join('')}
+                                </div>
+
+                                <div class="flex flex-col sm:flex-row gap-4 items-center">
+                                    <a href="tel:3034566898" class="bg-brand-600 hover:bg-brand-700 text-white font-bold px-6 py-3 rounded-xl transition flex items-center space-x-2">
+                                        <i class="fa-solid fa-phone"></i>
+                                        <span>303-456-6898</span>
+                                    </a>
+                                    <span class="text-xs text-brand-200">Call for immediate scheduling in ${data.city}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="py-16 bg-slate-50 border-t border-slate-200">
+                    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                        <div class="text-center mb-12">
+                            <h2 class="text-xs font-bold uppercase tracking-wider text-brand-700 mb-2">Got Questions?</h2>
+                            <h3 class="text-2xl sm:text-3xl font-extrabold text-slate-900">${data.city} Tree Care FAQs</h3>
+                        </div>
+
+                        <div class="space-y-4">
+                            ${data.faqs.map((faq, i) => `
+                                <div class="bg-white rounded-xl border border-slate-200 p-6 shadow-sm">
+                                    <h4 class="text-base font-bold text-slate-900 mb-2 flex items-start space-x-2">
+                                        <span class="text-brand-600 font-extrabold">Q:</span>
+                                        <span>${faq.q}</span>
+                                    </h4>
+                                    <p class="text-slate-600 text-sm leading-relaxed pl-6">
+                                        ${faq.a}
+                                    </p>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                </section>
+
+                <section class="py-16 bg-brand-700 text-white">
+                    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                        <h3 class="text-2xl sm:text-4xl font-extrabold mb-4">Ready to Schedule Tree Service in ${data.city}?</h3>
+                        <p class="text-brand-100 text-base max-w-xl mx-auto mb-8">
+                            Protect your property value and keep your trees healthy year-round. Get a free, no-obligation estimate from an ISA Certified Arborist.
+                        </p>
+                        <div class="flex flex-col sm:flex-row justify-center gap-4">
+                            <a href="tel:3034566898" class="bg-slate-900 hover:bg-slate-800 text-white font-bold px-8 py-4 rounded-xl shadow-lg transition flex items-center justify-center space-x-2">
+                                <i class="fa-solid fa-phone text-brand-accent"></i>
+                                <span>Call 303-456-6898</span>
+                            </a>
+                            <button onclick="openModal()" class="bg-white hover:bg-slate-100 text-brand-900 font-bold px-8 py-4 rounded-xl shadow-lg transition">
+                                Request Free Estimate Online
+                            </button>
+                        </div>
+                    </div>
+                </section>
+            `;
+        }
+
+        // Function to handle tab switching
+        function switchTab(key) {
+            // Update active state for desktop tabs
+            ['lakewood', 'arvada', 'wheatridge'].forEach(k => {
+                const dTab = document.getElementById(`tab-${k}`);
+                const mTab = document.getElementById(`mob-tab-${k}`);
+
+                if (k === key) {
+                    dTab.className = "active-tab py-4 px-2 text-sm font-medium transition-colors flex items-center space-x-2";
+                    mTab.className = "active-mobile-tab text-xs font-semibold px-4 py-2 rounded-full whitespace-nowrap border border-slate-300";
+                } else {
+                    dTab.className = "text-slate-600 hover:text-slate-900 py-4 px-2 text-sm font-medium transition-colors flex items-center space-x-2";
+                    mTab.className = "bg-white text-slate-700 text-xs font-semibold px-4 py-2 rounded-full whitespace-nowrap border border-slate-300";
+                }
+            });
+
+            // Render selected page
+            renderPage(key);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function openModal() {
+            document.getElementById('estimateModal').classList.remove('hidden');
+        }
+
+        function closeModal() {
+            document.getElementById('estimateModal').classList.add('hidden');
+        }
+
+        const menuToggle = document.querySelector('.site-nav-toggle');
+        const navigation = document.querySelector('.site-nav-container > nav');
+        menuToggle.addEventListener('click', () => {
+            const isOpen = navigation.classList.toggle('is-open');
+            menuToggle.setAttribute('aria-expanded', String(isOpen));
+            menuToggle.setAttribute('aria-label', isOpen ? 'Close menu' : 'Open menu');
+        });
+
+        navigation.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                navigation.classList.remove('is-open');
+                menuToggle.setAttribute('aria-expanded', 'false');
+                menuToggle.setAttribute('aria-label', 'Open menu');
+            });
+        });
+
+        // Initialize with Lakewood on page load
+        window.onload = function() {
+            renderPage('lakewood');
+        };
+    </script>
+</body>
+</html>

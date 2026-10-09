@@ -40,7 +40,33 @@ function routeKey(value) {
   return decoded || "/";
 }
 
-function walkPageRoutes(directory, relativeDirectory = "") {
+function loadExcludedPaths() {
+  const configPath = path.join(root, "_config.yml");
+  const lines = fs.readFileSync(configPath, "utf8").split(/\r?\n/);
+  const excludedPaths = new Set();
+  let inExcludeSection = false;
+
+  for (const line of lines) {
+    if (!inExcludeSection) {
+      inExcludeSection = /^exclude:\s*$/.test(line);
+      continue;
+    }
+
+    if (/^\S/.test(line)) break;
+    const match = line.match(/^\s+-\s+(.+?)\s*$/);
+    if (!match) continue;
+
+    const value = match[1].replace(/^(["'])(.*)\1$/, "$2");
+    excludedPaths.add(value.split(/[\\/]/).join(path.sep));
+  }
+
+  if (!inExcludeSection) {
+    throw new Error("_config.yml does not define an exclude list.");
+  }
+  return excludedPaths;
+}
+
+function walkPageRoutes(directory, relativeDirectory = "", excludedPaths = new Set()) {
   const routes = new Set();
   if (!fs.existsSync(directory)) return routes;
 
@@ -49,9 +75,10 @@ function walkPageRoutes(directory, relativeDirectory = "") {
 
     const absolutePath = path.join(directory, entry.name);
     const relativePath = path.join(relativeDirectory, entry.name);
+    if (excludedPaths.has(relativePath)) continue;
 
     if (entry.isDirectory()) {
-      for (const route of walkPageRoutes(absolutePath, relativePath)) routes.add(route);
+      for (const route of walkPageRoutes(absolutePath, relativePath, excludedPaths)) routes.add(route);
       continue;
     }
 
@@ -86,7 +113,7 @@ function loadRedirects() {
     throw new Error('Mapping file must contain a "redirects" array.');
   }
 
-  const existingRoutes = walkPageRoutes(root);
+  const existingRoutes = walkPageRoutes(root, "", loadExcludedPaths());
   const seenSources = new Set();
 
   return data.redirects.map((redirect, index) => {
