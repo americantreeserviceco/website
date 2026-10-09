@@ -214,6 +214,9 @@ def build_blog_pages() -> None:
         index_items.append(
             f"<article class=\"post-card\"><h3><a href=\"{post['url']}\">{escape(post['title'])}</a></h3><p class=\"muted\">Read the latest tree care advice and seasonal tips.</p><a href=\"{post['url']}\">Read article →</a></article>"
         )
+    index_items.append(
+        '<article class="post-card"><h3><a href="super_el_nino_colorado.html">What a Super El Niño Means for Colorado</a></h3><p class="muted">What Colorado climate research says about precipitation, snowpack, and winter weather odds.</p><a href="super_el_nino_colorado.html">Read article →</a></article>'
+    )
 
     index_html = page_template(
         SITE_TITLE,
