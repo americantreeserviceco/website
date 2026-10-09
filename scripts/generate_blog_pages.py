@@ -37,6 +37,11 @@ def slug_from_filename(filename: str) -> str:
 
 
 def page_template(title: str, body: str, current_page: str = "") -> str:
+    seasonal_styles = ""
+    if current_page == "blog":
+        seasonal_styles = """
+    .seasonal-promo { display: block; margin: 2rem auto; }
+    .seasonal-promo img { display: block; width: 100%; height: auto; border-radius: 18px; box-shadow: 0 20px 40px rgba(20, 31, 20, 0.18); }"""
     return f"""<!DOCTYPE html>
 <html lang=\"en\">
 <head>
@@ -72,7 +77,7 @@ def page_template(title: str, body: str, current_page: str = "") -> str:
     .card {{ background: var(--white); border-radius: 18px; box-shadow: var(--shadow); padding: 2rem; border: 1px solid rgba(29,77,42,0.08); }}
     .post-grid {{ display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem; margin-top: 2rem; }}
     .post-card {{ background: var(--green-soft); border: 1px solid rgba(29,77,42,0.08); border-radius: 16px; padding: 1.4rem; }}
-    .post-card h3 {{ margin-top: 0; }}
+    .post-card h3 {{ margin-top: 0; }}{seasonal_styles}
     .muted {{ color: var(--muted); }}
     ul {{ padding-left: 1.2rem; }}
     blockquote {{ margin: 1.5rem 0; padding-left: 1rem; border-left: 4px solid var(--green); color: var(--muted); }}
@@ -215,6 +220,7 @@ def build_blog_pages() -> None:
         f"""
         <h1>{SITE_TITLE}</h1>
         <p class=\"muted\">Helpful tree care articles, seasonal maintenance tips, and practical advice for Colorado properties.</p>
+        <a class=\"seasonal-promo\" href=\"../contact/index.html\" aria-label=\"Request a quote for seasonal tree health services\"><img src=\"../assets/images/seasonal/american-tree-health-update.png\" alt=\"Colorado tree health update sale notice\"></a>
         <div class=\"post-grid\">{''.join(index_items)}</div>
         """,
         current_page="blog",
