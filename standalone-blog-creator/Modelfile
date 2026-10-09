@@ -2,7 +2,7 @@
 
 ### 1. Base model
 
-FROM llama3.1:8b 
+FROM qwen3.6:27b
 
 ### 2. Set optimal parameters for long-form creative text generation
 

@@ -20,10 +20,10 @@ Options -Indexes
 RewriteEngine On
 RewriteBase /
 
-# 4. CANONICAL REDIRECT: Force HTTPS and ://americantreeserviceco.com
+# 4. CANONICAL REDIRECT: Force HTTPS and americantreeserviceco.com
 RewriteCond %{HTTPS} off [OR]
-RewriteCond %{HTTP_HOST} !^www\. [NC]
-RewriteRule ^(.*)$ https://://americantreeserviceco.com/$1 [L,R=301]
+RewriteCond %{HTTP_HOST} ^www\. [NC]
+RewriteRule ^(.*)$ https://americantreeserviceco.com/$1 [L,R=301]
 
 # 5. CLEAN URLS: Serve .html files without the extension in the URL
 # If the request is not for a directory

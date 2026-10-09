@@ -1,5 +1,5 @@
 # 1. Specify your base model (e.g., llama3, mistral, qwen2.5)
-FROM llama3
+FROM qwen3.6:27b
 
 # 2. Set your system instructions for the SEO expert
 SYSTEM """You are an expert SEO strategist. Help optimize website content, meta tags, and ranking structures."""
