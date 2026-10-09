@@ -60,6 +60,8 @@ large tree from my yard. Highly recommend!"
 
 ## Map & Directions
 
+<iframe src="https://maps.google.com/maps?q=Lakewood%2C+CO&z=12&output=embed" title="Lakewood, Colorado location map" width="100%" height="400" style="border:0;" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+
 [View our location on Google Maps](https://www.google.com/maps/place/Lakewood,+CO/)
 
 ## Additional Resources
@@ -67,4 +69,3 @@ large tree from my yard. Highly recommend!"
 - [Tree Care Tips](/resources/tree-care-tips)
 - [Our Guarantee](/resources/guarantee)
 - [Blog](/blog)
-
