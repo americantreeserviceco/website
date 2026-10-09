@@ -17,4 +17,4 @@ Disallow: /staging/
 Disallow: /dev/
 
 # Help search engines discover your valid content paths
-Sitemap: https://americantreeserviceco.com
+Sitemap: https://americantreeserviceco.com/sitemap.xml
