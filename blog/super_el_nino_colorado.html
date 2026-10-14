@@ -5,135 +5,202 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>What a Super El Niño Means for Colorado</title>
     <meta name="description" content="Learn what Colorado Climate Center research says about El Niño, precipitation, snowpack, and Colorado's possible winter weather.">
-    <link href="https://americantreeserviceco.com/blog/super_el_nino_colorado.html">
+    <link rel="canonical" href="https://americantreeserviceco.com/blog/super_el_nino_colorado.html">
     <style>
-:root {
-			--forest: #1d4d2a;
-			--forest-dark: #14351f;
-			--green: #2d7d46;
-			--green-soft: #edf8ee;
-			--sand: #f8f7f1;
-			--text: #243126;
-			--muted: #5d685f;
-			--white: #fff;
-		}
-		* { box-sizing: border-box; }
-		body { margin: 0; background: var(--sand); color: var(--text); font: 16px/1.65 Arial, Helvetica, sans-serif; }
-		a { color: var(--forest); text-decoration: none; }
-		a:hover { text-decoration: underline; }
-		.container { width: min(100% - 2rem, 1100px); margin: 0 auto; }
-		.topbar { background: var(--white); border-bottom: 1px solid #dce6dc; }
-		.nav { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 1rem 0; flex-wrap: wrap; }
-		.brand { display: flex; align-items: center; }
-		.brand img { display: block; height: 56px; width: auto; }
-		.nav-links, .footer-links { display: flex; gap: 1rem; flex-wrap: wrap; }
-		.nav-links a { color: var(--forest-dark); font-weight: 700; }
-		.header-cta { padding: .7rem 1rem; background: var(--green); color: var(--white); font-weight: 700; }
-		main { padding: 3rem 0 5rem; }
-		.article { max-width: 850px; margin: 0 auto; padding: clamp(1.25rem, 4vw, 2.5rem); background: var(--white); border: 1px solid #e1e8df; }
-		.article h1 { margin-top: 0; color: var(--forest-dark); line-height: 1.2; }
-		.article h2, .article h3 { color: var(--forest-dark); }
-		.article-meta, .article-excerpt { color: var(--muted); }
-		.article li { margin: .4rem 0; }
-		.back-link { display: inline-block; margin-bottom: 1.5rem; }
-		footer { padding: 2rem 0; background: var(--forest-dark); color: var(--white); }
-		.footer-inner { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
-		footer a { color: var(--white); }
-		@media (max-width: 640px) { .nav { justify-content: center; } .nav-links { justify-content: center; } .header-cta { width: 100%; text-align: center; } }
-	</style>
-	<link rel="stylesheet" href="/assets/css/halloween-theme.css">
-	<script src="/assets/js/halloween-theme.js" defer></script>
+        :root {
+            --forest: #1d4d2a;
+            --forest-dark: #14351f;
+            --green: #2d7d46;
+            --green-soft: #edf8ee;
+            --sand: #f8f7f1;
+            --text: #243126;
+            --muted: #5d685f;
+            --white: #fff;
+            --border: #dce6dc;
+        }
+        * { box-sizing: border-box; }
+        body { margin: 0; background: var(--sand); color: var(--text); font: 16px/1.65 Arial, Helvetica, sans-serif; }
+        a { color: var(--forest); text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        .container { width: min(100% - 2rem, 1100px); margin: 0 auto; }
+
+        /* Header */
+        .topbar { background: var(--white); border-bottom: 1px solid var(--border); }
+        .nav { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 1rem 0; flex-wrap: wrap; }
+        .brand { display: flex; align-items: center; font-weight: 700; color: var(--forest-dark); }
+        .brand img { display: block; height: 56px; width: auto; }
+        .nav-links, .footer-links { display: flex; gap: 1rem; flex-wrap: wrap; }
+        .nav-links a { color: var(--forest-dark); font-weight: 700; }
+        .header-cta { padding: .7rem 1rem; background: var(--green); color: var(--white); font-weight: 700; }
+        .header-cta:hover { background: var(--forest); text-decoration: none; }
+
+        /* Article */
+        main { padding: 3rem 0 5rem; }
+        .article { max-width: 850px; margin: 0 auto; padding: clamp(1.25rem, 4vw, 2.5rem); background: var(--white); border: 1px solid #e1e8df; }
+        .article h1 { margin-top: 0; color: var(--forest-dark); line-height: 1.2; }
+        .article h2, .article h3 { color: var(--forest-dark); line-height: 1.3; }
+        .article h2 { margin-top: 2rem; }
+        .article hr { border: 0; border-top: 1px solid var(--border); margin: 2rem 0; }
+        .article li { margin: .4rem 0; }
+        .article-meta, .article-excerpt { color: var(--muted); }
+        .back-link { display: inline-block; margin-bottom: 1.5rem; font-weight: 700; }
+
+        /* Table */
+        .table-wrap { overflow-x: auto; margin: 1.5rem 0; }
+        .article table { width: 100%; min-width: 560px; border-collapse: collapse; font-size: .95rem; }
+        .article th, .article td { border: 1px solid var(--border); padding: .65rem .8rem; text-align: left; vertical-align: top; }
+        .article thead th { background: var(--green-soft); color: var(--forest-dark); }
+        .article tbody tr:nth-child(even) { background: #fafcfa; }
+
+        /* Call to action + sources */
+        .cta-box { margin: 1.5rem 0 0; padding: 1rem 1.25rem; background: var(--green-soft); border-left: 4px solid var(--green); }
+        .cta-box p { margin: 0; }
+        .sources { margin-top: 1rem; font-size: .95rem; color: var(--muted); }
+        .sources h3 { margin-top: 0; }
+
+        /* Footer */
+        footer { padding: 2rem 0; background: var(--forest-dark); color: var(--white); }
+        .footer-inner { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+        footer a { color: var(--white); }
+
+        @media (max-width: 640px) {
+            .nav { justify-content: center; }
+            .nav-links { justify-content: center; }
+            .header-cta { width: 100%; text-align: center; }
+        }
+    </style>
+    <link rel="stylesheet" href="/assets/css/halloween-theme.css">
+    <script src="/assets/js/halloween-theme.js" defer></script>
+</head>
 <body>
 
-<div class="container">
-    <h1>What a Super El Niño Means for Colorado</h1>
-
-    <p>As El Niño strengthens in the equatorial Pacific, Coloradans across the Front Range and Western Slope are asking a familiar question: <em>Does this mean a drought-busting winter packed with snow and rain?</em></p>
-
-    <p>The <strong>Colorado Climate Center</strong> finds that El Niño can tilt precipitation odds in Colorado's favor, but the state’s response varies by region and season. A wetter pattern is possible; a snowy winter is not guaranteed.</p>
-
-    <p>Here is what the science and historical data actually tell us about how a Super El Niño impacts the Centennial State.</p>
-
-    <hr>
-
-    <h2>1. What Is a "Super El Niño"?</h2>
-    <p>El Niño—the warm phase of the El Niño-Southern Oscillation (ENSO)—occurs when tropical trade winds weaken, allowing warm ocean water to spread eastward across the Pacific. In the Colorado Climate Center’s discussion, “super” El Niño refers to a particularly strong event; the article identifies three modern events with sea-surface temperature anomalies of <strong>+2.0°C or higher</strong>: 1982/83, 1997/98, and 2015/16.</p>
-    <p>This pool of oceanic heat alters atmospheric circulation globally. Across North America, El Niño can weaken and split the polar jet stream, increasing the odds of cooler, wetter conditions across the U.S. Sunbelt and warmer conditions in the Pacific Northwest and north-central states.</p>
-
-    <h2>2. Colorado Lies in the "In-Between Zone"</h2>
-    <p>Unlike the Pacific Northwest (which reliably trends warm and dry during El Niño) or coastal California and the Desert Southwest (which tend to get soaked), <strong>Colorado sits directly in the transition zone</strong>.</p>
-    <p>The Colorado Climate Center emphasizes that El Niño’s influence on the state varies dramatically depending on the region and season:</p>
-    <ul>
-        <li><strong>Much of the state:</strong> Historical analyses show a general tendency toward higher precipitation during El Niño, especially in fall and spring.</li>
-        <li><strong>Front Range & Eastern Plains:</strong> El Niño is associated with greater potential for large spring snowstorms and fewer dry, windy spring days; those dry, windy days can still occur.</li>
-        <li><strong>Southern river basins:</strong> The San Juan and Rio Grande basins show a loose positive relationship between El Niño and peak snowpack.</li>
-    </ul>
-
-    <h2>3. Does a Stronger El Niño Guarantee More Snow?</h2>
-    <p>A stronger El Niño does not guarantee stronger weather impacts in Colorado. The Colorado Climate Center notes that only three “super” events appear in modern records: 1982/83 brought very large snowfall to Colorado, while 1997/98 and 2015/16 were roughly average. With so few examples, it is difficult to draw firm conclusions about how event strength translates to local weather.</p>
-    <p>Seasonal models and the Climate Prediction Center indicate elevated odds of above-normal precipitation across much of Colorado through spring, but these are probabilities—not a forecast of guaranteed snowfall.</p>
-
-    <h2>4. The Shifting Baseline: Climate Change & Warming Trends</h2>
-    <p>The Colorado Climate Center highlights an essential factor when comparing current conditions to historical winters: <strong>baseline warming</strong>.</p>
-    <ul>
-        <li><strong>Warming:</strong> Colorado climate has warmed since the major snow year of 1982/83, so historical comparisons do not capture today’s changed baseline.</li>
-        <li><strong>Precipitation and snowpack:</strong> Colorado average precipitation is likely decreasing in western Colorado, and warming means some precipitation may fall as rain rather than snow, especially at lower elevations.</li>
-        <li><strong>Uncertain drought relief:</strong> Even a wet season may not erase existing drought conditions. The Climate Center describes a wide range of possible outcomes.</li>
-    </ul>
-
-    <hr>
-
-    <h2>Summary of Regional Expectations</h2>
-    <table>
-        <thead>
-            <tr>
-                <th scope="col">Region</th>
-                <th scope="col">What the Colorado Climate Center reports</th>
-                <th scope="col">Important caveat</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td><strong>Much of Colorado</strong></td>
-                <td>Precipitation has generally been higher during El Niño, especially in fall and spring.</td>
-                <td>This is a historical tendency, not a guarantee for a particular season.</td>
-            </tr>
-            <tr>
-                <td><strong>Front Range Urban Corridor</strong></td>
-                <td>Greater potential for large spring snowstorms and fewer dry, windy spring days.</td>
-                <td>Dry, windy days remain frequent, and winter snow can vary.</td>
-            </tr>
-            <tr>
-                <td><strong>Peak seasonal snowpack statewide</strong></td>
-                <td>The relationship between ENSO and peak seasonal snowpack is weak statewide.</td>
-                <td>Only the San Juan and Rio Grande basins show a loose positive snowpack relationship.</td>
-            </tr>
-            <tr>
-                <td><strong>Eastern Plains</strong></td>
-                <td>More potential for large spring snowstorms and fewer dry, windy spring days.</td>
-                <td>These are changes in odds, not a deterministic forecast.</td>
-            </tr>
-        </tbody>
-    </table>
-
-    <h2>The Takeaway</h2>
-    <p>El Niño may improve the odds of above-normal precipitation in parts of Colorado, but it cannot promise a drought-busting winter or deep snowpack. Expect regional differences, and treat seasonal outlooks as probabilities rather than guarantees.</p>
-
-    <h2>Prepare Your Trees for Winter Weather</h2>
-    <p>Regardless of the seasonal outlook, inspect trees for dead or damaged limbs before winter storms arrive. If you spot a potential hazard near your home, contact a qualified tree-care professional for an assessment.</p>
-    <p><a href="../contact/index.html">Contact American Tree Colorado to discuss tree care or request an estimate.</a></p>
-
-    <hr>
-
-    <div class="footer">
-        <h3>Sources & References</h3>
-        <ul>
-            <li><strong>Colorado Climate Center (CSU):</strong> <a href="https://climate.colostate.edu/blog/index.php/2026/09/03/what-super-el-nino-means-for-colorado/" target="_blank" rel="noopener noreferrer">What Super El Niño Means for Colorado</a>, by Peter Goble.</li>
-            <li><strong>Colorado Climate Center:</strong> <a href="https://climate.colostate.edu/co_enso.html" target="_blank" rel="noopener noreferrer">ENSO and Colorado Climate Analysis</a>.</li>
-            <li><strong>NOAA Climate Prediction Center:</strong> <a href="https://www.cpc.ncep.noaa.gov/products/analysis_monitoring/enso_advisory/ensodisc.pdf" target="_blank" rel="noopener noreferrer">El Niño / Southern Oscillation (ENSO) Diagnostic Discussion</a>.</li>
-        </ul>
+<header class="topbar">
+    <div class="container nav">
+        <a class="brand" href="../index.html">
+            <img src="/assets/img/logo.png" alt="American Tree Colorado">
+        </a>
+        <nav class="nav-links" aria-label="Main">
+            <a href="../index.html">Home</a>
+            <a href="../services/index.html">Services</a>
+            <a href="../locations/index.html">Locations</a>
+            <a href="./index.html">Blog</a>
+            <a href="../contact/index.html">Contact</a>
+        </nav>
+        <a class="header-cta" href="../contact/index.html">Get an Estimate</a>
     </div>
-</div>
+</header>
+
+<main>
+    <div class="container">
+        <article class="article">
+            <a class="back-link" href="./index.html">&larr; All articles</a>
+
+            <h1>What a Super El Niño Means for Colorado</h1>
+
+            <p>As El Niño strengthens in the equatorial Pacific, Coloradans across the Front Range and Western Slope are asking a familiar question: <em>Does this mean a drought-busting winter packed with snow and rain?</em></p>
+
+            <p>The <strong>Colorado Climate Center</strong> finds that El Niño can tilt precipitation odds in Colorado's favor, but the state’s response varies by region and season. A wetter pattern is possible; a snowy winter is not guaranteed.</p>
+
+            <p>Here is what the science and historical data actually tell us about how a Super El Niño impacts the Centennial State.</p>
+
+            <hr>
+
+            <h2>1. What Is a "Super El Niño"?</h2>
+            <p>El Niño—the warm phase of the El Niño-Southern Oscillation (ENSO)—occurs when tropical trade winds weaken, allowing warm ocean water to spread eastward across the Pacific. In the Colorado Climate Center’s discussion, “super” El Niño refers to a particularly strong event; the article identifies three modern events with sea-surface temperature anomalies of <strong>+2.0°C or higher</strong>: 1982/83, 1997/98, and 2015/16.</p>
+            <p>This pool of oceanic heat alters atmospheric circulation globally. Across North America, El Niño can weaken and split the polar jet stream, increasing the odds of cooler, wetter conditions across the U.S. Sunbelt and warmer conditions in the Pacific Northwest and north-central states.</p>
+
+            <h2>2. Colorado Lies in the "In-Between Zone"</h2>
+            <p>Unlike the Pacific Northwest (which reliably trends warm and dry during El Niño) or coastal California and the Desert Southwest (which tend to get soaked), <strong>Colorado sits directly in the transition zone</strong>.</p>
+            <p>The Colorado Climate Center emphasizes that El Niño’s influence on the state varies dramatically depending on the region and season:</p>
+            <ul>
+                <li><strong>Much of the state:</strong> Historical analyses show a general tendency toward higher precipitation during El Niño, especially in fall and spring.</li>
+                <li><strong>Front Range &amp; Eastern Plains:</strong> El Niño is associated with greater potential for large spring snowstorms and fewer dry, windy spring days; those dry, windy days can still occur.</li>
+                <li><strong>Southern river basins:</strong> The San Juan and Rio Grande basins show a loose positive relationship between El Niño and peak snowpack.</li>
+            </ul>
+
+            <h2>3. Does a Stronger El Niño Guarantee More Snow?</h2>
+            <p>A stronger El Niño does not guarantee stronger weather impacts in Colorado. The Colorado Climate Center notes that only three “super” events appear in modern records: 1982/83 brought very large snowfall to Colorado, while 1997/98 and 2015/16 were roughly average. With so few examples, it is difficult to draw firm conclusions about how event strength translates to local weather.</p>
+            <p>Seasonal models and the Climate Prediction Center indicate elevated odds of above-normal precipitation across much of Colorado through spring, but these are probabilities—not a forecast of guaranteed snowfall.</p>
+
+            <h2>4. The Shifting Baseline: Climate Change &amp; Warming Trends</h2>
+            <p>The Colorado Climate Center highlights an essential factor when comparing current conditions to historical winters: <strong>baseline warming</strong>.</p>
+            <ul>
+                <li><strong>Warming:</strong> Colorado climate has warmed since the major snow year of 1982/83, so historical comparisons do not capture today’s changed baseline.</li>
+                <li><strong>Precipitation and snowpack:</strong> Colorado average precipitation is likely decreasing in western Colorado, and warming means some precipitation may fall as rain rather than snow, especially at lower elevations.</li>
+                <li><strong>Uncertain drought relief:</strong> Even a wet season may not erase existing drought conditions. The Climate Center describes a wide range of possible outcomes.</li>
+            </ul>
+
+            <hr>
+
+            <h2>Summary of Regional Expectations</h2>
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr>
+                            <th scope="col">Region</th>
+                            <th scope="col">What the Colorado Climate Center reports</th>
+                            <th scope="col">Important caveat</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Much of Colorado</strong></td>
+                            <td>Precipitation has generally been higher during El Niño, especially in fall and spring.</td>
+                            <td>This is a historical tendency, not a guarantee for a particular season.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Front Range Urban Corridor</strong></td>
+                            <td>Greater potential for large spring snowstorms and fewer dry, windy spring days.</td>
+                            <td>Dry, windy days remain frequent, and winter snow can vary.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Peak seasonal snowpack statewide</strong></td>
+                            <td>The relationship between ENSO and peak seasonal snowpack is weak statewide.</td>
+                            <td>Only the San Juan and Rio Grande basins show a loose positive snowpack relationship.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Eastern Plains</strong></td>
+                            <td>More potential for large spring snowstorms and fewer dry, windy spring days.</td>
+                            <td>These are changes in odds, not a deterministic forecast.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h2>The Takeaway</h2>
+            <p>El Niño may improve the odds of above-normal precipitation in parts of Colorado, but it cannot promise a drought-busting winter or deep snowpack. Expect regional differences, and treat seasonal outlooks as probabilities rather than guarantees.</p>
+
+            <h2>Prepare Your Trees for Winter Weather</h2>
+            <p>Regardless of the seasonal outlook, inspect trees for dead or damaged limbs before winter storms arrive. If you spot a potential hazard near your home, contact a qualified tree-care professional for an assessment.</p>
+            <div class="cta-box">
+                <p><a href="../contact/index.html"><strong>Contact American Tree Colorado</strong> to discuss tree care or request an estimate.</a></p>
+            </div>
+
+            <hr>
+
+            <div class="sources">
+                <h3>Sources &amp; References</h3>
+                <ul>
+                    <li><strong>Colorado Climate Center (CSU):</strong> <a href="https://climate.colostate.edu/blog/index.php/2026/09/03/what-super-el-nino-means-for-colorado/" target="_blank" rel="noopener noreferrer">What Super El Niño Means for Colorado</a>, by Peter Goble.</li>
+                    <li><strong>Colorado Climate Center:</strong> <a href="https://climate.colostate.edu/co_enso.html" target="_blank" rel="noopener noreferrer">ENSO and Colorado Climate Analysis</a>.</li>
+                    <li><strong>NOAA Climate Prediction Center:</strong> <a href="https://www.cpc.ncep.noaa.gov/products/analysis_monitoring/enso_advisory/ensodisc.pdf" target="_blank" rel="noopener noreferrer">El Niño / Southern Oscillation (ENSO) Diagnostic Discussion</a>.</li>
+                </ul>
+            </div>
+        </article>
+    </div>
+</main>
+
+<footer>
+    <div class="container footer-inner">
+        <div>&copy; 2026 American Tree Colorado</div>
+        <nav class="footer-links" aria-label="Footer">
+            <a href="../index.html">Home</a>
+            <a href="../services/index.html">Services</a>
+            <a href="./index.html">Blog</a>
+            <a href="../contact/index.html">Contact</a>
+        </nav>
+    </div>
+</footer>
 
 </body>
 </html>
