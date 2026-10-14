@@ -7,113 +7,48 @@
     <meta name="description" content="Learn what Colorado Climate Center research says about El Niño, precipitation, snowpack, and Colorado's possible winter weather.">
     <link href="https://americantreeserviceco.com/blog/super_el_nino_colorado.html">
     <style>
-        :root {
-            --primary-color: #1e3a8a;
-            --accent-color: #0284c7;
-            --text-color: #334155;
-            --bg-color: #f8fafc;
-            --card-bg: #ffffff;
-            --border-color: #e2e8f0;
-        }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            line-height: 1.7;
-            color: var(--text-color);
-            background-color: var(--bg-color);
-            margin: 0;
-            padding: 40px 20px;
-        }
-
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            background: var(--card-bg);
-            padding: 40px;
-            border-radius: 12px;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-        }
-
-        h1 {
-            color: var(--primary-color);
-            font-size: 2.25rem;
-            line-height: 1.3;
-            margin-bottom: 1.5rem;
-            border-bottom: 3px solid var(--accent-color);
-            padding-bottom: 10px;
-        }
-
-        h2 {
-            color: var(--primary-color);
-            font-size: 1.5rem;
-            margin-top: 2rem;
-            margin-bottom: 1rem;
-        }
-
-        p {
-            margin-bottom: 1.25rem;
-            font-size: 1.05rem;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 2rem 0;
-            background: var(--card-bg);
-        }
-
-        th, td {
-            padding: 12px 15px;
-            text-align: left;
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        th {
-            background-color: #f1f5f9;
-            color: var(--primary-color);
-            font-weight: 600;
-        }
-
-        tr:hover {
-            background-color: #f8fafc;
-        }
-
-        ul {
-            margin-bottom: 1.5rem;
-            padding-left: 1.5rem;
-        }
-
-        li {
-            margin-bottom: 0.5rem;
-        }
-
-        hr {
-            border: none;
-            border-top: 1px solid var(--border-color);
-            margin: 2rem 0;
-        }
-
-        .footer {
-            margin-top: 2rem;
-            font-size: 0.95rem;
-        }
-
-        .footer a {
-            color: var(--accent-color);
-            text-decoration: none;
-        }
-
-        .footer a:hover {
-            text-decoration: underline;
-        }
-    </style>
-</head>
+:root {
+			--forest: #1d4d2a;
+			--forest-dark: #14351f;
+			--green: #2d7d46;
+			--green-soft: #edf8ee;
+			--sand: #f8f7f1;
+			--text: #243126;
+			--muted: #5d685f;
+			--white: #fff;
+		}
+		* { box-sizing: border-box; }
+		body { margin: 0; background: var(--sand); color: var(--text); font: 16px/1.65 Arial, Helvetica, sans-serif; }
+		a { color: var(--forest); text-decoration: none; }
+		a:hover { text-decoration: underline; }
+		.container { width: min(100% - 2rem, 1100px); margin: 0 auto; }
+		.topbar { background: var(--white); border-bottom: 1px solid #dce6dc; }
+		.nav { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 1rem 0; flex-wrap: wrap; }
+		.brand { display: flex; align-items: center; }
+		.brand img { display: block; height: 56px; width: auto; }
+		.nav-links, .footer-links { display: flex; gap: 1rem; flex-wrap: wrap; }
+		.nav-links a { color: var(--forest-dark); font-weight: 700; }
+		.header-cta { padding: .7rem 1rem; background: var(--green); color: var(--white); font-weight: 700; }
+		main { padding: 3rem 0 5rem; }
+		.article { max-width: 850px; margin: 0 auto; padding: clamp(1.25rem, 4vw, 2.5rem); background: var(--white); border: 1px solid #e1e8df; }
+		.article h1 { margin-top: 0; color: var(--forest-dark); line-height: 1.2; }
+		.article h2, .article h3 { color: var(--forest-dark); }
+		.article-meta, .article-excerpt { color: var(--muted); }
+		.article li { margin: .4rem 0; }
+		.back-link { display: inline-block; margin-bottom: 1.5rem; }
+		footer { padding: 2rem 0; background: var(--forest-dark); color: var(--white); }
+		.footer-inner { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+		footer a { color: var(--white); }
+		@media (max-width: 640px) { .nav { justify-content: center; } .nav-links { justify-content: center; } .header-cta { width: 100%; text-align: center; } }
+	</style>
+	<link rel="stylesheet" href="/assets/css/halloween-theme.css">
+	<script src="/assets/js/halloween-theme.js" defer></script>
 <body>
 
 <div class="container">
     <h1>What a Super El Niño Means for Colorado</h1>
 
-    <p>As El Niño strengthens in the equatorial Pacific, Coloradans across the Front Range and Western Slope are asking a familiar question: <em>Does this mean a drought-busting winter packed with snow and rain?</em>[cite: 1]</p>
+    <p>As El Niño strengthens in the equatorial Pacific, Coloradans across the Front Range and Western Slope are asking a familiar question: <em>Does this mean a drought-busting winter packed with snow and rain?</em></p>
 
     <p>The <strong>Colorado Climate Center</strong> finds that El Niño can tilt precipitation odds in Colorado's favor, but the state’s response varies by region and season. A wetter pattern is possible; a snowy winter is not guaranteed.</p>
 
