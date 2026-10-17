@@ -8,6 +8,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="/assets/css/halloween-theme.css">
     <script src="/assets/js/halloween-theme.js" defer></script>
+    <script src="/assets/js/nws-weather.js" defer></script>
 </head>
 <body class="bg-slate-50 text-slate-800 antialiased">
     <nav class="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between gap-4 flex-wrap">
@@ -36,6 +37,13 @@
     </header>
 
     <main>
+        <section class="py-12 px-6" aria-labelledby="weather-heading">
+            <div class="max-w-6xl mx-auto">
+                <h2 id="weather-heading" class="text-3xl font-bold text-green-900 mb-2 text-center">Boulder Weather</h2>
+                <p class="text-center text-slate-600 mb-6">Check conditions before you schedule tree work &mdash; high winds, snow, and storms affect safety.</p>
+                <div data-nws-weather data-lat="40.0150" data-lon="-105.2705" data-city="Boulder" aria-live="polite"></div>
+            </div>
+        </section>
         <section class="py-16 px-6">
             <div class="max-w-6xl mx-auto">
                 <div class="text-center mb-12">

@@ -51,11 +51,11 @@ and get a quote for your tree service needs.
 
 > "American Tree Colorado was incredibly responsive and did a great job on removing a 
 large tree from my yard. Highly recommend!"  
-> - Jane Doe, Arvada Resident
+> - Janet Bowe, Arvada Resident
 
 > "Their team was friendly and thorough. My trees look amazing after their pruning!" 
  
-> - John Smith, Local Business Owner
+> - Sam Siah, Local Business Owner
 
 ## Map & Directions
 
