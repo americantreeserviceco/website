@@ -6,16 +6,6 @@
       "status": 301
     },
     {
-      "from": "/locations/lakewood/",
-      "to": "/service-areas/lakewood-co/",
-      "status": 301
-    },
-    {
-      "from": "/locations/arvada/",
-      "to": "/service-areas/arvada-co/",
-      "status": 301
-    },
-    {
       "from": "/locations/wheat-ridge/",
       "to": "/service-areas/wheat-ridge-co/",
       "status": 301
