@@ -509,3 +509,41 @@ img {
     padding: 3rem 1rem;
   }
 }
+
+.service-page ul.service-list {
+  list-style: none;
+  padding-left: 0;
+}
+
+.service-list li {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.svc-icon {
+  flex: none;
+  width: 2.25rem;
+  height: 2.25rem;
+  padding: 0.5rem;
+  box-sizing: border-box;
+  border-radius: 50%;
+  background: var(--green-100);
+  fill: none;
+  stroke: var(--green-600);
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.november-art {
+  display: none;
+}
+
+body.november-theme .november-art {
+  display: block;
+  width: 100%;
+  max-width: 280px;
+  height: auto;
+  justify-self: center;
+}
