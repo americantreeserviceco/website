@@ -786,6 +786,39 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 		}
 	</style>
 	<link rel="stylesheet" href="/assets/css/halloween-theme.css">
+	<style>
+		/* Halloween border (homepage, October only via body.halloween-theme) */
+		body.halloween-theme::before,
+		body.halloween-theme::after {
+			content: "";
+			position: fixed;
+			pointer-events: none;
+			z-index: 9999;
+		}
+		body.halloween-theme::before {
+			inset: 0;
+			border: 12px solid transparent;
+			border-image: repeating-linear-gradient(45deg, #f5a623 0 14px, #28232c 14px 28px) 12;
+			box-shadow: inset 0 0 18px rgba(245, 166, 35, 0.45);
+		}
+		body.halloween-theme::after {
+			top: 12px;
+			left: 12px;
+			right: 12px;
+			height: 32px;
+			overflow: hidden;
+			white-space: nowrap;
+			font-size: 22px;
+			line-height: 32px;
+			letter-spacing: 14px;
+			content: "🎃🦇🕸️👻🎃🦇🕸️👻🎃🦇🕸️👻🎃🦇🕸️👻🎃🦇🕸️👻🎃🦇🕸️👻🎃🦇🕸️👻🎃🦇🕸️👻";
+			background: linear-gradient(#28232c, rgba(40, 35, 44, 0));
+		}
+		@media (max-width: 640px) {
+			body.halloween-theme::before { border-width: 8px; border-image-slice: 8; }
+			body.halloween-theme::after { top: 8px; left: 8px; right: 8px; font-size: 16px; height: 24px; line-height: 24px; letter-spacing: 8px; }
+		}
+	</style>
 	<script src="/assets/js/halloween-theme.js" defer></script>
 </head>
 <body>
