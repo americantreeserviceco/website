@@ -4,11 +4,6 @@
       "from": "/pruning-%26-removals",
       "to": "/services/tree-trimming-and-pruning/",
       "status": 301
-    },
-    {
-      "from": "/locations/wheat-ridge/",
-      "to": "/service-areas/wheat-ridge-co/",
-      "status": 301
     }
   ]
 }
