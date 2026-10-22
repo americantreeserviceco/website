@@ -5,6 +5,29 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>{{ page.title | escape }} | {{ site.title | escape }}</title>
 	<meta name="description" content="{{ page.description | default: page.excerpt | strip_html | normalize_whitespace | truncate: 160 | escape }}">
+	{% assign canonical = "https://americantreeserviceco.com" | append: page.url %}
+	<link rel="canonical" href="{{ canonical }}">
+	<meta property="og:type" content="article">
+	<meta property="og:site_name" content="{{ site.title | escape }}">
+	<meta property="og:title" content="{{ page.title | escape }}">
+	<meta property="og:description" content="{{ page.description | default: page.excerpt | strip_html | normalize_whitespace | truncate: 160 | escape }}">
+	<meta property="og:url" content="{{ canonical }}">
+	<meta property="og:image" content="https://americantreeserviceco.com/assets/images/logo/AmericanTree_Logo_RGB-gbp.png">
+	<meta name="twitter:card" content="summary">
+	{% if page.date %}
+	<script type="application/ld+json">
+	{
+		"@context": "https://schema.org",
+		"@type": "BlogPosting",
+		"headline": {{ page.title | jsonify }},
+		"description": {{ page.description | default: page.excerpt | strip_html | normalize_whitespace | truncate: 160 | jsonify }},
+		"datePublished": "{{ page.date | date_to_xmlschema }}",
+		"mainEntityOfPage": "{{ canonical }}",
+		"author": { "@type": "Organization", "name": "American Tree Colorado", "url": "https://americantreeserviceco.com/" },
+		"publisher": { "@type": "Organization", "name": "American Tree Colorado", "logo": { "@type": "ImageObject", "url": "https://americantreeserviceco.com/assets/images/logo/AmericanTree_Logo_RGB-gbp.png" } }
+	}
+	</script>
+	{% endif %}
 	<style>
 		:root {
 			--forest: #1d4d2a;
@@ -35,6 +58,8 @@
 		.article-meta, .article-excerpt { color: var(--muted); }
 		.article li { margin: .4rem 0; }
 		.back-link { display: inline-block; margin-bottom: 1.5rem; }
+		.article-body .cta-box { margin: 1.5rem 0; padding: 1rem 1.25rem; background: var(--green-soft); border-left: 4px solid var(--green); border-radius: 0 12px 12px 0; }
+		.article-body .cta-box p { margin: 0; }
 		footer { padding: 2rem 0; background: var(--forest-dark); color: var(--white); }
 		.footer-inner { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
 		footer a { color: var(--white); }

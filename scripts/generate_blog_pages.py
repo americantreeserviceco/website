@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import re
+from datetime import date
 from html import escape
 from pathlib import Path
 
@@ -11,6 +12,13 @@ ROOT = Path(__file__).resolve().parent.parent
 POSTS_DIR = ROOT / "_posts"
 BLOG_DIR = ROOT / "blog"
 SITE_TITLE = "American Tree Colorado Blog"
+LIQUID_POST_GRID = (
+    "{% for post in site.posts %}"
+    "<article class=\"post-card\"><h3><a href=\"{{ post.url }}\">{{ post.title | escape }}</a></h3>"
+    "<p class=\"muted\">{{ post.description | default: 'Read the latest tree care advice and seasonal tips.' | escape }}</p>"
+    "<a href=\"{{ post.url }}\">Read article →</a></article>"
+    "{% endfor %}"
+)
 
 
 def parse_post_title(raw_text: str) -> str:
@@ -67,7 +75,7 @@ def page_template(title: str, body: str, current_page: str = "") -> str:
     a:hover {{ text-decoration: underline; }}
     .topbar {{ background: rgba(255,255,255,0.96); border-bottom: 1px solid rgba(29,77,42,0.12); position: sticky; top: 0; z-index: 10; }}
     .container {{ max-width: 1100px; margin: 0 auto; padding: 0 1.25rem; }}
-    .nav {{ display: flex; align-items: center; justify-content: space-between; gap: 1.25rem; padding: 1rem 0; flex-wrap: wrap; }}
+    .nav {{ display: flex; align-items: center; justify-content: space-between; gap: 1.25rem; padding: 1rem 1.25rem; flex-wrap: wrap; }}
     .brand {{ display: flex; align-items: center; }}
     .brand img {{ display: block; height: 56px; width: auto; }}
     .nav-links {{ display: flex; gap: 1.1rem; flex-wrap: wrap; align-items: center; }}
@@ -89,7 +97,10 @@ def page_template(title: str, body: str, current_page: str = "") -> str:
     @media (max-width: 640px) {{ .nav {{ justify-content: center; }} .nav-links {{ justify-content: center; }} .header-cta {{ width: 100%; text-align: center; }} }}
   </style>
   <link rel="stylesheet" href="/assets/css/halloween-theme.css">
+  <link rel="stylesheet" href="/assets/css/november-theme.css">
   <script src="/assets/js/halloween-theme.js" defer></script>
+  <script src="/assets/js/november-theme.js" defer></script>
+  <script src="/assets/js/severe-alerts.js" defer></script>
 </head>
 <body>
   <header class=\"topbar\">
@@ -196,6 +207,8 @@ def markdown_to_html(markdown: str) -> str:
 def build_blog_pages() -> None:
     posts = []
     for path in sorted(POSTS_DIR.glob("*.md")):
+        if path.name[:10] > date.today().isoformat():
+            continue  # scheduled post: Jekyll publishes it on its date
         raw = path.read_text(encoding="utf-8")
         title = parse_post_title(raw)
         slug = slug_from_filename(path.name)
@@ -218,19 +231,23 @@ def build_blog_pages() -> None:
         '<article class="post-card"><h3><a href="super_el_nino_colorado.html">What a Super El Niño Means for Colorado</a></h3><p class="muted">What Colorado climate research says about precipitation, snowpack, and winter weather odds.</p><a href="super_el_nino_colorado.html">Read article →</a></article>'
     )
 
-    index_html = page_template(
-        SITE_TITLE,
-        f"""
+    def index_page(grid: str) -> str:
+        return page_template(
+            SITE_TITLE,
+            f"""
         <h1>{SITE_TITLE}</h1>
         <p class=\"muted\">Helpful tree care articles, seasonal maintenance tips, and practical advice for Colorado properties.</p>
         <a class=\"seasonal-promo\" href=\"../contact/index.html\" aria-label=\"Request a quote for seasonal tree health services\"><img src=\"../assets/images/seasonal/american-tree-health-update.png\" alt=\"Colorado tree health update sale notice\"></a>
-        <div class=\"post-grid\">{''.join(index_items)}</div>
+        <div class=\"post-grid\">{grid}</div>
         """,
-        current_page="blog",
-    )
-    (BLOG_DIR / "index.html").write_text(index_html, encoding="utf-8")
+            current_page="blog",
+        )
+
+    (BLOG_DIR / "index.html").write_text(index_page(''.join(index_items)), encoding="utf-8")
+    # The live /blog/ index is rendered by Jekyll from site.posts, which leaves out future-dated
+    # posts, so scheduled posts appear on the index the day they publish.
     (ROOT / "journal-index.html").write_text(
-        f"---\npermalink: /blog/\n---\n{index_html}",
+        f"---\npermalink: /blog/\n---\n{index_page(LIQUID_POST_GRID)}",
         encoding="utf-8",
     )
 
