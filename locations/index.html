@@ -5,11 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Service Areas | American Tree Colorado</title>
     <link rel="canonical" href="https://americantreeserviceco.com/locations/">
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/assets/css/design-system.css?v=20261023">
     <link rel="stylesheet" href="/assets/css/halloween-theme.css">
     <link rel="stylesheet" href="/assets/css/november-theme.css">
     <script src="/assets/js/halloween-theme.js" defer></script>
     <script src="/assets/js/november-theme.js" defer></script>
+    <script src="/assets/js/nav-toggle.js" defer></script>
     <script src="/assets/js/severe-alerts.js" defer></script>
 </head>
 <!-- Google tag (gtag.js) -->
@@ -21,70 +22,81 @@
 
   gtag('config', 'G-JTRR29NY4W');
 </script>
-<body class="bg-slate-50 text-slate-800">
-    <nav class="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between">
-        <a href="../index.html" class="flex items-center gap-3 text-2xl font-bold text-green-800">
-            <img src="../assets/images/optimized/AmericanTree_Logo_RGB-gbp.webp" alt="American Tree Colorado" width="88" height="88">
-        </a>
-        <a href="../contact/index.html" class="bg-green-700 text-white px-5 py-2.5 rounded-full font-semibold">Request a Quote</a>
-    </nav>
-
-    <header class="bg-gradient-to-r from-green-900 to-green-700 text-white py-20">
-        <div class="max-w-5xl mx-auto px-6 text-center">
-            <p class="uppercase tracking-[0.2em] text-sm font-semibold text-green-100 mb-4">Service Areas</p>
-            <h1 class="text-4xl md:text-6xl font-extrabold mb-6">Tree Care Across the Front Range</h1>
-            <p class="max-w-3xl mx-auto text-lg md:text-xl text-green-50 leading-relaxed">
-                From Arvada to Lakewood, we provide expert tree services for homeowners and businesses throughout the Denver metro area.
-            </p>
+<body>
+    <header class="site-header">
+        <div class="container">
+            <a href="../index.html" class="brand" aria-label="American Tree Colorado home"><img src="../assets/images/optimized/AmericanTree_Logo_RGB-gbp.webp" alt="American Tree Colorado"></a>
+            <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false">Menu</button>
+            <nav class="nav" aria-label="Main navigation">
+                <a href="../index.html">Home</a>
+                <a href="../about/index.html">About</a>
+                <a href="../services/index.html">Services</a>
+                <a href="../locations/index.html" class="active">Locations</a>
+                <a href="../contact/index.html">Contact</a>
+            </nav>
+            <a class="header-cta" href="../contact/index.html">Request a Quote</a>
         </div>
     </header>
 
-    <section class="max-w-6xl mx-auto px-6 pt-12">
-        <div class="mx-auto max-w-4xl relative">
-            <a href="../contact/index.html" class="group relative block overflow-hidden rounded-[28px] shadow-[0_18px_40px_rgba(15,23,42,0.14)] transition-transform duration-200 hover:-translate-y-0.5 hover:shadow-[0_22px_50px_rgba(15,23,42,0.18)]">
-                <div class="absolute left-4 bottom-4 z-10 border-2 border-[#1f2a1d] bg-[#f7b52a] px-4 py-2 text-center text-[#152118] font-black uppercase tracking-[0.12em] text-[10px] sm:text-xs shadow-lg" style="clip-path: polygon(0 0, 100% 0, 100% 84%, 92% 100%, 0 100%);">
-                    <span class="block">Schedule a</span>
-                    <span class="block text-lg sm:text-xl">Free Estimate</span>
+    <main>
+        <section class="page-banner">
+            <div class="container--narrow">
+                <p class="banner-eyebrow">Service Areas</p>
+                <h1 class="banner-title">Tree Care Across the Front Range</h1>
+                <p class="banner-lead">From Arvada to Lakewood, we provide expert tree services for homeowners and businesses throughout the Denver metro area.</p>
+            </div>
+        </section>
+
+        <section class="section section--tight" style="padding-bottom:0">
+            <div class="container">
+                <a href="../contact/index.html" class="promo-card">
+                    <span class="promo-stamp"><span>Schedule a</span><strong>Free Estimate</strong></span>
+                    <img src="../assets/images/seasonal/american-tree-seasonal-fall-ghost.webp" alt="Colorado fall tree health promotion">
+                </a>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="container">
+                <div class="card-grid">
+                <a href="./arvada/index.html" class="service-card">
+                    <h3>Arvada</h3>
+                    <p>Tree removal, pruning, trimming, stump grinding, and local tree care support.</p>
+                </a>
+                <a href="./boulder/index.html" class="service-card">
+                    <h3>Boulder</h3>
+                    <p>Professional arborist care for residential and commercial landscapes.</p>
+                </a>
+                <a href="./denver/index.html" class="service-card">
+                    <h3>Denver</h3>
+                    <p>Reliable tree care services for homes, properties, and city neighborhoods.</p>
+                </a>
+                <a href="./golden/index.html" class="service-card">
+                    <h3>Golden</h3>
+                    <p>Expert tree service solutions tailored to the Golden foothills and surrounding areas.</p>
+                </a>
+                <a href="./lakewood/index.html" class="service-card">
+                    <h3>Lakewood</h3>
+                    <p>Trusted local tree service for pruning, removals, and property maintenance.</p>
+                </a>
+                <a href="./wheat-ridge/index.html" class="service-card">
+                    <h3>Wheat Ridge</h3>
+                    <p>Mature canopy care, fruit tree pruning, removals, and plant health support.</p>
+                </a>
                 </div>
-
-                <img src="../assets/images/seasonal/american-tree-seasonal-fall-ghost.webp" alt="Colorado fall tree health promotion" class="block w-full h-auto rounded-[28px]">
-            </a>
-        </div>
-    </section>
-
-    <main class="max-w-6xl mx-auto px-6 py-16">
-        <div class="grid md:grid-cols-2 xl:grid-cols-3 gap-8">
-            <a href="./arvada/index.html" class="block bg-white rounded-2xl border border-slate-200 shadow-sm p-6 hover:shadow-md transition">
-                <h2 class="text-2xl font-bold text-green-800 mb-2">Arvada</h2>
-                <p class="text-slate-600">Tree removal, pruning, trimming, stump grinding, and local tree care support.</p>
-            </a>
-            <a href="./boulder/index.html" class="block bg-white rounded-2xl border border-slate-200 shadow-sm p-6 hover:shadow-md transition">
-                <h2 class="text-2xl font-bold text-green-800 mb-2">Boulder</h2>
-                <p class="text-slate-600">Professional arborist care for residential and commercial landscapes.</p>
-            </a>
-            <a href="./denver/index.html" class="block bg-white rounded-2xl border border-slate-200 shadow-sm p-6 hover:shadow-md transition">
-                <h2 class="text-2xl font-bold text-green-800 mb-2">Denver</h2>
-                <p class="text-slate-600">Reliable tree care services for homes, properties, and city neighborhoods.</p>
-            </a>
-            <a href="./golden/index.html" class="block bg-white rounded-2xl border border-slate-200 shadow-sm p-6 hover:shadow-md transition">
-                <h2 class="text-2xl font-bold text-green-800 mb-2">Golden</h2>
-                <p class="text-slate-600">Expert tree service solutions tailored to the Golden foothills and surrounding areas.</p>
-            </a>
-            <a href="./lakewood/index.html" class="block bg-white rounded-2xl border border-slate-200 shadow-sm p-6 hover:shadow-md transition">
-                <h2 class="text-2xl font-bold text-green-800 mb-2">Lakewood</h2>
-                <p class="text-slate-600">Trusted local tree service for pruning, removals, and property maintenance.</p>
-            </a>
-            <a href="./wheat-ridge/index.html" class="block bg-white rounded-2xl border border-slate-200 shadow-sm p-6 hover:shadow-md transition">
-                <h2 class="text-2xl font-bold text-green-800 mb-2">Wheat Ridge</h2>
-                <p class="text-slate-600">Mature canopy care, fruit tree pruning, removals, and plant health support.</p>
-            </a>
-        </div>
+            </div>
+        </section>
     </main>
-
-    <footer class="bg-slate-950 text-slate-300 py-10 px-6">
-        <div class="max-w-6xl mx-auto text-center">
-            <p class="text-white font-semibold">American Tree Colorado</p>
-            <p class="mt-2">Serving Colorado communities with dependable tree care.</p>
+    <footer class="site-footer">
+        <div class="container">
+            <div><strong>American Tree Colorado</strong><div>Colorado tree care for homes and businesses</div></div>
+            <div class="footer-links">
+                <a href="../index.html">Home</a>
+                <a href="../about/index.html">About</a>
+                <a href="../services/index.html">Services</a>
+                <a href="../locations/index.html">Locations</a>
+                <a href="../contact/index.html">Contact</a>
+            </div>
         </div>
     </footer>
     <script> window.$zoho = window.$zoho || {}; $zoho.salesiq = $zoho.salesiq || { ready: function(){} } </script>

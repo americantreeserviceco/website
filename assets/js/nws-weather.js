@@ -112,7 +112,7 @@
   }
 
   function icon(url) {
-    var img = el('img', 'h-14 w-14 rounded-full');
+    var img = el('img', 'weather-icon');
     if (url) img.src = url;
     img.alt = '';
     img.loading = 'lazy';
@@ -133,25 +133,25 @@
   }
 
   function render(root, lat, lon, data) {
-    var wrap = el('div', 'bg-white border border-slate-200 rounded-2xl shadow-sm p-6 md:p-8');
+    var wrap = el('div', 'weather');
 
     data.alerts.slice(0, 3).forEach(function (a) {
-      var banner = el('div', 'mb-5 rounded-xl border border-amber-300 bg-amber-50 px-4 py-3 text-amber-900');
+      var banner = el('div', 'weather-alert');
       banner.setAttribute('role', 'alert');
-      banner.appendChild(el('p', 'font-bold', a.event));
-      if (a.headline) banner.appendChild(el('p', 'text-sm', a.headline));
+      banner.appendChild(el('p', 'weather-alert-title', a.event));
+      if (a.headline) banner.appendChild(el('p', 'weather-alert-text', a.headline));
       wrap.appendChild(banner);
     });
 
     var cur = data.current;
-    var top = el('div', 'flex flex-wrap items-center gap-5 mb-6');
+    var top = el('div', 'weather-now');
     top.appendChild(el('p', 'sr-only', 'Current conditions'));
     top.appendChild(icon(cur.icon));
     var temp = el('div');
-    temp.appendChild(el('p', 'text-5xl font-extrabold text-green-900', cur.temp + '°F'));
-    temp.appendChild(el('p', 'text-slate-600', cur.desc));
+    temp.appendChild(el('p', 'weather-temp', cur.temp + '°F'));
+    temp.appendChild(el('p', 'weather-desc', cur.desc));
     top.appendChild(temp);
-    var facts = el('ul', 'text-slate-600 md:ml-auto space-y-1');
+    var facts = el('ul', 'weather-facts');
     if (cur.feelsLike != null && cur.feelsLike !== cur.temp) facts.appendChild(el('li', null, 'Feels like ' + cur.feelsLike + '°F'));
     if (cur.wind) facts.appendChild(el('li', null, 'Wind: ' + cur.wind));
     if (cur.humidity != null) facts.appendChild(el('li', null, 'Humidity: ' + cur.humidity + '%'));
@@ -159,20 +159,20 @@
     top.appendChild(facts);
     wrap.appendChild(top);
 
-    var grid = el('div', 'grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4');
+    var grid = el('div', 'weather-days');
     dayCards(data.daily).forEach(function (c) {
-      var card = el('div', 'rounded-xl bg-green-50 border border-green-100 p-4 text-center');
-      card.appendChild(el('p', 'font-semibold text-green-900', c.period.name));
+      var card = el('div', 'weather-day');
+      card.appendChild(el('p', 'weather-day-name', c.period.name));
       var hi = c.period.temperature + '°';
-      card.appendChild(el('p', 'text-2xl font-bold text-green-800', c.low != null ? hi + ' / ' + c.low + '°' : hi));
-      card.appendChild(el('p', 'text-sm text-slate-600', c.period.shortForecast));
+      card.appendChild(el('p', 'weather-day-temp', c.low != null ? hi + ' / ' + c.low + '°' : hi));
+      card.appendChild(el('p', 'weather-day-desc', c.period.shortForecast));
       grid.appendChild(card);
     });
     wrap.appendChild(grid);
 
-    var credit = el('p', 'mt-5 text-xs text-slate-500');
+    var credit = el('p', 'weather-credit');
     credit.appendChild(document.createTextNode('Data from the '));
-    var link = el('a', 'underline hover:text-green-700', 'National Weather Service');
+    var link = el('a', null, 'National Weather Service');
     link.href = 'https://forecast.weather.gov/MapClick.php?lat=' + lat + '&lon=' + lon;
     link.target = '_blank';
     link.rel = 'noopener noreferrer';
@@ -185,9 +185,9 @@
   }
 
   function renderError(root, city, lat, lon) {
-    var box = el('div', 'bg-white border border-slate-200 rounded-2xl p-6 text-center text-slate-600');
+    var box = el('div', 'weather-error');
     box.appendChild(document.createTextNode('Live weather is unavailable right now. '));
-    var link = el('a', 'text-green-700 font-semibold hover:underline', 'View the ' + city + ' forecast at weather.gov');
+    var link = el('a', null, 'View the ' + city + ' forecast at weather.gov');
     link.href = 'https://forecast.weather.gov/MapClick.php?lat=' + lat + '&lon=' + lon;
     link.target = '_blank';
     link.rel = 'noopener noreferrer';
@@ -199,7 +199,7 @@
     var lat = root.getAttribute('data-lat');
     var lon = root.getAttribute('data-lon');
     var city = root.getAttribute('data-city') || 'your area';
-    root.appendChild(el('p', 'text-center text-slate-500', 'Loading ' + city + ' weather…'));
+    root.appendChild(el('p', 'weather-loading', 'Loading ' + city + ' weather…'));
     load(lat, lon)
       .then(function (data) { render(root, lat, lon, data); })
       .catch(function () { renderError(root, city, lat, lon); });
