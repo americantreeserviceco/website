@@ -5,12 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>American Tree Colorado - Arvada, CO</title>
     <meta name="description" content="Get the best tree care services in Arvada, CO. Our certified arborists provide tree removal, pruning, planting, and more.">
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/assets/css/design-system.css?v=20261023">
     <link rel="stylesheet" href="/assets/css/halloween-theme.css">
     <link rel="stylesheet" href="/assets/css/november-theme.css">
     <script src="/assets/js/halloween-theme.js" defer></script>
     <script src="/assets/js/november-theme.js" defer></script>
-    <script src="/assets/js/nws-weather.js" defer></script>
+    <script src="/assets/js/nav-toggle.js" defer></script>
+    <script src="/assets/js/nws-weather.js?v=20261023" defer></script>
 </head>
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-JTRR29NY4W"></script>
@@ -21,165 +22,156 @@
 
   gtag('config', 'G-JTRR29NY4W');
 </script>
-<body class="bg-slate-50 text-slate-800 antialiased">
-    <nav class="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between gap-4 flex-wrap">
-        <a href="../../index.html" class="flex items-center gap-3 text-2xl font-bold text-green-800">
-            <img src="../../assets/images/optimized/AmericanTree_Logo_RGB-gbp.webp" alt="American Tree Colorado" width="88" height="88">
-        </a>
-        <div class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-700">
-            <a href="../../index.html" class="hover:text-green-700">Home</a>
-            <a href="../../about/index.html" class="hover:text-green-700">About</a>
-            <a href="../../services/index.html" class="hover:text-green-700">Services</a>
-            <a href="../../contact/index.html" class="hover:text-green-700">Contact</a>
-        </div>
-        <a href="tel:3034566898" class="bg-green-700 text-white px-5 py-2.5 rounded-full font-semibold hover:bg-green-800 transition">Call Now</a>
-    </nav>
-
-    <header class="relative isolate overflow-hidden py-20 text-white">
-        <img src="../../assets/images/optimized/cta-strip.webp" alt="Tree care project from the American Tree Colorado portfolio" class="absolute inset-0 h-full w-full object-cover">
-        <div class="absolute inset-0 bg-green-900/80"></div>
-        <div class="relative max-w-5xl mx-auto px-6 text-center">
-            <p class="text-green-100 uppercase tracking-[0.2em] text-sm font-semibold mb-4">Arvada, Colorado</p>
-            <h1 class="text-4xl md:text-6xl font-extrabold mb-6">American Tree Colorado - Arvada, CO</h1>
-            <p class="max-w-3xl mx-auto text-lg md:text-xl text-green-50 leading-relaxed">
-                We are dedicated to providing top-notch tree care services to the residents and businesses of Arvada, CO. Our team of certified arborists is passionate about keeping your trees healthy, beautiful, and safe.
-            </p>
+<body>
+    <header class="site-header">
+        <div class="container">
+            <a href="../../index.html" class="brand" aria-label="American Tree Colorado home"><img src="../../assets/images/optimized/AmericanTree_Logo_RGB-gbp.webp" alt="American Tree Colorado"></a>
+            <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false">Menu</button>
+            <nav class="nav" aria-label="Main navigation">
+                <a href="../../index.html">Home</a>
+                <a href="../../about/index.html">About</a>
+                <a href="../../services/index.html">Services</a>
+                <a href="../../locations/index.html" class="active">Locations</a>
+                <a href="../../contact/index.html">Contact</a>
+            </nav>
+            <a class="header-cta" href="../../contact/index.html">Request a Quote</a>
         </div>
     </header>
 
     <main>
-        <section class="py-12 px-6" aria-labelledby="weather-heading">
-            <div class="max-w-6xl mx-auto">
-                <div class="bg-green-50 border border-green-100 rounded-3xl shadow-sm p-6 md:p-10">
-                    <h2 id="weather-heading" class="text-3xl font-bold text-green-900 mb-2 text-center">Arvada Weather</h2>
-                    <p class="text-center text-slate-600 mb-6">Check conditions before you schedule tree work &mdash; high winds, snow, and storms affect safety.</p>
+        <header class="page-hero">
+            <img class="page-hero-media" src="../../assets/images/optimized/cta-strip.webp" alt="Tree care project from the American Tree Colorado portfolio">
+            <div class="page-hero-shade"></div>
+            <div class="container--narrow">
+                <p class="banner-eyebrow">Arvada, Colorado</p>
+                <h1 class="banner-title">American Tree Colorado - Arvada, CO</h1>
+                <p class="banner-lead">We are dedicated to providing top-notch tree care services to the residents and businesses of Arvada, CO. Our team of certified arborists is passionate about keeping your trees healthy, beautiful, and safe.</p>
+            </div>
+        </header>
+        <section class="section--tight" aria-labelledby="weather-heading">
+            <div class="container">
+                <div class="panel">
+                    <h2 id="weather-heading">Arvada Weather</h2>
+                    <p class="panel-intro">Check conditions before you schedule tree work — high winds, snow, and storms affect safety.</p>
                     <div data-nws-weather data-lat="39.8028" data-lon="-105.0875" data-city="Arvada" aria-live="polite"></div>
                 </div>
             </div>
         </section>
-        <section class="py-16 px-6">
-            <div class="max-w-6xl mx-auto">
-                <div class="text-center mb-12">
-                    <h2 class="text-3xl md:text-4xl font-bold text-green-900">Our Services</h2>
+        <section class="section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Our Services</h2>
                 </div>
-                <div class="grid md:grid-cols-2 xl:grid-cols-3 gap-8">
-                    <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
-                        <svg class="w-11 h-11 p-2.5 mb-3 rounded-full bg-green-100 text-green-700" width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m17 14 3 3.3a1 1 0 0 1-.7 1.7H4.7a1 1 0 0 1-.7-1.7L7 14h-.3a1 1 0 0 1-.7-1.7L9 9h-.2A1 1 0 0 1 8 7.3L12 3l4 4.3a1 1 0 0 1-.8 1.7H15l3 3.3a1 1 0 0 1-.7 1.7H17Z"/><path d="M12 22v-3"/></svg>
-                        <h3 class="text-xl font-bold text-green-800 mb-2"><a href="../../services/tree-removal/index.html" class="hover:underline">Tree Removal</a></h3>
-                        <p class="text-slate-600">Professional tree removal for hazards, storm damage, and property improvement.</p>
-                        <a href="../../services/tree-removal/index.html" class="inline-block mt-3 font-semibold text-green-700 hover:underline">Learn more &rarr;</a>
+                <div class="card-grid">
+                    <article class="service-card">
+                        <svg class="svc-icon svc-icon--lg" viewBox="0 0 24 24" aria-hidden="true"><path d="m17 14 3 3.3a1 1 0 0 1-.7 1.7H4.7a1 1 0 0 1-.7-1.7L7 14h-.3a1 1 0 0 1-.7-1.7L9 9h-.2A1 1 0 0 1 8 7.3L12 3l4 4.3a1 1 0 0 1-.8 1.7H15l3 3.3a1 1 0 0 1-.7 1.7H17Z"></path><path d="M12 22v-3"></path></svg>
+                        <h3><a href="../../services/tree-removal/index.html">Tree Removal</a></h3>
+                        <p>Professional tree removal for hazards, storm damage, and property improvement.</p>
+                        <a class="link" href="../../services/tree-removal/index.html">Learn more &rarr;</a>
+                    </article>
+                    <article class="service-card">
+                        <svg class="svc-icon svc-icon--lg" viewBox="0 0 24 24" aria-hidden="true"><circle cx="6" cy="6" r="3"></circle><path d="M8.12 8.12 12 12"></path><path d="M20 4 8.12 15.88"></path><circle cx="6" cy="18" r="3"></circle><path d="M14.8 14.8 20 20"></path></svg>
+                        <h3><a href="../../services/tree-trimming-and-pruning/index.html">Pruning &amp; Trimming</a></h3>
+                        <p>Shape and maintain healthy growth for residential and commercial trees.</p>
+                        <a class="link" href="../../services/tree-trimming-and-pruning/index.html">Learn more &rarr;</a>
+                    </article>
+                    <article class="service-card">
+                        <svg class="svc-icon svc-icon--lg" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="5"></circle><circle cx="12" cy="12" r="1"></circle></svg>
+                        <h3><a href="../../services/stump-grinding/index.html">Stump Grinding</a></h3>
+                        <p>Remove old stumps cleanly to restore your landscape and improve safety.</p>
+                        <a class="link" href="../../services/stump-grinding/index.html">Learn more &rarr;</a>
+                    </article>
+                    <article class="service-card">
+                        <svg class="svc-icon svc-icon--lg" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 20h10"></path><path d="M10 20c5.5-2.5.8-6.4 3-10"></path><path d="M9.5 9.4c1.1.8 1.8 2.2 2.3 3.7-2 .4-3.5.4-4.8-.3-1.2-.6-2.3-1.9-3-4.2 2.8-.5 4.4 0 5.5.8z"></path><path d="M14.1 6a7 7 0 0 0-1.1 4c1.9-.1 3.3-.6 4.3-1.4 1-1 1.6-2.3 1.7-4.6-2.7.1-4 1-4.9 2z"></path></svg>
+                        <h3><a href="../../services/index.html">Tree Planting</a></h3>
+                        <p>Expert selection and planting for the right fit in your property.</p>
+                        <a class="link" href="../../services/index.html">Learn more &rarr;</a>
+                    </article>
+                    <article class="service-card">
+                        <svg class="svc-icon svc-icon--lg" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22a7 7 0 0 0 7-7c0-2-1-3.9-3-5.5s-3.5-4-4-6.5c-.5 2.5-2 4.9-4 6.5C6 11.1 5 13 5 15a7 7 0 0 0 7 7z"></path></svg>
+                        <h3><a href="../../services/index.html">Irrigation &amp; Fertilization</a></h3>
+                        <p>Develop a routine to ensure long-term growth and tree vitality.</p>
+                        <a class="link" href="../../services/index.html">Learn more &rarr;</a>
+                    </article>
+                    <article class="service-card">
+                        <svg class="svc-icon svc-icon--lg" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"></path><path d="m9 12 2 2 4-4"></path></svg>
+                        <h3><a href="../../services/index.html">Health &amp; Disease Management</a></h3>
+                        <p>Assess and treat issues before they become severe or costly.</p>
+                        <a class="link" href="../../services/index.html">Learn more &rarr;</a>
+                    </article>
+                </div>
+            </div>
+        </section>
+        <section class="section section--white">
+            <div class="container">
+                <div class="split">
+                    <div>
+                        <h2 class="heading-lg">Why Choose Us?</h2>
+                        <ul class="check-list">
+                            <li>Professional &amp; Certified Arborists</li>
+                            <li>Customer Satisfaction Guaranteed</li>
+                            <li>Affordable Pricing</li>
+                            <li>Timely Service</li>
+                            <li>Emergency Tree Services Available</li>
+                        </ul>
                     </div>
-                    <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
-                        <svg class="w-11 h-11 p-2.5 mb-3 rounded-full bg-green-100 text-green-700" width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="6" cy="6" r="3"/><path d="M8.12 8.12 12 12"/><path d="M20 4 8.12 15.88"/><circle cx="6" cy="18" r="3"/><path d="M14.8 14.8 20 20"/></svg>
-                        <h3 class="text-xl font-bold text-green-800 mb-2"><a href="../../services/tree-trimming-and-pruning/index.html" class="hover:underline">Pruning &amp; Trimming</a></h3>
-                        <p class="text-slate-600">Shape and maintain healthy growth for residential and commercial trees.</p>
-                        <a href="../../services/tree-trimming-and-pruning/index.html" class="inline-block mt-3 font-semibold text-green-700 hover:underline">Learn more &rarr;</a>
-                    </div>
-                    <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
-                        <svg class="w-11 h-11 p-2.5 mb-3 rounded-full bg-green-100 text-green-700" width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></svg>
-                        <h3 class="text-xl font-bold text-green-800 mb-2"><a href="../../services/stump-grinding/index.html" class="hover:underline">Stump Grinding</a></h3>
-                        <p class="text-slate-600">Remove old stumps cleanly to restore your landscape and improve safety.</p>
-                        <a href="../../services/stump-grinding/index.html" class="inline-block mt-3 font-semibold text-green-700 hover:underline">Learn more &rarr;</a>
-                    </div>
-                    <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
-                        <svg class="w-11 h-11 p-2.5 mb-3 rounded-full bg-green-100 text-green-700" width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 20h10"/><path d="M10 20c5.5-2.5.8-6.4 3-10"/><path d="M9.5 9.4c1.1.8 1.8 2.2 2.3 3.7-2 .4-3.5.4-4.8-.3-1.2-.6-2.3-1.9-3-4.2 2.8-.5 4.4 0 5.5.8z"/><path d="M14.1 6a7 7 0 0 0-1.1 4c1.9-.1 3.3-.6 4.3-1.4 1-1 1.6-2.3 1.7-4.6-2.7.1-4 1-4.9 2z"/></svg>
-                        <h3 class="text-xl font-bold text-green-800 mb-2"><a href="../../services/index.html" class="hover:underline">Tree Planting</a></h3>
-                        <p class="text-slate-600">Expert selection and planting for the right fit in your property.</p>
-                        <a href="../../services/index.html" class="inline-block mt-3 font-semibold text-green-700 hover:underline">Learn more &rarr;</a>
-                    </div>
-                    <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
-                        <svg class="w-11 h-11 p-2.5 mb-3 rounded-full bg-green-100 text-green-700" width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22a7 7 0 0 0 7-7c0-2-1-3.9-3-5.5s-3.5-4-4-6.5c-.5 2.5-2 4.9-4 6.5C6 11.1 5 13 5 15a7 7 0 0 0 7 7z"/></svg>
-                        <h3 class="text-xl font-bold text-green-800 mb-2"><a href="../../services/index.html" class="hover:underline">Irrigation &amp; Fertilization</a></h3>
-                        <p class="text-slate-600">Develop a routine to ensure long-term growth and tree vitality.</p>
-                        <a href="../../services/index.html" class="inline-block mt-3 font-semibold text-green-700 hover:underline">Learn more &rarr;</a>
-                    </div>
-                    <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
-                        <svg class="w-11 h-11 p-2.5 mb-3 rounded-full bg-green-100 text-green-700" width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg>
-                        <h3 class="text-xl font-bold text-green-800 mb-2"><a href="../../services/index.html" class="hover:underline">Health &amp; Disease Management</a></h3>
-                        <p class="text-slate-600">Assess and treat issues before they become severe or costly.</p>
-                        <a href="../../services/index.html" class="inline-block mt-3 font-semibold text-green-700 hover:underline">Learn more &rarr;</a>
+                    <div class="info-card">
+                        <h2 class="heading-lg">Location &amp; Contact Information</h2>
+                        <ul class="detail-list">
+                            <li><span class="label">Address:</span><span>Golden, Colorado 80401 USA</span></li>
+                            <li><span class="label">Phone:</span><span>(303) 456-6898</span></li>
+                            <li><span class="label">Email:</span><span>mandi@americantreecolorado.com</span></li>
+                            <li><span class="label">Hours:</span><span>Monday - Friday: 8:00 AM - 5:00 PM</span></li>
+                            <li><span class="label">Weekend:</span><span>Saturday &amp; Sunday: Closed</span></li>
+                        </ul>
                     </div>
                 </div>
             </div>
         </section>
-
-        <section class="bg-white py-16 px-6">
-            <div class="max-w-6xl mx-auto grid lg:grid-cols-2 gap-12 items-start">
-                <div>
-                    <h2 class="text-3xl font-bold text-green-900 mb-6">Why Choose Us?</h2>
-                    <ul class="space-y-4 text-lg text-slate-700">
-                        <li><span class="font-bold text-green-800">•</span> Professional &amp; Certified Arborists</li>
-                        <li><span class="font-bold text-green-800">•</span> Customer Satisfaction Guaranteed</li>
-                        <li><span class="font-bold text-green-800">•</span> Affordable Pricing</li>
-                        <li><span class="font-bold text-green-800">•</span> Timely Service</li>
-                        <li><span class="font-bold text-green-800">•</span> Emergency Tree Services Available</li>
-                    </ul>
-                </div>
-
-                <div class="bg-green-50 border border-green-100 rounded-2xl p-8">
-                    <h2 class="text-3xl font-bold text-green-900 mb-6">Location &amp; Contact Information</h2>
-                    <ul class="space-y-3 text-slate-700 text-lg">
-                        <li><span class="font-bold text-green-800">Address:</span> Golden, Colorado 80401 USA</li>
-                        <li><span class="font-bold text-green-800">Phone:</span> (303) 456-6898</li>
-                        <li><span class="font-bold text-green-800">Email:</span> mandi@americantreecolorado.com</li>
-                        <li><span class="font-bold text-green-800">Hours:</span> Monday - Friday: 8:00 AM - 5:00 PM</li>
-                        <li><span class="font-bold text-green-800">Weekend:</span> Saturday &amp; Sunday: Closed</li>
-                    </ul>
-                </div>
+        <section class="cta-banner" style="--cta-image:url(../../assets/images/optimized/cta-strip.webp)">
+            <div class="container">
+                <h2>Get a Quote</h2>
+                <p>Fill out our contact form or give us a call to schedule a consultation and get a quote for your tree service needs.</p>
+                <div class="cta-row"><a class="primary-btn" href="../../contact/index.html">Contact Us</a><a class="secondary-btn" href="tel:3034566898">Call (303) 456-6898</a></div>
             </div>
         </section>
-
-        <section class="py-16 px-6">
-            <div class="max-w-5xl mx-auto">
-                <h2 class="text-3xl md:text-4xl font-bold text-center text-green-900 mb-10">Get a Quote</h2>
-                <div class="bg-white border border-slate-200 rounded-2xl p-8 shadow-sm text-center">
-                    <p class="text-lg text-slate-700 mb-6">Fill out our contact form or give us a call to schedule a consultation and get a quote for your tree service needs.</p>
-                    <div class="flex flex-col sm:flex-row justify-center gap-4">
-                        <a href="../../contact/index.html" class="bg-green-700 text-white px-6 py-3 rounded-full font-semibold hover:bg-green-800 transition">Contact Us</a>
-                        <a href="tel:3034566898" class="border border-green-700 text-green-800 px-6 py-3 rounded-full font-semibold hover:bg-green-50 transition">Call (303) 456-6898</a>
-                    </div>
+        <section class="section">
+            <div class="container--narrow center">
+                <div class="section-header">
+                    <h2>Arvada Service Area</h2>
+                    <p>Serving Arvada and nearby communities.</p>
                 </div>
+                <div class="map-frame">
+                    <iframe src="https://maps.google.com/maps?q=Arvada%2C+CO&z=12&output=embed" title="Arvada, Colorado service area map" height="400" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+                <p style="margin:var(--space-4) 0 0"><a class="text-link" href="https://www.google.com/maps/search/?api=1&query=Arvada%2C%20CO" target="_blank" rel="noopener noreferrer">Open Arvada in Google Maps</a></p>
             </div>
         </section>
-
-        <section class="bg-slate-50 py-16 px-6">
-            <div class="max-w-5xl mx-auto text-center">
-                <h2 class="text-3xl font-bold text-green-900 mb-4">Arvada Service Area</h2>
-                <p class="text-slate-600 mb-8">Serving Arvada and nearby communities.</p>
-                <div class="rounded-2xl overflow-hidden border border-slate-200 shadow-sm">
-                    <iframe src="https://maps.google.com/maps?q=Arvada%2C+CO&z=12&output=embed" title="Arvada, Colorado service area map" width="100%" height="400" style="border:0;" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-                </div>
-                <a class="inline-block mt-5 text-green-700 font-semibold hover:underline" href="https://www.google.com/maps/search/?api=1&amp;query=Arvada%2C%20CO" target="_blank" rel="noopener noreferrer">Open Arvada in Google Maps</a>
-            </div>
-        </section>
-
-        <section class="bg-slate-900 text-white py-16 px-6">
-            <div class="max-w-5xl mx-auto">
-                <h2 class="text-3xl font-bold text-center mb-10">Testimonials</h2>
-                <div class="grid md:grid-cols-2 gap-8">
-                    <blockquote class="bg-slate-800 border border-slate-700 rounded-2xl p-6">
-                        <p class="text-lg italic text-slate-200">“American Tree is awesome, I've used them for all my trees. I also use them for feeding, and insects protection”</p>
-                        <footer class="mt-4 text-green-300">— J. Chambers, Arvada, CO · via Nextdoor</footer>
+        <section class="testimonial-wrap">
+            <div class="container">
+                <div class="section-header"><h2>Testimonials</h2></div>
+                <div class="testimonial-grid">
+                    <blockquote class="testimonial">
+                        <p>“American Tree is awesome, I've used them for all my trees. I also use them for feeding, and insects protection”</p>
+                        <footer>— J. Chambers, Arvada, CO · via Nextdoor</footer>
                     </blockquote>
-                    <blockquote class="bg-slate-800 border border-slate-700 rounded-2xl p-6">
-                        <p class="text-lg italic text-slate-200">“American Tree Golden - huge fan! We've had them out 3 times and Troy is great, very reasonable!”</p>
-                        <footer class="mt-4 text-green-300">— K. Kolber, Arvada, CO · via Nextdoor</footer>
+                    <blockquote class="testimonial">
+                        <p>“American Tree Golden - huge fan! We've had them out 3 times and Troy is great, very reasonable!”</p>
+                        <footer>— K. Kolber, Arvada, CO · via Nextdoor</footer>
                     </blockquote>
                 </div>
             </div>
         </section>
     </main>
-
-    <footer class="bg-slate-950 text-slate-300 py-10 px-6">
-        <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4 text-center md:text-left">
-            <div>
-                <p class="text-lg font-semibold text-white">American Tree Colorado</p>
-                <p>Arvada, CO</p>
-            </div>
-            <div class="flex gap-6 text-sm">
-                <a href="../../index.html" class="hover:text-white">Home</a>
-                <a href="../../about/index.html" class="hover:text-white">About</a>
-                <a href="../../contact/index.html" class="hover:text-white">Contact</a>
+    <footer class="site-footer">
+        <div class="container">
+            <div><strong>American Tree Colorado</strong><div>Colorado tree care for homes and businesses</div></div>
+            <div class="footer-links">
+                <a href="../../index.html">Home</a>
+                <a href="../../about/index.html">About</a>
+                <a href="../../services/index.html">Services</a>
+                <a href="../../locations/index.html">Locations</a>
+                <a href="../../contact/index.html">Contact</a>
             </div>
         </div>
     </footer>

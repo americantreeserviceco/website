@@ -5,11 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact Us - American Tree Colorado</title>
     <link rel="canonical" href="https://americantreeserviceco.com/contact/">
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/assets/css/design-system.css?v=20261023">
     <link rel="stylesheet" href="/assets/css/halloween-theme.css">
     <link rel="stylesheet" href="/assets/css/november-theme.css">
     <script src="/assets/js/halloween-theme.js" defer></script>
     <script src="/assets/js/november-theme.js" defer></script>
+    <script src="/assets/js/nav-toggle.js" defer></script>
     <script src="/assets/js/severe-alerts.js" defer></script>
     <script src="/assets/js/contact-autoreply.js" defer></script>
 </head>
@@ -22,146 +23,108 @@
 
   gtag('config', 'G-JTRR29NY4W');
 </script>
-<body class="bg-white text-gray-900 antialiased">
-
-    <!-- Navigation (Consistent with About Page) -->
-    <nav class="flex items-center justify-between px-6 py-4 max-w-7xl mx-auto">
-        <a href="../index.html" aria-label="American Tree Colorado home">
-            <img src="../assets/images/optimized/AmericanTree_Logo_RGB-gbp.webp" alt="American Tree Colorado" class="h-14 w-auto">
-        </a>
-        <div class="hidden md:flex gap-8 font-medium text-gray-600">
-            <a href="../index.html" class="hover:text-green-700 transition">Home</a>
-            <a href="../about/index.html" class="hover:text-green-700 transition">About</a>
-            <a href="../services/index.html" class="hover:text-green-700 transition">Services</a>
-            <a href="index.html" class="text-green-700 border-b-2 border-green-700">Contact</a>
+<body>
+    <header class="site-header">
+        <div class="container">
+            <a href="../index.html" class="brand" aria-label="American Tree Colorado home"><img src="../assets/images/optimized/AmericanTree_Logo_RGB-gbp.webp" alt="American Tree Colorado"></a>
+            <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false">Menu</button>
+            <nav class="nav" aria-label="Main navigation">
+                <a href="../index.html">Home</a>
+                <a href="../about/index.html">About</a>
+                <a href="../services/index.html">Services</a>
+                <a href="../locations/index.html">Locations</a>
+                <a href="../contact/index.html" class="active">Contact</a>
+            </nav>
+            <a class="header-cta" href="#contact-form">Request a Quote</a>
         </div>
-        <a href="tel:3034566898" class="bg-green-700 text-white px-5 py-2 rounded-full font-semibold hover:bg-green-800 transition">
-            Call Now
-        </a>
-    </nav>
+    </header>
 
-    <!-- Hero Section -->
-    <section class="bg-slate-50 py-16 border-b border-gray-100">
-        <div class="max-w-7xl mx-auto px-6 text-center">
-            <h1 class="text-4xl md:text-5xl font-extrabold text-slate-900 mb-4">Get In Touch</h1>
-            <p class="text-lg text-gray-600 max-w-2xl mx-auto">
-                We're here to assist you with any inquiries or requests. Feel free to reach out using the form below, or contact us directly.
-            </p>
-        </div>
-    </section>
-
-    <!-- Main Contact Section -->
-    <section class="py-16 max-w-7xl mx-auto px-6">
-        <div class="grid lg:grid-cols-3 gap-12">
-            
-            <!-- Sidebar: Contact Info & Hours -->
-            <div class="space-y-10">
-                <!-- Contact Details -->
-                <div>
-                    <h2 class="text-2xl font-bold text-slate-900 mb-6 flex items-center gap-2">
-                        <span class="text-green-600">📍</span> Contact Information
-                    </h2>
-                    <ul class="space-y-4">
-                        <li class="flex items-start gap-3">
-                            <span class="text-green-700 font-bold">Phone:</span>
-                            <a href="tel:3034566898" class="text-gray-600 hover:text-green-700 transition">(303) 456-6898</a>
-                        </li>
-                        <li class="flex items-start gap-3">
-                            <span class="text-green-700 font-bold">Email:</span>
-                            <a href="mailto:mandi@americantreecolorado.com" class="text-gray-600 hover:text-green-700 transition">mandi@americantreecolorado.com</a>
-                        </li>
-                        <li class="flex items-start gap-3">
-                            <span class="text-green-700 font-bold">Address:</span>
-                            <span class="text-gray-600">Golden, Colorado 80401 USA</span>
-                        </li>
-                    </ul>
-                </div>
-
-                <!-- Hours of Operation -->
-                <div class="p-6 bg-green-50 rounded-2xl border border-green-100">
-                    <h2 class="text-xl font-bold text-green-900 mb-4 flex items-center gap-2">
-                        <span class="text-green-600">⏰</span> Hours of Operation
-                    </h2>
-                    <ul class="space-y-3 text-gray-700">
-                        <li class="flex justify-between">
-                            <span>Mon - Fri</span>
-                            <span class="font-semibold">8:00 AM - 5:00 PM</span>
-                        </li>
-                        <li class="flex justify-between">
-                            <span>Saturday</span>
-                            <span class="font-semibold">9:00 AM - 3:00 PM</span>
-                        </li>
-                        <li class="flex justify-between">
-                            <span>Sunday</span>
-                            <span class="font-semibold text-red-500">Closed</span>
-                        </li>
-                    </ul>
-                </div>
+    <main>
+        <section class="page-banner page-banner--light">
+            <div class="container--narrow">
+                <h1 class="banner-title">Get In Touch</h1>
+                <p class="banner-lead">We're here to assist you with any inquiries or requests. Feel free to reach out using the form below, or contact us directly.</p>
             </div>
+        </section>
 
-            <!-- Main Column: Form & Map -->
-            <div class="lg:col-span-2 space-y-12">
-                <!-- Contact Form -->
-                <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-200">
-                    <h2 class="text-2xl font-bold text-slate-900 mb-2">Send us a Message</h2>
-                    <p class="text-gray-500 mb-8">Fill out the form below and we will get back to you as soon as possible.</p>
-                    
-                    <form action="https://formspree.io/f/maenvddy" method="POST" class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <input type="hidden" name="_subject" value="New website inquiry - American Tree Colorado">
-                        <div class="flex flex-col gap-2">
-                            <label for="name" class="text-sm font-semibold text-gray-700">Name</label>
-                            <input type="text" id="name" name="name" required 
-                                class="px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none transition" 
-                                placeholder="Your full name">
+        <section class="section">
+            <div class="container">
+                <div class="split split--sidebar">
+                    <div class="stack">
+                        <div>
+                            <h2 class="btn-icon" style="font-size:1.6rem"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg> Contact Information</h2>
+                            <ul class="detail-list">
+                                <li><span class="label">Phone:</span><a href="tel:3034566898">(303) 456-6898</a></li>
+                                <li><span class="label">Email:</span><a href="mailto:mandi@americantreecolorado.com">mandi@americantreecolorado.com</a></li>
+                                <li><span class="label">Address:</span><span>Golden, Colorado 80401 USA</span></li>
+                            </ul>
                         </div>
-                        <div class="flex flex-col gap-2">
-                            <label for="email" class="text-sm font-semibold text-gray-700">Email</label>
-                            <input type="email" id="email" name="email" required 
-                                class="px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none transition" 
-                                placeholder="email@example.com">
-                        </div>
-                        <div class="flex flex-col gap-2 md:col-span-2">
-                            <label for="message" class="text-sm font-semibold text-gray-700">Message</label>
-                            <textarea id="message" name="message" rows="4" required 
-                                class="px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none transition" 
-                                placeholder="How can we help you?"></textarea>
-                        </div>
-                        <div class="md:col-span-2">
-                            <button type="submit" class="w-full md:w-auto px-8 py-4 bg-green-700 text-white font-bold rounded-lg hover:bg-green-800 transition shadow-lg shadow-green-200">
-                                Send Message
-                            </button>
-                        </div>
-                    </form>
-                </div>
 
-                <!-- Golden service area map -->
-                <div>
-                    <h2 class="text-2xl font-bold text-slate-900 mb-4">Golden Service Area</h2>
-                    <p class="text-gray-600 mb-4">Based in Golden, serving the Denver metro area and nearby foothill communities.</p>
-                    <div class="rounded-2xl overflow-hidden shadow-inner border border-gray-200">
-                    <iframe 
-                        src="https://maps.google.com/maps?q=Golden%2C+CO+80401&z=12&output=embed"
-                        title="Golden, Colorado service area map"
-                        width="100%" 
-                        height="450" 
-                        style="border:0;" 
-                        allowfullscreen="" 
-                        loading="lazy">
-                    </iframe>
+                        <div class="info-card">
+                            <h2 class="btn-icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg> Hours of Operation</h2>
+                            <ul class="hours-list">
+                                <li><span>Mon - Fri</span><span class="time">8:00 AM - 5:00 PM</span></li>
+                                <li><span>Saturday</span><span class="time">9:00 AM - 3:00 PM</span></li>
+                                <li><span>Sunday</span><span class="time">Closed</span></li>
+                            </ul>
+                        </div>
                     </div>
-                    <a class="inline-block mt-4 text-green-700 font-semibold hover:underline" href="https://www.google.com/maps/search/?api=1&amp;query=Golden%2C%20CO%2080401" target="_blank" rel="noopener noreferrer">Open Golden in Google Maps</a>
+
+                    <div class="stack">
+                        <div class="form-card" id="contact-form">
+                            <h2>Send us a Message</h2>
+                            <p class="form-intro">Fill out the form below and we will get back to you as soon as possible.</p>
+                            <form action="https://formspree.io/f/maenvddy" method="POST" class="field-grid">
+                                <input type="hidden" name="_subject" value="New website inquiry - American Tree Colorado">
+                                <div class="field">
+                                    <label for="name">Name</label>
+                                    <input type="text" id="name" name="name" required placeholder="Your full name">
+                                </div>
+                                <div class="field">
+                                    <label for="email">Email</label>
+                                    <input type="email" id="email" name="email" required placeholder="email@example.com">
+                                </div>
+                                <div class="field field--full">
+                                    <label for="message">Message</label>
+                                    <textarea id="message" name="message" rows="4" required placeholder="How can we help you?"></textarea>
+                                </div>
+                                <div class="field--full">
+                                    <button type="submit" class="primary-btn">Send Message</button>
+                                </div>
+                            </form>
+                        </div>
+
+                        <div>
+                            <h2 style="font-size:1.6rem">Golden Service Area</h2>
+                            <p>Based in Golden, serving the Denver metro area and nearby foothill communities.</p>
+                            <div class="map-frame">
+                                <iframe src="https://maps.google.com/maps?q=Golden%2C+CO+80401&amp;z=12&amp;output=embed" title="Golden, Colorado service area map" height="450" allowfullscreen="" loading="lazy"></iframe>
+                            </div>
+                            <p style="margin:var(--space-4) 0 0"><a class="text-link" href="https://www.google.com/maps/search/?api=1&amp;query=Golden%2C%20CO%2080401" target="_blank" rel="noopener noreferrer">Open Golden in Google Maps</a></p>
+                        </div>
+                    </div>
                 </div>
             </div>
+        </section>
+
+        <section class="closing-note">
+            <div class="container">
+                <p>Thank you for choosing American Tree Colorado! We look forward to serving you.</p>
+            </div>
+        </section>
+    </main>
+    <footer class="site-footer">
+        <div class="container">
+            <div><strong>American Tree Colorado</strong><div>Colorado tree care for homes and businesses</div></div>
+            <div class="footer-links">
+                <a href="../index.html">Home</a>
+                <a href="../about/index.html">About</a>
+                <a href="../services/index.html">Services</a>
+                <a href="../locations/index.html">Locations</a>
+                <a href="../contact/index.html">Contact</a>
+            </div>
         </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="py-12 text-center border-t border-gray-100">
-        <p class="text-gray-600 italic">
-            Thank you for choosing American Tree Colorado! We look forward to serving you.
-        </p>
     </footer>
-
     <script>window.$zoho=window.$zoho || {};$zoho.salesiq=$zoho.salesiq||{ready:function(){}}</script><script id="zsiqscript" src="https://salesiq.zohopublic.com/widget?wc=siq25524f251a528774cdc8a86e67797f365ecbe601c430d1dcdbc98fd02ca5df9a" defer></script>
 </body>
 </html>
