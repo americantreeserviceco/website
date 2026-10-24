@@ -32,7 +32,7 @@ ensuring your trees are healthy, beautiful, and safe.
 - **Customer Satisfaction Guaranteed**
 - **Affordable Pricing**
 - **Timely Service**
-- **Emergency Tree Services Available**
+- **24/7 Emergency Tree Services Available**
 
 ## Location & Contact Information
 
@@ -40,7 +40,9 @@ ensuring your trees are healthy, beautiful, and safe.
 - **Phone:** (303) 456-6898
 - **Email:** info@americantreeserviceco.com
 - **Hours:** Monday - Friday: 8:00 AM - 5:00 PM  
-  Saturday & Sunday: Closed
+  Saturday: 9:00 AM - 3:00 PM  
+  Sunday: Closed
+- **Emergency:** 24-hour emergency service
 
 ## Get a Quote
 

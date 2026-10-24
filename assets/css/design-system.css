@@ -120,7 +120,7 @@ a.service-card:hover{transform:translateY(-2px)}
 .check-list li::before{content:"";position:absolute;left:.45rem;top:.3rem;width:.45rem;height:.9rem;border:solid var(--green-600);border-width:0 2px 2px 0;transform:rotate(45deg)}
 .check-list strong{color:var(--slate-900)}
 .detail-list li{display:flex;gap:var(--space-3);margin:0 0 var(--space-3);color:var(--slate-700)}
-.detail-list .label{flex:none;min-width:4.5rem;font-weight:700;color:var(--forest-800)}
+.detail-list .label{flex:none;min-width:5.5rem;font-weight:700;color:var(--forest-800)}
 .detail-list a:hover{text-decoration:underline}
 .hours-list li{display:flex;justify-content:space-between;gap:var(--space-4);padding:.35rem 0;color:var(--slate-700)}
 .hours-list .time{font-weight:600;color:var(--slate-900)}
