@@ -24,7 +24,7 @@ JEKYLL_REPO_PATH = os.environ.get(
 
 ### 2. Set GIT_BRANCH when your deployment branch is not 'main'
 GIT_BRANCH = os.environ.get("GIT_BRANCH", "main")
-OLLAMA_MODEL = os.environ.get("OLLAMA_MODEL", "adept-blogger")
+OLLAMA_MODEL = os.environ.get("OLLAMA_MODEL", "blog-expert")
 
 ### ==========================================
 
