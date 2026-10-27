@@ -46,6 +46,48 @@ def run_git_command(commands, working_dir):
         raise
 
 
+def make_description(markdown):
+    """Create bounded metadata text from the first prose paragraph."""
+    for paragraph in re.split(r"\n\s*\n", markdown):
+        paragraph = paragraph.strip()
+        if not paragraph or re.match(r"^#{1,6}\s+", paragraph):
+            continue
+        text = paragraph
+        text = re.sub(r"^\s*(?:[-*+]|\d+\.)\s+", "", text)
+        text = re.sub(r"!\[([^\]]*)\]\([^)]*\)", r"\1", text)
+        text = re.sub(r"\[([^\]]+)\]\([^)]*\)", r"\1", text)
+        text = re.sub(r"[`*_>#]", "", text)
+        text = re.sub(r"\s+", " ", text).strip()
+        if text:
+            if len(text) > 160:
+                shortened = text[:157].rsplit(" ", 1)[0].rstrip(" ,;:")
+                return f"{shortened}..."
+            return text
+    return ""
+
+
+def validate_post(post_path):
+    """Run source and rendered-site checks before allowing the post to publish."""
+    validator = os.path.join(
+        os.path.dirname(os.path.abspath(__file__)),
+        "..",
+        "scripts",
+        "validate_blog_posts.py",
+    )
+    subprocess.run(
+        [
+            sys.executable,
+            validator,
+            "--root",
+            JEKYLL_REPO_PATH,
+            "--candidate",
+            post_path,
+        ],
+        cwd=JEKYLL_REPO_PATH,
+        check=True,
+    )
+
+
 def create_and_push_blog_post(topic_prompt):
     """Generate a blog post via Ollama and push it to the local Jekyll repo."""
     if not topic_prompt.strip():
@@ -72,7 +114,13 @@ def create_and_push_blog_post(topic_prompt):
     try:
         response = ollama.generate(
             model=OLLAMA_MODEL,
-            prompt=f"Write a comprehensive blog post about: {topic_prompt}",
+            prompt=(
+                f"Write a useful, accurate blog post about: {topic_prompt}\n"
+                "Return only the article body in Markdown. Do not include YAML front matter, "
+                "title options, a meta description, table of contents, SEO notes, or social posts. "
+                "Start with an introductory paragraph; use level-two headings for sections. "
+                "Avoid unsupported guarantees and unsafe do-it-yourself tree-work instructions."
+            ),
         )
     except Exception as exc:
         print(f"❌ Failed to reach Ollama. Is the server running? Error: {exc}")
@@ -112,9 +160,15 @@ def create_and_push_blog_post(topic_prompt):
         print(f"❌ Refusing to overwrite an existing post: {full_path}")
         return
 
+    description = make_description(post_content)
+    if not description:
+        print("❌ Could not create a description from the generated article. Nothing was saved.")
+        return
+
     jekyll_post = f"""---
 title: {json.dumps(title, ensure_ascii=False)}
 date: {today_date}
+description: {json.dumps(description, ensure_ascii=False)}
 ---
 
 {post_content}
@@ -124,6 +178,16 @@ date: {today_date}
     with open(full_path, "w", encoding="utf-8") as f:
         f.write(jekyll_post)
     print(f"📝 Step 2: Post successfully generated and written to local file: {filename}")
+
+    try:
+        print("🔎 Validating all blog posts and building the rendered site before publishing...")
+        validate_post(full_path)
+    except (OSError, subprocess.CalledProcessError) as exc:
+        print(
+            f"\n❌ Blog validation failed; the post was not staged or published: {exc}. "
+            f"Review the draft at {full_path}."
+        )
+        return
 
     # Run the Git upload pipeline
     print("🚀 Step 3: Pushing new content live to GitHub Pages...")
