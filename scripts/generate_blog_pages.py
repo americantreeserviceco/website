@@ -14,9 +14,16 @@ BLOG_DIR = ROOT / "blog"
 SITE_TITLE = "American Tree Colorado Blog"
 LIQUID_POST_GRID = (
     "{% for post in site.posts %}"
-    "<article class=\"post-card\"><h3><a href=\"{{ post.url }}\">{{ post.title | escape }}</a></h3>"
-    "<p class=\"muted\">{{ post.description | default: 'Read the latest tree care advice and seasonal tips.' | escape }}</p>"
-    "<a href=\"{{ post.url }}\">Read article →</a></article>"
+    "<article class=\"post-card\"><div class=\"post-card-inner\">"
+    "<div class=\"post-card-face post-card-front\"><p class=\"post-card-kicker\">Tree care guide</p>"
+    "<h2>{{ post.title | escape }}</h2>"
+    "<p class=\"muted\">{{ post.description | default: 'Practical tree care advice for Colorado properties.' | escape }}</p>"
+    "<button class=\"flip-card-button\" type=\"button\" aria-pressed=\"false\">Flip to preview</button></div>"
+    "<div class=\"post-card-face post-card-back\"><p class=\"post-card-kicker\">Article preview</p>"
+    "<p class=\"post-preview\">{{ post.excerpt | strip_html | normalize_whitespace | truncate: 260 | escape }}</p>"
+    "<div class=\"post-card-actions\"><button class=\"flip-card-button\" type=\"button\" aria-pressed=\"true\">Back to details</button>"
+    "<a class=\"read-article-link\" href=\"{{ post.url }}\">Read article <span aria-hidden=\"true\">→</span></a></div>"
+    "</div></div></article>"
     "{% endfor %}"
 )
 
@@ -36,6 +43,27 @@ def parse_post_title(raw_text: str) -> str:
     return cleaned.strip()
 
 
+def parse_post_field(raw_text: str, field: str) -> str:
+    front_matter = re.match(r"\A---\s*\n(.*?)\n---\s*(?:\n|$)", raw_text, re.DOTALL)
+    if not front_matter:
+        return ""
+    match = re.search(rf"(?m)^{re.escape(field)}:\s*(.*?)\s*$", front_matter.group(1))
+    return match.group(1).strip().strip("\"'") if match else ""
+
+
+def post_preview(raw_text: str) -> str:
+    body = re.sub(r"\A---\s*\n.*?\n---\s*(?:\n|$)", "", raw_text, flags=re.DOTALL)
+    for paragraph in re.split(r"\n\s*\n", body):
+        paragraph = paragraph.strip()
+        if not paragraph or paragraph.startswith(("#", "<")):
+            continue
+        paragraph = re.sub(r"!\[([^\]]*)\]\([^)]*\)", r"\1", paragraph)
+        paragraph = re.sub(r"\[([^\]]+)\]\([^)]*\)", r"\1", paragraph)
+        paragraph = re.sub(r"[*_`>#]", "", paragraph)
+        return re.sub(r"\s+", " ", paragraph)
+    return "Open this guide for practical tree care advice and recommendations."
+
+
 def slug_from_filename(filename: str) -> str:
     stem = Path(filename).stem
     parts = stem.split("-")
@@ -46,10 +74,57 @@ def slug_from_filename(filename: str) -> str:
 
 def page_template(title: str, body: str, current_page: str = "") -> str:
     seasonal_styles = ""
+    flip_card_script = ""
     if current_page == "blog":
         seasonal_styles = """
     .seasonal-promo { display: block; margin: 2rem auto; }
-    .seasonal-promo img { display: block; width: 100%; height: auto; border-radius: 18px; box-shadow: 0 20px 40px rgba(20, 31, 20, 0.18); }"""
+    .seasonal-promo img { display: block; width: 100%; height: auto; border-radius: 18px; box-shadow: 0 20px 40px rgba(20, 31, 20, 0.18); }
+    .post-grid { align-items: stretch; }
+    .post-card { min-height: 285px; padding: 0; background: transparent; border: 0; perspective: 1100px; }
+    .post-card-inner { position: relative; min-height: 285px; height: 100%; transform-style: preserve-3d; transition: transform 650ms cubic-bezier(.2,.75,.25,1); }
+    .post-card.is-flipped .post-card-inner { transform: rotateY(180deg); }
+    .post-card:focus-within { outline: 3px solid rgba(45,125,70,.3); outline-offset: 5px; border-radius: 18px; }
+    .post-card-face { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: flex-start; padding: 1.4rem; overflow: auto; border: 1px solid rgba(45,125,70,.22); border-radius: 18px; background: linear-gradient(145deg,#fff 5%,#f0f8ef 100%); box-shadow: 0 12px 28px rgba(20,53,31,.1); backface-visibility: hidden; -webkit-backface-visibility: hidden; }
+    .post-card:hover .post-card-face, .post-card:focus-within .post-card-face { box-shadow: 0 14px 34px rgba(45,125,70,.2), 0 0 22px rgba(104,190,115,.32); }
+    .post-card-back { transform: rotateY(180deg); background: linear-gradient(145deg,#14351f,#1d4d2a); color: #fff; border-color: rgba(130,210,145,.65); }
+    .post-card h2 { margin: .25rem 0 .65rem; color: var(--forest-dark); font-size: 1.2rem; line-height: 1.35; }
+    .post-card-kicker { margin: 0; color: var(--green); font-size: .75rem; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
+    .post-card-back .post-card-kicker, .post-card-back .post-preview { color: rgba(255,255,255,.92); }
+    .post-preview { display: -webkit-box; overflow: hidden; -webkit-box-orient: vertical; -webkit-line-clamp: 5; margin: .75rem 0 1rem; }
+    .flip-card-button { margin-top: auto; padding: .5rem .75rem; color: var(--forest-dark); background: #e5f3e5; border: 1px solid rgba(45,125,70,.3); border-radius: 999px; font: inherit; font-size: .85rem; font-weight: 700; cursor: pointer; }
+    .post-card-back .flip-card-button { color: #fff; background: rgba(255,255,255,.12); border-color: rgba(255,255,255,.4); }
+    .post-card-actions { display: flex; align-items: center; justify-content: space-between; gap: .75rem; width: 100%; margin-top: auto; }
+    .post-card-actions .flip-card-button { margin-top: 0; }
+    .read-article-link { color: #fff; font-weight: 800; }
+    .post-card button:focus-visible, .post-card a:focus-visible { outline: 3px solid #e8c66a; outline-offset: 3px; }
+    @media (prefers-reduced-motion: reduce) { .post-card-inner { transition: none; } }
+    @media (max-width: 640px) { .post-card, .post-card-inner { min-height: 310px; } }"""
+        flip_card_script = """
+  <script>
+    function setCardFace(card, flipped) {
+      card.classList.toggle('is-flipped', flipped);
+      card.querySelectorAll('.flip-card-button').forEach((control) => {
+        control.setAttribute('aria-pressed', String(flipped));
+      });
+      card.querySelectorAll('.post-card-face').forEach((face) => {
+        const isBack = face.classList.contains('post-card-back');
+        const visible = isBack === flipped;
+        face.setAttribute('aria-hidden', String(!visible));
+        face.inert = !visible;
+      });
+    }
+
+    document.querySelectorAll('.post-card').forEach((card) => setCardFace(card, false));
+    document.addEventListener('click', function (event) {
+      const button = event.target.closest('.flip-card-button');
+      if (!button) return;
+      const card = button.closest('.post-card');
+      if (!card) return;
+      const flipped = !card.classList.contains('is-flipped');
+      setCardFace(card, flipped);
+      card.querySelector(flipped ? '.post-card-back .flip-card-button' : '.post-card-front .flip-card-button').focus();
+    });
+  </script>"""
     return f"""<!DOCTYPE html>
 <html lang=\"en\">
 <head>
@@ -139,6 +214,7 @@ def page_template(title: str, body: str, current_page: str = "") -> str:
       </div>
     </div>
   </footer>
+{flip_card_script}
 </body>
 </html>
 """
@@ -212,8 +288,25 @@ def build_blog_pages() -> None:
         raw = path.read_text(encoding="utf-8")
         title = parse_post_title(raw)
         slug = slug_from_filename(path.name)
-        url = f"{slug}.html"
-        posts.append({"title": title, "url": url, "slug": slug, "path": path})
+        url = parse_post_field(raw, "permalink").strip("/")
+        if not url:
+            url = f"blog/{slug}.html"
+        else:
+            url = url.removeprefix("blog/")
+            url = url.removesuffix("/")
+            if not url.endswith(".html"):
+                url += "/index.html"
+        posts.append(
+            {
+                "title": title,
+                "url": url.removeprefix("blog/"),
+                "slug": slug,
+                "path": path,
+                "description": parse_post_field(raw, "description")
+                or "Practical tree care advice for Colorado properties.",
+                "preview": post_preview(raw),
+            }
+        )
 
     BLOG_DIR.mkdir(parents=True, exist_ok=True)
 
@@ -225,10 +318,27 @@ def build_blog_pages() -> None:
     index_items = []
     for post in posts:
         index_items.append(
-            f"<article class=\"post-card\"><h3><a href=\"{post['url']}\">{escape(post['title'])}</a></h3><p class=\"muted\">Read the latest tree care advice and seasonal tips.</p><a href=\"{post['url']}\">Read article →</a></article>"
+            f"<article class=\"post-card\"><div class=\"post-card-inner\">"
+            f"<div class=\"post-card-face post-card-front\"><p class=\"post-card-kicker\">Tree care guide</p>"
+            f"<h2>{escape(post['title'])}</h2><p class=\"muted\">{escape(post['description'])}</p>"
+            f"<button class=\"flip-card-button\" type=\"button\" aria-pressed=\"false\">Flip to preview</button></div>"
+            f"<div class=\"post-card-face post-card-back\"><p class=\"post-card-kicker\">Article preview</p>"
+            f"<p class=\"post-preview\">{escape(post['preview'][:260])}</p>"
+            f"<div class=\"post-card-actions\"><button class=\"flip-card-button\" type=\"button\" aria-pressed=\"true\">Back to details</button>"
+            f"<a class=\"read-article-link\" href=\"{escape(post['url'])}\">Read article <span aria-hidden=\"true\">→</span></a>"
+            f"</div></div></div></article>"
         )
     index_items.append(
-        '<article class="post-card"><h3><a href="super_el_nino_colorado.html">What a Super El Niño Means for Colorado</a></h3><p class="muted">What Colorado climate research says about precipitation, snowpack, and winter weather odds.</p><a href="super_el_nino_colorado.html">Read article →</a></article>'
+        '<article class="post-card"><div class="post-card-inner">'
+        '<div class="post-card-face post-card-front"><p class="post-card-kicker">Tree care guide</p>'
+        '<h2>What a Super El Niño Means for Colorado</h2>'
+        '<p class="muted">What Colorado climate research says about precipitation, snowpack, and winter weather odds.</p>'
+        '<button class="flip-card-button" type="button" aria-pressed="false">Flip to preview</button></div>'
+        '<div class="post-card-face post-card-back"><p class="post-card-kicker">Article preview</p>'
+        '<p class="post-preview">Learn what Colorado Climate Center research says about El Niño, precipitation, snowpack, and Colorado’s possible winter weather.</p>'
+        '<div class="post-card-actions"><button class="flip-card-button" type="button" aria-pressed="true">Back to details</button>'
+        '<a class="read-article-link" href="super_el_nino_colorado.html">Read article <span aria-hidden="true">→</span></a>'
+        '</div></div></div></article>'
     )
 
     def index_page(grid: str) -> str:

@@ -2,18 +2,18 @@
 title: "Why Late Fall and Winter Are the Best Time to Prune Trees on the Front Range"
 date: 2026-11-02 06:00:00 -0700
 permalink: /blog/dormant-season-pruning-colorado.html
-description: "Dormant-season pruning helps Colorado trees heal, lets arborists see structure clearly and protects your lawn. Here's why Front Range homeowners prune in winter."
+description: "Dormant-season pruning can make tree structure easier to assess. Learn when winter pruning suits Front Range trees and when species-specific timing matters."
 ---
 
-Most people think about their trees in spring, when everything leafs out. Arborists think about them in winter. For most deciduous trees along the Front Range, the dormant season, from after leaf drop until buds begin to swell, is the best time for structural pruning.
+Most people think about their trees in spring, when everything leafs out. Arborists think about them in winter. For many deciduous trees along the Front Range, the dormant season, from after leaf drop until buds begin to swell, can be a practical time for structural pruning. The best timing depends on the species, condition, and reason for pruning.
 
 ## 1. You can see the tree's structure
 
-Without leaves, every branch union, crossing limb, crack and dead branch is visible. That makes it easier to choose the right cuts: removing deadwood, reducing long, heavy limbs, correcting competing leaders and thinning crowded growth. Better cuts mean a stronger tree that handles snow and wind more safely.
+Without leaves, every branch union, crossing limb, crack and dead branch is visible. That makes it easier to assess the structure and plan any needed cuts, such as removing deadwood or addressing competing leaders. Pruning does not guarantee that a tree will withstand snow or wind.
 
 ## 2. Less stress on the tree
 
-A dormant tree isn't pushing out new leaves or fighting summer heat and drought. Pruning cuts made in winter are followed by a full spring of growth, when the tree can begin sealing wounds quickly.
+A dormant tree is not producing new leaves. Trees compartmentalize pruning wounds rather than healing them; timing and proper cuts can support that natural response.
 
 ## 3. Lower risk of spreading pests and disease
 
@@ -31,8 +31,8 @@ Frozen or firm ground supports equipment better, perennials and garden beds are 
 
 - **Deadwood first.** Dead and broken branches are removed back to living tissue.
 - **Reduce, don't top.** Long limbs are shortened back to a healthy lateral branch, never cut to stubs. Topping causes weak regrowth and decay. See [Pruning vs. Topping](/blog/pruning-vs-topping-why-bad-tree-cutting-can-destro.html).
-- **Don't overdo it.** A common arborist guideline is to remove no more than about a quarter of a tree's living canopy in one season.
-- **Clean cuts at the branch collar.** Cuts made just outside the collar let the tree seal the wound naturally. Wound paint isn't needed for most trees.
+- **Don't overdo it.** How much live canopy can be removed depends on the tree and its condition. Have a qualified arborist set a site-specific pruning objective.
+- **Make appropriate cuts.** Preserve the branch collar where present. Trees compartmentalize wounds; cuts do not make a wound disappear. Wound paint is generally unnecessary for routine pruning.
 - **Young trees get structural training.** A few cuts on a young tree now can prevent a major failure 15 years from now.
 
 ## Trees that need a slightly different schedule

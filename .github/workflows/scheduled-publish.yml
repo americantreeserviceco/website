@@ -8,12 +8,30 @@ on:
   workflow_dispatch:
 
 permissions:
+  contents: read
   pages: write
 
 jobs:
   rebuild:
     runs-on: ubuntu-latest
     steps:
+      - name: Check out site source
+        uses: actions/checkout@v4
+
+      - name: Set up Ruby and install Jekyll dependencies
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.3"
+          bundler-cache: true
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
+      - name: Validate posts and rendered site
+        run: python scripts/validate_blog_posts.py
+
       - name: Request a Pages build
         run: gh api --method POST "repos/${{ github.repository }}/pages/builds"
         env:

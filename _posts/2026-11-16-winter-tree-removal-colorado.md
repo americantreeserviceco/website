@@ -9,11 +9,11 @@ If you have a dead, declining or hazardous tree, you may be thinking it can wait
 
 ## Why winter works well for tree removal
 
-- **Firm or frozen ground.** Equipment rolls over hard ground with far less rutting and lawn damage than in a soggy spring.
+- **Ground conditions.** Frozen or firm ground may reduce lawn disturbance, though conditions vary and crews must still plan equipment access carefully.
 - **Dormant landscapes.** Perennials, shrubs and garden beds are dormant, so there's less to protect and less to replant.
-- **Better visibility.** Without leaves, crews can see the structure of the tree and plan rigging and cuts precisely.
+- **Better visibility.** Without leaves, crews may be able to see the tree's structure more clearly and plan the work.
 - **Lighter cleanup.** Bare branches mean less debris to chip and haul.
-- **Easier scheduling.** Spring and summer fill up fast. Booking in winter usually means more flexibility on dates.
+- **Scheduling.** Availability varies by company, weather, and demand; winter may offer different scheduling options.
 - **Ready for spring planting.** Remove the old tree and grind the stump in winter, and you're ready to plant a replacement in spring.
 
 <div class="cta-box" markdown="1">
@@ -24,14 +24,14 @@ If you have a dead, declining or hazardous tree, you may be thinking it can wait
 
 Not every problem tree needs to be removed. Pruning, cabling or treatment can save many trees. Removal is usually worth discussing when you see:
 
-- A tree that is dead or more than half dead
+- A dead tree or one with extensive decline, after a professional assessment
 - Large cracks, splits or cavities in the trunk
 - Decay or fungal growth at the base, or root damage from construction
 - A sudden new lean or heaving soil
 - An ash tree with serious [emerald ash borer](/blog/emerald-ash-borer-front-range.html) damage
-- A tree that's too close to the house, foundation or utility lines
+- A tree with defects that put a home, foundation, or other target at risk; location alone does not determine whether removal is needed. Contact the utility about trees near power lines.
 
-Our [5 signs a tree needs removal](/blog/5-signs-a-diseased-or-damaged-tree-needs-immediate.html) and [homeowner's safety checklist](/blog/how-to-tell-if-your-tree-is-dangerous-homeowners-safety-checklist.html) cover these in detail.
+Our [5 signs a tree needs a professional assessment](/blog/5-signs-a-diseased-or-damaged-tree-needs-immediate.html) and [homeowner's safety checklist](/blog/how-to-tell-if-your-tree-is-dangerous-homeowners-safety-checklist.html) cover these in detail.
 
 ## Before you book: permits, HOAs and utilities
 

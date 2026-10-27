@@ -17,6 +17,18 @@
 	const AWAY = [
 	];
 
+	// Daily form loads vs submissions for the dashboard's "Website estimate form" card (form-beacon Worker).
+	// Sends only the event and page path; nothing typed into the form.
+	const STATS_URL = 'https://form-beacon.snowseasons.workers.dev/';
+
+	function track(event) {
+		try {
+			if (navigator.sendBeacon) navigator.sendBeacon(STATS_URL, JSON.stringify({ e: event, p: location.pathname }));
+		} catch (error) {
+			// Counting must never get in the way of the form.
+		}
+	}
+
 	const TIME_ZONE = 'America/Denver';
 	const PHONE_DISPLAY = '(303) 456-6898';
 	const PHONE_LINK = 'tel:+13034566898';
@@ -165,6 +177,7 @@
 					headers: { Accept: 'application/json' },
 				});
 				if (!response.ok) throw new Error(`Formspree returned ${response.status}`);
+				track('submit');
 
 				const nameField = form.querySelector('[name="name"]');
 				const firstName = nameField ? nameField.value.trim().split(/\s+/)[0] : '';
@@ -191,6 +204,7 @@
 		if (!window.fetch || !window.FormData || !window.Intl) return;
 		const forms = document.querySelectorAll('form[action*="formspree.io/f/"]');
 		if (!forms.length) return;
+		track('load');
 		injectStyles();
 		forms.forEach(enhance);
 	});

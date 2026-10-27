@@ -41,7 +41,7 @@ Our [homeowner's tree safety checklist](/blog/how-to-tell-if-your-tree-is-danger
 
 ## Don't let storm damage turn into a bad pruning job
 
-After a storm, it's tempting to hire whoever knocks on the door first or to cut every damaged branch back to a stub. Topping and stub cuts leave trees weaker and more likely to break in the next storm. A broken limb should be removed back to a healthy branch or the trunk with a clean cut that lets the tree seal the wound. Read more in [Pruning vs. Topping](/blog/pruning-vs-topping-why-bad-tree-cutting-can-destro.html).
+After a storm, it's tempting to hire whoever knocks on the door first or to cut every damaged branch back to a stub. Topping and stub cuts leave trees weaker and more likely to break in the next storm. A broken limb should be assessed and pruned with a proper cut when appropriate. Trees compartmentalize wounds; pruning does not make an injury disappear. Read more in [Pruning vs. Topping](/blog/pruning-vs-topping-why-bad-tree-cutting-can-destro.html).
 
 ## Get ahead of the next storm
 

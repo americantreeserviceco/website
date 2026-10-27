@@ -14,9 +14,9 @@ Before anyone gets on a ladder, look up:
 - **Dead or broken limbs** above where you'll stand or lean a ladder
 - **Hangers,** broken branches caught in the canopy after fall storms
 - **Cracks** in large limbs or where trunks divide
-- **Branches near power lines.** Never hang lights in a tree that touches or grows near overhead lines.
+- **Branches near power lines.** Do not climb or handle lights near overhead lines. If a tree is touching a line, stay away and call the utility.
 
-If you spot any of these, have them dealt with before decorating. A limb that looks fine from the ground can fail under a person's weight or a ladder's pressure. See our [homeowner's tree safety checklist](/blog/how-to-tell-if-your-tree-is-dangerous-homeowners-safety-checklist.html).
+If you spot any of these, do not climb or lean a ladder against the tree. Keep clear of hazards and arrange a professional assessment when needed. See our [homeowner's tree safety checklist](/blog/how-to-tell-if-your-tree-is-dangerous-homeowners-safety-checklist.html).
 
 <div class="cta-box" markdown="1">
 **Want the tree ready before the lights go up?** We'll remove deadwood and hazards so you can decorate safely. Serving Golden, Lakewood, Arvada, Wheat Ridge, Denver and Boulder. [Request a free estimate](/contact/).
@@ -29,7 +29,7 @@ If you spot any of these, have them dealt with before decorating. A limb that lo
 3. **Use LED lights.** They run cooler, use less power and are lighter on small branches.
 4. **Keep weight off small limbs.** Heavy strands, ornaments and inflatables can break thin branches, especially once snow adds weight.
 5. **Use outdoor-rated cords and GFCI outlets.** Keep connections off the ground and away from melting snow.
-6. **Never lean a ladder on a weak branch.** Use a stable, level ladder and have someone hold it. For tall trees, consider hiring help.
+6. **Use ladders safely.** Set a ladder on stable, level ground and follow its instructions. Do not climb near overhead lines or use a tree branch for support. Leave tall or difficult installations to a qualified professional.
 
 ## Take lights down by spring
 
