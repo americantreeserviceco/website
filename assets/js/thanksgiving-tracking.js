@@ -7,7 +7,7 @@
   const track = event => {
     window.dataLayer = window.dataLayer || [];
     window.dataLayer.push({ event, image_id: 'thanksgiving_mascots',
-      image_path: image.getAttribute('src'), placement: 'homepage_contact' });
+      image_path: image.getAttribute('src'), placement: 'homepage_hero' });
   };
   graphic.addEventListener('click', () => {
     track('thanksgiving_image_click');
