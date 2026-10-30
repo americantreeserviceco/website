@@ -10,6 +10,9 @@
   var PHONE = '(303) 456-6898';
   var PHONE_HREF = 'tel:+13034566898';
   var HELP_URL = '/services/rapid-hazard-response/index.html';
+  // BOU is the Denver/Boulder forecast office. Its full Winter Weather Message, for winter alerts only.
+  var WINTER = /^(Winter|Blizzard|Ice Storm|Heavy Snow)/i;
+  var WINTER_MESSAGE_URL = 'https://forecast.weather.gov/product.php?site=BOU&issuedby=BOU&product=WSW&format=CI&version=1&glossary=0';
 
   function el(tag, style, text) {
     var n = document.createElement(tag);
@@ -63,7 +66,32 @@
     help.href = HELP_URL;
     bar.appendChild(help);
 
-    var close = el('button', 'position:absolute;right:8px;top:50%;transform:translateY(-50%);background:none;border:0;color:inherit;font-size:24px;line-height:1;cursor:pointer;padding:4px 10px;', '×');
+    if (WINTER.test(alert.event)) {
+      var nws = el('a', 'color:inherit;text-decoration:underline;white-space:nowrap;', 'National Weather Service message');
+      nws.href = WINTER_MESSAGE_URL;
+      nws.target = '_blank';
+      nws.rel = 'noopener';
+      bar.appendChild(nws);
+    }
+
+    if (alert.description) {
+      // NWS hard-wraps lines; keep its paragraphs and let the text reflow on phones.
+      var text = alert.description.replace(/([^\n])\n(?!\n)/g, '$1 ');
+      var panel = el('div', 'flex-basis:100%;max-width:760px;max-height:40vh;overflow:auto;padding:8px 0 4px;text-align:left;white-space:pre-line;', text);
+      panel.hidden = true;
+      var more = el('button', 'background:none;border:0;padding:0;color:inherit;font:inherit;text-decoration:underline;cursor:pointer;', 'Details');
+      more.type = 'button';
+      more.setAttribute('aria-expanded', 'false');
+      more.addEventListener('click', function () {
+        panel.hidden = !panel.hidden;
+        more.setAttribute('aria-expanded', String(!panel.hidden));
+        more.textContent = panel.hidden ? 'Details' : 'Hide details';
+      });
+      bar.appendChild(more);
+      bar.appendChild(panel);
+    }
+
+    var close = el('button', 'position:absolute;right:8px;top:4px;background:none;border:0;color:inherit;font-size:24px;line-height:1;cursor:pointer;padding:4px 10px;', '×');
     close.type = 'button';
     close.setAttribute('aria-label', 'Dismiss weather alert');
     close.addEventListener('click', function () {
@@ -77,7 +105,8 @@
 
   function run() {
     if (new URLSearchParams(location.search).get('alert') === 'test') {
-      return show({ id: 'test', event: 'High Wind Warning', severity: 'Severe', expires: new Date(Date.now() + 6 * 3600e3).toISOString() });
+      return show({ id: 'test', event: 'Winter Storm Warning', severity: 'Severe', expires: new Date(Date.now() + 6 * 3600e3).toISOString(),
+        description: '* WHAT...TEST ONLY. Heavy snow expected.\n\n* WHERE...Test area.\n\n* WHEN...This is a preview, not a real alert.' });
     }
     Promise.all(POINTS.map(fetchPoint)).then(function (r) {
       var alert = pickAlert([].concat.apply([], r));
