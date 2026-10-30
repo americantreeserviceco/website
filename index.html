@@ -860,9 +860,54 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 			.november-theme .hero-brand { margin-bottom: 8px; padding: 6px 7px; font-size: 10px; letter-spacing: 0; white-space: nowrap; }
 			.november-theme .hero-cta-orbit { justify-self: center; }
 		}
+		/* Christmas palette for the winter theme: red, pine green and gold on warm white */
+		body.winter-theme {
+			--primary: #b3261e;
+			--secondary: #1e5631;
+			--accent: #d4af37;
+			--light: #fff7ec;
+			--dark: #222222;
+			background-color: #fffdf8;
+		}
+		/* Winter hero (homepage, Dec to Feb via body.winter-theme or ?theme=winter) */
+		.hero-winter-art { display: none; }
+		html.santa-off .hero-winter-art { display: none; }
+		.winter-theme .hero-halloween-art,
+		.winter-theme .hero-november-art { display: none; }
+		.winter-theme .hero-content {
+			display: grid;
+			grid-template-columns: minmax(0, 1fr) minmax(250px, 380px);
+			grid-template-areas: "brand art" "title art" "copy art" "cta art";
+			align-items: center;
+			column-gap: clamp(28px, 5vw, 72px);
+			max-width: 1080px;
+			text-align: left;
+		}
+		.winter-theme .hero-brand { grid-area: brand; justify-self: start; animation: none; }
+		.winter-theme .hero h1 { grid-area: title; }
+		.winter-theme .hero p { grid-area: copy; }
+		.winter-theme .hero-cta-orbit { grid-area: cta; justify-self: start; }
+		.winter-theme .hero-winter-art {
+			display: block;
+			grid-area: art;
+			width: 100%;
+			max-width: 380px;
+			height: auto;
+			aspect-ratio: 427 / 513;
+			justify-self: center;
+			object-fit: contain;
+			filter: drop-shadow(0 14px 22px rgba(0, 0, 0, 0.28));
+		}
+		@media (max-width: 640px) {
+			.winter-theme .hero-content { grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: "brand art" "title title" "copy copy" "cta cta"; column-gap: 8px; row-gap: 0; text-align: center; }
+			.winter-theme .hero-winter-art { width: min(32vw, 130px); max-width: none; justify-self: end; }
+			.winter-theme .hero-brand { margin-bottom: 8px; padding: 6px 7px; font-size: 10px; letter-spacing: 0; white-space: nowrap; }
+			.winter-theme .hero-cta-orbit { justify-self: center; }
+		}
 	</style>
 	<script src="/assets/js/halloween-theme.js" defer></script>
 	<script src="/assets/js/november-theme.js" defer></script>
+		<script src="/assets/js/winter-theme.js" defer></script>
 	<script src="/assets/js/severe-alerts.js" defer></script>
 	<script src="/assets/js/contact-autoreply.js" defer></script>
 
@@ -903,6 +948,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 				<button class="hero-november-art thanksgiving-graphic" id="thanksgiving-graphic" type="button" aria-label="Start your tree care estimate">
                   <img src="/assets/images/seasonal/pilgim-poca.png" width="514" height="514" decoding="async" alt="Thanksgiving cartoon of a Native American and Pilgrim with a young tree and pumpkin">
                 </button>
+				<img class="hero-winter-art" src="assets/images/seasonal/santa.webp" alt="" aria-hidden="true">
 				<h1>Certified Arborist Tree Care for Golden and the Denver Metro Area</h1>
 				<p>Locally based and serving Colorado since 1993. Get knowledgeable care for tree health, pruning, removals, and storm hazards.</p>
 				<div class="hero-cta-orbit">
