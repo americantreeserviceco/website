@@ -865,6 +865,15 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 	<script src="/assets/js/november-theme.js" defer></script>
 	<script src="/assets/js/severe-alerts.js" defer></script>
 	<script src="/assets/js/contact-autoreply.js" defer></script>
+
+  <style>
+    .thanksgiving-greeting { margin-top: 24px; text-align: center; }
+    .thanksgiving-greeting h4 { color: #714014; font-size: 1.35rem; }
+    .thanksgiving-graphic { display: block; width: min(100%, 300px); margin: 12px auto 0; padding: 0; border: 0; border-radius: 16px; background: transparent; cursor: pointer; }
+    .thanksgiving-graphic:focus-visible { outline: 3px solid var(--primary); outline-offset: 5px; }
+    .thanksgiving-graphic img { display: block; width: 100%; height: auto; }
+  </style>
+  <script src="/assets/js/thanksgiving-tracking.js" defer></script>
 </head>
 <body>
 	<header>
@@ -1090,6 +1099,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 					<p>Email: <a href="mailto:mandi@americantreecolorado.com">mandi@americantreecolorado.com</a></p>
 					<p>Based in Golden, Colorado, serving the Denver metro area and nearby Front Range communities.</p>
 					<p><strong>Typical response time:</strong> same-day or next-business-day for urgent tree concerns.</p>
+          <div class="thanksgiving-greeting">
+            <h4>Happy Thanksgiving!</h4>
+            <p>Grateful for our community. Rooted in care.</p>
+            <button class="thanksgiving-graphic" id="thanksgiving-graphic" type="button" aria-label="Start your tree care estimate">
+              <img src="/assets/images/seasonal/pilgim-poca.png" width="514" height="514" loading="lazy" decoding="async" alt="Thanksgiving cartoon of a Native American and Pilgrim with a young tree and pumpkin">
+            </button>
+          </div>
 				</div>
 				<div class="contact-card">
 					<form action="https://formspree.io/f/maenvddy" method="POST">
