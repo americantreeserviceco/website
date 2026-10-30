@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 200" aria-hidden="true">
+  <style>
+    .orbit { transform-box: view-box; transform-origin: 180px 100px; animation: carousel 16s linear infinite; }
+    @keyframes carousel { to { transform: rotate(360deg); } }
+    @media (prefers-reduced-motion: reduce) { .orbit { animation: none; } }
+  </style>
+  <defs>
+    <g id="snowflake" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <path transform="rotate(0)" d="M0 0V-14 M-4-10 0-6 4-10 M-3-15 0-12 3-15"/>
+      <path transform="rotate(60)" d="M0 0V-14 M-4-10 0-6 4-10 M-3-15 0-12 3-15"/>
+      <path transform="rotate(120)" d="M0 0V-14 M-4-10 0-6 4-10 M-3-15 0-12 3-15"/>
+      <path transform="rotate(180)" d="M0 0V-14 M-4-10 0-6 4-10 M-3-15 0-12 3-15"/>
+      <path transform="rotate(240)" d="M0 0V-14 M-4-10 0-6 4-10 M-3-15 0-12 3-15"/>
+      <path transform="rotate(300)" d="M0 0V-14 M-4-10 0-6 4-10 M-3-15 0-12 3-15"/>
+    </g>
+  </defs>
+  <g class="orbit">
+    <use href="#snowflake" transform="translate(180 30) rotate(0)" color="#dff7ff"/>
+    <use href="#snowflake" transform="translate(340 100) rotate(20)" color="#80d5f5"/>
+    <use href="#snowflake" transform="translate(180 170) rotate(0)" color="#c6eaff"/>
+    <use href="#snowflake" transform="translate(20 100) rotate(20)" color="#a4e3fa"/>
+  </g>
+</svg>
