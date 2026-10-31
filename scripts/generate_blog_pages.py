@@ -75,7 +75,9 @@ def slug_from_filename(filename: str) -> str:
 def page_template(title: str, body: str, current_page: str = "") -> str:
     seasonal_styles = ""
     flip_card_script = ""
+    canonical_link = ""
     if current_page == "blog":
+        canonical_link = "\n  <link rel=\"canonical\" href=\"https://americantreeserviceco.com/blog/\" />"
         seasonal_styles = """
     .seasonal-promo { display: block; margin: 2rem auto; }
     .seasonal-promo img { display: block; width: 100%; height: auto; border-radius: 18px; box-shadow: 0 20px 40px rgba(20, 31, 20, 0.18); }
@@ -131,7 +133,7 @@ def page_template(title: str, body: str, current_page: str = "") -> str:
   <meta charset=\"UTF-8\" />
   <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\" />
   <title>{escape(title)} | American Tree Colorado</title>
-  <meta name=\"description\" content=\"American Tree Colorado blog and tree care insights.\" />
+  <meta name=\"description\" content=\"American Tree Colorado blog and tree care insights.\" />{canonical_link}
   <style>
     :root {{
       --forest: #1d4d2a;
