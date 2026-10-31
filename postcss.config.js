@@ -1,4 +1,4 @@
-mobile.exports = {
+module.exports = {
   plugins: [
     require('postcss-import'),
     require('tailwindcss'),
@@ -6,4 +6,4 @@ mobile.exports = {
     // Minify only during production builds
     ...(process.env.JEKYLL_ENV === 'production' ? [require('cssnano')({ preset: 'default' })] : [])
   ]
-)
+}
