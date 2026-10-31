@@ -45,3 +45,4 @@ exclude:
   - "scan_report.txt"
   - "test_openvino.py"
   - "directory_syntax_checker.py"
+  - "google-report.html"
