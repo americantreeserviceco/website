@@ -167,6 +167,8 @@ function createApp({ db, getUserForToken, allowedOrigins = [] }) {
     registerCrudRoutes(app, db, `/api/${path}`, path, schema);
   }
 
+  // Express only treats a handler as error middleware when it declares four arguments.
+  // eslint-disable-next-line no-unused-vars
   app.use((error, _req, res, _next) => {
     if (error instanceof SyntaxError && 'body' in error) {
       return res.status(400).json({ error: 'Malformed JSON body' });

@@ -28,7 +28,7 @@ app.post('/api/save-post', (req, res) => {
 title: "${title.replace(/"/g, '\\"')}"
 date: ${date}
 summary: "${(summary || '').replace(/"/g, '\\"')}"
-tags: [${(tags || []).map(t => `"\${t.trim()}"`).join(', ')}]
+tags: [${(tags || []).map(t => `"${t.trim().replace(/"/g, '\\"')}"`).join(', ')}]
 status: "${status || 'draft'}"
 ---
 
