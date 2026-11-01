@@ -13,10 +13,10 @@
   "type": "commonjs",
   "main": "index.js",
   "scripts": {
-    "build": "python3 scripts/generate_blog_pages.py && jekyll build",
+    "build": "python3 scripts/generate_blog_pages.py && bundle exec jekyll build",
     "build:blog": "python3 scripts/generate_blog_pages.py",
     "generate:redirects": "node scripts/generate_redirects.js",
-    "dev": "jekyll serve",
+    "dev": "bundle exec jekyll serve",
     "test": "echo \"No tests configured\" && exit 0"
   },
   "dependencies": {

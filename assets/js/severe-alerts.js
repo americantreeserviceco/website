@@ -76,11 +76,16 @@
 
     if (alert.description) {
       // NWS hard-wraps lines; keep its paragraphs and let the text reflow on phones.
-      var text = alert.description.replace(/([^\n])\n(?!\n)/g, '$1 ');
+      var text = alert.description.replace(/\r\n?/g, '\n').replace(/([^\n])\n(?!\n)/g, '$1 ');
       var panel = el('div', 'flex-basis:100%;max-width:760px;max-height:40vh;overflow:auto;padding:8px 0 4px;text-align:left;white-space:pre-line;', text);
+      panel.tabIndex = 0;
+      panel.id = 'weather-alert-details';
+      panel.setAttribute('role', 'region');
+      panel.setAttribute('aria-label', 'National Weather Service alert details');
       panel.hidden = true;
       var more = el('button', 'background:none;border:0;padding:0;color:inherit;font:inherit;text-decoration:underline;cursor:pointer;', 'Details');
       more.type = 'button';
+      more.setAttribute('aria-controls', panel.id);
       more.setAttribute('aria-expanded', 'false');
       more.addEventListener('click', function () {
         panel.hidden = !panel.hidden;
