@@ -904,6 +904,46 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 			.winter-theme .hero-brand { margin-bottom: 8px; padding: 6px 7px; font-size: 10px; letter-spacing: 0; white-space: nowrap; }
 			.winter-theme .hero-cta-orbit { justify-self: center; }
 		}
+		/* Holiday lights (December via html.holiday-lights, or ?theme=winter). The hero text cycles red, green and gold
+		   for at most five seconds, then rests on gold, so it needs no pause control (WCAG 2.2.2). The solid panel is what
+		   keeps each colour readable: over the photo the red drops well below 4.5:1. */
+		.holiday-lights .hero-content::before {
+			content: "";
+			grid-area: 2 / 1 / 5 / 2;
+			align-self: stretch;
+			margin: -12px;
+			border-radius: 16px;
+			background: #101b33;
+		}
+		.holiday-lights .hero h1,
+		.holiday-lights .hero p,
+		.holiday-lights .hero .btn { color: #ffd166; animation-name: holiday-lights; animation-timing-function: steps(1, end); }
+		.holiday-lights .hero h1 { animation-duration: 2.4s; animation-iteration-count: 2; }
+		.holiday-lights .hero p { animation-duration: 3.1s; animation-delay: 0.35s; animation-iteration-count: 1.5; }
+		/* The button takes the panel colour because none of the three text colours are readable on the usual gold fill. */
+		.holiday-lights .hero .btn {
+			animation-duration: 1.9s;
+			animation-delay: 0.7s;
+			animation-iteration-count: 2;
+			background-color: #101b33;
+			box-shadow: inset 0 0 0 2px #ffd166;
+		}
+		.holiday-lights .hero .btn:hover,
+		.holiday-lights .hero .btn:focus-visible { background-color: #101b33; text-decoration: underline; }
+		.holiday-lights .hero .btn:focus-visible { outline: 2px solid #ffffff; outline-offset: 2px; }
+		@keyframes holiday-lights {
+			0%, 100% { color: #ff4d5a; }
+			33% { color: #56d68d; }
+			66% { color: #ffd166; }
+		}
+		@media (prefers-reduced-motion: reduce) {
+			.holiday-lights .hero h1,
+			.holiday-lights .hero p,
+			.holiday-lights .hero .btn { animation: none; color: #ff4d5a; }
+		}
+		@media (max-width: 640px) {
+			.holiday-lights .hero-content::before { grid-area: 2 / 1 / 5 / 3; }
+		}
 	</style>
 	<script src="/assets/js/halloween-theme.js" defer></script>
 	<script src="/assets/js/november-theme.js" defer></script>
