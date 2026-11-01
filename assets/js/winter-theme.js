@@ -7,6 +7,6 @@
   document.documentElement.classList.add('winter-theme');
   document.body?.classList.add('winter-theme');
 
-  // Santa is shown in December only. January and February keep the winter colours without him.
-  if (!override && month !== 11) document.documentElement.classList.add('santa-off');
+  // Santa and the hero's holiday lights are December only. January and February keep the winter colours without them.
+  document.documentElement.classList.add(override || month === 11 ? 'holiday-lights' : 'santa-off');
 })();
