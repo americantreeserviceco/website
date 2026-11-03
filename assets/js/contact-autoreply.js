@@ -105,17 +105,35 @@
 		document.head.appendChild(style);
 	}
 
-	function backAt(status) {
-		return status.nextOpen ? `, <strong>${status.nextOpen}</strong>` : '';
+	function appendPhoneLink(parent) {
+		const link = document.createElement('a');
+		link.href = PHONE_LINK;
+		link.textContent = PHONE_DISPLAY;
+		parent.appendChild(link);
+	}
+
+	function appendBackAt(parent, status) {
+		if (!status.nextOpen) return;
+		parent.appendChild(document.createTextNode(" "));
+		const strong = document.createElement('strong');
+		strong.textContent = status.nextOpen;
+		parent.appendChild(strong);
 	}
 
 	function noteFor(status) {
 		const note = document.createElement('p');
 		note.className = status.available ? 'autoreply-note' : 'autoreply-note is-away';
 		note.setAttribute('role', 'status');
-		note.innerHTML = status.available
-			? 'Mandi is in the office now. For urgent tree concerns, the typical response is same-day or next-business-day.'
-			: `Mandi is out of the office right now. Send your message anyway and she'll reply when she's back${backAt(status)}. Urgent tree hazard or storm damage? Call <a href="${PHONE_LINK}">${PHONE_DISPLAY}</a>.`;
+
+		if (status.available) {
+			note.textContent = 'Mandi is in the office now. For urgent tree concerns, the typical response is same-day or next-business-day.';
+		} else {
+			note.appendChild(document.createTextNode("Mandi is out of the office right now. Send your message anyway and she'll reply when she's back"));
+			appendBackAt(note, status);
+			note.appendChild(document.createTextNode('. Urgent tree hazard or storm damage? Call '));
+			appendPhoneLink(note);
+			note.appendChild(document.createTextNode('.'));
+		}
 		return note;
 	}
 
@@ -130,16 +148,25 @@
 		reply.appendChild(heading);
 
 		const body = document.createElement('p');
-		const contactNote = hasEmail
+		if (status.available) {
+			body.appendChild(document.createTextNode('Mandi is in the office today. For urgent tree concerns, the typical response is same-day or next-business-day. '));
+		} else {
+			body.appendChild(document.createTextNode("Mandi is out of the office right now. She'll reply when she's back"));
+			appendBackAt(body, status);
+			body.appendChild(document.createTextNode('. '));
+		}
+		body.appendChild(document.createTextNode(hasEmail
 			? 'Keep an eye on your inbox, and check your spam folder if you don’t see it.'
-			: 'Mandi will contact you at the phone number you provided.';
-		body.innerHTML = status.available
-			? `Mandi is in the office today. For urgent tree concerns, the typical response is same-day or next-business-day. ${contactNote}`
-			: `Mandi is out of the office right now. She'll reply when she's back${backAt(status)}. ${contactNote}`;
+			: 'Mandi will contact you at the phone number you provided.'));
 		reply.appendChild(body);
 
 		const urgent = document.createElement('p');
-		urgent.innerHTML = `<strong>Can't wait?</strong> For a fallen tree, storm damage, or a branch on a roof or power line, call <a href="${PHONE_LINK}">${PHONE_DISPLAY}</a>.`;
+		const emphasis = document.createElement('strong');
+		emphasis.textContent = "Can't wait?";
+		urgent.appendChild(emphasis);
+		urgent.appendChild(document.createTextNode(' For a fallen tree, storm damage, or a branch on a roof or power line, call '));
+		appendPhoneLink(urgent);
+		urgent.appendChild(document.createTextNode('.'));
 		reply.appendChild(urgent);
 
 		return reply;
@@ -220,9 +247,15 @@
 				message.className = 'autoreply-error';
 				message.setAttribute('role', 'alert');
 				message.setAttribute('tabindex', '-1');
-				message.innerHTML = rejected
-					? `Your submission was rejected. Please check your details before trying again, or call <a href="${PHONE_LINK}">${PHONE_DISPLAY}</a>.`
-					: `We couldn't confirm delivery. Your message may already have arrived. Please call <a href="${PHONE_LINK}">${PHONE_DISPLAY}</a> before submitting again to avoid a duplicate.`;
+				if (rejected) {
+					message.appendChild(document.createTextNode('Your submission was rejected. Please check your details before trying again, or call '));
+				} else {
+					message.appendChild(document.createTextNode("We couldn't confirm delivery. Your message may already have arrived. Please call "));
+				}
+				appendPhoneLink(message);
+				message.appendChild(document.createTextNode(rejected
+					? '.'
+					: ' before submitting again to avoid a duplicate.'));
 				form.appendChild(message);
 				message.focus();
 			} finally {
