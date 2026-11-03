@@ -41,7 +41,9 @@ bundle exec jekyll build
 bundle exec jekyll serve
 ```
 
-The generated site is written to `_site/`. New blog posts belong in `_posts/` and should include Jekyll YAML front matter. Pushing to the `dev` branch triggers the GitHub Pages Jekyll deployment workflow.
+The generated site is written to `_site/`. New blog posts belong in `_posts/` and should include Jekyll YAML front matter. GitHub Pages builds the `main` branch using Jekyll 3.10.0; the Gemfile pins that same version for local and scheduled validation. Run `bundle install` after changing the Gemfile. The scheduled workflow validates posts before requesting a Pages rebuild.
+
+The site ships plain CSS. PostCSS only configures the declared Autoprefixer plugin; Tailwind compilation, import expansion, and minification are not part of the Jekyll build.
 
 ## Legacy URL Redirects
 

@@ -904,6 +904,15 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 			.winter-theme .hero-brand { margin-bottom: 8px; padding: 6px 7px; font-size: 10px; letter-spacing: 0; white-space: nowrap; }
 			.winter-theme .hero-cta-orbit { justify-self: center; }
 		}
+		/* January and February retain winter colours without reserving a Santa column. */
+		html.santa-off .hero-content {
+			grid-template-columns: minmax(0, 1fr);
+			grid-template-areas: "brand" "title" "copy" "cta";
+			max-width: 800px;
+			text-align: center;
+		}
+		html.santa-off .hero-brand,
+		html.santa-off .hero-cta-orbit { justify-self: center; }
 		/* Holiday lights (December via html.holiday-lights, or ?theme=winter). The hero text cycles red, green and gold
 		   for at most five seconds, then rests on gold, so it needs no pause control (WCAG 2.2.2). The solid panel is what
 		   keeps each colour readable: over the photo the red drops well below 4.5:1. */
@@ -988,7 +997,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 				<button class="hero-november-art thanksgiving-graphic" id="thanksgiving-graphic" type="button" aria-label="Start your tree care estimate">
                   <img src="/assets/images/seasonal/pilgim-poca.png" width="514" height="514" decoding="async" alt="Thanksgiving cartoon of a Native American and Pilgrim with a young tree and pumpkin">
                 </button>
-				<img class="hero-winter-art" src="assets/images/seasonal/santa.webp" alt="" aria-hidden="true">
+				<img class="hero-winter-art" src="assets/images/seasonal/christmas/santa.webp" alt="" aria-hidden="true">
 				<h1>Certified Arborist Tree Care for Golden and the Denver Metro Area</h1>
 				<p>Locally based and serving Colorado since 1993. Get knowledgeable care for tree health, pruning, removals, and storm hazards.</p>
 				<div class="hero-cta-orbit">

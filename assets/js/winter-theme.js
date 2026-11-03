@@ -1,6 +1,7 @@
 (() => {
   const override = new URLSearchParams(location.search).get('theme');
-  const month = new Date().getMonth();
+  // Share one month snapshot so deferred scripts agree across a midnight transition.
+  const month = window.__americanTreeThemeMonth ?? (window.__americanTreeThemeMonth = new Date().getMonth());
   const isWinter = month === 11 || month === 0 || month === 1;
   if (override ? override !== 'winter' : !isWinter) return;
 
