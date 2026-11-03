@@ -46,3 +46,8 @@ exclude:
   - "test_openvino.py"
   - "directory_syntax_checker.py"
   - "google-report.html"
+  # A custom exclude list replaces Jekyll's defaults, so list the build files explicitly.
+  - "Gemfile"
+  - "Gemfile.lock"
+  - "tailwind.config.js"
+  - "postcss.config.js"
