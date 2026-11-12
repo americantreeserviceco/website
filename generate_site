@@ -23,7 +23,7 @@ OUT_DIR = Path(sys.argv[1] if len(sys.argv) > 1 else "~/AmericanTree/sites").exp
 
 PHONE_DISPLAY = "303-456-6898"
 PHONE_HREF = "tel:+13034566898"
-EMAIL = "info@AmericanTreeColorado.com"
+EMAIL = "mandi@americantreecolorado.com"
 FACEBOOK_URL = "https://facebook.com"
 GOOGLE_BUSINESS_URL = "https://google.com"  # TODO: replace with your real Google Business Profile link
 
