@@ -5,7 +5,6 @@ permalink: /blog/:title.html
 timezone: America/Denver
 include:
   - _redirects
-  - .htaccess
 defaults:
   - scope:
       path: "_posts"
@@ -38,3 +37,18 @@ exclude:
   - "package-lock.json"
   - ".env"
   - "jekyll-sitemap"
+  - "CLAUDE.md"
+  - "README.md"
+  - "Modelfile"
+  - "installer.sh"
+  - "scan_report.txt"
+  - "test_openvino.py"
+  - "directory_syntax_checker.py"
+  - "google-report.html"
+  # A custom exclude list replaces Jekyll's defaults, so list the build files explicitly.
+  - "Gemfile"
+  - "Gemfile.lock"
+  - "tailwind.config.js"
+  - "postcss.config.js"
+  # The publish workflow installs gems here; Jekyll must not build the gems' template files.
+  - "vendor"

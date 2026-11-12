@@ -2,6 +2,7 @@
 title: "How to Tell If Your Tree Is Dangerous: A Homeowner’s Safety Checklist"
 date: 2026-10-03 09:00:00 -0600
 permalink: /blog/how-to-tell-if-your-tree-is-dangerous-homeowners-safety-checklist.html
+description: "Use this ground-level safety checklist to spot concerning tree changes, stay clear of hazards and know when to call an arborist."
 ---
 
 Trees rarely announce a problem with one unmistakable warning. A new crack, a hanging limb, or a patch of lifted soil can matter more when it appears alongside other changes, especially after a storm or nearby construction. Use this checklist to notice concerns from a safe distance. It is not a diagnosis, and a single sign does not automatically mean a tree must be removed.

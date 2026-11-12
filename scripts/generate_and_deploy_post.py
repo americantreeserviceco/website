@@ -1,3 +1,4 @@
+import json
 import os
 import re
 import subprocess
@@ -38,6 +39,36 @@ def run_git_command(commands, working_dir):
         raise
 
 
+def make_description(markdown):
+    """Create bounded metadata text from the first prose paragraph."""
+    for paragraph in re.split(r"\n\s*\n", markdown):
+        paragraph = paragraph.strip()
+        if not paragraph or re.match(r"^#{1,6}\s+", paragraph):
+            continue
+        text = paragraph
+        text = re.sub(r"^\s*(?:[-*+]|\d+\.)\s+", "", text)
+        text = re.sub(r"!\[([^\]]*)\]\([^)]*\)", r"\1", text)
+        text = re.sub(r"\[([^\]]+)\]\([^)]*\)", r"\1", text)
+        text = re.sub(r"[`*_>#]", "", text)
+        text = re.sub(r"\s+", " ", text).strip()
+        if text:
+            if len(text) > 160:
+                shortened = text[:157].rsplit(" ", 1)[0].rstrip(" ,;:")
+                return f"{shortened}..."
+            return text
+    return ""
+
+
+def validate_post(post_path):
+    """Run source and rendered-site checks before allowing the post to publish."""
+    validator = os.path.join(PROJECT_ROOT, "scripts", "validate_blog_posts.py")
+    subprocess.run(
+        [sys.executable, validator, "--root", JEKYLL_REPO_PATH, "--candidate", post_path],
+        cwd=JEKYLL_REPO_PATH,
+        check=True,
+    )
+
+
 def create_and_push_blog_post(topic_prompt):
     """Generate a post with Ollama and publish it to the local Jekyll repo."""
     if not os.path.isdir(JEKYLL_REPO_PATH):
@@ -60,7 +91,13 @@ def create_and_push_blog_post(topic_prompt):
     try:
         response = ollama.generate(
             model=OLLAMA_MODEL,
-            prompt=f"Write a comprehensive blog post about: {topic_prompt}",
+            prompt=(
+                f"Write a useful, accurate blog post about: {topic_prompt}\n"
+                "Return only the article body in Markdown. Do not include YAML front matter, "
+                "title options, a meta description, table of contents, SEO notes, or social posts. "
+                "Start with an introductory paragraph; use level-two headings for sections. "
+                "Avoid unsupported guarantees and unsafe do-it-yourself tree-work instructions."
+            ),
         )
     except Exception as exc:
         print(f"❌ Failed to reach Ollama. Is the server running? Error: {exc}")
@@ -85,17 +122,47 @@ def create_and_push_blog_post(topic_prompt):
         os.makedirs(posts_dir)
 
     full_path = os.path.join(posts_dir, filename)
+    if os.path.exists(full_path):
+        print(f"❌ Refusing to overwrite an existing post: {full_path}")
+        return
 
+    description = make_description(post_content)
+    if not description:
+        print("❌ Could not create a description from the generated article. Nothing was saved.")
+        return
+
+    jekyll_post = f"""---
+title: {json.dumps(topic_prompt.strip(), ensure_ascii=False)}
+date: {today_date}
+description: {json.dumps(description, ensure_ascii=False)}
+---
+
+{post_content}
+"""
     with open(full_path, "w", encoding="utf-8") as handle:
-        handle.write(post_content)
+        handle.write(jekyll_post)
     print(f"📝 Step 2: Post successfully generated and written to local file: {filename}")
+
+    try:
+        print("🔎 Validating all blog posts and building the rendered site before publishing...")
+        validate_post(full_path)
+    except (OSError, subprocess.CalledProcessError) as exc:
+        print(
+            f"\n❌ Blog validation failed; the post was not staged or published: {exc}. "
+            f"Review the draft at {full_path}."
+        )
+        return
 
     print("🚀 Step 3: Pushing new content live to GitHub Pages...")
     try:
-        run_git_command(["git", "add", "-f", full_path], JEKYLL_REPO_PATH)
+        relative_path = os.path.relpath(full_path, JEKYLL_REPO_PATH)
+        run_git_command(["git", "add", "-f", "--", relative_path], JEKYLL_REPO_PATH)
 
         commit_message = f"Auto-publish post via local Ollama: {topic_prompt[:40]}"
-        run_git_command(["git", "commit", "-m", commit_message], JEKYLL_REPO_PATH)
+        run_git_command(
+            ["git", "commit", "--only", "-m", commit_message, "--", relative_path],
+            JEKYLL_REPO_PATH,
+        )
 
         run_git_command(["git", "push", "origin", GIT_BRANCH], JEKYLL_REPO_PATH)
 

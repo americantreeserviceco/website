@@ -860,17 +860,119 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 			.november-theme .hero-brand { margin-bottom: 8px; padding: 6px 7px; font-size: 10px; letter-spacing: 0; white-space: nowrap; }
 			.november-theme .hero-cta-orbit { justify-self: center; }
 		}
+		/* Christmas palette for the winter theme: red, pine green and gold on warm white */
+		body.winter-theme {
+			--primary: #b3261e;
+			--secondary: #1e5631;
+			--accent: #d4af37;
+			--light: #fff7ec;
+			--dark: #222222;
+			background-color: #fffdf8;
+		}
+		/* Winter hero (homepage, Dec to Feb via body.winter-theme or ?theme=winter) */
+		.hero-winter-art { display: none; }
+		html.santa-off .hero-winter-art { display: none; }
+		.winter-theme .hero-halloween-art,
+		.winter-theme .hero-november-art { display: none; }
+		.winter-theme .hero-content {
+			display: grid;
+			grid-template-columns: minmax(0, 1fr) minmax(250px, 380px);
+			grid-template-areas: "brand art" "title art" "copy art" "cta art";
+			align-items: center;
+			column-gap: clamp(28px, 5vw, 72px);
+			max-width: 1080px;
+			text-align: left;
+		}
+		.winter-theme .hero-brand { grid-area: brand; justify-self: start; animation: none; }
+		.winter-theme .hero h1 { grid-area: title; }
+		.winter-theme .hero p { grid-area: copy; }
+		.winter-theme .hero-cta-orbit { grid-area: cta; justify-self: start; }
+		.winter-theme .hero-winter-art {
+			display: block;
+			grid-area: art;
+			width: 100%;
+			max-width: 380px;
+			height: auto;
+			aspect-ratio: 427 / 513;
+			justify-self: center;
+			object-fit: contain;
+			filter: drop-shadow(0 14px 22px rgba(0, 0, 0, 0.28));
+		}
+		@media (max-width: 640px) {
+			.winter-theme .hero-content { grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: "brand art" "title title" "copy copy" "cta cta"; column-gap: 8px; row-gap: 0; text-align: center; }
+			.winter-theme .hero-winter-art { width: min(32vw, 130px); max-width: none; justify-self: end; }
+			.winter-theme .hero-brand { margin-bottom: 8px; padding: 6px 7px; font-size: 10px; letter-spacing: 0; white-space: nowrap; }
+			.winter-theme .hero-cta-orbit { justify-self: center; }
+		}
+		/* January and February retain winter colours without reserving a Santa column. */
+		html.santa-off .hero-content {
+			grid-template-columns: minmax(0, 1fr);
+			grid-template-areas: "brand" "title" "copy" "cta";
+			max-width: 800px;
+			text-align: center;
+		}
+		html.santa-off .hero-brand,
+		html.santa-off .hero-cta-orbit { justify-self: center; }
+		/* Holiday lights (December via html.holiday-lights, or ?theme=winter). The hero text cycles red, green and gold
+		   for at most five seconds, then rests on gold, so it needs no pause control (WCAG 2.2.2). The solid panel is what
+		   keeps each colour readable: over the photo the red drops well below 4.5:1. */
+		.holiday-lights .hero-content::before {
+			content: "";
+			grid-area: 2 / 1 / 5 / 2;
+			align-self: stretch;
+			margin: -12px;
+			border-radius: 16px;
+			background: #101b33;
+		}
+		.holiday-lights .hero h1,
+		.holiday-lights .hero p,
+		.holiday-lights .hero .btn { color: #ffd166; animation-name: holiday-lights; animation-timing-function: steps(1, end); }
+		.holiday-lights .hero h1 { animation-duration: 2.4s; animation-iteration-count: 2; }
+		.holiday-lights .hero p { animation-duration: 3.1s; animation-delay: 0.35s; animation-iteration-count: 1.5; }
+		/* The button takes the panel colour because none of the three text colours are readable on the usual gold fill. */
+		.holiday-lights .hero .btn {
+			animation-duration: 1.9s;
+			animation-delay: 0.7s;
+			animation-iteration-count: 2;
+			background-color: #101b33;
+			box-shadow: inset 0 0 0 2px #ffd166;
+		}
+		.holiday-lights .hero .btn:hover,
+		.holiday-lights .hero .btn:focus-visible { background-color: #101b33; text-decoration: underline; }
+		.holiday-lights .hero .btn:focus-visible { outline: 2px solid #ffffff; outline-offset: 2px; }
+		@keyframes holiday-lights {
+			0%, 100% { color: #ff4d5a; }
+			33% { color: #56d68d; }
+			66% { color: #ffd166; }
+		}
+		@media (prefers-reduced-motion: reduce) {
+			.holiday-lights .hero h1,
+			.holiday-lights .hero p,
+			.holiday-lights .hero .btn { animation: none; color: #ff4d5a; }
+		}
+		@media (max-width: 640px) {
+			.holiday-lights .hero-content::before { grid-area: 2 / 1 / 5 / 3; }
+		}
 	</style>
 	<script src="/assets/js/halloween-theme.js" defer></script>
 	<script src="/assets/js/november-theme.js" defer></script>
+		<script src="/assets/js/winter-theme.js" defer></script>
 	<script src="/assets/js/severe-alerts.js" defer></script>
 	<script src="/assets/js/contact-autoreply.js" defer></script>
+
+  <style>
+    .thanksgiving-graphic { padding: 0; border: 0; background: transparent; cursor: pointer; }
+    .november-theme .thanksgiving-graphic { aspect-ratio: 1; }
+    .thanksgiving-graphic:focus-visible { outline: 3px solid var(--accent); outline-offset: 5px; border-radius: 16px; }
+    .hero-november-art.thanksgiving-graphic img { position: static; display: block; width: 100%; height: auto; }
+  </style>
+  <script src="/assets/js/thanksgiving-tracking.js" defer></script>
 </head>
 <body>
 	<header>
 		<div class="nav-container">
 			<a class="logo" href="/" aria-label="American Tree Colorado home">
-				<img src="assets/images/optimized/AmericanTree_Logo_RGB-gbp.webp" alt="American Tree Colorado logo">
+				<img src="assets/images/optimized/AmericanTree_Logo_RGB.webp" alt="American Tree Colorado logo">
 			</a>
 			<button class="nav-toggle" type="button" aria-label="Toggle menu" aria-expanded="false">Menu</button>
 			<nav aria-label="Main navigation">
@@ -892,12 +994,15 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 			<div class="hero-content">
 				<div class="hero-brand">American Tree Colorado</div>
 				<img class="hero-halloween-art" src="assets/images/optimized/halloween-boo.webp" alt="" aria-hidden="true">
-				<div class="hero-november-art" aria-hidden="true"><img class="turkey-tail" src="assets/images/seasonal/turkey.webp" alt=""><img class="turkey-body" src="assets/images/seasonal/turkey.webp" alt=""></div>
+				<button class="hero-november-art thanksgiving-graphic" id="thanksgiving-graphic" type="button" aria-label="Start your tree care estimate">
+                  <img src="/assets/images/seasonal/pilgim-poca.png" width="514" height="514" decoding="async" alt="Thanksgiving cartoon of a Native American and Pilgrim with a young tree and pumpkin">
+                </button>
+				<img class="hero-winter-art" src="assets/images/seasonal/christmas/santa.webp" alt="" aria-hidden="true">
 				<h1>Certified Arborist Tree Care for Golden and the Denver Metro Area</h1>
 				<p>Locally based and serving Colorado since 1993. Get knowledgeable care for tree health, pruning, removals, and storm hazards.</p>
 				<div class="hero-cta-orbit">
 					<a class="btn" href="/contact/">Request a Free Estimate</a>
-					<img class="hero-leaves" src="assets/images/autumn-leaves.svg" alt="" aria-hidden="true">
+					<img class="hero-leaves" src="assets/images/seasonal/autumn-leaves.svg" alt="" aria-hidden="true">
 				</div>
 			</div>
 		</section>
@@ -929,11 +1034,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 			<div class="inner">
 				<div class="stats-grid">
 					<div class="stat">
-						<strong>31+</strong>
-						<span>Years serving Colorado</span>
+						<strong>46+</strong>
+						<span>Years of experience</span>
 					</div>
 					<div class="stat">
-						<strong>6</strong>
+						<strong>7</strong>
 						<span>Core services</span>
 					</div>
 					<div class="stat">
@@ -991,6 +1096,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 					<h3>Winter Root Fertilization</h3>
 					<p>Support root health with seasonal fertilization for Colorado trees.</p>
 					<a href="/services/winter-root-fertilization/">Explore root fertilization</a>
+				</article>
+				<article class="card">
+					<h3>Plant Health Care</h3>
+					<p>Find out what is really affecting a tree, then treat only what is there.</p>
+					<a href="/services/plant-health-care/">Explore plant health care</a>
 				</article>
 			</div>
 		</section>

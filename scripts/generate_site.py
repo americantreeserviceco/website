@@ -150,7 +150,7 @@ def testimonial(root, loc):
         
     return f"""> {t['quote']}
 >
-> \- {t['name']}, {LOCATIONS[loc]}, CO{photo_md}"""
+> \\- {t['name']}, {LOCATIONS[loc]}, CO{photo_md}"""
 
 
 def cta_banner():
@@ -165,9 +165,9 @@ def quote_form(default_service=None):
     return f"""## Get Your Free Estimate
 <a id="quote"></a>
 Please submit your inquiry details below{svc_context}:
-* **Name:** \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
-* **Phone:** \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
-* **Message:** \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_"""
+* **Name:** \\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_
+* **Phone:** \\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_
+* **Message:** \\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_"""
 
 
 def footer(root, loc=None):

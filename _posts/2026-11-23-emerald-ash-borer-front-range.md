@@ -39,7 +39,7 @@ Healthy ash trees can be protected with systemic insecticide treatments, typical
 
 ### 2. Remove a declining ash
 
-Trees that have already lost a large share of their canopy are generally poor candidates for treatment. Ash killed by EAB becomes brittle quickly, which makes removal more dangerous and more expensive the longer it waits. Planned [tree removal](/services/tree-removal/) on your schedule is safer than an emergency removal after a limb comes down.
+Trees that have already lost a large share of their canopy are generally poor candidates for treatment. Dead or declining trees can become increasingly hazardous as they deteriorate, so have them assessed and plan any needed [tree removal](/services/tree-removal/) with a qualified professional.
 
 ### 3. Plan a replacement
 
@@ -53,7 +53,7 @@ Many homeowners remove a struggling ash and plant a different species, so shade 
 
 ## Help slow the spread
 
-Don't move ash firewood or wood debris out of your area. Moving infested wood is one of the main ways EAB reaches new neighborhoods.
+Avoid moving ash firewood or wood debris, and check current state and local rules before transporting it. Moving infested wood can help spread EAB to new areas.
 
 <div class="cta-box" markdown="1">
 **American Tree Colorado has cared for Front Range trees since 1993.** Whether your ash should be protected or removed, we'll give you a straight answer. [Request your free estimate](/contact/).

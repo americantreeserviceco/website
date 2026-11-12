@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 200" aria-hidden="true">
+  <style>
+    .orbit { transform-box: view-box; transform-origin: 180px 100px; animation: carousel 16s linear infinite; }
+    @keyframes carousel { to { transform: rotate(360deg); } }
+    @media (prefers-reduced-motion: reduce) { .orbit { animation: none; } }
+  </style>
+  <defs>
+    <g id="clover" stroke="#195b31" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M0 2C3 8 4 12 0 16" fill="none" stroke-width="2.5"/>
+      <path d="M0 2C-4-3-11-9-7-14C-4-18 0-16 0-12C0-16 4-18 7-14C11-9 4-3 0 2Z"/>
+      <path d="M0 2C-6 4-15 5-16-1C-17-6-13-8-10-5C-13-8-12-12-7-11C-1-10 0-3 0 2Z"/>
+      <path d="M0 2C6 4 15 5 16-1C17-6 13-8 10-5C13-8 12-12 7-11C1-10 0-3 0 2Z"/>
+      <path d="M0-3V-10M-4-2-10-4M4-2 10-4" fill="none" stroke="#c3ef9b" stroke-width="1"/>
+    </g>
+  </defs>
+  <g class="orbit">
+    <use href="#clover" transform="translate(180 30) rotate(-15)" fill="#48b84e"/>
+    <use href="#clover" transform="translate(340 100) rotate(15)" fill="#79cf53"/>
+    <use href="#clover" transform="translate(180 170) rotate(15)" fill="#269c46"/>
+    <use href="#clover" transform="translate(20 100) rotate(-15)" fill="#65bd42"/>
+  </g>
+</svg>

@@ -17,6 +17,18 @@
 	const AWAY = [
 	];
 
+	// Daily form loads vs submissions for the dashboard's "Website estimate form" card (form-beacon Worker).
+	// Sends only the event and page path; nothing typed into the form.
+	const STATS_URL = 'https://form-beacon.snowseasons.workers.dev/';
+
+	function track(event) {
+		try {
+			if (navigator.sendBeacon) navigator.sendBeacon(STATS_URL, JSON.stringify({ e: event, p: location.pathname }));
+		} catch (error) {
+			// Counting must never get in the way of the form.
+		}
+	}
+
 	const TIME_ZONE = 'America/Denver';
 	const PHONE_DISPLAY = '(303) 456-6898';
 	const PHONE_LINK = 'tel:+13034566898';
@@ -53,7 +65,11 @@
 		const now = denverNow();
 		const today = new Date(Date.UTC(now.year, now.month - 1, now.day));
 
-		for (let offset = 0; offset < 60; offset += 1) {
+		// Search beyond every configured absence, plus a full week for the next office day.
+		const lastAwayEnd = AWAY.reduce((latest, range) =>
+			Math.max(latest, Date.parse(`${range.to}T00:00:00Z`) || 0), today.getTime());
+		const searchDays = Math.ceil((lastAwayEnd - today.getTime()) / 86400000) + 8;
+		for (let offset = 0; offset < searchDays; offset += 1) {
 			const date = new Date(today.getTime() + offset * 86400000);
 			const hours = HOURS[date.getUTCDay()];
 			if (!hours || isAway(date)) continue;
@@ -89,21 +105,39 @@
 		document.head.appendChild(style);
 	}
 
-	function backAt(status) {
-		return status.nextOpen ? `, <strong>${status.nextOpen}</strong>` : '';
+	function appendPhoneLink(parent) {
+		const link = document.createElement('a');
+		link.href = PHONE_LINK;
+		link.textContent = PHONE_DISPLAY;
+		parent.appendChild(link);
+	}
+
+	function appendBackAt(parent, status) {
+		if (!status.nextOpen) return;
+		parent.appendChild(document.createTextNode(" "));
+		const strong = document.createElement('strong');
+		strong.textContent = status.nextOpen;
+		parent.appendChild(strong);
 	}
 
 	function noteFor(status) {
 		const note = document.createElement('p');
 		note.className = status.available ? 'autoreply-note' : 'autoreply-note is-away';
 		note.setAttribute('role', 'status');
-		note.innerHTML = status.available
-			? 'Mandi is in the office now and usually replies within a few hours.'
-			: `Mandi is out of the office right now. Send your message anyway and she'll reply when she's back${backAt(status)}. Urgent tree hazard or storm damage? Call <a href="${PHONE_LINK}">${PHONE_DISPLAY}</a>.`;
+
+		if (status.available) {
+			note.textContent = 'Mandi is in the office now. For urgent tree concerns, the typical response is same-day or next-business-day.';
+		} else {
+			note.appendChild(document.createTextNode("Mandi is out of the office right now. Send your message anyway and she'll reply when she's back"));
+			appendBackAt(note, status);
+			note.appendChild(document.createTextNode('. Urgent tree hazard or storm damage? Call '));
+			appendPhoneLink(note);
+			note.appendChild(document.createTextNode('.'));
+		}
 		return note;
 	}
 
-	function replyFor(status, name) {
+	function replyFor(status, name, hasEmail) {
 		const reply = document.createElement('div');
 		reply.className = 'autoreply-reply';
 		reply.setAttribute('role', 'status');
@@ -114,13 +148,25 @@
 		reply.appendChild(heading);
 
 		const body = document.createElement('p');
-		body.innerHTML = status.available
-			? 'Mandi is in the office today and usually replies within a few hours. Keep an eye on your inbox, and check your spam folder if you don’t see it.'
-			: `Mandi is out of the office right now, so your message is first in line. She'll reply when she's back${backAt(status)}. Keep an eye on your inbox, and check your spam folder if you don’t see it.`;
+		if (status.available) {
+			body.appendChild(document.createTextNode('Mandi is in the office today. For urgent tree concerns, the typical response is same-day or next-business-day. '));
+		} else {
+			body.appendChild(document.createTextNode("Mandi is out of the office right now. She'll reply when she's back"));
+			appendBackAt(body, status);
+			body.appendChild(document.createTextNode('. '));
+		}
+		body.appendChild(document.createTextNode(hasEmail
+			? 'Keep an eye on your inbox, and check your spam folder if you don’t see it.'
+			: 'Mandi will contact you at the phone number you provided.'));
 		reply.appendChild(body);
 
 		const urgent = document.createElement('p');
-		urgent.innerHTML = `<strong>Can't wait?</strong> For a fallen tree, storm damage, or a branch on a roof or power line, call <a href="${PHONE_LINK}">${PHONE_DISPLAY}</a>.`;
+		const emphasis = document.createElement('strong');
+		emphasis.textContent = "Can't wait?";
+		urgent.appendChild(emphasis);
+		urgent.appendChild(document.createTextNode(' For a fallen tree, storm damage, or a branch on a roof or power line, call '));
+		appendPhoneLink(urgent);
+		urgent.appendChild(document.createTextNode('.'));
 		reply.appendChild(urgent);
 
 		return reply;
@@ -138,11 +184,18 @@
 	}
 
 	function enhance(form) {
-		form.parentNode.insertBefore(noteFor(availability()), form);
+		let note = noteFor(availability());
+		form.parentNode.insertBefore(note, form);
+		let pending = false;
 
 		form.addEventListener('submit', async (event) => {
 			event.preventDefault();
+			if (pending) return;
+			pending = true;
 			const status = availability();
+			const freshNote = noteFor(status);
+			note.replaceWith(freshNote);
+			note = freshNote;
 			const button = form.querySelector('[type="submit"]');
 			const buttonText = button ? button.textContent : '';
 			const previousError = form.querySelector('.autoreply-error');
@@ -150,47 +203,76 @@
 
 			// Tells Mandi, in the notification email, what the sender was promised.
 			setHidden(form, 'Availability when sent', status.available
-				? 'In office (sender told: reply within a few hours)'
+				? 'In office (sender told: same-day or next-business-day for urgent tree concerns)'
 				: `Out of office (sender told: reply when she's back${status.nextOpen ? `, ${status.nextOpen}` : ''})`);
 
-			if (button) {
-				button.disabled = true;
-				button.textContent = 'Sending…';
-			}
-
+			// Capture exactly what is sent before locking fields during the request.
+			const data = new FormData(form);
+			const firstName = String(data.get('name') || '').trim().split(/\s+/)[0];
+			const hasEmail = Boolean(String(data.get('email') || data.get('_replyto') || '').trim());
+			const controls = Array.from(form.elements);
+			const disabledBefore = controls.map((control) => control.disabled);
+			controls.forEach((control) => { control.disabled = true; });
+			form.setAttribute('aria-busy', 'true');
+			if (button) button.textContent = 'Sending…';
+			const controller = new AbortController();
+			let timer;
+			let rejected = false;
 			try {
-				const response = await fetch(form.action, {
-					method: 'POST',
-					body: new FormData(form),
-					headers: { Accept: 'application/json' },
-				});
-				if (!response.ok) throw new Error(`Formspree returned ${response.status}`);
-
-				const nameField = form.querySelector('[name="name"]');
-				const firstName = nameField ? nameField.value.trim().split(/\s+/)[0] : '';
-				const reply = replyFor(status, firstName);
-				const note = form.previousElementSibling;
-				if (note && note.classList.contains('autoreply-note')) note.remove();
+				// Race as well as abort so even a stalled fetch implementation releases the form.
+				const response = await Promise.race([
+					fetch(form.action, {
+						method: 'POST', body: data,
+						headers: { Accept: 'application/json' }, signal: controller.signal,
+					}),
+					new Promise((resolve, reject) => {
+						timer = setTimeout(() => {
+							controller.abort();
+							reject(new Error('Submission timed out'));
+						}, 20000);
+					}),
+				]);
+				if (!response.ok) {
+					// Server errors can follow acceptance; only client rejections are definite.
+					rejected = response.status >= 400 && response.status < 500;
+					throw new Error(`Formspree returned ${response.status}`);
+				}
+				track('submit');
+				const reply = replyFor(status, firstName, hasEmail);
+				note.remove();
 				form.replaceWith(reply);
 				reply.focus();
 			} catch (error) {
-				if (button) {
-					button.disabled = false;
-					button.textContent = buttonText;
-				}
 				const message = document.createElement('p');
 				message.className = 'autoreply-error';
 				message.setAttribute('role', 'alert');
-				message.innerHTML = `Sorry, your message didn't go through. Please try again, or call <a href="${PHONE_LINK}">${PHONE_DISPLAY}</a>.`;
+				message.setAttribute('tabindex', '-1');
+				if (rejected) {
+					message.appendChild(document.createTextNode('Your submission was rejected. Please check your details before trying again, or call '));
+				} else {
+					message.appendChild(document.createTextNode("We couldn't confirm delivery. Your message may already have arrived. Please call "));
+				}
+				appendPhoneLink(message);
+				message.appendChild(document.createTextNode(rejected
+					? '.'
+					: ' before submitting again to avoid a duplicate.'));
 				form.appendChild(message);
+				message.focus();
+			} finally {
+				clearTimeout(timer);
+				controls.forEach((control, index) => { control.disabled = disabledBefore[index]; });
+				form.removeAttribute('aria-busy');
+				if (button) button.textContent = buttonText;
+				pending = false;
 			}
 		});
 	}
 
 	document.addEventListener('DOMContentLoaded', () => {
-		if (!window.fetch || !window.FormData || !window.Intl) return;
+		if (!window.fetch || !window.FormData || !window.Intl || !window.AbortController) return;
 		const forms = document.querySelectorAll('form[action*="formspree.io/f/"]');
 		if (!forms.length) return;
+		track('load');
 		injectStyles();
 		forms.forEach(enhance);
 	});

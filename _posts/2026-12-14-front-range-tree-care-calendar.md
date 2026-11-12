@@ -9,14 +9,14 @@ Trees on the Front Range deal with a lot: dry winters, wet spring snowstorms, su
 
 ## Winter (December to February)
 
-- **Structural pruning.** Dormant trees show their structure clearly and heal well in spring. [Why winter pruning works](/blog/dormant-season-pruning-colorado.html).
+- **Structural pruning.** The dormant season can make branch structure easier to assess, though pruning timing varies by species and purpose. [Learn about dormant-season pruning](/blog/dormant-season-pruning-colorado.html).
 - **Tree removals.** Firm ground and dormant landscapes make winter a great time to take down dead or hazardous trees. [Winter removal guide](/blog/winter-tree-removal-colorado.html).
 - **Winter watering.** Water during dry spells on days above 40°F. [How much and how often](/blog/winter-watering-trees-front-range.html).
 - **Ash tree decisions.** Assess ash trees for emerald ash borer and plan spring treatment or removal. [EAB guide](/blog/emerald-ash-borer-front-range.html).
 - **Remove holiday light wraps** before spring growth. [Decorating tips](/blog/holiday-lights-trees.html).
 
 <div class="cta-box" markdown="1">
-**Winter is our best season to get ahead.** Book [pruning](/services/tree-trimming-and-pruning/), [removals](/services/tree-removal/) and [winter root fertilization](/services/winter-root-fertilization/) now. [Request a free estimate](/contact/).
+**Winter is our best season to get ahead.** Book [pruning](/services/tree-trimming-and-pruning/) or [removals](/services/tree-removal/) now. Ask for an assessment before deciding whether fertilization is appropriate. [Request an estimate](/contact/).
 </div>
 
 ## Spring (March to May)
@@ -38,7 +38,7 @@ Trees on the Front Range deal with a lot: dry winters, wet spring snowstorms, su
 
 - **Prepare for early snow.** Front Range storms can arrive while trees still have leaves. [What to do before and after](/blog/early-snow-front-range-trees.html).
 - **Fall planting** works well while soil is still warm.
-- **Winter root fertilization** feeds roots heading into dormancy. [Learn more](/blog/winter-root-fertilization.html).
+- **Fertilizer only when needed.** Many shade trees do not need additional nutrients; get a diagnosis before applying fertilizer. [Learn when fertilization may be appropriate](/blog/winter-root-fertilization.html).
 - **Begin winter watering** once fall rains end.
 - **Hire before you need to.** Our guide on [how to choose a tree service](/blog/how-to-choose-a-tree-service-colorado.html) explains what to ask.
 
