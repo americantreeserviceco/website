@@ -38,7 +38,7 @@ ensuring your trees are healthy, beautiful, and safe.
 
 - **Address:** Golden, CO 80401
 - **Phone:** (303) 456-6898
-- **Email:** info@americantreeserviceco.com
+- **Email:** mandi@americantreecolorado.com
 - **Hours:** Monday - Friday: 8:00 AM - 5:00 PM  
   Saturday: 9:00 AM - 3:00 PM  
   Sunday: Closed
