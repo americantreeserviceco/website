@@ -12,7 +12,7 @@ DB_CONFIG = {
     "host": "localhost",
     "user": "uselesse",
     "password": "ericvbrooks",  # Replace with actual user password
-    "database": "arborist",
+    "database": "arborist_platform",
     "port": 3306
 }
 
