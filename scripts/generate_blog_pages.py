@@ -72,12 +72,12 @@ def slug_from_filename(filename: str) -> str:
     return stem
 
 
-def page_template(title: str, body: str, current_page: str = "") -> str:
+def page_template(title: str, body: str, current_page: str = "", canonical_url: str = "") -> str:
     seasonal_styles = ""
     flip_card_script = ""
-    canonical_link = ""
     if current_page == "blog":
-        canonical_link = "\n  <link rel=\"canonical\" href=\"https://americantreeserviceco.com/blog/\" />"
+        # The blog index is served at /blog/, so it canonicalizes there rather than to itself.
+        canonical_url = "https://americantreeserviceco.com/blog/"
         seasonal_styles = """
     .seasonal-promo { display: block; margin: 2rem auto; }
     .seasonal-promo img { display: block; width: 100%; height: auto; border-radius: 18px; box-shadow: 0 20px 40px rgba(20, 31, 20, 0.18); }
@@ -127,6 +127,7 @@ def page_template(title: str, body: str, current_page: str = "") -> str:
       card.querySelector(flipped ? '.post-card-back .flip-card-button' : '.post-card-front .flip-card-button').focus();
     });
   </script>"""
+    canonical_link = f"\n  <link rel=\"canonical\" href=\"{canonical_url}\" />" if canonical_url else ""
     return f"""<!DOCTYPE html>
 <html lang=\"en\">
 <head>
@@ -314,7 +315,11 @@ def build_blog_pages() -> None:
 
     for post in posts:
         article_html = markdown_to_html(post["path"].read_text(encoding="utf-8"))
-        article_page = page_template(post["title"], f"<h1>{escape(post['title'])}</h1><div class=\"article-body\">{article_html}</div>")
+        article_page = page_template(
+            post["title"],
+            f"<h1>{escape(post['title'])}</h1><div class=\"article-body\">{article_html}</div>",
+            canonical_url=f"https://americantreeserviceco.com/blog/{post['url']}",
+        )
         (BLOG_DIR / post["url"]).write_text(article_page, encoding="utf-8")
 
     index_items = []
