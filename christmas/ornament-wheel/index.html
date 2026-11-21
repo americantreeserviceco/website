@@ -749,7 +749,6 @@
          * PRIZE CARD DOWNLOADS (PNG / JPG only)
          */
         let lastWon = null;
-        let downloadsApi = null;
         let downloadsReady = false;
 
         function setDlStatus(msg, bad) {
@@ -844,7 +843,7 @@
             const pw = g.measureText(ptsText).width + 110, ph = 100, px = (S - pw) / 2, py = 805;
             g.fillStyle = '#FFF6DD';
             g.beginPath();
-            g.roundRect(px, py, pw, ph, ph / 2);
+            if (g.roundRect) g.roundRect(px, py, pw, ph, ph / 2); else g.rect(px, py, pw, ph);
             g.fill();
             g.fillStyle = '#10201a';
             g.fillText(ptsText, S / 2, py + 70);
@@ -866,21 +865,32 @@
             return new Promise((resolve, reject) => canvas.toBlob(b => b ? resolve(b) : reject(new Error('encode failed')), type, quality));
         }
 
+        // Save a blob through a temporary link. Browsers cannot confirm the save, so the message only says it started.
+        function saveBlob(blob, filename) {
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = filename;
+            a.rel = 'noopener';
+            document.body.appendChild(a);
+            a.click();
+            a.remove();
+            setTimeout(() => URL.revokeObjectURL(url), 30000);
+        }
+
         async function downloadPrize(item, fmt) {
-            if (!downloadsApi || !item) return;
+            if (!item) return;
             if (fmt !== 'png' && fmt !== 'jpg') return;   // PNG / JPG only
             setDlStatus('Preparing your prize card…');
             try {
                 const card = await buildPrizeCard(item);
                 const blob = await canvasToBlob(card, fmt === 'jpg' ? 'image/jpeg' : 'image/png', 0.95);
                 const slug = String(item.isSpinAgain ? 'bonus-spin' : 'day-' + item.day) + '-' + item.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
-                const res = await downloadsApi.save({ filename: `12-days-of-christmas-${slug}.${fmt}`, data: blob });
-                setDlStatus(res && res.status === 'saved' ? `Saved as ${fmt.toUpperCase()}!` : '');
+                saveBlob(blob, `12-days-of-christmas-${slug}.${fmt}`);
+                setDlStatus(`Your ${fmt.toUpperCase()} prize card is downloading.`);
             } catch (e) {
                 console.warn('prize card download failed', e);
-                if (e && e.code === 'declined') setDlStatus('');
-                else if (e && e.code === 'rate_limited') setDlStatus('One moment, then try again.', true);
-                else setDlStatus('Download is not available right now.', true);
+                setDlStatus('Download is not available right now.', true);
             }
         }
 
@@ -889,16 +899,13 @@
             if (item) { lastWon = lastWon || null; downloadPrize(item, fmt); }
         }
 
-        async function initDownloads() {
-            try {
-                downloadsApi = (window.claude && window.claude.use) ? await window.claude.use('downloads') : null;
-            } catch (e) { downloadsApi = null; }
-            downloadsReady = !!downloadsApi;
-            if (downloadsReady) {
-                document.getElementById('modal-download-row').style.display = 'flex';
-                document.querySelectorAll('.dl-btn').forEach(b => b.addEventListener('click', () => downloadPrize(lastWon, b.dataset.fmt)));
-                renderHistory();
-            }
+        function initDownloads() {
+            // Prize cards are drawn on a canvas and saved as an image, which every current browser supports.
+            downloadsReady = typeof HTMLCanvasElement !== 'undefined' && !!HTMLCanvasElement.prototype.toBlob;
+            if (!downloadsReady) return;
+            document.getElementById('modal-download-row').style.display = 'flex';
+            document.querySelectorAll('.dl-btn').forEach(b => b.addEventListener('click', () => downloadPrize(lastWon, b.dataset.fmt)));
+            renderHistory();
         }
 
         /**
@@ -1091,4 +1098,3 @@
     </script>
 </body>
 </html>
-</body></html>
