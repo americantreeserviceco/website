@@ -977,9 +977,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 		.holiday-band .btn { background: #e8b53a; color: #14351f; }
 		.holiday-band .btn:hover, .holiday-band .btn:focus-visible { background: #f2c85a; color: #14351f; }
 	</style>
-	<script src="/assets/js/halloween-theme.js" defer></script>
-	<script src="/assets/js/november-theme.js" defer></script>
-		<script src="/assets/js/winter-theme.js" defer></script>
+	<!-- The season scripts are tiny and run before the page is drawn, so the hero never shows its default layout first. -->
+	<script src="/assets/js/halloween-theme.js"></script>
+	<script src="/assets/js/november-theme.js"></script>
+	<script src="/assets/js/winter-theme.js"></script>
 	<script src="/assets/js/blowing-leaves.js" defer></script>
 	<script src="/assets/js/severe-alerts.js" defer></script>
 	<script src="/assets/js/contact-autoreply.js" defer></script>
@@ -993,6 +994,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <script src="/assets/js/thanksgiving-tracking.js" defer></script>
 </head>
 <body>
+	<script>
+		// The season scripts above set their class on <html> before the page exists; copy it onto <body> straight away.
+		['halloween-theme', 'november-theme', 'winter-theme'].forEach(function (name) {
+			if (document.documentElement.classList.contains(name)) document.body.classList.add(name);
+		});
+	</script>
 	<header>
 		<div class="nav-container">
 			<a class="logo" href="/" aria-label="American Tree Colorado home">
@@ -1017,11 +1024,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 		<section class="hero" fetchpriority="high">
 			<div class="hero-content">
 				<div class="hero-brand">American Tree Colorado</div>
-				<img class="hero-halloween-art" src="assets/images/optimized/halloween-boo.webp" alt="" aria-hidden="true">
+				<img class="hero-halloween-art" src="assets/images/optimized/halloween-boo.webp" loading="lazy" alt="" aria-hidden="true">
 				<button class="hero-november-art thanksgiving-graphic" id="thanksgiving-graphic" type="button" aria-label="Start your tree care estimate">
-                  <img src="/assets/images/seasonal/pilgim-poca.png" width="514" height="514" decoding="async" alt="Thanksgiving cartoon of a Native American and Pilgrim with a young tree and pumpkin">
+                  <img src="/assets/images/seasonal/pilgim-poca.webp" srcset="/assets/images/seasonal/pilgim-poca-260.webp 260w, /assets/images/seasonal/pilgim-poca.webp 514w" sizes="(max-width: 640px) 130px, 380px" width="514" height="514" decoding="async" loading="lazy" alt="Thanksgiving cartoon of a Native American and Pilgrim with a young tree and pumpkin">
                 </button>
-				<img class="hero-winter-art" src="assets/images/seasonal/christmas/santa.webp" alt="" aria-hidden="true">
+				<img class="hero-winter-art" src="assets/images/seasonal/christmas/santa.webp" loading="lazy" alt="" aria-hidden="true">
 				<h1>Certified Arborist Tree Care for Golden and the Denver Metro Area</h1>
 				<p>Locally based and serving Colorado since 1993. Get knowledgeable care for tree health, pruning, removals, and storm hazards.</p>
 				<div class="hero-cta-orbit">
