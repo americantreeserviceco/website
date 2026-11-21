@@ -359,6 +359,23 @@ h1, h2, h3 { color: var(--forest-900); line-height: 1.12; letter-spacing: -0.02e
 
 .text-link { font-weight: 700; }
 
+/* Ornament wheel promo */
+.wheel-ornaments {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.wheel-ornaments img {
+  height: 120px;
+  width: auto;
+  filter: drop-shadow(0 8px 10px rgba(20, 53, 31, 0.25));
+}
+
+.wheel-promo .xmas-actions { justify-content: center; }
+
 /* Closing call to action and greeting */
 .xmas-cta {
   background: var(--forest-900);
@@ -456,6 +473,8 @@ h1, h2, h3 { color: var(--forest-900); line-height: 1.12; letter-spacing: -0.02e
   .footer-links { justify-content: flex-start; }
   .xmas-cta { padding: 3rem 0; }
   .xmas-cta .xmas-actions .btn { width: 100%; }
+  .wheel-ornaments { gap: 0.6rem; }
+  .wheel-ornaments img { height: 76px; }
 }
 
 @media (prefers-reduced-motion: reduce) {

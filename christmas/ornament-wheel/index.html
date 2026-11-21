@@ -1,0 +1,1094 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Christmas Ornament Wheel | American Tree Colorado</title>
+    <meta name="description" content="Spin the Christmas Ornament Wheel from American Tree Colorado and collect all 12 Days of Christmas ornaments. A free holiday game, just for fun.">
+    <link rel="canonical" href="https://americantreeserviceco.com/christmas/ornament-wheel/">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="American Tree Colorado">
+    <meta property="og:title" content="Christmas Ornament Wheel | American Tree Colorado">
+    <meta property="og:description" content="Spin the wheel and collect all 12 Days of Christmas ornaments.">
+    <meta property="og:url" content="https://americantreeserviceco.com/christmas/ornament-wheel/">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-JTRR29NY4W"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-JTRR29NY4W');
+    </script>
+    <!-- Self-hosted styles, icons, fonts and confetti (no external CDN) -->
+    <link rel="stylesheet" href="game-assets/games.tailwind.css">
+    <link rel="stylesheet" href="game-assets/fontawesome/css/all.min.css">
+    <link rel="stylesheet" href="game-assets/fonts.css">
+    <script src="game-assets/confetti.browser.js"></script>
+
+    <style>
+        .font-holiday {
+            font-family: 'Mountains of Christmas', cursive;
+        }
+        .font-body {
+            font-family: 'Nunito', sans-serif;
+        }
+        /* Custom scrollbar for prize lists */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: rgba(15, 23, 42, 0.6);
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(220, 38, 38, 0.6);
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(220, 38, 38, 0.9);
+        }
+        /* Glowing neon-like border for Christmas vibe */
+        .glow-gold {
+            box-shadow: 0 0 20px rgba(234, 179, 8, 0.5);
+        }
+        .glow-red {
+            box-shadow: 0 0 25px rgba(220, 38, 38, 0.6);
+        }
+    </style>
+</head>
+<body class="h-full bg-slate-950 text-slate-100 font-body overflow-x-hidden selection:bg-red-600 selection:text-white">
+    <!-- Snow Canvas Background -->
+    <canvas id="snow-canvas" class="fixed inset-0 pointer-events-none z-0"></canvas>
+
+    <div class="relative z-10 min-h-screen flex flex-col justify-between max-w-7xl mx-auto px-4 py-6">
+
+        <!-- Links back into the American Tree site -->
+        <nav aria-label="Site links" style="display:flex;flex-wrap:wrap;justify-content:center;gap:6px 18px;margin-bottom:12px;font-size:14px;font-weight:700">
+            <a href="/christmas/" style="color:#fcd34d;text-decoration:underline;text-underline-offset:3px">&larr; Back to the Christmas page</a>
+            <a href="/" style="color:#fcd34d;text-decoration:underline;text-underline-offset:3px">American Tree Colorado home</a>
+        </nav>
+
+        <!-- Header -->
+        <header class="text-center mb-6">
+            <div class="inline-flex items-center justify-center space-x-3 mb-2">
+                <i class="fa-solid fa-holly-berry text-red-500 text-3xl"></i>
+                <h1 class="font-holiday text-4xl sm:text-6xl font-bold text-amber-300 drop-shadow-[0_4px_4px_rgba(0,0,0,0.8)] tracking-wide">
+                    Christmas Ornament Wheel
+                </h1>
+                <i class="fa-solid fa-holly-berry text-red-500 text-3xl"></i>
+            </div>
+            <p class="text-emerald-300 font-medium text-base sm:text-lg max-w-xl mx-auto">
+                Spin the wheel to win collectible glass Christmas ornaments. You get 12 spins, and a bonus ornament gives you a free extra spin!
+            </p>
+            <p style="margin:8px auto 0;max-width:36rem;font-size:13px;color:#cbd5e1">Just for fun: points and ornaments are saved on this device only.</p>
+
+            <!-- Collection counter -->
+            <div class="mt-4 flex flex-wrap items-center justify-center gap-4">
+                <div class="bg-gradient-to-r from-amber-600 via-amber-500 to-amber-600 text-slate-950 px-6 py-2.5 rounded-full shadow-lg font-extrabold flex items-center gap-3 border-2 border-amber-200 glow-gold">
+                    <i class="fa-solid fa-gift text-2xl text-slate-900"></i>
+                    <div class="text-left leading-none">
+                        <div class="text-[10px] uppercase tracking-wider text-slate-900/80 font-bold">Ornaments Collected</div>
+                        <div class="text-2xl sm:text-3xl font-black"><span id="collected-count">0</span> <span style="font-size:14px;font-weight:800">of 14</span></div>
+                    </div>
+                </div>
+
+                <div class="bg-slate-900/90 border border-amber-500/50 px-5 py-2.5 rounded-full shadow-lg font-bold flex items-center gap-2.5">
+                    <i class="fa-solid fa-dharmachakra text-amber-300 text-xl"></i>
+                    <div class="text-left leading-none">
+                        <div class="text-[10px] uppercase tracking-wider text-slate-400">Spins Left</div>
+                        <div class="text-lg font-extrabold text-amber-300"><span id="spins-left">12</span> <span class="text-xs font-normal text-slate-300">of 12 · <span id="spin-total">0/20 total</span></span></div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content Grid -->
+        <main class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start my-auto">
+
+            <!-- Left Panel: Rewards Store & Inventory -->
+            <section class="lg:col-span-4 bg-slate-900/80 backdrop-blur-md p-5 rounded-2xl border border-emerald-800/50 shadow-xl order-2 lg:order-1">
+                <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px"><h2 style="margin:0;font-size:17px;font-weight:800;color:#fcd34d">My Ornament Collection</h2><span id="collection-count" style="font-size:13px;font-weight:800;color:#6ee7b7">0/14</span></div>
+                <!-- Navigation Tabs (hidden) -->
+                <div style="display:none" class="flex border-b border-slate-700/60 mb-4 gap-2">
+                    <button id="tab-shop-btn" class="flex-1 py-2 text-sm font-bold text-amber-400 border-b-2 border-amber-400 flex items-center justify-center gap-1.5 transition">
+                        <i class="fa-solid fa-store text-emerald-400"></i> Rewards Shop
+                    </button>
+                    <button id="tab-inv-btn" class="flex-1 py-2 text-sm font-bold text-slate-400 border-b-2 border-transparent hover:text-slate-200 flex items-center justify-center gap-1.5 transition">
+                        <i class="fa-solid fa-trophy text-amber-400"></i> Inventory (<span id="inventory-count">0</span>)
+                    </button>
+                </div>
+
+                <!-- Rewards Shop View -->
+                <div id="shop-view" class="space-y-2.5 max-h-[440px] overflow-y-auto pr-1">
+                    <!-- Dynamic rendering of store items -->
+                </div>
+
+                <!-- Inventory View -->
+                <div id="inventory-view" class="hidden space-y-2.5 max-h-[440px] overflow-y-auto pr-1">
+                    <!-- Dynamic rendering of redeemed items -->
+                </div>
+            </section>
+
+            <!-- Center Panel: The Roulette Wheel -->
+            <section class="lg:col-span-8 flex flex-col items-center justify-center order-1 lg:order-2 relative">
+
+                <!-- Floating +Points Notification Overlay -->
+                <div id="floating-pts" class="pointer-events-none absolute top-10 z-40 text-4xl sm:text-5xl font-black text-amber-300 drop-shadow-[0_4px_8px_rgba(0,0,0,0.9)] opacity-0 transform translate-y-4 transition-all duration-700">
+                    +0 PTS
+                </div>
+
+                <div class="relative flex flex-col items-center">
+
+                    <!-- Wheel Top Pointer/Ticker -->
+                    <div class="absolute -top-5 z-30 flex flex-col items-center filter drop-shadow-[0_4px_6px_rgba(0,0,0,0.7)]">
+                        <div class="w-8 h-10 bg-gradient-to-b from-amber-300 to-amber-500 clip-pointer rounded-t-sm border-2 border-amber-200 flex items-center justify-center">
+                            <i class="fa-solid fa-caret-down text-red-700 text-xl mt-[-2px]"></i>
+                        </div>
+                    </div>
+
+                    <!-- Canvas Wheel Container -->
+                    <div class="relative p-3 bg-gradient-to-tr from-amber-600 via-amber-400 to-amber-700 rounded-full glow-gold border-4 border-amber-300/60 shadow-2xl">
+                        <!-- Outer Decorative Frame Lights -->
+                        <div class="w-[340px] h-[340px] sm:w-[460px] sm:h-[460px] relative rounded-full flex items-center justify-center bg-slate-900 border-4 border-emerald-950 overflow-hidden">
+                            <canvas id="wheel-canvas" width="460" height="460" class="w-full h-full cursor-pointer"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- Spin Controls -->
+                    <div class="mt-6 flex items-center gap-4">
+                        <button id="spin-btn" class="relative group bg-gradient-to-r from-red-600 via-red-500 to-emerald-600 hover:from-red-500 hover:to-emerald-500 text-white font-bold text-xl sm:text-2xl py-3.5 px-10 rounded-full shadow-lg glow-red transform active:scale-95 transition duration-150 border-2 border-amber-300/70">
+                            <span class="flex items-center gap-2">
+                                <i class="fa-solid fa-dharmachakra animate-spin-slow"></i> SPIN WHEEL
+                            </span>
+                        </button>
+
+                        <button id="sound-toggle-btn" class="bg-slate-800 hover:bg-slate-700 border border-slate-600 text-amber-300 w-12 h-12 rounded-full flex items-center justify-center shadow-md transition" title="Toggle Sound">
+                            <i id="sound-icon" class="fa-solid fa-volume-high text-lg"></i>
+                        </button>
+                    </div>
+                    <p id="spin-limit-msg" style="display:none;margin-top:14px;text-align:center;font-weight:800;color:#fcd34d;font-size:15px"></p>
+                    <button id="reset-btn" type="button" style="margin-top:12px;background:transparent;border:1px solid #475569;color:#cbd5e1;font-weight:700;font-size:13px;padding:6px 16px;border-radius:999px;cursor:pointer"><i class="fa-solid fa-rotate-left"></i> Reset game</button>
+
+                </div>
+
+            </section>
+
+        </main>
+
+        <!-- Won Prizes History Drawer / Footer Bar -->
+        <footer class="mt-8 bg-slate-900/90 border border-amber-500/30 rounded-2xl p-4 backdrop-blur-md">
+            <div class="flex items-center justify-between mb-3 border-b border-slate-800 pb-2">
+                <h3 class="text-lg font-bold text-amber-300 flex items-center gap-2">
+                    <i class="fa-solid fa-clock-rotate-left text-emerald-400"></i> Won Ornaments Log
+                </h3>
+                <button id="clear-history-btn" class="text-xs text-slate-400 hover:text-red-400 transition">
+                    Clear History
+                </button>
+            </div>
+            <div id="history-container" class="flex gap-3 overflow-x-auto pb-2 min-h-[64px] items-center">
+                <p id="empty-history-msg" class="text-sm text-slate-500 italic">No ornaments won yet! Give the wheel a spin!</p>
+            </div>
+        </footer>
+
+    </div>
+
+    <!-- Prize Result Modal -->
+    <div id="prize-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md opacity-0 transition-opacity duration-300">
+        <div class="relative bg-gradient-to-b from-slate-900 via-slate-900 to-emerald-950 border-2 border-amber-400 rounded-3xl p-6 sm:p-8 max-w-md w-full text-center shadow-2xl transform scale-90 transition-transform duration-300 glow-gold">
+
+            <!-- Close Button -->
+            <button id="modal-close-btn" class="absolute top-4 right-4 text-slate-400 hover:text-white text-xl w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center transition">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <div class="inline-block bg-red-600/20 border border-red-500/50 rounded-full px-4 py-1 text-red-400 font-bold text-sm tracking-wide mb-3">
+                <span id="modal-day-num">DAY 1</span> UNLOCKED!
+            </div>
+
+            <!-- Big Icon Display -->
+            <div id="modal-icon-display" class="text-6xl sm:text-7xl my-3 filter drop-shadow-[0_10px_10px_rgba(0,0,0,0.5)] transform hover:scale-110 transition duration-200">
+                🎄
+            </div>
+
+            <h3 id="modal-prize-title" class="font-holiday text-3xl sm:text-4xl font-bold text-amber-300 mb-2">
+                A Partridge in a Pear Tree
+            </h3>
+
+            <p id="modal-prize-desc" class="text-slate-300 text-sm sm:text-base mb-6 px-2">
+                On the first day of Christmas, my true love gave to me...
+            </p>
+
+            <div class="flex gap-3">
+                <button id="modal-claim-btn" class="w-full bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-bold py-3 px-6 rounded-xl shadow-lg transition transform active:scale-95 text-base flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-gift"></i> Collect Ornament
+                </button>
+            </div>
+            <div id="modal-download-row" style="display:none;margin-top:12px;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap">
+                <span style="font-size:12px;color:#94a3b8;font-weight:700;letter-spacing:.04em">SAVE YOUR PRIZE CARD</span>
+                <button type="button" class="dl-btn" data-fmt="png" style="background:#f59e0b;color:#0f172a;font-weight:800;font-size:13px;padding:7px 16px;border-radius:12px;border:0;cursor:pointer"><i class="fa-solid fa-download"></i> PNG</button>
+                <button type="button" class="dl-btn" data-fmt="jpg" style="background:#fbbf24;color:#0f172a;font-weight:800;font-size:13px;padding:7px 16px;border-radius:12px;border:0;cursor:pointer"><i class="fa-solid fa-download"></i> JPG</button>
+            </div>
+            <div id="dl-status" style="min-height:18px;margin-top:8px;font-size:12px;color:#6ee7b7" aria-live="polite"></div>
+        </div>
+    </div>
+
+    <!-- Pointer CSS Clip Path helper -->
+    <style>
+        .clip-pointer {
+            clip-path: polygon(0% 0%, 100% 0%, 50% 100%);
+        }
+        @keyframes spinSlow {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        .animate-spin-slow {
+            animation: spinSlow 12s linear infinite;
+        }
+    </style>
+
+    <script>
+        /**
+         * 12 DAYS OF CHRISTMAS DATA & POINTS STATE
+         */
+        const DEFAULT_DAYS = [
+            { day: 1, title: "Partridge in a Pear Tree", emoji: "🦜", color: "#B91C1C", img: "ornaments/day01.webp", points: 25, desc: "A partridge in a pear tree, where the 12 days begin.", spinsLeft: Math.floor(Math.random() * 5) + 1 },
+            { day: 2, title: "Two Turtle Doves", emoji: "🕊️", color: "#047857", img: "ornaments/day02.webp", points: 63, desc: "Two turtle doves, side by side on a snowy branch.", spinsLeft: Math.floor(Math.random() * 5) + 1 },
+            { day: "SPIN", title: "BONUS SPIN AGAIN!", img: "ornaments/bonus-wheel.webp", emoji: "🔄", color: "#7C3AED", points: 125, desc: "Bonus ornament! You earned a FREE extra spin.", isSpinAgain: true, spinsLeft: "∞" },
+            { day: 3, title: "Three French Hens", emoji: "🐓", color: "#D97706", img: "ornaments/day03.webp", points: 125, desc: "Three French hens strutting through the snow.", spinsLeft: Math.floor(Math.random() * 5) + 1 },
+            { day: 4, title: "Four Calling Birds", emoji: "🐦", color: "#1D4ED8", img: "ornaments/day04.webp", points: 188, desc: "Four calling birds singing from the branches.", spinsLeft: Math.floor(Math.random() * 5) + 1 },
+            { day: 5, title: "Five Golden Rings", emoji: "💍", color: "#EAB308", img: "ornaments/day05.webp", points: 250, desc: "Five golden rings, the shiniest of the set.", spinsLeft: Math.floor(Math.random() * 5) + 1 },
+            { day: 6, title: "Six Geese a-Laying", emoji: "🪿", color: "#0D9488", img: "ornaments/day06.webp", points: 300, desc: "Six geese a-laying in a cozy nest.", spinsLeft: Math.floor(Math.random() * 5) + 1 },
+            { day: "SPIN", title: "BONUS SPIN AGAIN!", img: "ornaments/bonus-gift.webp", emoji: "🎁", color: "#EC4899", points: 250, desc: "Bonus gift ornament! Unwrap a FREE extra spin.", isSpinAgain: true, spinsLeft: "∞" },
+            { day: 7, title: "Seven Swans a-Swimming", emoji: "🦢", color: "#6D28D9", img: "ornaments/day07.webp", points: 375, desc: "Seven swans a-swimming across the lake.", spinsLeft: Math.floor(Math.random() * 5) + 1 },
+            { day: 8, title: "Eight Maids a-Milking", emoji: "🥛", color: "#C026D3", img: "ornaments/day08.webp", points: 500, desc: "Eight maids a-milking in the mountain pasture.", spinsLeft: Math.floor(Math.random() * 5) + 1 },
+            { day: 9, title: "Nine Ladies Dancing", emoji: "💃", color: "#BE123C", img: "ornaments/day09.webp", points: 625, desc: "Nine ladies dancing in the meadow.", spinsLeft: Math.floor(Math.random() * 5) + 1 },
+            { day: 10, title: "Ten Lords a-Leaping", emoji: "🕺", color: "#0369A1", img: "ornaments/day10.webp", points: 750, desc: "Ten lords a-leaping across the hills.", spinsLeft: Math.floor(Math.random() * 5) + 1 },
+            { day: 11, title: "Eleven Pipers Piping", emoji: "🎺", color: "#15803D", img: "ornaments/day11.webp", points: 1250, desc: "Eleven pipers piping in their tartan.", spinsLeft: Math.floor(Math.random() * 5) + 1 },
+            { day: 12, title: "Twelve Drummers Drumming", emoji: "🥁", color: "#A16207", img: "ornaments/day12.webp", points: 2500, desc: "The grand finale: twelve drummers drumming!", spinsLeft: Math.floor(Math.random() * 5) + 1 }
+        ];
+
+        const SHOP_ITEMS = [
+            { id: "item_pear", title: "Golden Pear Tree", emoji: "🌳", cost: 500, desc: "A glowing ornament for your collection." },
+            { id: "item_dove", title: "Turtle Dove Badge", emoji: "🕊️", cost: 1500, desc: "Symbol of holiday friendship." },
+            { id: "item_cocoa", title: "Infinite Hot Cocoa", emoji: "☕", cost: 3000, desc: "Never runs out of marshmallows!" },
+            { id: "item_rings", title: "Golden Rings Trophy", emoji: "🏆", cost: 5000, desc: "Shimmering gold trophy for your mantle." },
+            { id: "item_sleigh", title: "Santa's Flying Sleigh", emoji: "🛷", cost: 10000, desc: "Magical high-speed winter sleigh." },
+            { id: "item_crown", title: "North Pole Crown", emoji: "👑", cost: 25000, desc: "Become the ultimate Holiday Legend." }
+        ];
+
+        let prizes = [...DEFAULT_DAYS];
+
+        // Ornament artwork (loaded once; the wheel redraws as each image arrives)
+        const ORN_CACHE = {};
+        function getOrnament(src) {
+            if (!src) return null;
+            if (!ORN_CACHE[src]) {
+                const im = new Image();
+                im.onload = () => { if (typeof drawWheel === 'function' && !isSpinning) drawWheel(); };
+                im.src = src;
+                ORN_CACHE[src] = im;
+            }
+            return ORN_CACHE[src];
+        }
+        function ornamentHTML(item, cls) {
+            return item.img
+                ? `<img src="${item.img}" alt="${item.title}" style="height:92px;width:auto;max-width:none;flex-shrink:0;filter:drop-shadow(0 2px 3px rgba(0,0,0,.5))" draggable="false">`
+                : `<span class="text-2xl">${item.emoji}</span>`;
+        }
+        let totalPoints = parseInt(localStorage.getItem('christmas_points')) || 0;
+        let streak = parseInt(localStorage.getItem('christmas_streak')) || 0;
+        let inventory = JSON.parse(localStorage.getItem('christmas_inventory')) || [];
+        let collection = {};
+        try { collection = JSON.parse(localStorage.getItem('christmas_ornaments')) || {}; } catch (e) { collection = {}; }
+        // Christmas Day (Dec 25, or ?christmas=1 to preview): every spin is a free "spin again" until all 12 days are collected
+        function isChristmas() {
+            const d = new Date();
+            return (d.getMonth() === 11 && d.getDate() === 25) || /[?&]christmas=1\b/.test(location.search);
+        }
+        function allDaysCollected() {
+            return DEFAULT_DAYS.filter(d => !d.isSpinAgain).every(d => collection[d.img]);
+        }
+        // Spin-again mode: all day on Dec 25, and on any other day once the final 2 spins begin (the spin made with 2 left and after)
+        function endlessMode() { return isChristmas() || (typeof spinsRemaining === 'function' && spinsRemaining() <= 1); }
+        function christmasSpinAgain() { return endlessMode() && !allDaysCollected(); }
+        function collectedCount() { return Object.keys(collection).length; }
+        let claimedHistory = JSON.parse(localStorage.getItem('christmas_history_12')) || [];
+        let audioEnabled = true;
+
+        // Calculate current multiplier from streak
+        function getMultiplier() {
+            return parseFloat((1 + Math.min(streak, 10) * 0.1).toFixed(1));
+        }
+
+        /**
+         * WEB AUDIO SYNTHESIZER (Ticking sound & Victory Fanfare)
+         */
+        const AudioContext = window.AudioContext || window.webkitAudioContext;
+        let audioCtx = null;
+
+        function initAudio() {
+            if (!audioCtx) {
+                audioCtx = new AudioContext();
+            }
+            if (audioCtx.state === 'suspended') {
+                audioCtx.resume();
+            }
+        }
+
+        // Ticking sound for wheel rotation
+        function playTickSound() {
+            if (!audioEnabled) return;
+            try {
+                initAudio();
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+
+                osc.type = 'triangle';
+                osc.frequency.setValueAtTime(600, audioCtx.currentTime);
+                osc.frequency.exponentialRampToValueAtTime(150, audioCtx.currentTime + 0.04);
+
+                gain.gain.setValueAtTime(0.15, audioCtx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.04);
+
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+
+                osc.start();
+                osc.stop(audioCtx.currentTime + 0.04);
+            } catch (e) {
+                // Audio context error fallback
+            }
+        }
+
+        // Festive Fanfare tune on winning a prize
+        function playVictorySound() {
+            if (!audioEnabled) return;
+            try {
+                initAudio();
+                const notes = [261.63, 329.63, 392.00, 523.25, 659.25, 783.99]; // C4, E4, G4, C5, E5, G5
+                notes.forEach((freq, index) => {
+                    const osc = audioCtx.createOscillator();
+                    const gain = audioCtx.createGain();
+                    const startTime = audioCtx.currentTime + (index * 0.08);
+
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(freq, startTime);
+
+                    gain.gain.setValueAtTime(0, startTime);
+                    gain.gain.linearRampToValueAtTime(0.2, startTime + 0.02);
+                    gain.gain.exponentialRampToValueAtTime(0.001, startTime + 0.25);
+
+                    osc.connect(gain);
+                    gain.connect(audioCtx.destination);
+
+                    osc.start(startTime);
+                    osc.stop(startTime + 0.25);
+                });
+            } catch (e) {
+                // Audio context error fallback
+            }
+        }
+
+        /**
+         * CANVAS ROULETTE WHEEL RENDERING
+         */
+        const canvas = document.getElementById('wheel-canvas');
+        const ctx = canvas.getContext('2d');
+        let currentAngle = 0;
+        let isSpinning = false;
+
+        function drawWheel() {
+            const width = canvas.width;
+            const height = canvas.height;
+            const centerX = width / 2;
+            const centerY = height / 2;
+            const radius = width / 2 - 12;
+
+            ctx.clearRect(0, 0, width, height);
+
+            const numSlices = prizes.length;
+            const sliceAngle = (Math.PI * 2) / numSlices;
+
+            // Draw Slices
+            for (let i = 0; i < numSlices; i++) {
+                const angle = currentAngle + i * sliceAngle;
+                const prize = prizes[i];
+
+                ctx.save();
+                ctx.beginPath();
+                ctx.moveTo(centerX, centerY);
+                ctx.arc(centerX, centerY, radius, angle, angle + sliceAngle);
+                ctx.closePath();
+
+                ctx.fillStyle = prize.color;
+                ctx.fill();
+                ctx.lineWidth = 2;
+                ctx.strokeStyle = "#FDE047";
+                ctx.stroke();
+
+                // Text & Icon alignment inside slices
+                ctx.translate(centerX, centerY);
+                ctx.rotate(angle + sliceAngle / 2);
+                ctx.textAlign = "right";
+
+                // Prize Text & Counter
+                ctx.fillStyle = "#FFFFFF";
+                ctx.font = "bold 12px Nunito, sans-serif";
+
+                ctx.shadowColor = "rgba(0,0,0,0.8)";
+                ctx.shadowBlur = 4;
+
+                const spinCountLabel = prize.isSpinAgain ? "SPIN AGAIN" : `(${prize.spinsLeft}x)`;
+                const orn = getOrnament(prize.img);
+                if (orn && orn.complete && orn.naturalWidth) {
+                    // large ornament at the rim, cap pointing outward; two-line label sits inward
+                    const oh = 74, ow = oh * orn.naturalWidth / orn.naturalHeight;
+                    ctx.save();
+                    ctx.shadowColor = "rgba(0,0,0,0.6)";
+                    ctx.shadowBlur = 8;
+                    ctx.translate(radius - 4 - oh / 2, 0);
+                    ctx.rotate(Math.PI / 2);
+                    ctx.drawImage(orn, -ow / 2, -oh / 2, ow, oh);
+                    ctx.restore();
+                    ctx.textAlign = "left";
+                    ctx.font = "800 13px Nunito, sans-serif";
+                    ctx.fillText(prize.isSpinAgain ? 'Bonus Spin' : `Day ${prize.day}`, 56, -3);
+                    ctx.font = "700 11px Nunito, sans-serif";
+                    ctx.fillText(collection[prize.img] ? '✓ Collected' : 'Not yet', 56, 12);
+                } else {
+                    ctx.fillText(`${prize.emoji} ${prize.isSpinAgain ? 'Bonus Spin' : 'Day ' + prize.day}`, radius - 12, 0);
+                }
+
+                ctx.restore();
+            }
+
+            // Draw Inner Hub / Decorative Center
+            ctx.save();
+            ctx.translate(centerX, centerY);
+            ctx.beginPath();
+            ctx.arc(0, 0, 45, 0, Math.PI * 2);
+            ctx.fillStyle = "#0F172A";
+            ctx.fill();
+            ctx.lineWidth = 4;
+            ctx.strokeStyle = "#FDE047";
+            ctx.stroke();
+
+            // Center Christmas Tree Icon
+            ctx.fillStyle = "#22C55E";
+            ctx.font = "26px sans-serif";
+            ctx.textAlign = "center";
+            ctx.textBaseline = "middle";
+            ctx.fillText("🎄", 0, 0);
+
+            ctx.restore();
+        }
+
+        /**
+         * PHYSICS-BASED SPINNING LOGIC
+         */
+        let spinVelocity = 0;
+        let friction = 0.985;
+        let lastSegmentIndex = -1;
+
+        // Spin limit: 12 spins in total. Landing on a Bonus Spin grants one free extra spin that does not count.
+        const MAX_SPINS = 12;
+        const HARD_CAP = 20;   // absolute maximum spins, free spins included
+        let spinsUsed = Math.min(MAX_SPINS, parseInt(localStorage.getItem('christmas_spins_used')) || 0);
+        let spinsTotal = Math.min(HARD_CAP, parseInt(localStorage.getItem('christmas_spins_total')) || spinsUsed);
+        let freeSpin = localStorage.getItem('christmas_free_spin') === '1';
+        const SPIN_BTN_HTML = document.getElementById('spin-btn').innerHTML;
+
+        function spinsRemaining() { return MAX_SPINS - spinsUsed; }
+        function capReached() { return spinsTotal >= HARD_CAP; }
+        function canSpin() { return !capReached() && (freeSpin || spinsRemaining() > 0); }
+
+        function updateSpinUI() {
+            const left = spinsRemaining();
+            document.getElementById('spins-left').innerText = left;
+            const tot = document.getElementById('spin-total');
+            if (tot) tot.innerText = `${spinsTotal}/${HARD_CAP} total`;
+            const btn = document.getElementById('spin-btn');
+            const msg = document.getElementById('spin-limit-msg');
+            if (isSpinning) return;
+            if (canSpin()) {
+                btn.disabled = false;
+                btn.classList.remove('opacity-75', 'cursor-not-allowed');
+                btn.innerHTML = SPIN_BTN_HTML;
+                msg.style.display = freeSpin ? 'block' : 'none';
+                if (freeSpin) msg.textContent = isChristmas() && !allDaysCollected() ? '🎄 Christmas Day magic: spin again until all 12 days are collected!' : (christmasSpinAgain() ? '🎄 Final stretch: keep spinning until all 12 days are collected!' : '🎁 Free bonus spin ready!');
+            } else {
+                btn.disabled = true;
+                btn.classList.add('opacity-75', 'cursor-not-allowed');
+                btn.innerHTML = `<span class="flex items-center gap-2">${capReached() ? 'SPIN LIMIT REACHED' : 'ALL 12 SPINS USED'}</span>`;
+                msg.style.display = 'block';
+                msg.textContent = capReached()
+                    ? `🎄 You've reached the ${HARD_CAP}-spin limit. You collected ${collectedCount()} of 14 ornaments!`
+                    : `🎄 You've used all 12 spins. You collected ${collectedCount()} of 14 ornaments!`;
+            }
+        }
+
+        // Reset: back to 12 spins, 0 points, empty log/inventory (two taps to confirm)
+        let resetArmed = null;
+        function resetGame() {
+            ['christmas_points','christmas_streak','christmas_inventory','christmas_ornaments','christmas_history_12','christmas_spins_used','christmas_spins_total','christmas_free_spin']
+                .forEach(k => { try { localStorage.removeItem(k); } catch (e) {} });
+            totalPoints = 0; streak = 0; inventory = []; collection = {}; claimedHistory = [];
+            spinsUsed = 0; spinsTotal = 0; freeSpin = false;
+            closeModal();
+            updateScoreboard(); renderInventory(); renderHistory(); updateSpinUI();
+        }
+        function onResetClick() {
+            const btn = document.getElementById('reset-btn');
+            if (isSpinning) return;
+            if (resetArmed) {
+                clearTimeout(resetArmed); resetArmed = null;
+                btn.innerHTML = '<i class="fa-solid fa-rotate-left"></i> Reset game';
+                btn.style.borderColor = '#475569'; btn.style.color = '#cbd5e1';
+                resetGame();
+            } else {
+                btn.textContent = 'Tap again to erase collection & restart';
+                btn.style.borderColor = '#f87171'; btn.style.color = '#fca5a5';
+                resetArmed = setTimeout(() => {
+                    resetArmed = null;
+                    btn.innerHTML = '<i class="fa-solid fa-rotate-left"></i> Reset game';
+                    btn.style.borderColor = '#475569'; btn.style.color = '#cbd5e1';
+                }, 4000);
+            }
+        }
+
+        function spinWheel() {
+            if (isSpinning) return;
+            if (!canSpin()) { updateSpinUI(); return; }
+            spinsTotal++;
+            localStorage.setItem('christmas_spins_total', spinsTotal);
+            if (freeSpin) {
+                freeSpin = false;
+                localStorage.setItem('christmas_free_spin', '0');
+            } else {
+                spinsUsed++;
+                localStorage.setItem('christmas_spins_used', spinsUsed);
+            }
+
+            initAudio();
+            isSpinning = true;
+            document.getElementById('spin-btn').disabled = true;
+            document.getElementById('spin-btn').classList.add('opacity-75', 'cursor-not-allowed');
+
+            // Increment streak
+            streak++;
+            localStorage.setItem('christmas_streak', streak);
+            updateScoreboard();
+
+            // Determine slice outcome
+            const numSlices = prizes.length;
+            const sliceAngle = (Math.PI * 2) / numSlices;
+            // Weighted pick: ornaments you don't own yet are 5x more likely than ones you already have
+            const NEW_WEIGHT = 5;
+            const weights = prizes.map(pz => collection[pz.img || pz.title] ? 1 : NEW_WEIGHT);
+            let roll = Math.random() * weights.reduce((a, b) => a + b, 0);
+            let wonPrizeIndex = weights.length - 1;
+            for (let i = 0; i < weights.length; i++) { roll -= weights[i]; if (roll < 0) { wonPrizeIndex = i; break; } }
+
+            const targetSliceCenter = wonPrizeIndex * sliceAngle + sliceAngle / 2;
+            let desiredFinalAngle = (Math.PI * 1.5) - targetSliceCenter;
+
+            while (desiredFinalAngle < 0) desiredFinalAngle += Math.PI * 2;
+            const extraRotations = (Math.floor(Math.random() * 4) + 6) * (Math.PI * 2);
+            const totalRotationNeeded = extraRotations + (desiredFinalAngle - (currentAngle % (Math.PI * 2)));
+
+            spinVelocity = Math.sqrt(2 * 0.0015 * totalRotationNeeded);
+
+            animateSpin();
+        }
+
+        function animateSpin() {
+            if (!isSpinning) return;
+
+            currentAngle += spinVelocity;
+            spinVelocity *= friction;
+
+            const numSlices = prizes.length;
+            const sliceAngle = (Math.PI * 2) / numSlices;
+            const normalizedAngle = (Math.PI * 1.5 - currentAngle) % (Math.PI * 2);
+            const positiveAngle = normalizedAngle < 0 ? normalizedAngle + Math.PI * 2 : normalizedAngle;
+            const currentSegment = Math.floor(positiveAngle / sliceAngle);
+
+            if (currentSegment !== lastSegmentIndex) {
+                playTickSound();
+                lastSegmentIndex = currentSegment;
+            }
+
+            drawWheel();
+
+            if (spinVelocity < 0.002) {
+                spinVelocity = 0;
+                isSpinning = false;
+                document.getElementById('spin-btn').disabled = false;
+                document.getElementById('spin-btn').classList.remove('opacity-75', 'cursor-not-allowed');
+
+                const finalSegment = currentSegment % numSlices;
+                const winningPrize = prizes[finalSegment];
+
+                onWinPrize(winningPrize);
+            } else {
+                requestAnimationFrame(animateSpin);
+            }
+        }
+
+        /**
+         * MODAL CONTROLS
+         */
+        function closeModal() {
+            const modal = document.getElementById('prize-modal');
+            if (!modal) return;
+            const modalCard = modal.querySelector('div');
+            modal.classList.add('opacity-0');
+            if (modalCard) {
+                modalCard.classList.remove('scale-100');
+                modalCard.classList.add('scale-90');
+            }
+            setTimeout(() => modal.classList.add('hidden'), 300);
+        }
+
+        /**
+         * PRIZE WINNING & POINTS CALCULATION
+         */
+        function onWinPrize(prize) {
+            const key = prize.img || prize.title;
+            const isNew = !collection[key];
+            collection[key] = (collection[key] || 0) + 1;
+            localStorage.setItem('christmas_ornaments', JSON.stringify(collection));
+            lastWon = { ...prize, isNew, count: collection[key] };
+            setDlStatus('');
+            drawWheel();
+
+            updateScoreboard();
+            showFloatingPoints(isNew ? 'NEW ORNAMENT!' : `DUPLICATE ×${collection[key]}`);
+            playVictorySound();
+            triggerConfetti();
+
+            // Populate Modal
+            document.getElementById('modal-day-num').innerText = prize.isSpinAgain ? "BONUS SPIN" : `DAY ${prize.day}`;
+            document.getElementById('modal-icon-display').innerHTML = prize.img
+                ? `<img src="${prize.img}" alt="${prize.title}" style="display:block;margin:0 auto;height:min(330px,38vh);width:auto;max-width:100%" draggable="false">`
+                : prize.emoji;
+            document.getElementById('modal-prize-title').innerText = prize.title;
+            document.getElementById('modal-prize-desc').innerText = prize.desc + (isNew
+                ? ` Added to your collection (${collectedCount()} of 14).`
+                : ` You already have this one (now ×${collection[key]}).`);
+
+            // Show Modal
+            const modal = document.getElementById('prize-modal');
+            const modalCard = modal.querySelector('div');
+
+            modal.classList.remove('hidden');
+            setTimeout(() => {
+                modal.classList.remove('opacity-0');
+                modalCard.classList.remove('scale-90');
+                modalCard.classList.add('scale-100');
+            }, 10);
+
+            // Auto spin again if landed on "Spin Again!"
+            if (prize.isSpinAgain || christmasSpinAgain()) {
+                const claimBtn = document.getElementById('modal-claim-btn');
+                claimBtn.innerHTML = `<i class="fa-solid fa-rotate-right animate-spin"></i> Spin Again Now!`;
+                if (christmasSpinAgain() && !prize.isSpinAgain) document.getElementById('modal-prize-desc').innerText += (isChristmas() ? ' 🎄 Christmas Day: SPIN AGAIN until all 12 days are collected!' : ' 🎄 Final spins: SPIN AGAIN until all 12 days are collected!');
+                claimBtn.onclick = () => {
+                    closeModal();
+                    setTimeout(spinWheel, 300);
+                };
+            } else {
+                const claimBtn = document.getElementById('modal-claim-btn');
+                claimBtn.innerHTML = `<i class="fa-solid fa-gift"></i> Collect Ornament`;
+                claimBtn.onclick = closeModal;
+            }
+
+            addHistoryItem(prize, 0);
+
+            if (prize.isSpinAgain || christmasSpinAgain()) {
+                freeSpin = true;
+                localStorage.setItem('christmas_free_spin', '1');
+            }
+            updateSpinUI();
+        }
+
+        function showFloatingPoints(pts) {
+            const el = document.getElementById('floating-pts');
+            el.innerText = pts;
+            el.classList.remove('opacity-0', 'translate-y-4');
+            el.classList.add('opacity-100', '-translate-y-6');
+
+            setTimeout(() => {
+                el.classList.remove('opacity-100', '-translate-y-6');
+                el.classList.add('opacity-0', 'translate-y-4');
+            }, 1500);
+        }
+
+        function updateScoreboard() {
+            const n = collectedCount();
+            document.getElementById('collected-count').innerText = n;
+            const cc = document.getElementById('collection-count');
+            if (cc) cc.innerText = `${n}/${DEFAULT_DAYS.length}`;
+            renderShop();
+            if (typeof updateSpinUI === 'function' && !isSpinning) updateSpinUI();
+        }
+
+        function triggerConfetti() {
+            if (typeof confetti === 'function') {
+                confetti({
+                    particleCount: 100,
+                    spread: 70,
+                    origin: { y: 0.6 },
+                    colors: ['#EF4444', '#10B981', '#F59E0B', '#3B82F6', '#FFFFFF']
+                });
+            }
+        }
+
+        /**
+         * PRIZE CARD DOWNLOADS (PNG / JPG only)
+         */
+        let lastWon = null;
+        let downloadsApi = null;
+        let downloadsReady = false;
+
+        function setDlStatus(msg, bad) {
+            const el = document.getElementById('dl-status');
+            if (!el) return;
+            el.textContent = msg;
+            el.style.color = bad ? '#fca5a5' : '#6ee7b7';
+        }
+
+        function mixWithWhite(hex, t) {
+            const n = parseInt(hex.replace('#', ''), 16);
+            const ch = v => Math.round(v + (255 - v) * t);
+            return `rgb(${ch(n >> 16)},${ch((n >> 8) & 255)},${ch(n & 255)})`;
+        }
+
+        function loadImage(src) {
+            return new Promise(resolve => {
+                const im = getOrnament(src);
+                if (!im) return resolve(null);
+                if (im.complete && im.naturalWidth) return resolve(im);
+                im.addEventListener('load', () => resolve(im), { once: true });
+                im.addEventListener('error', () => resolve(null), { once: true });
+            });
+        }
+
+        function wrapLines(g, text, maxW, maxLines) {
+            const words = text.split(' ');
+            const lines = [];
+            let cur = '';
+            for (const w of words) {
+                const t = cur ? cur + ' ' + w : w;
+                if (g.measureText(t).width > maxW && cur) { lines.push(cur); cur = w; } else { cur = t; }
+            }
+            if (cur) lines.push(cur);
+            return lines.slice(0, maxLines);
+        }
+
+        async function buildPrizeCard(item) {
+            try { await Promise.all([document.fonts.load('800 40px Nunito'), document.fonts.load('700 40px Nunito'), document.fonts.load('700 40px "Mountains of Christmas"')]); } catch (e) {}
+            const S = 1080, B = 26;
+            const c = document.createElement('canvas');
+            c.width = c.height = S * 2;   // 2160 px output
+            const g = c.getContext('2d');
+            g.scale(2, 2);
+            const color = item.color || '#B91C1C';
+            // gold frame + colored vignette (matches the prize cards)
+            g.fillStyle = '#E0A224';
+            g.fillRect(0, 0, S, S);
+            const rg = g.createRadialGradient(S / 2, S * 0.4, S * 0.08, S / 2, S / 2, S * 0.78);
+            rg.addColorStop(0, mixWithWhite(color, 0.18));
+            rg.addColorStop(0.62, color);
+            rg.addColorStop(1, '#0b0f1a');
+            g.fillStyle = rg;
+            g.fillRect(B, B, S - 2 * B, S - 2 * B);
+            g.textAlign = 'center';
+            g.textBaseline = 'alphabetic';
+            g.fillStyle = 'rgba(255,255,255,0.88)';
+            g.font = '800 40px Nunito, sans-serif';
+            g.letterSpacing = '6px';
+            const label = item.isSpinAgain ? 'BONUS SPIN · 12 DAYS OF CHRISTMAS' : `DAY ${item.day} · 12 DAYS OF CHRISTMAS`;
+            g.fillText(label, S / 2, 150, S - 140);
+            g.letterSpacing = '0px';
+            // ornament artwork (older history entries saved before artwork existed are looked up by title)
+            let src = item.img;
+            if (!src) {
+                const m = DEFAULT_DAYS.find(d => d.title === item.title && d.emoji === item.emoji);
+                src = m && m.img;
+            }
+            const orn = await loadImage(src);
+            if (orn) {
+                const oh = 530, ow = oh * orn.naturalWidth / orn.naturalHeight;
+                g.save();
+                g.shadowColor = 'rgba(0,0,0,0.5)'; g.shadowBlur = 36; g.shadowOffsetY = 14;
+                g.imageSmoothingQuality = 'high';
+                g.drawImage(orn, (S - ow) / 2, 172, ow, oh);
+                g.restore();
+            } else {
+                g.font = '300px sans-serif';
+                g.fillText(item.emoji, S / 2, 500);
+            }
+            // title (shrinks to fit one line)
+            g.fillStyle = '#FFFFFF';
+            let fs = 84;
+            g.font = `800 ${fs}px Nunito, sans-serif`;
+            while (g.measureText(item.title).width > S - 150 && fs > 44) { fs -= 2; g.font = `800 ${fs}px Nunito, sans-serif`; }
+            g.shadowColor = 'rgba(0,0,0,0.45)'; g.shadowBlur = 10;
+            g.fillText(item.title, S / 2, 770);
+            g.shadowBlur = 0;
+            // points pill
+            const ptsText = 'Collectible Ornament';
+            g.font = '800 56px Nunito, sans-serif';
+            const pw = g.measureText(ptsText).width + 110, ph = 100, px = (S - pw) / 2, py = 805;
+            g.fillStyle = '#FFF6DD';
+            g.beginPath();
+            g.roundRect(px, py, pw, ph, ph / 2);
+            g.fill();
+            g.fillStyle = '#10201a';
+            g.fillText(ptsText, S / 2, py + 70);
+            // description
+            g.fillStyle = 'rgba(255,255,255,0.92)';
+            g.font = '600 32px Nunito, sans-serif';
+            const lines = wrapLines(g, item.desc || '', S - 190, 2);
+            lines.forEach((ln, i) => g.fillText(ln, S / 2, 962 + i * 40));
+            // footer
+            g.fillStyle = 'rgba(255,255,255,0.7)';
+            g.font = '700 26px Nunito, sans-serif';
+            g.letterSpacing = '3px';
+            g.fillText('AMERICAN TREE COLORADO', S / 2, S - B - 14);
+            g.letterSpacing = '0px';
+            return c;
+        }
+
+        function canvasToBlob(canvas, type, quality) {
+            return new Promise((resolve, reject) => canvas.toBlob(b => b ? resolve(b) : reject(new Error('encode failed')), type, quality));
+        }
+
+        async function downloadPrize(item, fmt) {
+            if (!downloadsApi || !item) return;
+            if (fmt !== 'png' && fmt !== 'jpg') return;   // PNG / JPG only
+            setDlStatus('Preparing your prize card…');
+            try {
+                const card = await buildPrizeCard(item);
+                const blob = await canvasToBlob(card, fmt === 'jpg' ? 'image/jpeg' : 'image/png', 0.95);
+                const slug = String(item.isSpinAgain ? 'bonus-spin' : 'day-' + item.day) + '-' + item.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+                const res = await downloadsApi.save({ filename: `12-days-of-christmas-${slug}.${fmt}`, data: blob });
+                setDlStatus(res && res.status === 'saved' ? `Saved as ${fmt.toUpperCase()}!` : '');
+            } catch (e) {
+                console.warn('prize card download failed', e);
+                if (e && e.code === 'declined') setDlStatus('');
+                else if (e && e.code === 'rate_limited') setDlStatus('One moment, then try again.', true);
+                else setDlStatus('Download is not available right now.', true);
+            }
+        }
+
+        function downloadPrizeAt(idx, fmt) {
+            const item = claimedHistory[idx];
+            if (item) { lastWon = lastWon || null; downloadPrize(item, fmt); }
+        }
+
+        async function initDownloads() {
+            try {
+                downloadsApi = (window.claude && window.claude.use) ? await window.claude.use('downloads') : null;
+            } catch (e) { downloadsApi = null; }
+            downloadsReady = !!downloadsApi;
+            if (downloadsReady) {
+                document.getElementById('modal-download-row').style.display = 'flex';
+                document.querySelectorAll('.dl-btn').forEach(b => b.addEventListener('click', () => downloadPrize(lastWon, b.dataset.fmt)));
+                renderHistory();
+            }
+        }
+
+        /**
+         * HISTORY TRACKING
+         */
+        function addHistoryItem(prize, earnedPts) {
+            const time = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+            claimedHistory.unshift({ ...prize, earnedPts, time });
+            localStorage.setItem('christmas_history_12', JSON.stringify(claimedHistory));
+            renderHistory();
+        }
+
+        function renderHistory() {
+            const container = document.getElementById('history-container');
+            if (claimedHistory.length === 0) {
+                container.innerHTML = `<p id="empty-history-msg" class="text-sm text-slate-500 italic">No ornaments won yet! Give the wheel a spin!</p>`;
+                return;
+            }
+
+            container.innerHTML = claimedHistory.map((item, idx) => `
+                <div class="flex-shrink-0 bg-slate-800/90 border border-emerald-600/40 rounded-xl px-3 py-2 flex items-center gap-2 shadow-sm animate-fade-in">
+                    ${ornamentHTML(item, "")}
+                    <div class="text-left">
+                        <div class="text-xs font-bold text-amber-300">${item.isSpinAgain ? 'Bonus Spin' : 'Day ' + item.day} ornament</div>
+                        <div class="text-[10px] text-slate-400">${item.title} • ${item.time}</div>
+                        ${downloadsReady ? `<div style="margin-top:4px;display:flex;gap:6px">
+                            <button type="button" onclick="downloadPrizeAt(${idx}, 'png')" style="font-size:10px;font-weight:800;background:#f59e0b;color:#0f172a;border:0;border-radius:8px;padding:2px 8px;cursor:pointer">PNG</button>
+                            <button type="button" onclick="downloadPrizeAt(${idx}, 'jpg')" style="font-size:10px;font-weight:800;background:#fbbf24;color:#0f172a;border:0;border-radius:8px;padding:2px 8px;cursor:pointer">JPG</button>
+                        </div>` : ''}
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        /**
+         * SHOP & INVENTORY
+         */
+        function renderShop() {
+            const container = document.getElementById('shop-view');
+            container.style.cssText = 'display:grid;grid-template-columns:repeat(3,1fr);gap:10px;max-height:440px;overflow-y:auto;padding-right:4px';
+            container.innerHTML = DEFAULT_DAYS.map(item => {
+                const n = collection[item.img] || 0;
+                const label = item.isSpinAgain ? 'Bonus' : 'Day ' + item.day;
+                return `<div style="position:relative;text-align:center;padding:8px 4px 6px;border-radius:12px;background:${n ? 'rgba(6,78,59,.35)' : 'rgba(30,41,59,.6)'};border:1px solid ${n ? 'rgba(52,211,153,.45)' : 'rgba(71,85,105,.5)'}">
+                    <img src="${item.img}" alt="${n ? item.title : 'Locked ornament'}" draggable="false" style="height:78px;width:auto;max-width:100%;${n ? '' : 'filter:grayscale(1) brightness(.22);opacity:.85'}">
+                    <div style="font-size:11px;font-weight:800;margin-top:4px;color:${n ? '#fcd34d' : '#64748b'}">${n ? label : '?'}</div>
+                    ${n > 1 ? `<span style="position:absolute;top:4px;right:6px;font-size:10px;font-weight:800;background:#f59e0b;color:#0f172a;border-radius:999px;padding:1px 6px">×${n}</span>` : ''}
+                </div>`;
+            }).join('');
+        }
+
+        function buyShopItem(itemId) {
+            const item = SHOP_ITEMS.find(i => i.id === itemId);
+            if (!item || totalPoints < item.cost || inventory.some(i => i.id === itemId)) return;
+
+            totalPoints -= item.cost;
+            inventory.push({ ...item, redeemedAt: new Date().toLocaleDateString() });
+
+            localStorage.setItem('christmas_points', totalPoints);
+            localStorage.setItem('christmas_inventory', JSON.stringify(inventory));
+
+            updateScoreboard();
+            renderInventory();
+            triggerConfetti();
+        }
+
+        function renderInventory() {
+            const container = document.getElementById('inventory-view');
+            if (inventory.length === 0) {
+                container.innerHTML = `<div class="text-center py-8 text-slate-500 text-sm">Your inventory is empty.<br>Earn points from the wheel to redeem rewards!</div>`;
+                return;
+            }
+
+            container.innerHTML = inventory.map(item => `
+                <div class="p-3 rounded-xl bg-slate-800/80 border border-amber-500/30 flex items-center gap-3">
+                    <span class="text-3xl">${item.emoji}</span>
+                    <div>
+                        <div class="text-sm font-bold text-amber-300">${item.title}</div>
+                        <div class="text-xs text-slate-400">${item.desc}</div>
+                        <div class="text-[10px] text-emerald-400 mt-0.5">Unlocked on ${item.redeemedAt}</div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        /**
+         * BACKGROUND SNOW ANIMATION
+         */
+        function initSnow() {
+            const snowCanvas = document.getElementById('snow-canvas');
+            const sCtx = snowCanvas.getContext('2d');
+
+            function resize() {
+                snowCanvas.width = window.innerWidth;
+                snowCanvas.height = window.innerHeight;
+            }
+            resize();
+            window.addEventListener('resize', resize);
+
+            const flakes = Array.from({ length: 60 }, () => ({
+                x: Math.random() * snowCanvas.width,
+                y: Math.random() * snowCanvas.height,
+                radius: Math.random() * 3 + 1,
+                density: Math.random() * 1 + 0.5,
+                opacity: Math.random() * 0.7 + 0.3
+            }));
+
+            function drawFlakes() {
+                sCtx.clearRect(0, 0, snowCanvas.width, snowCanvas.height);
+                sCtx.fillStyle = "rgba(255, 255, 255, 0.8)";
+                sCtx.beginPath();
+
+                flakes.forEach(f => {
+                    sCtx.moveTo(f.x, f.y);
+                    sCtx.arc(f.x, f.y, f.radius, 0, Math.PI * 2, true);
+
+                    // Update positions
+                    f.y += Math.cos(f.density) + 1 + f.radius / 2;
+                    f.x += Math.sin(f.density) * 0.5;
+
+                    if (f.y > snowCanvas.height) {
+                        f.y = -10;
+                        f.x = Math.random() * snowCanvas.width;
+                    }
+                });
+                sCtx.fill();
+                requestAnimationFrame(drawFlakes);
+            }
+            drawFlakes();
+        }
+
+        /**
+         * EVENT LISTENERS & INITIALIZATION
+         */
+        document.addEventListener('DOMContentLoaded', () => {
+            prizes.forEach(p => getOrnament(p.img));
+            drawWheel();
+            updateScoreboard();
+            renderInventory();
+            renderHistory();
+            initSnow();
+            initDownloads();
+
+            // Wheel Spin Trigger
+            document.getElementById('spin-btn').addEventListener('click', spinWheel);
+            document.getElementById('reset-btn').addEventListener('click', onResetClick);
+            updateSpinUI();
+            canvas.addEventListener('click', spinWheel);
+
+            // Tab Switching Logic
+            const shopBtn = document.getElementById('tab-shop-btn');
+            const invBtn = document.getElementById('tab-inv-btn');
+            const shopView = document.getElementById('shop-view');
+            const invView = document.getElementById('inventory-view');
+
+            shopBtn.addEventListener('click', () => {
+                shopView.classList.remove('hidden');
+                invView.classList.add('hidden');
+                shopBtn.className = "flex-1 py-2 text-sm font-bold text-amber-400 border-b-2 border-amber-400 flex items-center justify-center gap-1.5 transition";
+                invBtn.className = "flex-1 py-2 text-sm font-bold text-slate-400 border-b-2 border-transparent hover:text-slate-200 flex items-center justify-center gap-1.5 transition";
+            });
+
+            invBtn.addEventListener('click', () => {
+                invView.classList.remove('hidden');
+                shopView.classList.add('hidden');
+                invBtn.className = "flex-1 py-2 text-sm font-bold text-amber-400 border-b-2 border-amber-400 flex items-center justify-center gap-1.5 transition";
+                shopBtn.className = "flex-1 py-2 text-sm font-bold text-slate-400 border-b-2 border-transparent hover:text-slate-200 flex items-center justify-center gap-1.5 transition";
+                renderInventory();
+            });
+
+            // Toggle Sound
+            const soundBtn = document.getElementById('sound-toggle-btn');
+            const soundIcon = document.getElementById('sound-icon');
+            soundBtn.addEventListener('click', () => {
+                audioEnabled = !audioEnabled;
+                soundIcon.className = audioEnabled ? 'fa-solid fa-volume-high text-lg' : 'fa-solid fa-volume-xmark text-lg text-red-400';
+            });
+
+            // Modal Controls
+            document.getElementById('modal-close-btn').addEventListener('click', closeModal);
+            document.getElementById('modal-claim-btn').addEventListener('click', closeModal);
+
+            // Clear History
+            document.getElementById('clear-history-btn').addEventListener('click', () => {
+                claimedHistory = [];
+                localStorage.removeItem('christmas_history_12');
+                renderHistory();
+            });
+        });
+    </script>
+</body>
+</html>
+</body></html>
