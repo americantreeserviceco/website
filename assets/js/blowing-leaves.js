@@ -9,6 +9,10 @@
  * drawn once into small sprites, then moved by a wind that swells and fades so the leaves are pushed along in gusts,
  * tumble, and flip edge-on as they go. It does nothing for visitors who prefer reduced motion and pauses while the
  * tab is hidden.
+ *
+ * Leaves only blow on windy days. The current wind at Golden is read from api.weather.gov (no key), the same source
+ * as the location weather widgets, and the leaves run only at WINDY_MPH or more. Calm, unknown or failed readings keep
+ * the leaves off. The check repeats every 10 minutes. Add ?wind=on to force the leaves on for a preview.
  */
 (function () {
   'use strict';
@@ -26,13 +30,20 @@
     var canvas = document.createElement('canvas');
     canvas.setAttribute('aria-hidden', 'true');
     // Under the sticky header (z-index 1000) and over the page content.
-    canvas.style.cssText = 'position:fixed;top:0;left:0;pointer-events:none;z-index:900';
+    // Hidden until the first wind reading says it is windy.
+    canvas.style.cssText = 'position:fixed;top:0;left:0;pointer-events:none;z-index:900;display:none';
     var ctx = canvas.getContext('2d');
     if (!ctx) return;
     document.body.appendChild(canvas);
 
     var COLORS = ['#b3261e', '#c8461f', '#d9731a', '#e08a24', '#e0a526', '#d4af37', '#a8541d', '#8a4b1f'];
     var SPRITE = 64;
+    var API = 'https://api.weather.gov';
+    var WIND_POINT = '39.7555,-105.2211';   // Golden
+    var WINDY_MPH = 15;                    // NWS calls 15 mph and up "breezy"
+    var WIND_CHECK_MS = 10 * 60 * 1000;
+    var running = false;
+    var rafId = 0;
 
     // Outline of a leaf pointing up, as points in the range -1 to 1.
     function mapleOutline() {
@@ -188,12 +199,68 @@
         ctx.restore();
       }
       ctx.globalAlpha = 1;
-      window.requestAnimationFrame(frame);
+      if (running) rafId = window.requestAnimationFrame(frame);
+    }
+
+    // Start or stop the animation. Stopping clears the canvas so no leaves are left behind.
+    function setRunning(on) {
+      if (on === running) return;
+      running = on;
+      canvas.style.display = on ? '' : 'none';
+      if (on) {
+        last = 0;
+        rafId = window.requestAnimationFrame(frame);
+      } else {
+        window.cancelAnimationFrame(rafId);
+        ctx.clearRect(0, 0, width, height);
+      }
+    }
+
+    function getJSON(url) {
+      return fetch(url, { headers: { Accept: 'application/geo+json' } }).then(function (res) {
+        if (!res.ok) throw new Error('NWS ' + res.status);
+        return res.json();
+      });
+    }
+
+    // Upper end of an NWS forecast wind such as "10 to 15 mph", or a single value such as "5 mph".
+    function parseMph(text) {
+      var m = /(\d+)(?:\s*to\s*(\d+))?\s*mph/i.exec(text || '');
+      return m ? Number(m[2] || m[1]) : null;
+    }
+
+    // Current wind in mph: the latest observation from the nearest station, else the current forecast hour.
+    function currentWindMph() {
+      return getJSON(API + '/points/' + WIND_POINT).then(function (point) {
+        var props = point.properties;
+        return getJSON(props.observationStations)
+          .then(function (list) { return getJSON(list.features[0].id + '/observations/latest'); })
+          .then(function (obs) {
+            var kmh = obs.properties.windSpeed && obs.properties.windSpeed.value;
+            if (kmh == null) throw new Error('no wind reading');
+            return kmh * 0.621371;   // NWS reports km/h
+          })
+          .catch(function () {
+            return getJSON(props.forecastHourly).then(function (forecast) {
+              return parseMph(forecast.properties.periods[0].windSpeed);
+            });
+          });
+      });
+    }
+
+    function updateWind() {
+      if (params.get('wind') === 'on') { setRunning(true); return; }
+      currentWindMph().then(function (mph) {
+        setRunning(mph != null && mph >= WINDY_MPH);
+      }).catch(function () {
+        setRunning(false);   // no reading means no leaves
+      });
     }
 
     resize();
     window.addEventListener('resize', resize);
-    window.requestAnimationFrame(frame);
+    updateWind();
+    window.setInterval(updateWind, WIND_CHECK_MS);
   } catch (error) {
     // Decoration only: ignore failures.
   }
