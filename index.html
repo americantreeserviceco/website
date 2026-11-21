@@ -6,8 +6,9 @@
 	<title>Certified Arborist Tree Care | American Tree Colorado</title>
 	<meta name="description" content="ISA Certified Arborist tree care in Golden and the Denver metro area. Call American Tree Colorado for pruning, removal, and tree health services.">
 	<link rel="canonical" href="https://americantreeserviceco.com/">
-	<link rel="preconnect" href="https://salesiq.zoho.com" crossorigin>
-	<link rel="dns-prefetch" href="https://salesiq.zoho.com">
+	<link rel="preload" as="image" type="image/webp" fetchpriority="high"
+		imagesrcset="/assets/images/optimized/home-hero-v1-640.webp 640w, /assets/images/optimized/home-hero-v1-960.webp 960w, /assets/images/optimized/home-hero-v1-1200.webp 1200w"
+		imagesizes="(max-width: 768px) max(100vw, 480px), 100vw">
 	<!-- Meta Pixel Code -->
 <script>!function(f,b,e,v,n,t,s)
 {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -19,9 +20,7 @@ s.parentNode.insertBefore(t,s)}(window, document,'script',
 'https://connect.facebook.net/en_US/fbevents.js');
 fbq('init', '1851958289139223');
 fbq('track', 'PageView');
-</script><noscript><img height="1" width="1" style="display:none"
-src="https://www.facebook.com/tr?id=1851958289139223&ev=PageView&noscript=1"
-/></noscript>
+</script>
 	<!-- End Meta Pixel Code -->
 	<!-- Google Tag Manager -->
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -45,10 +44,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 			padding: 0;
 			font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 		}
-<!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MHLKM5PD"
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<!-- End Google Tag Manager (noscript) -->
 		body {
 			color: var(--dark);
 			line-height: 1.6;
@@ -132,8 +127,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 		}
 
 		.hero {
-			background: linear-gradient(rgba(0, 0, 0, 0.58), rgba(0, 0, 0, 0.58)), url('assets/images/optimized/dji-hero.webp') no-repeat center center / cover;
-			background-image: linear-gradient(rgba(0, 0, 0, 0.58), rgba(0, 0, 0, 0.58)), url('assets/images/optimized/dji-hero.webp');
+			background-color: #1e3d1a;
+			--photo-overlay: rgb(0 0 0 / 58%);
 			position: relative;
 			overflow: hidden;
 			min-height: 600px;
@@ -179,8 +174,22 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 			animation: masthead-rgb 6s linear infinite;
 		}
 
-		.halloween-theme .hero {
-			background-image: linear-gradient(rgba(22, 13, 9, 0.72), rgba(22, 13, 9, 0.72)), url('assets/images/optimized/dji-hero.webp');
+		.halloween-theme .hero { --photo-overlay: rgb(36 27 43 / 76%); }
+		.november-theme .hero { --photo-overlay: rgb(40 28 20 / 76%); }
+
+		.hero, .cta-strip { isolation: isolate; }
+		.home-photo, .hero::before, .cta-strip::before {
+			position: absolute;
+			inset: 0;
+			width: 100%;
+			height: 100%;
+			pointer-events: none;
+		}
+		.home-photo { object-fit: cover; z-index: -2; }
+		.hero::before, .cta-strip::before {
+			content: '';
+			background: var(--photo-overlay);
+			z-index: -1;
 		}
 
 		.halloween-theme .hero-brand {
@@ -265,8 +274,23 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 			box-shadow: 0 8px 22px rgba(53, 44, 64, 0.08);
 		}
 
-		.halloween-theme .cta-strip {
-			background-image: linear-gradient(rgba(36, 27, 43, 0.76), rgba(36, 27, 43, 0.76)), url('assets/images/optimized/cta-strip.webp');
+		.halloween-theme .cta-strip { --photo-overlay: rgb(36 27 43 / 76%); }
+		.november-theme .cta-strip { --photo-overlay: rgb(40 28 20 / 76%); }
+
+		body.november-theme {
+			--primary: #8a3a2b;
+			--secondary: #3b2a20;
+			--accent: #d99a2b;
+			--light: #fbf3e4;
+			--dark: #2b1f18;
+			background-color: #fdf8ee;
+		}
+		body.halloween-theme { background-color: #fffaf4; }
+		body.halloween-theme .nav-toggle { color: #873f28; }
+		body.november-theme .nav-toggle { color: #6e2d21; }
+		body.november-theme .feature-band {
+			background: linear-gradient(135deg, #fbf3e4, #f1e0c3);
+			border-color: rgb(138 58 43 / 20%);
 		}
 
 		@keyframes masthead-rgb {
@@ -405,7 +429,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 		.cta-strip {
 			position: relative;
-			background: linear-gradient(rgba(18, 41, 27, 0.68), rgba(18, 41, 27, 0.68)), url('assets/images/optimized/cta-strip.webp') center/cover no-repeat;
+			background-color: #12291b;
+			--photo-overlay: rgb(18 41 27 / 68%);
 			border-top: 1px solid rgba(23, 59, 42, 0.12);
 			border-bottom: 1px solid rgba(23, 59, 42, 0.12);
 			padding: 88px 20px;
@@ -514,134 +539,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 			margin: 0 auto;
 		}
 
-		.testimonial-wrap {
-			background: #f7f4ee;
-			border-top: 1px solid rgba(45, 90, 39, 0.1);
-			border-bottom: 1px solid rgba(45, 90, 39, 0.1);
-			padding: 30px 20px 0;
-		}
-
-		.testimonial-wrap .inner {
-			max-width: 1200px;
-			margin: 0 auto;
-		}
-
-		.testimonial-grid {
-			display: grid;
-			grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-			gap: 22px;
-		}
-
-		.testimonial {
-			background: #fff;
-			border: 1px solid rgba(45, 90, 39, 0.08);
-			border-radius: 14px;
-			padding: 28px 24px;
-			box-shadow: 0 10px 24px rgba(23, 59, 42, 0.05);
-		}
-
-		.testimonial p {
-			font-size: 1.02rem;
-			margin-bottom: 18px;
-			color: var(--dark);
-		}
-
-		.testimonial footer {
-			background: transparent;
-			padding: 0;
-			margin: 0;
-			text-align: left;
-			color: var(--secondary);
-			font-size: 0.95rem;
-			font-weight: 700;
-		}
-
-		.contact-wrap {
-			background: linear-gradient(180deg, #f8f8f2 0%, #eff4ee 100%);
-		}
-
-		.contact-container {
-			display: grid;
-			grid-template-columns: 0.9fr 1.1fr;
-			gap: 32px;
-			align-items: stretch;
-		}
-
-		.contact-info {
-			background: #fff;
-			border: 1px solid rgba(45, 90, 39, 0.08);
-			border-radius: 18px;
-			padding: 28px 24px;
-			box-shadow: 0 12px 28px rgba(23, 59, 42, 0.05);
-		}
-
-		.contact-info h3 {
-			margin-bottom: 20px;
-			color: var(--primary);
-		}
-
-		.contact-info p {
-			margin-bottom: 15px;
-			font-size: 16px;
-		}
-
-		.contact-card {
-			background: #fff;
-			border: 1px solid rgba(45, 90, 39, 0.08);
-			border-radius: 18px;
-			padding: 28px 24px;
-			box-shadow: 0 12px 28px rgba(23, 59, 42, 0.05);
-		}
-
-		form {
-			display: flex;
-			flex-direction: column;
-			gap: 15px;
-		}
-
-		form label {
-			font-weight: 600;
-		}
-
-		form input,
-		form textarea {
-			width: 100%;
-			padding: 12px 14px;
-			border: 1px solid #d7d7d7;
-			border-radius: 10px;
-			font-size: 16px;
-			background: #fff;
-		}
-
-		form textarea {
-			resize: vertical;
-			min-height: 120px;
-		}
-
-		form .btn {
-			align-self: flex-start;
-		}
-
-		footer {
-			background: var(--secondary);
-			color: #ffffff;
-			text-align: center;
-			padding: 40px 20px;
-			margin-top: 60px;
-		}
-
-		.footer-links {
-			display: flex;
-			justify-content: center;
-			gap: 20px;
-			flex-wrap: wrap;
-			margin-bottom: 16px;
-		}
-
-		.footer-links a {
-			color: #ffffff;
-		}
-
 		@media (min-width: 769px) {
 			.nav-container {
 				flex-wrap: nowrap;
@@ -665,9 +562,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 			}
 
 			.feature-band .feature-grid,
-			.stats-grid,
-			.testimonial-grid,
-			.contact-container {
+			.stats-grid {
 				grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
 			}
 		}
@@ -784,15 +679,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 			}
 
 			.feature-band .feature-grid,
-			.stats-grid,
-			.testimonial-grid,
-			.contact-container {
+			.stats-grid {
 				grid-template-columns: 1fr;
-			}
-
-			.contact-card,
-			.contact-info {
-				padding: 22px 18px;
 			}
 
 			section {
@@ -800,8 +688,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 			}
 		}
 	</style>
-	<link rel="stylesheet" href="/assets/css/halloween-theme.css">
-	<link rel="stylesheet" href="/assets/css/november-theme.css">
 	<style>
 		/* November hero (homepage, November only via body.november-theme) */
 		.hero-november-art { display: none; }
@@ -977,11 +863,22 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 		.holiday-band .btn { background: #e8b53a; color: #14351f; }
 		.holiday-band .btn:hover, .holiday-band .btn:focus-visible { background: #f2c85a; color: #14351f; }
 	</style>
-	<!-- The season scripts are tiny and run before the page is drawn, so the hero never shows its default layout first. -->
-	<script src="/assets/js/halloween-theme.js"></script>
-	<script src="/assets/js/november-theme.js"></script>
-	<script src="/assets/js/winter-theme.js"></script>
-	<script src="/assets/js/blowing-leaves.js" defer></script>
+	<script>
+		// Set the seasonal classes before drawing the header and hero.
+		(() => {
+			const params = new URLSearchParams(location.search);
+			const month = window.__americanTreeThemeMonth = new Date().getMonth();
+			const override = params.get('theme');
+			const theme = override ||
+				(month === 9 ? 'halloween' : month === 10 ? 'november' : [11, 0, 1].includes(month) ? 'winter' : '');
+			if (['halloween', 'november', 'winter'].includes(theme)) {
+				document.documentElement.classList.add(theme + '-theme');
+			}
+			if (theme === 'winter') {
+				document.documentElement.classList.add(override || month === 11 ? 'holiday-lights' : 'santa-off');
+			}
+		})();
+	</script>
 	<script src="/assets/js/severe-alerts.js" defer></script>
 	<script src="/assets/js/contact-autoreply.js" defer></script>
 
@@ -991,19 +888,27 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     .thanksgiving-graphic:focus-visible { outline: 3px solid var(--accent); outline-offset: 5px; border-radius: 16px; }
     .hero-november-art.thanksgiving-graphic img { position: static; display: block; width: 100%; height: auto; }
   </style>
-  <script src="/assets/js/thanksgiving-tracking.js" defer></script>
+	<link rel="stylesheet" href="/assets/css/home-sections-v1.css" media="print" onload="this.media='all'">
+	<noscript><link rel="stylesheet" href="/assets/css/home-sections-v1.css"></noscript>
 </head>
 <body>
 	<script>
-		// The season scripts above set their class on <html> before the page exists; copy it onto <body> straight away.
+		// The theme initializer sets its class on <html> before the page exists; copy it onto <body> straight away.
 		['halloween-theme', 'november-theme', 'winter-theme'].forEach(function (name) {
 			if (document.documentElement.classList.contains(name)) document.body.classList.add(name);
 		});
 	</script>
+	<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MHLKM5PD"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+	<noscript><img height="1" width="1" style="display:none" alt=""
+src="https://www.facebook.com/tr?id=1851958289139223&ev=PageView&noscript=1"
+/></noscript>
 	<header>
 		<div class="nav-container">
 			<a class="logo" href="/" aria-label="American Tree Colorado home">
-				<img src="assets/images/optimized/AmericanTree_Logo_RGB.webp" alt="American Tree Colorado logo">
+				<img src="assets/images/optimized/AmericanTree_Logo_RGB.webp" width="212" height="104" alt="American Tree Colorado logo">
 			</a>
 			<button class="nav-toggle" type="button" aria-label="Toggle menu" aria-expanded="false">Menu</button>
 			<nav aria-label="Main navigation">
@@ -1021,19 +926,24 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 	</header>
 
 	<main>
-		<section class="hero" fetchpriority="high">
+		<section class="hero">
+			<img class="home-photo" src="/assets/images/optimized/home-hero-v1-1200.webp"
+				srcset="/assets/images/optimized/home-hero-v1-640.webp 640w, /assets/images/optimized/home-hero-v1-960.webp 960w, /assets/images/optimized/home-hero-v1-1200.webp 1200w"
+				sizes="(max-width: 768px) max(100vw, 480px), 100vw" width="1200" height="900" fetchpriority="high" alt="">
 			<div class="hero-content">
 				<div class="hero-brand">American Tree Colorado</div>
-				<img class="hero-halloween-art" src="assets/images/optimized/halloween-boo.webp" loading="lazy" alt="" aria-hidden="true">
+				<img class="hero-halloween-art" src="assets/images/optimized/halloween-boo.webp" width="260" height="260" loading="lazy" alt="" aria-hidden="true">
 				<button class="hero-november-art thanksgiving-graphic" id="thanksgiving-graphic" type="button" aria-label="Start your tree care estimate">
                   <img src="/assets/images/seasonal/pilgim-poca.webp" srcset="/assets/images/seasonal/pilgim-poca-260.webp 260w, /assets/images/seasonal/pilgim-poca.webp 514w" sizes="(max-width: 640px) 130px, 380px" width="514" height="514" decoding="async" loading="lazy" alt="Thanksgiving cartoon of a Native American and Pilgrim with a young tree and pumpkin">
                 </button>
-				<img class="hero-winter-art" src="assets/images/seasonal/christmas/santa.webp" loading="lazy" alt="" aria-hidden="true">
+				<img class="hero-winter-art" src="/assets/images/optimized/home-santa-v1-428.webp"
+					srcset="/assets/images/optimized/home-santa-v1-260.webp 260w, /assets/images/optimized/home-santa-v1-428.webp 428w"
+					sizes="(max-width: 768px) 130px, 380px" width="428" height="514" loading="lazy" alt="" aria-hidden="true">
 				<h1>Certified Arborist Tree Care for Golden and the Denver Metro Area</h1>
 				<p>Locally based and serving Colorado since 1993. Get knowledgeable care for tree health, pruning, removals, and storm hazards.</p>
 				<div class="hero-cta-orbit">
 					<a class="btn" href="/contact/">Request a Free Estimate</a>
-					<img class="hero-leaves" src="assets/images/seasonal/autumn-leaves.svg" alt="" aria-hidden="true">
+					<img class="hero-leaves" src="assets/images/seasonal/autumn-leaves.svg" width="360" height="200" loading="lazy" alt="" aria-hidden="true">
 				</div>
 			</div>
 		</section>
@@ -1085,6 +995,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 		</section>
 
 		<section class="cta-strip" aria-labelledby="cta-title">
+			<img class="home-photo" src="/assets/images/optimized/home-cta-v1-1200.webp"
+				srcset="/assets/images/optimized/home-cta-v1-640.webp 640w, /assets/images/optimized/home-cta-v1-1200.webp 1200w"
+				sizes="100vw" width="1200" height="555" loading="lazy" decoding="async" alt="">
 			<div class="inner">
 				<h2 id="cta-title">Ready for safer, healthier trees?</h2>
 				<p>From routine pruning to storm emergency response, our team helps homeowners protect their property and keep trees thriving year-round.</p>
@@ -1270,13 +1183,24 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 	</footer>
 	<script>
 		document.addEventListener('DOMContentLoaded', () => {
-			const themeOverride = new URLSearchParams(location.search).get('theme');
-			const month = new Date().getMonth();
-			if (themeOverride ? themeOverride === 'november' : month === 10) {
-				document.body.classList.add('november-theme');
+			const params = new URLSearchParams(location.search);
+			const autumn = document.body.matches('.halloween-theme, .november-theme');
+			if (document.body.classList.contains('november-theme')) {
+				const tracking = document.createElement('script');
+				tracking.src = '/assets/js/thanksgiving-tracking.js';
+				document.body.append(tracking);
 			}
-			if (themeOverride ? themeOverride === 'halloween' : month === 9) {
-				document.body.classList.add('halloween-theme');
+			if ((autumn || params.get('leaves') === 'on') && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+				const loadLeaves = () => {
+					const script = document.createElement('script');
+					script.src = '/assets/js/blowing-leaves.js';
+					document.body.append(script);
+				};
+				const loadAfterPaint = () => {
+					if ('requestIdleCallback' in window) requestIdleCallback(loadLeaves, { timeout: 1500 });
+					else setTimeout(loadLeaves, 100);
+				};
+				window.addEventListener('load', loadAfterPaint, { once: true });
 			}
 
 			const menuToggle = document.querySelector('.nav-toggle');
