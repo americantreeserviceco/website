@@ -11,6 +11,7 @@
     <meta property="og:title" content="Christmas Ornament Wheel | American Tree Colorado">
     <meta property="og:description" content="Spin the wheel and collect all 12 Days of Christmas ornaments.">
     <meta property="og:url" content="https://americantreeserviceco.com/christmas/ornament-wheel/">
+    <script src="/christmas/ornament3d.js"></script>
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-JTRR29NY4W"></script>
     <script>
@@ -55,6 +56,16 @@
         .glow-red {
             box-shadow: 0 0 25px rgba(220, 38, 38, 0.6);
         }
+
+        /* Ornament turntable: a flat ornament turns once around its vertical axis when it is viewed. */
+        @keyframes orn-twirl {
+            from { transform: perspective(700px) rotateY(0deg); }
+            to { transform: perspective(700px) rotateY(360deg); }
+        }
+        .orn-twirl { animation: orn-twirl 1.6s cubic-bezier(0.45, 0.05, 0.25, 1); }
+        #modal-icon-display img { cursor: pointer; }
+        [data-owned]:focus-visible { outline: 3px solid #fcd34d; outline-offset: 2px; }
+        @media (prefers-reduced-motion: reduce) { .orn-twirl { animation: none; } }
     </style>
 </head>
 <body class="h-full bg-slate-950 text-slate-100 font-body overflow-x-hidden selection:bg-red-600 selection:text-white">
@@ -290,6 +301,27 @@
                 ORN_CACHE[src] = im;
             }
             return ORN_CACHE[src];
+        }
+        // Turn an ornament once around its vertical axis. Skipped when the visitor prefers reduced motion.
+        const REDUCED_MOTION = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+        function twirlOrnament(img) {
+            if (!img || REDUCED_MOTION) return;
+            // Use the 3D spin when it can run; otherwise fall back to the flat CSS turn below.
+            if (window.OrnamentSpin && window.OrnamentSpin.spin(img)) return;
+            if (img.classList.contains('orn-twirl')) return;
+            img.classList.add('orn-twirl');
+            img.addEventListener('animationend', () => img.classList.remove('orn-twirl'), { once: true });
+        }
+        function initOrnamentTwirl() {
+            const shop = document.getElementById('shop-view');
+            const twirlCard = (e) => { const card = e.target.closest('[data-owned]'); if (card) twirlOrnament(card.querySelector('img')); };
+            shop.addEventListener('mouseover', (e) => {
+                const card = e.target.closest('[data-owned]');
+                if (card && !card.contains(e.relatedTarget)) twirlOrnament(card.querySelector('img'));
+            });
+            shop.addEventListener('click', twirlCard);
+            shop.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); twirlCard(e); } });
+            document.getElementById('modal-icon-display').addEventListener('click', (e) => { if (e.target.tagName === 'IMG') twirlOrnament(e.target); });
         }
         function ornamentHTML(item, cls) {
             return item.img
@@ -688,6 +720,7 @@
                 modalCard.classList.remove('scale-90');
                 modalCard.classList.add('scale-100');
             }, 10);
+            setTimeout(() => twirlOrnament(document.querySelector('#modal-icon-display img')), 250);
 
             // Auto spin again if landed on "Spin Again!"
             if (prize.isSpinAgain || christmasSpinAgain()) {
@@ -949,7 +982,7 @@
             container.innerHTML = DEFAULT_DAYS.map(item => {
                 const n = collection[item.img] || 0;
                 const label = item.isSpinAgain ? 'Bonus' : 'Day ' + item.day;
-                return `<div style="position:relative;text-align:center;padding:8px 4px 6px;border-radius:12px;background:${n ? 'rgba(6,78,59,.35)' : 'rgba(30,41,59,.6)'};border:1px solid ${n ? 'rgba(52,211,153,.45)' : 'rgba(71,85,105,.5)'}">
+                return `<div ${n ? `data-owned="1" role="button" tabindex="0" aria-label="Spin the ${item.title} ornament"` : ''} style="${n ? 'cursor:pointer;' : ''}position:relative;text-align:center;padding:8px 4px 6px;border-radius:12px;background:${n ? 'rgba(6,78,59,.35)' : 'rgba(30,41,59,.6)'};border:1px solid ${n ? 'rgba(52,211,153,.45)' : 'rgba(71,85,105,.5)'}">
                     <img src="${item.img}" alt="${n ? item.title : 'Locked ornament'}" draggable="false" style="height:78px;width:auto;max-width:100%;${n ? '' : 'filter:grayscale(1) brightness(.22);opacity:.85'}">
                     <div style="font-size:11px;font-weight:800;margin-top:4px;color:${n ? '#fcd34d' : '#64748b'}">${n ? label : '?'}</div>
                     ${n > 1 ? `<span style="position:absolute;top:4px;right:6px;font-size:10px;font-weight:800;background:#f59e0b;color:#0f172a;border-radius:999px;padding:1px 6px">×${n}</span>` : ''}
@@ -1048,6 +1081,7 @@
             renderHistory();
             initSnow();
             initDownloads();
+            initOrnamentTwirl();
 
             // Wheel Spin Trigger
             document.getElementById('spin-btn').addEventListener('click', spinWheel);

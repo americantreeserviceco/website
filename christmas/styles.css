@@ -397,6 +397,14 @@ h1, h2, h3 { color: var(--forest-900); line-height: 1.12; letter-spacing: -0.02e
 
 .wheel-promo .xmas-actions { justify-content: center; }
 
+/* Each ornament turns once around its vertical axis when it scrolls into view (twirl.js adds .is-twirling). */
+@keyframes ornament-twirl {
+  from { transform: perspective(600px) rotateY(0deg); }
+  to { transform: perspective(600px) rotateY(360deg); }
+}
+
+.wheel-ornaments img.is-twirling { animation: ornament-twirl 1.8s cubic-bezier(0.45, 0.05, 0.25, 1); }
+
 /* Advent calendar doors (tips page) */
 .doors {
   list-style: none;
@@ -576,5 +584,6 @@ h1, h2, h3 { color: var(--forest-900); line-height: 1.12; letter-spacing: -0.02e
   html { scroll-behavior: auto; }
   .btn, .day-card a, .door { transition: none; }
   .advent-js .tip.is-open { animation: none; }
+  .wheel-ornaments img.is-twirling { animation: none; }
   .day-card a:hover, .day-card a:focus-visible { transform: none; }
 }
