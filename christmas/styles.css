@@ -1,15 +1,15 @@
 /* Christmas campaign pages (/christmas/). Shares the site's forest green, cream and gold, with Christmas red as the accent. */
 :root {
-  --forest-900: #14351f;
-  --forest-800: #1d4d2a;
-  --forest-700: #265e35;
-  --green-600: #2d7d46;
+  --forest-900: #0f3a21;
+  --forest-800: #17502e;
+  --forest-700: #1f6b3a;
+  --green-600: #1f7a3f;
   --cream: #f8f5ee;
   --white: #ffffff;
   --ink: #17221c;
   --muted: #4f5b52;
-  --xmas-red: #b8322f;
-  --xmas-red-dark: #8f2421;
+  --xmas-red: #c0282d;
+  --xmas-red-dark: #8f1d1d;
   --gold: #e8b53a;
   --line: rgba(20, 53, 31, 0.12);
   --shadow: 0 18px 40px rgba(20, 53, 31, 0.12);
@@ -524,6 +524,53 @@ h1, h2, h3 { color: var(--forest-900); line-height: 1.12; letter-spacing: -0.02e
   font-size: 0.85rem;
   color: #8ea892;
 }
+
+/* Red, green and gold palette: green and red carry the page, gold is the accent. */
+.site-header { border-bottom: 3px solid var(--gold); }
+.nav a:hover,
+.nav a:focus-visible,
+.nav a.active { color: var(--xmas-red); }
+.header-cta { background: var(--xmas-red); }
+.header-cta:hover,
+.header-cta:focus-visible { background: var(--xmas-red-dark); }
+
+.xmas-hero,
+.page-hero { border-bottom: 5px solid var(--gold); }
+.xmas-hero .btn-red { border-color: var(--gold); }
+
+/* A short gold rule under every section heading */
+.section-title h2::after {
+  content: '';
+  display: block;
+  width: 72px;
+  height: 4px;
+  margin: 0.7rem auto 0;
+  border-radius: 2px;
+  background: var(--gold);
+}
+
+/* Red sections: the poster on the landing page and the advent calendar */
+.xmas-section.red {
+  background: linear-gradient(135deg, #8f1d1d 0%, #b8262b 55%, #8f1d1d 100%);
+  border-top: 4px solid var(--gold);
+  border-bottom: 4px solid var(--gold);
+}
+.xmas-section.red .section-title h2 { color: var(--white); }
+.xmas-section.red .section-title p { color: #ffe9e4; }
+.xmas-section.red .advent-note { color: #ffe08a; }
+.xmas-section.red .xmas-actions { justify-content: center; }
+.advent-js .door.is-ready .door-status { background: var(--gold); color: var(--forest-900); }
+.advent-poster img { border: 4px solid var(--gold); }
+
+.xmas-card { border-color: rgba(185, 138, 20, 0.35); }
+.xmas-cta {
+  background: linear-gradient(135deg, var(--forest-900) 0%, var(--forest-700) 100%);
+  border-top: 4px solid var(--gold);
+}
+.greeting { border-top: 4px solid var(--gold); }
+.site-footer { background: #0b2a19; border-top: 4px solid var(--gold); }
+.footer-links a:hover,
+.footer-links a:focus-visible { color: var(--gold); }
 
 /* Tablet */
 @media (max-width: 900px) {
