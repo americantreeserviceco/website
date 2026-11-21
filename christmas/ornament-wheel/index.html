@@ -22,6 +22,8 @@
       gtag('config', 'G-JTRR29NY4W');
     </script>
     <!-- Self-hosted styles, icons, fonts and confetti (no external CDN) -->
+    <link rel="stylesheet" href="/christmas/page-loader.css">
+    <script src="/christmas/page-loader.js"></script>
     <link rel="stylesheet" href="game-assets/games.tailwind.css">
     <link rel="stylesheet" href="game-assets/fontawesome/css/all.min.css">
     <link rel="stylesheet" href="game-assets/fonts.css">
@@ -75,6 +77,9 @@
     </style>
 </head>
 <body class="h-full bg-slate-950 text-slate-100 font-body overflow-x-hidden selection:bg-red-600 selection:text-white">
+    <div class="page-loader" style="--loader-bg:#020617" role="status" aria-live="polite" aria-label="Loading">
+      <div class="custom-spinner-wrapper"><img class="custom-spinner-img" src="/christmas/ornament-wheel/ornaments/day01.webp" width="56" height="56" alt=""></div>
+    </div>
     <!-- Snow Canvas Background -->
     <canvas id="snow-canvas" class="fixed inset-0 pointer-events-none z-0"></canvas>
 

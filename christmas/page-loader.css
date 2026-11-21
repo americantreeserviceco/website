@@ -1,0 +1,62 @@
+/*
+ * Spinner and page-load overlay for the /christmas/ pages.
+ *
+ * .custom-spinner-wrapper / .custom-spinner-img are the spinner itself and can be used anywhere on their own.
+ * .page-loader is a full-screen overlay that holds one. It stays hidden unless page-loader.js adds .has-loader to
+ * <html>, so without JavaScript it never covers the page.
+ */
+
+/* Custom image spinner */
+.custom-spinner-wrapper {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.custom-spinner-img {
+    width: 56px;
+    height: 56px;
+    object-fit: contain;
+    animation: custom-spin 1s linear infinite normal;
+    filter: drop-shadow(0 0 10px #e8b53a);   /* soft gold glow to match the red, green and gold pages */
+}
+
+@keyframes custom-spin {
+    0% { transform: rotate(0deg) scale(1); }
+    50% { transform: rotate(180deg) scale(1); }
+    100% { transform: rotate(360deg) scale(1); }
+}
+
+/* Spinning is a trigger for some people, so with reduced motion the image gently pulses instead. */
+@media (prefers-reduced-motion: reduce) {
+    .custom-spinner-img { animation: custom-pulse 1.6s ease-in-out infinite; }
+}
+
+@keyframes custom-pulse {
+    0%, 100% { opacity: 0.55; transform: scale(0.94); }
+    50% { opacity: 1; transform: scale(1); }
+}
+
+/* Page-load overlay */
+.page-loader { display: none; }
+
+.has-loader .page-loader {
+    position: fixed;
+    inset: 0;
+    z-index: 2147483000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--loader-bg, #f8f5ee);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.35s ease, visibility 0s linear 0.35s;
+}
+
+/* page-loader.js adds .loader-visible only if the page is still loading after a short wait, so quick loads never flash it. */
+.has-loader.loader-visible .page-loader {
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.2s ease;
+}
