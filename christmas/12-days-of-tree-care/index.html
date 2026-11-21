@@ -12,6 +12,8 @@
   <meta property="og:description" content="Open a door each day, December 13–24, for a winter tree-care tip from American Tree Colorado.">
   <meta property="og:url" content="https://americantreeserviceco.com/christmas/12-days-of-tree-care/">
   <link rel="stylesheet" href="/christmas/styles.css">
+  <link rel="stylesheet" href="/christmas/page-loader.css">
+  <script src="/christmas/page-loader.js"></script>
   <script>
     // Hide the tips until advent.js takes over. If it never runs, show them again so the page is never empty.
     document.documentElement.classList.add('advent-js');
@@ -33,6 +35,9 @@
   </script>
 </head>
 <body>
+  <div class="page-loader" role="status" aria-live="polite" aria-label="Loading">
+    <div class="custom-spinner-wrapper"><img class="custom-spinner-img" src="/christmas/ornament-wheel/ornaments/day01.webp" width="56" height="56" alt=""></div>
+  </div>
   <div class="candy-stripe" aria-hidden="true"></div>
   <header class="site-header">
     <div class="container">
