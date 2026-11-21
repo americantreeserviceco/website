@@ -66,6 +66,12 @@
         #modal-icon-display img { cursor: pointer; }
         [data-owned]:focus-visible { outline: 3px solid #fcd34d; outline-offset: 2px; }
         @media (prefers-reduced-motion: reduce) { .orn-twirl { animation: none; } }
+
+        /* The wheel is a fixed 340px square, wider than the smallest phones once the page padding is counted. */
+        @media (max-width: 380px) {
+            .w-\[340px\] { width: calc(100vw - 56px); }
+            .h-\[340px\] { height: calc(100vw - 56px); }
+        }
     </style>
 </head>
 <body class="h-full bg-slate-950 text-slate-100 font-body overflow-x-hidden selection:bg-red-600 selection:text-white">
