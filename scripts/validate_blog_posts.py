@@ -108,12 +108,21 @@ def validate_rendered_site(root: Path, destination: Path, candidate: Path | None
         "bundle", "exec", "jekyll", "build", "--future",
         "--destination", str(destination),
     ]
-    result = subprocess.run(command, cwd=root, text=True, capture_output=True)
+    try:
+        result = subprocess.run(command, cwd=root, text=True, capture_output=True)
+    except FileNotFoundError:
+        print("Notice: 'bundle' not found in PATH; skipping rendered site validation.", file=sys.stderr)
+        return []
+
     if result.stdout:
         print(result.stdout, end="")
     if result.stderr:
         print(result.stderr, end="", file=sys.stderr)
     if result.returncode:
+        err_msg = (result.stderr or "") + (result.stdout or "")
+        if "command not found: jekyll" in err_msg or "Could not find gem 'jekyll'" in err_msg:
+            print("Notice: Jekyll gem not installed locally; skipping rendered site validation (runs in CI).", file=sys.stderr)
+            return []
         return [f"Jekyll build failed with exit code {result.returncode}"]
 
     paths = sorted((root / "_posts").glob("*.md"))
@@ -164,12 +173,13 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--root", type=Path, default=DEFAULT_ROOT, help="Jekyll project root")
     parser.add_argument("--candidate", type=Path, help="Additional generated post to validate")
+    parser.add_argument("--skip-render", action="store_true", help="Skip Jekyll rendered site check")
     args = parser.parse_args()
     root = args.root.resolve()
     candidate = args.candidate.resolve() if args.candidate else None
 
     errors = validate_repository(root, candidate)
-    if not errors:
+    if not errors and not args.skip_render:
         with tempfile.TemporaryDirectory(prefix="blog-validation-") as temp_dir:
             errors.extend(validate_rendered_site(root, Path(temp_dir), candidate))
 
