@@ -138,6 +138,15 @@ h1, h2, h3 { color: var(--forest-900); line-height: 1.12; letter-spacing: -0.02e
   background: repeating-linear-gradient(135deg, var(--xmas-red) 0 14px, var(--white) 14px 28px);
 }
 
+/* Falling snow (snow.js) sits over the page but under the sticky header and ignores clicks */
+.snowfall {
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 9;
+}
+
 /* Hero */
 .xmas-hero {
   position: relative;
