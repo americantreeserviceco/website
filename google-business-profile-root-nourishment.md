@@ -13,13 +13,13 @@
 
 ## Service Description (Ready to Paste)
 
-🌳 **Full-Zone Root Nourishment – Deep Root Tree Fertilization**
+🌳 **Full-Zone Root Nourishment™ – Deep Root Tree Fertilization**
 
-Colorado's dry climate, challenging soil conditions, and unpredictable weather can make it difficult for trees to thrive. American Tree Colorado's Full-Zone Root Nourishment service delivers essential nutrients throughout the root zone to support stronger roots, healthier foliage, and long-term tree vitality.
+Colorado's dry climate, challenging soil conditions, and unpredictable weather can make it difficult for trees to thrive. American Tree Colorado's Full-Zone Root Nourishment™ service delivers essential nutrients throughout the root zone to support stronger roots, healthier foliage, and long-term tree vitality.
 
 Our seasonal deep root fertilization program supports trees during spring growth, summer heat and drought stress, and fall root development. By improving nutrient availability and supporting healthy soil conditions, we help trees maintain their natural resilience against environmental stress.
 
-🌱 Give your trees the nourishment they need to thrive. Contact American Tree Colorado to schedule a tree health assessment and learn more about our Full-Zone Root Nourishment program.
+🌱 Give your trees the nourishment they need to thrive. Contact American Tree Colorado to schedule a tree health assessment and learn more about our Full-Zone Root Nourishment™ program.
 
 ---
 
@@ -37,6 +37,6 @@ Supports root health and nutrient reserves as trees transition into winter dorma
 ---
 
 ## Compliance & Marketing Guidelines
-- **Positioning:** Position **Full-Zone Root Nourishment** as American Tree Colorado's branded tree health care service, with **Deep Root Tree Fertilization** as the primary searchable term.
+- **Positioning:** Position **Full-Zone Root Nourishment™** as American Tree Colorado's branded tree health care service, with **Deep Root Tree Fertilization** as the primary searchable term.
 - **Claims Guardrails:** Avoid claiming that treatment prevents freeze damage, eliminates insects/borers, or guarantees drought resistance.
 - **Program Scheduling:** Advertise a three-application schedule only if actually provided and agreed upon with the crew lead.

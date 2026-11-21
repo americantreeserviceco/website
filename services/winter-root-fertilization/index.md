@@ -1,11 +1,11 @@
 ---
 layout: page
-title: Full-Zone Root Nourishment - Deep Root Tree Fertilization - American Tree Colorado
+title: Full-Zone Root Nourishment™ - Deep Root Tree Fertilization - American Tree Colorado
 permalink: /services/winter-root-fertilization/
 ---
-# Full-Zone Root Nourishment – Deep Root Tree Fertilization
+# Full-Zone Root Nourishment™ – Deep Root Tree Fertilization
 
-Colorado's dry climate, challenging soil conditions, and unpredictable weather can make it difficult for trees to thrive. American Tree Colorado's **Full-Zone Root Nourishment** service delivers essential nutrients throughout the root zone to support stronger roots, healthier foliage, and long-term tree vitality.
+Colorado's dry climate, challenging soil conditions, and unpredictable weather can make it difficult for trees to thrive. American Tree Colorado's **Full-Zone Root Nourishment™** service delivers essential nutrients throughout the root zone to support stronger roots, healthier foliage, and long-term tree vitality.
 
 Our seasonal deep root fertilization program supports trees during spring growth, summer heat and drought stress, and fall root development. By improving nutrient availability and supporting healthy soil conditions, we help trees maintain their natural resilience against environmental stress.
 
