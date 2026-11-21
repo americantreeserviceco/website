@@ -344,6 +344,27 @@ h1, h2, h3 { color: var(--forest-900); line-height: 1.12; letter-spacing: -0.02e
 .tip p { color: var(--ink); margin-bottom: 0.85rem; }
 .tip p:last-child { margin-bottom: 0; }
 .tip-cta { font-weight: 700; color: var(--forest-800); }
+
+/* Character art on selected tips. The images are decorative, so they carry empty alt text. */
+.tip { display: flow-root; }
+
+.tip-art {
+  float: right;
+  width: 140px;
+  height: auto;
+  margin: -0.25rem -0.25rem 0.5rem 1.25rem;
+  filter: drop-shadow(0 6px 8px rgba(20, 53, 31, 0.22));
+}
+
+.tip-art-wide {
+  display: block;
+  width: 100%;
+  max-width: 360px;
+  height: auto;
+  margin: 1.25rem auto 0;
+  border-radius: 1rem;
+  box-shadow: var(--shadow);
+}
 .tip-links { margin-bottom: 0.85rem; font-size: 0.95rem; color: var(--muted); }
 .tip-links a { color: var(--forest-800); font-weight: 700; }
 
@@ -375,6 +396,76 @@ h1, h2, h3 { color: var(--forest-900); line-height: 1.12; letter-spacing: -0.02e
 }
 
 .wheel-promo .xmas-actions { justify-content: center; }
+
+/* Advent calendar doors (tips page) */
+.doors {
+  list-style: none;
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.door {
+  position: relative;
+  display: block;
+  aspect-ratio: 159 / 150;
+  border-radius: 10px;
+  overflow: hidden;
+  background: var(--forest-900);
+  box-shadow: var(--shadow);
+  text-decoration: none;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.door img { display: block; width: 100%; height: 100%; object-fit: fill; }
+
+.door-status {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 0.3rem 0.25rem;
+  text-align: center;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: #f7e7b0;
+  background: rgba(10, 30, 20, 0.86);
+}
+
+/* Without JavaScript every door is a plain link to its tip, so keep them looking available. */
+.advent-js .door.is-locked { cursor: not-allowed; }
+.advent-js .door.is-locked img { filter: grayscale(0.75) brightness(0.5); }
+.advent-js .door.is-ready { box-shadow: 0 0 0 3px var(--gold), 0 0 20px rgba(232, 181, 58, 0.65); cursor: pointer; }
+.advent-js .door.is-ready:hover,
+.advent-js .door.is-ready:focus-visible { transform: translateY(-3px); }
+.advent-js .door.is-ready .door-status { background: var(--xmas-red); color: var(--white); }
+.advent-js .door.is-opened img { filter: brightness(0.72); }
+.advent-js .door.is-opened .door-status { background: var(--forest-700); }
+
+.door:focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; }
+
+.advent-note { min-height: 1.6em; margin-top: 0.4rem; font-weight: 700; color: var(--xmas-red-dark); }
+.advent-empty { text-align: center; color: var(--muted); margin: 0; }
+
+/* Tips stay hidden until their door is opened (advent.js adds .advent-js and .is-open). */
+.advent-js .tip:not(.is-open) { display: none; }
+.advent-js .tip.is-open { animation: tip-reveal 0.5s ease both; }
+.advent-js #tips:has(.tip.is-open) .advent-empty { display: none; }
+
+@keyframes tip-reveal {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: none; }
+}
+
+/* Calendar poster on the landing page */
+.advent-poster { margin: 0 auto 1.75rem; max-width: 520px; }
+.advent-poster img { width: 100%; height: auto; border-radius: 1rem; box-shadow: var(--shadow); }
+.xmas-section.alt .xmas-actions { justify-content: center; }
 
 /* Closing call to action and greeting */
 .xmas-cta {
@@ -441,6 +532,7 @@ h1, h2, h3 { color: var(--forest-900); line-height: 1.12; letter-spacing: -0.02e
   .xmas-art img { max-width: 300px; }
   .xmas-cards { grid-template-columns: 1fr; }
   .day-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .doors { max-width: 560px; }
 }
 
 /* Phone: the navigation collapses behind the Menu button */
@@ -469,6 +561,9 @@ h1, h2, h3 { color: var(--forest-900); line-height: 1.12; letter-spacing: -0.02e
   .day-card a { padding: 0.9rem; }
   .day-number { font-size: 1.7rem; }
   .tip { padding: 1.3rem 1.2rem; }
+  .doors { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.7rem; }
+  .door-status { font-size: 0.66rem; }
+  .tip-art { float: none; width: 112px; margin: 0 auto 0.75rem; }
   .footer-grid { grid-template-columns: 1fr; }
   .footer-links { justify-content: flex-start; }
   .xmas-cta { padding: 3rem 0; }
@@ -479,6 +574,7 @@ h1, h2, h3 { color: var(--forest-900); line-height: 1.12; letter-spacing: -0.02e
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .btn, .day-card a { transition: none; }
+  .btn, .day-card a, .door { transition: none; }
+  .advent-js .tip.is-open { animation: none; }
   .day-card a:hover, .day-card a:focus-visible { transform: none; }
 }
