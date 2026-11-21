@@ -3,15 +3,23 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>12 Days of Tree-mendous Cheer: Winter Tree-Care Tips | American Tree Colorado</title>
-  <meta name="description" content="Twelve short winter tree-care tips from American Tree Colorado: watering when conditions allow, mulch, young trees, bark protection, evergreens and pruning plans.">
+  <title>Winter Tree-Care Advent Calendar: 12 Days of Tree-mendous Cheer | American Tree Colorado</title>
+  <meta name="description" content="Open a door each day, December 13–24, for a short winter tree-care tip from American Tree Colorado and Santa Dr. Troy: watering, mulch, young trees, bark protection, evergreens and pruning plans.">
   <link rel="canonical" href="https://americantreeserviceco.com/christmas/12-days-of-tree-care/">
   <meta property="og:type" content="article">
   <meta property="og:site_name" content="American Tree Colorado">
-  <meta property="og:title" content="12 Days of Tree-mendous Cheer: Winter Tree-Care Tips | American Tree Colorado">
-  <meta property="og:description" content="Twelve short winter tree-care tips from American Tree Colorado.">
+  <meta property="og:title" content="Winter Tree-Care Advent Calendar: 12 Days of Tree-mendous Cheer | American Tree Colorado">
+  <meta property="og:description" content="Open a door each day, December 13–24, for a winter tree-care tip from American Tree Colorado.">
   <meta property="og:url" content="https://americantreeserviceco.com/christmas/12-days-of-tree-care/">
   <link rel="stylesheet" href="/christmas/styles.css">
+  <script>
+    // Hide the tips until advent.js takes over. If it never runs, show them again so the page is never empty.
+    document.documentElement.classList.add('advent-js');
+    window.addEventListener('load', function () {
+      if (!window.__adventReady) document.documentElement.classList.remove('advent-js');
+    });
+  </script>
+  <script src="/christmas/advent.js" defer></script>
   <script src="/assets/js/nav-toggle.js" defer></script>
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-JTRR29NY4W"></script>
@@ -46,15 +54,41 @@
     <section class="page-hero" aria-labelledby="tips-title">
       <div class="container">
         <a class="back-link" href="/christmas/">&larr; Back to the Christmas page</a>
-        <h1 id="tips-title">Winter Tree Care Tips</h1>
-        <p>From <strong>12 Days of Tree-mendous Cheer</strong>: twelve short winter tree-care tips, plus a festive question here and there. Where a tip comes from a university or state source, the source is linked under the tip.</p>
+        <h1 id="tips-title">Winter Tree Care Advent Calendar</h1>
+        <p>Open a door each day from December 13 to 24 to reveal a short winter tree-care tip from Santa Dr. Troy, plus a festive question here and there. Where a tip comes from a university or state source, the source is linked under the tip. After December 24, all twelve tips stay open.</p>
       </div>
     </section>
 
-    <section class="xmas-section" aria-label="Daily tips">
+    <section class="xmas-section advent" id="calendar" aria-labelledby="calendar-title">
       <div class="container">
+        <div class="section-title">
+          <h2 id="calendar-title">Open a door each day</h2>
+          <p id="advent-status" aria-live="polite">Twelve doors, twelve winter tree-care tips. Doors open at midnight Mountain Time, December 13–24.</p>
+          <p id="advent-note" class="advent-note" role="status"></p>
+        </div>
+        <ol class="doors">
+          <li><a class="door" href="#day-1" data-day="1" aria-label="Door 1"><img src="/assets/images/seasonal/christmas/advent-doors/door-01.webp" width="159" height="150" alt="" loading="lazy"><span class="door-status">Dec 13</span></a></li>
+          <li><a class="door" href="#day-2" data-day="2" aria-label="Door 2"><img src="/assets/images/seasonal/christmas/advent-doors/door-02.webp" width="159" height="150" alt="" loading="lazy"><span class="door-status">Dec 14</span></a></li>
+          <li><a class="door" href="#day-3" data-day="3" aria-label="Door 3"><img src="/assets/images/seasonal/christmas/advent-doors/door-03.webp" width="159" height="150" alt="" loading="lazy"><span class="door-status">Dec 15</span></a></li>
+          <li><a class="door" href="#day-4" data-day="4" aria-label="Door 4"><img src="/assets/images/seasonal/christmas/advent-doors/door-04.webp" width="159" height="150" alt="" loading="lazy"><span class="door-status">Dec 16</span></a></li>
+          <li><a class="door" href="#day-5" data-day="5" aria-label="Door 5"><img src="/assets/images/seasonal/christmas/advent-doors/door-05.webp" width="159" height="150" alt="" loading="lazy"><span class="door-status">Dec 17</span></a></li>
+          <li><a class="door" href="#day-6" data-day="6" aria-label="Door 6"><img src="/assets/images/seasonal/christmas/advent-doors/door-06.webp" width="159" height="150" alt="" loading="lazy"><span class="door-status">Dec 18</span></a></li>
+          <li><a class="door" href="#day-7" data-day="7" aria-label="Door 7"><img src="/assets/images/seasonal/christmas/advent-doors/door-07.webp" width="159" height="150" alt="" loading="lazy"><span class="door-status">Dec 19</span></a></li>
+          <li><a class="door" href="#day-8" data-day="8" aria-label="Door 8"><img src="/assets/images/seasonal/christmas/advent-doors/door-08.webp" width="159" height="150" alt="" loading="lazy"><span class="door-status">Dec 20</span></a></li>
+          <li><a class="door" href="#day-9" data-day="9" aria-label="Door 9"><img src="/assets/images/seasonal/christmas/advent-doors/door-09.webp" width="159" height="150" alt="" loading="lazy"><span class="door-status">Dec 21</span></a></li>
+          <li><a class="door" href="#day-10" data-day="10" aria-label="Door 10"><img src="/assets/images/seasonal/christmas/advent-doors/door-10.webp" width="159" height="150" alt="" loading="lazy"><span class="door-status">Dec 22</span></a></li>
+          <li><a class="door" href="#day-11" data-day="11" aria-label="Door 11"><img src="/assets/images/seasonal/christmas/advent-doors/door-11.webp" width="159" height="150" alt="" loading="lazy"><span class="door-status">Dec 23</span></a></li>
+          <li><a class="door" href="#day-12" data-day="12" aria-label="Door 12"><img src="/assets/images/seasonal/christmas/advent-doors/door-12.webp" width="159" height="150" alt="" loading="lazy"><span class="door-status">Dec 24</span></a></li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="xmas-section" id="tips" aria-label="Revealed tips">
+      <div class="container">
+        <p id="advent-empty" class="advent-empty" hidden>Your tips will appear here as you open each door.</p>
         <ol class="tips-list">
           <li class="tip" id="day-1">
+            <img class="tip-art" src="/assets/images/seasonal/christmas/santa-dr-troy-gift-cutout-480.webp" width="480" height="535" alt="" loading="lazy">
             <p class="tip-date">Tip 1</p>
             <h2>Welcome to Winter Tree Care Tips</h2>
             <p>Santa Dr. Troy is bringing a little tree-mendous cheer to the winter months! Join American Tree Colorado for a little winter tree care, a few festive questions, and plenty of Colorado holiday spirit. What is your favorite tree in your yard?</p>
@@ -69,6 +103,7 @@
             <p class="tip-source">Source: <a href="https://extension.colostate.edu/resource/fall-and-winter-watering-of-plants-and-trees/">Fall and winter watering of plants and trees</a>, Colorado State University Extension.</p>
           </li>
           <li class="tip" id="day-3">
+            <img class="tip-art" src="/assets/images/seasonal/christmas/sapling-character-cutout-480.webp" width="480" height="535" alt="" loading="lazy">
             <p class="tip-date">Tip 3</p>
             <h2>Mulching Trees for Winter Protection</h2>
             <p>Mulch is a useful winter helper. A 2–4 inch layer of organic mulch can moderate soil conditions; keep it clear of the trunk. Think blanket, not a pile against the bark.</p>
@@ -85,6 +120,7 @@
             <p class="tip-source">Source: <a href="https://csfs.colostate.edu/2017/10/31/tips-prepare-landscape-trees-winter/">Tips to prepare landscape trees for winter</a>, Colorado State Forest Service.</p>
           </li>
           <li class="tip" id="day-5">
+            <img class="tip-art" src="/assets/images/seasonal/christmas/dr-troy-winter-cutout.webp" width="247" height="299" alt="" loading="lazy">
             <p class="tip-date">Tip 5</p>
             <h2>Protecting Young Tree Bark in Winter</h2>
             <p>Winter sunshine and temperature swings can stress young, thin-barked trees. Ask about appropriate trunk protection for your tree rather than guessing at the right material or timing.</p>
@@ -101,6 +137,7 @@
             <p class="tip-source">Source: <a href="https://extension.colostate.edu/resource/fall-and-winter-watering-of-plants-and-trees/">Fall and winter watering of plants and trees</a>, Colorado State University Extension.</p>
           </li>
           <li class="tip" id="day-7">
+            <img class="tip-art" src="/assets/images/seasonal/christmas/snowy-tree-character-cutout-480.webp" width="480" height="534" alt="" loading="lazy">
             <p class="tip-date">Tip 7</p>
             <h2>Winter Dryness in Exposed Landscape Spots</h2>
             <p>Sun, wind, and reflected heat can leave some landscape spots drier than others. Check exposed areas instead of assuming every tree has the same winter moisture needs.</p>
@@ -117,6 +154,7 @@
             <p class="tip-source">Source: <a href="https://csfs.colostate.edu/2017/10/31/tips-prepare-landscape-trees-winter/">Tips to prepare landscape trees for winter</a>, Colorado State Forest Service.</p>
           </li>
           <li class="tip" id="day-9">
+            <img class="tip-art" src="/assets/images/seasonal/christmas/elf-helper-cutout-480.webp" width="480" height="535" alt="" loading="lazy">
             <p class="tip-date">Tip 9</p>
             <h2>Dormant-Season Pruning: Plan Before You Cut</h2>
             <p>Put thoughtful pruning on the calendar. Dormant-season pruning suits many trees, but the right timing and cuts depend on the tree and its condition. Make a plan before reaching for the tools.</p>
@@ -131,6 +169,7 @@
             <p class="tip-cta">Send us your own tree photo through our <a href="/contact/">contact page</a>.</p>
           </li>
           <li class="tip" id="day-11">
+            <img class="tip-art" src="/assets/images/seasonal/christmas/christmas-tree-character-cutout-480.webp" width="480" height="535" alt="" loading="lazy">
             <p class="tip-date">Tip 11</p>
             <h2>Planning Next Year's Tree Care</h2>
             <p>A new year is a good time to plan tree care. Have a tree question you have been putting off? Tell American Tree Colorado what you are noticing, and ask about a tree-care assessment.</p>
@@ -142,6 +181,7 @@
             <h2>A Tree-mendous Holiday Wrap-Up</h2>
             <p>That is a wrap on this round of tips! Thank you for sharing your questions, your trees, and your Colorado holiday spirit. From American Tree Colorado and Santa Dr. Troy, wishing you a joyful holiday season.</p>
             <p>Share a little cheer with a neighbor today.</p>
+            <img class="tip-art-wide" src="/assets/images/seasonal/christmas/merry-christmas-colorado-greeting-720.webp" width="720" height="720" alt="Merry Christmas, Colorado! Thank you for helping our community grow. With tree-mendous gratitude, Santa Dr. Troy." loading="lazy">
           </li>
         </ol>
       </div>
