@@ -19,6 +19,7 @@
   <script src="/assets/js/nav-toggle.js" defer></script>
   <script src="/christmas/ornament3d.js" defer></script>
   <script src="/christmas/twirl.js" defer></script>
+  <script src="/christmas/countdown.js" defer></script>
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-JTRR29NY4W"></script>
   <script>
@@ -67,6 +68,24 @@
           <img src="/assets/images/seasonal/christmas/santa-and-reindeer-cutout-720.webp" width="720" height="647" fetchpriority="high" alt="Cartoon Santa holding a fir sprig beside a reindeer wearing jingle bells">
           <figcaption>Santa Dr. Troy and friends</figcaption>
         </figure>
+      </div>
+    </section>
+
+    <section class="countdown-band" aria-labelledby="countdown-title">
+      <div class="container">
+        <h2 id="countdown-title" class="countdown-title">Christmas is coming</h2>
+        <div class="countdown" id="countdown" role="timer">
+          <p class="countdown-fallback">Christmas Day is December 25.</p>
+          <div class="countdown-units" aria-hidden="true">
+            <div class="countdown-unit"><span class="countdown-number" data-unit="days">--</span><span class="countdown-label">Days</span></div>
+            <div class="countdown-unit"><span class="countdown-number" data-unit="hours">--</span><span class="countdown-label">Hours</span></div>
+            <div class="countdown-unit"><span class="countdown-number" data-unit="minutes">--</span><span class="countdown-label">Minutes</span></div>
+            <div class="countdown-unit"><span class="countdown-number" data-unit="seconds">--</span><span class="countdown-label">Seconds</span></div>
+          </div>
+          <p class="countdown-message" hidden>Merry Christmas, Colorado!</p>
+          <p class="countdown-caption" id="countdown-caption"></p>
+          <span class="sr-only" id="countdown-summary"></span>
+        </div>
       </div>
     </section>
 
