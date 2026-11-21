@@ -84,4 +84,12 @@ layout: null
     <lastmod>{{ post.last_modified_at | default: post.date | date: "%Y-%m-%d" }}</lastmod>
   </url>
   {% endfor %}
+  <url>
+    <loc>https://americantreeserviceco.com/christmas/</loc>
+    <lastmod>2026-11-20</lastmod>
+  </url>
+  <url>
+    <loc>https://americantreeserviceco.com/christmas/12-days-of-tree-care/</loc>
+    <lastmod>2026-11-20</lastmod>
+  </url>
 </urlset>

@@ -968,6 +968,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 		@media (max-width: 640px) {
 			.holiday-lights .hero-content::before { grid-area: 2 / 1 / 5 / 3; }
 		}
+		/* Christmas campaign band, linking to /christmas/ */
+		.holiday-band { background: linear-gradient(135deg, #14351f 0%, #1d4d2a 65%, #6b1f1d 100%); color: #fff; padding: 64px 20px; text-align: center; }
+		.holiday-band .inner { max-width: 760px; margin: 0 auto; }
+		.holiday-band .holiday-eyebrow { margin: 0 0 10px; color: #e8b53a; font-size: 13px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
+		.holiday-band h2 { margin: 0 0 14px; color: #fff; font-size: clamp(28px, 4vw, 40px); line-height: 1.15; }
+		.holiday-band p { margin: 0 0 24px; color: #e4eee2; }
+		.holiday-band .btn { background: #e8b53a; color: #14351f; }
+		.holiday-band .btn:hover, .holiday-band .btn:focus-visible { background: #f2c85a; color: #14351f; }
 	</style>
 	<script src="/assets/js/halloween-theme.js" defer></script>
 	<script src="/assets/js/november-theme.js" defer></script>
@@ -1186,6 +1194,15 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 			</div>
 		</section>
 
+		<section class="holiday-band" aria-labelledby="holiday-title">
+			<div class="inner">
+				<p class="holiday-eyebrow">Winter tree care &middot; Holiday tips</p>
+				<h2 id="holiday-title">12 Days of Tree-mendous Cheer</h2>
+				<p>Seasonal tree-care tips and festive cheer from Santa Dr. Troy.</p>
+				<a class="btn" href="/christmas/">Read the tips</a>
+			</div>
+		</section>
+
 		<section class="testimonial-wrap" aria-labelledby="reviews-title">
 			<div class="inner">
 				<h2 class="section-title" id="reviews-title">What our clients say</h2>
@@ -1234,6 +1251,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 	<footer>
 		<nav class="footer-links" aria-label="Footer navigation">
 			<a href="/services/">Services</a>
+			<a href="/christmas/">12 Days of Tree-mendous Cheer</a>
 			<a href="/locations/">Service Areas</a>
 			<a href="/service-areas/wheat-ridge-co/">Wheat Ridge Tree Service</a>
 			<a href="/about/">About</a>
