@@ -512,6 +512,19 @@ h1, h2, h3 { color: var(--forest-900); line-height: 1.12; letter-spacing: -0.02e
   .toy-elves img { animation: none; }
 }
 
+/* The real logo, in a white badge so it reads on the red sections */
+.section-logo {
+  display: block;
+  width: auto;
+  height: 64px;
+  margin: 0 auto 1.5rem;
+  padding: 0.5rem 1rem;
+  background: var(--white);
+  border: 3px solid var(--gold);
+  border-radius: 14px;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.25);
+}
+
 /* Closing call to action and greeting */
 .xmas-cta {
   background: var(--forest-900);
