@@ -484,6 +484,34 @@ h1, h2, h3 { color: var(--forest-900); line-height: 1.12; letter-spacing: -0.02e
 .advent-poster img { width: 100%; height: auto; border-radius: 1rem; box-shadow: var(--shadow); }
 .xmas-section.alt .xmas-actions { justify-content: center; }
 
+/* Elves on the Toy Shop promo */
+.toy-elves {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  gap: clamp(0.5rem, 3vw, 2rem);
+  margin-bottom: 1.75rem;
+}
+
+.toy-elves img {
+  height: 170px;
+  width: auto;
+  filter: drop-shadow(0 8px 10px rgba(20, 53, 31, 0.25));
+  animation: elf-bob 2.8s ease-in-out infinite;
+}
+
+.toy-elves img:nth-child(2) { animation-delay: -0.9s; }
+.toy-elves img:nth-child(3) { animation-delay: -1.8s; }
+
+@keyframes elf-bob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .toy-elves img { animation: none; }
+}
+
 /* Closing call to action and greeting */
 .xmas-cta {
   background: var(--forest-900);
