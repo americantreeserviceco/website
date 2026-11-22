@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Full-Zone Root Nourishment™ - Deep Root Tree Fertilization - American Tree Colorado
+title: Full-Zone Root Nourishment™ | American Tree Colorado
 permalink: /services/winter-root-fertilization/
 ---
 # Full-Zone Root Nourishment™ – Deep Root Tree Fertilization
