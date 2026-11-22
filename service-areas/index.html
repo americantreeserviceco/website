@@ -43,6 +43,7 @@
             <button type="button" class="tab" role="tab" id="tab-lakewood" aria-selected="true" onclick="switchTab('lakewood')">Lakewood, CO</button>
             <button type="button" class="tab" role="tab" id="tab-arvada" aria-selected="false" onclick="switchTab('arvada')">Arvada, CO</button>
             <button type="button" class="tab" role="tab" id="tab-wheatridge" aria-selected="false" onclick="switchTab('wheatridge')">Wheat Ridge, CO</button>
+            <button type="button" class="tab" role="tab" id="tab-westminster" aria-selected="false" onclick="switchTab('westminster')">Westminster, CO</button>
         </div>
     </div>
 
@@ -75,6 +76,7 @@
                         <option value="Lakewood">Lakewood, CO</option>
                         <option value="Arvada">Arvada, CO</option>
                         <option value="Wheat Ridge">Wheat Ridge, CO</option>
+                        <option value="Westminster">Westminster, CO</option>
                         <option value="Golden">Golden, CO</option>
                     </select>
                 </div>
@@ -208,6 +210,39 @@
                         a: "EAB is best managed preventatively. Our team uses systemic trunk injections that circulate through the tree's vascular system, applied on a schedule suited to the product and local pressure."
                     }
                 ]
+            },
+            westminster: {
+                city: "Westminster, CO",
+                heroTagline: "Tree Care for Westminster Homes and Businesses",
+                heroIntro: "American Tree Colorado provides ISA Certified Arborist tree care for Westminster properties, from routine pruning of shade trees to removal of hazardous or storm-damaged trees.",
+                badge: "Westminster Tree Care",
+                // No neighborhood list yet: the section hides itself when this is empty.
+                neighborhoods: [],
+                specificsTitle: "Local Expertise: Managing Trees in Westminster, CO",
+                specifics: [
+                    {
+                        title: "Heavy Snow & Rapid Swings",
+                        desc: "Early autumn and late spring snowstorms can catch trees in leaf and split limbs. Regular structural pruning reduces that risk."
+                    },
+                    {
+                        title: "Alkaline Soil Management",
+                        desc: "Front Range soils are alkaline and often compacted, which can keep trees from absorbing iron and cause yellowing leaves. Overwatering and compaction make it worse, so we check watering and soil first."
+                    },
+                    {
+                        title: "Emerald Ash Borer",
+                        desc: "Emerald ash borer is established along the Front Range. Preventive treatment can protect a healthy, well-placed ash, and we will tell you honestly which trees are worth treating."
+                    }
+                ],
+                faqs: [
+                    {
+                        q: "Do I need a permit to remove a tree on my property in Westminster?",
+                        a: "It depends on where the tree is. Trees in or near a public right-of-way or city easement can fall under city rules, so check with the City of Westminster before removing one."
+                    },
+                    {
+                        q: "Can my Ash tree in Westminster be saved from Emerald Ash Borer?",
+                        a: "Often, if it is treated before the canopy declines badly. Once a tree shows heavy thinning and D-shaped exit holes, the window has usually closed. We assess the tree and treat on a schedule suited to the product and local pressure."
+                    }
+                ]
             }
         };
 
@@ -331,9 +366,9 @@
                                 Our ISA Certified Arborists are dispatching daily across ${data.city}. We know the local soil, pest profiles, and municipal canopy guidelines.
                             </p>
 
-                            <ul class="chips">
+                            ${data.neighborhoods.length ? `<ul class="chips">
                                 ${data.neighborhoods.map(n => `<li class="chip">${icon('pin')}${n}</li>`).join('')}
-                            </ul>
+                            </ul>` : ''}
 
                             <div class="btn-row" style="align-items:center">
                                 <a href="tel:3034566898" class="primary-btn btn-icon">${icon('phone')}303-456-6898</a>
@@ -376,7 +411,7 @@
 
         // Function to handle tab switching
         function switchTab(key) {
-            ['lakewood', 'arvada', 'wheatridge'].forEach(k => {
+            ['lakewood', 'arvada', 'wheatridge', 'westminster'].forEach(k => {
                 document.getElementById(`tab-${k}`).setAttribute('aria-selected', String(k === key));
             });
 
