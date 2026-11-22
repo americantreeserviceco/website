@@ -1217,6 +1217,8 @@ src="https://www.facebook.com/tr?id=1851958289139223&ev=PageView&noscript=1"
 				</div>
 				<div class="contact-card">
 					<form action="https://formspree.io/f/maenvddy" method="POST">
+						<!-- Honeypot: hidden from people and skipped by assistive tech; Formspree rejects submissions where bots fill it. -->
+						<input type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" hidden>
 						<label for="name">Name</label>
 						<input id="name" name="name" type="text" autocomplete="name" required>
 						<label for="email">Email</label>

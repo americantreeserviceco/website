@@ -5,6 +5,7 @@ permalink: /blog/:title.html
 timezone: America/Denver
 include:
   - _redirects
+  - .well-known
 defaults:
   - scope:
       path: "_posts"
