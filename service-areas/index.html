@@ -61,6 +61,8 @@
         </div>
         <form id="estimateForm" action="https://formspree.io/f/maenvddy" method="POST" class="modal-body">
             <input type="hidden" name="_subject" value="New service-area estimate request - American Tree Colorado">
+            <!-- Honeypot: hidden from people and skipped by assistive tech; Formspree rejects submissions where bots fill it. -->
+            <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" hidden>
             <div class="field">
                 <label for="estimate-name">Full Name</label>
                 <input id="estimate-name" name="name" type="text" autocomplete="name" required placeholder="John Doe">
