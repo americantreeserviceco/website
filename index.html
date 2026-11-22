@@ -927,6 +927,27 @@
     .november-theme .thanksgiving-graphic { aspect-ratio: 1; }
     .thanksgiving-graphic:focus-visible { outline: 3px solid var(--accent); outline-offset: 5px; border-radius: 16px; }
     .hero-november-art.thanksgiving-graphic img { position: static; display: block; width: 100%; height: auto; }
+
+    /* Mobile call bar: hidden on desktop. On phones it is fixed to the bottom, and body padding keeps the footer reachable above it. */
+    .mobile-call-bar { display: none; }
+    @media (max-width: 768px) {
+      body { padding-bottom: calc(76px + env(safe-area-inset-bottom)); }
+      .mobile-call-bar {
+        position: fixed; left: 0; right: 0; bottom: 0; z-index: 50;
+        display: flex; align-items: center; justify-content: space-between; gap: 12px;
+        padding: 10px 16px calc(10px + env(safe-area-inset-bottom));
+        background: var(--secondary); color: #fff;
+        box-shadow: 0 -4px 14px rgb(0 0 0 / 18%);
+      }
+      .mobile-call-sub { font-size: 13px; line-height: 1.25; }
+      .mobile-call-action {
+        flex: 0 0 auto; display: inline-flex; align-items: center; min-height: 44px;
+        padding: 10px 16px; border-radius: 8px;
+        background: var(--accent); color: #1b1b1b; font-weight: 700; text-decoration: none;
+      }
+      .mobile-call-action:focus-visible { outline: 3px solid #fff; outline-offset: 3px; }
+    }
+    @media print { .mobile-call-bar { display: none; } }
   </style>
 	<link rel="stylesheet" href="/assets/css/home-sections-v1.css" media="print" onload="this.media='all'">
 	<noscript><link rel="stylesheet" href="/assets/css/home-sections-v1.css"></noscript>
@@ -1245,6 +1266,10 @@ src="https://www.facebook.com/tr?id=1851958289139223&ev=PageView&noscript=1"
 		</nav>
 		<p>American Tree Colorado | Tree care for the Denver metro area</p>
 	</footer>
+	<div class="mobile-call-bar" role="region" aria-label="Quick call">
+		<span class="mobile-call-sub">ISA Certified Arborist help</span>
+		<a href="tel:+13034566898" class="mobile-call-action">Call (303) 456-6898 Now</a>
+	</div>
 	<script>
 		document.addEventListener('DOMContentLoaded', () => {
 			const params = new URLSearchParams(location.search);
